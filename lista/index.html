@@ -1,0 +1,1591 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Diagnóstico de Lista gratuito para infoproductores: descubre si tu base de datos está viva, fría o infrautilizada y qué campaña activar primero para que vuelva a generar ventas." />
+  <title>Diagnóstico de Lista para Infoproductores · Daniel García de Celis</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="/favicon.png">
+
+  <meta property="og:title" content="Diagnóstico de Lista" />
+  <meta property="og:description" content="¿Tu lista te vende o solo acumula contactos? Diagnóstico interactivo, resultado al instante." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://danielgarciadecelis.com/lista/" />
+  <meta property="og:image" content="https://danielgarciadecelis.com/og.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Diagnóstico de Lista para Infoproductores" />
+  <meta name="twitter:description" content="Descubre si tu lista está viva, fría o infrautilizada. Resultado al instante." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:     #060606;
+      --black-2:   #0c0b0a;
+      --ink:       #f3ede4;
+      --ink-dim:   #b6ada1;
+      --muted:     #6e655b;
+      --line:      rgba(201, 168, 76, 0.16);
+      --line-soft: rgba(243, 237, 228, 0.08);
+      --gold:      #c9a84c;
+      --gold-hi:   #e6c97a;
+      --gold-lo:   #8a7129;
+      --warn:      #d98a6e;
+    }
+
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+    body {
+      background: var(--black);
+      color: var(--ink);
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.65;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity: 0.045;
+      pointer-events: none;
+      z-index: 0;
+      mix-blend-mode: overlay;
+    }
+
+    .hero-glow {
+      position: absolute;
+      top: -120px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 720px;
+      height: 720px;
+      background: radial-gradient(circle at center, rgba(201,168,76,0.10) 0%, rgba(201,168,76,0.03) 35%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 28px;
+      position: relative;
+      z-index: 2;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(6, 6, 6, 0.78);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line-soft);
+    }
+    .nav-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 16px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo-mark {
+      width: 22px;
+      height: 22px;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 0.7rem;
+      color: var(--gold);
+      letter-spacing: 0;
+    }
+    .logo em { font-style: italic; color: var(--gold); font-weight: 400; margin-left: 2px; }
+
+    .nav-cta {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-dim);
+      text-decoration: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s;
+    }
+    .nav-cta:hover { color: var(--gold); }
+    .nav-cta svg { width: 13px; height: 13px; transition: transform 0.2s; }
+    .nav-cta:hover svg { transform: translateX(3px); }
+
+    .hero {
+      position: relative;
+      padding: 96px 0 80px;
+      text-align: center;
+    }
+
+    .chapter-mark {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 0.85rem;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+      margin-bottom: 28px;
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.05s forwards;
+    }
+    .chapter-mark::before,
+    .chapter-mark::after {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.5;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: clamp(2.35rem, 5.8vw, 3.75rem);
+      line-height: 1.06;
+      letter-spacing: -0.022em;
+      max-width: 18ch;
+      margin: 0 auto 28px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.2s forwards;
+    }
+    h1 em {
+      font-style: italic;
+      font-weight: 700;
+      background: linear-gradient(120deg, var(--gold-hi) 0%, var(--gold) 50%, var(--gold-lo) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: var(--gold);
+    }
+
+    .subhead {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      font-size: 1.08rem;
+      line-height: 1.65;
+      color: var(--ink-dim);
+      max-width: 540px;
+      margin: 0 auto 44px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.35s forwards;
+    }
+
+    .section {
+      padding: 88px 0;
+      position: relative;
+    }
+    .section + .section { border-top: 1px solid var(--line-soft); }
+
+    .eyebrow {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .eyebrow::before {
+      content: '';
+      width: 22px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: clamp(1.65rem, 3.2vw, 2.15rem);
+      line-height: 1.18;
+      letter-spacing: -0.012em;
+      color: var(--ink);
+      margin-bottom: 14px;
+      max-width: 22ch;
+    }
+    h2 em { font-style: italic; color: var(--gold); font-weight: 400; }
+
+    .section-lead {
+      font-size: 1rem;
+      color: var(--ink-dim);
+      max-width: 540px;
+      margin-bottom: 48px;
+    }
+
+    .bullets {
+      list-style: none;
+      display: grid;
+      gap: 0;
+    }
+    .bullets li {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 24px;
+      align-items: start;
+      padding: 28px 0;
+      border-top: 1px solid var(--line-soft);
+      transition: background 0.3s;
+    }
+    .bullets li:last-child { border-bottom: 1px solid var(--line-soft); }
+    .bullets li:hover { background: rgba(201, 168, 76, 0.02); }
+
+    .b-num {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.35rem;
+      color: var(--gold);
+      line-height: 1;
+      padding-top: 4px;
+    }
+    .b-body strong {
+      display: block;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 1.05rem;
+      color: var(--ink);
+      margin-bottom: 6px;
+      letter-spacing: -0.005em;
+    }
+    .b-body p {
+      font-size: 0.94rem;
+      color: var(--ink-dim);
+      line-height: 1.6;
+    }
+
+    .steps {
+      display: grid;
+      gap: 32px;
+      counter-reset: step;
+    }
+    .step {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      padding-left: 28px;
+      position: relative;
+    }
+    .step::before {
+      counter-increment: step;
+      content: "0" counter(step);
+      position: absolute;
+      left: 0;
+      top: 2px;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 0.95rem;
+      color: var(--gold);
+    }
+    .step h3 {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 1rem;
+      color: var(--ink);
+      letter-spacing: -0.005em;
+    }
+    .step p {
+      font-size: 0.92rem;
+      color: var(--ink-dim);
+      line-height: 1.55;
+    }
+
+    .quote {
+      padding: 64px 0;
+      text-align: center;
+      border-top: 1px solid var(--line-soft);
+      border-bottom: 1px solid var(--line-soft);
+    }
+    .quote-mark {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--gold);
+      font-size: 3rem;
+      line-height: 1;
+      display: block;
+      margin-bottom: 8px;
+    }
+    .quote blockquote {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(1.25rem, 2.4vw, 1.55rem);
+      line-height: 1.4;
+      color: var(--ink);
+      max-width: 560px;
+      margin: 0 auto 20px;
+      letter-spacing: -0.005em;
+    }
+
+    .logos-label {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 36px;
+      position: relative;
+    }
+    .logos-label::before,
+    .logos-label::after {
+      content: '';
+      width: 40px;
+      height: 1px;
+      background: var(--line);
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0 18px;
+    }
+    .clients-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border-top: 1px solid var(--line-soft);
+      border-left: 1px solid var(--line-soft);
+    }
+    .clients-grid .client {
+      padding: 22px 14px 18px;
+      text-align: center;
+      border-right: 1px solid var(--line-soft);
+      border-bottom: 1px solid var(--line-soft);
+      transition: background 0.35s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 150px;
+    }
+    .clients-grid .client:hover { background: rgba(201, 168, 76, 0.04); }
+    .clients-grid .avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      object-fit: cover;
+      filter: grayscale(100%) brightness(0.92) contrast(1.05);
+      opacity: 0.72;
+      transition: filter 0.35s, opacity 0.35s;
+      border: 1px solid rgba(201, 168, 76, 0.18);
+    }
+    .clients-grid .client:hover .avatar { filter: grayscale(0%) brightness(1) contrast(1); opacity: 1; }
+    .clients-grid .logo {
+      height: 56px;
+      max-width: 130px;
+      width: auto;
+      object-fit: contain;
+      filter: grayscale(100%) brightness(1.5);
+      opacity: 0.72;
+      transition: filter 0.35s, opacity 0.35s;
+    }
+    .clients-grid .logo[data-whiten] { filter: brightness(0) invert(1); opacity: 0.78; }
+    .clients-grid .logo[data-color] { filter: none; opacity: 0.85; }
+    .clients-grid .client:hover .logo { filter: grayscale(0%) brightness(1) contrast(1); opacity: 1; }
+    .clients-grid .client:hover .logo[data-whiten] { filter: brightness(0) invert(1); opacity: 1; }
+    .clients-grid .client:hover .logo[data-color] { filter: none; opacity: 1; }
+    .clients-grid .name {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      font-size: 0.74rem;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      line-height: 1.3;
+      transition: color 0.35s;
+      min-height: 2.6em;
+      display: flex;
+      align-items: center;
+      text-align: center;
+    }
+    .clients-grid .client:hover .name { color: var(--ink-dim); }
+
+    @media (max-width: 640px) {
+      .clients-grid { grid-template-columns: repeat(3, 1fr); }
+      .clients-grid .client { padding: 18px 8px 14px; min-height: 130px; gap: 8px; }
+      .clients-grid .avatar { width: 52px; height: 52px; }
+      .clients-grid .logo { height: 44px; max-width: 90px; }
+      .clients-grid .name { font-size: 0.66rem; }
+    }
+
+    .cta-inline {
+      margin-top: 44px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      text-align: center;
+    }
+    .cta-inline .cta-note { margin-top: 0; }
+
+    .cta {
+      padding: 96px 0 88px;
+      text-align: center;
+      position: relative;
+    }
+    .cta::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 1px;
+      background: var(--gold);
+    }
+    .cta h2 { margin: 0 auto 18px; max-width: 18ch; }
+    .cta-sub { font-size: 1rem; color: var(--ink-dim); max-width: 480px; margin: 0 auto 40px; }
+
+    .btn-wa {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--gold);
+      color: var(--black);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 0.98rem;
+      letter-spacing: 0.01em;
+      padding: 18px 34px;
+      text-decoration: none;
+      border: 1px solid var(--gold);
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background 0.25s, color 0.25s, transform 0.15s, box-shadow 0.25s;
+      box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.4);
+    }
+    .btn-wa:hover {
+      background: transparent;
+      color: var(--gold);
+      box-shadow: 0 8px 32px -8px rgba(201, 168, 76, 0.45);
+      transform: translateY(-2px);
+    }
+    .btn-wa svg { flex-shrink: 0; }
+
+    .cta-note {
+      margin-top: 18px;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 0.95rem;
+      letter-spacing: 0;
+      text-transform: none;
+      color: var(--ink-dim);
+      display: block;
+    }
+
+    footer {
+      padding: 40px 0 48px;
+      border-top: 1px solid var(--line-soft);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    footer a { color: var(--ink-dim); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--gold); }
+    .foot-brand { font-family: 'Playfair Display', serif; font-style: italic; color: var(--ink-dim); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+
+    /* DIAGNOSTICO */
+    .screen { display: none; animation: fadeIn 0.4s ease; }
+    .screen.on { display: block; }
+
+    .quiz-wrap { padding: 56px 0 90px; min-height: 70vh; }
+    .progress { height: 2px; background: var(--line-soft); margin-bottom: 10px; overflow: hidden; }
+    .progress i { display: block; height: 100%; background: var(--gold); width: 0; transition: width 0.35s ease; }
+    .pcount {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 44px;
+    }
+    .qblock {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .qblock::before { content: ''; width: 22px; height: 1px; background: var(--gold); }
+    .qtext {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: clamp(1.45rem, 4vw, 1.95rem);
+      line-height: 1.22;
+      letter-spacing: -0.012em;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+    .qsub { font-size: 0.92rem; color: var(--muted); margin-bottom: 30px; }
+    .opts { display: flex; flex-direction: column; gap: 10px; margin-top: 30px; }
+    .opt {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      border: 1px solid var(--line-soft);
+      background: rgba(243, 237, 228, 0.02);
+      padding: 17px 20px;
+      font-size: 0.97rem;
+      color: var(--ink-dim);
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s, color 0.2s;
+      text-align: left;
+      line-height: 1.5;
+      border-radius: 2px;
+    }
+    .opt:hover { border-color: var(--line); background: rgba(201, 168, 76, 0.04); color: var(--ink); }
+    .opt.sel { border-color: var(--gold); background: rgba(201, 168, 76, 0.08); color: var(--ink); }
+    .qnav { display: flex; justify-content: space-between; align-items: center; margin-top: 36px; }
+    .qback {
+      background: none; border: none; cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted); padding: 8px 0; transition: color 0.2s;
+    }
+    .qback:hover { color: var(--ink-dim); }
+    textarea {
+      width: 100%; background: rgba(243, 237, 228, 0.03);
+      border: 1px solid var(--line-soft); border-radius: 2px;
+      color: var(--ink); font-family: 'DM Sans', sans-serif; font-weight: 300;
+      font-size: 0.97rem; padding: 16px; min-height: 110px; resize: vertical; line-height: 1.6;
+      margin-top: 30px;
+    }
+    textarea:focus, .field input:focus { outline: none; border-color: var(--gold); }
+    .curr { display: inline-flex; border: 1px solid var(--line-soft); border-radius: 2px; overflow: hidden; margin-top: 22px; }
+    .curr button {
+      background: none; border: none; color: var(--muted);
+      font-family: 'DM Sans', sans-serif; font-size: 0.78rem; font-weight: 500;
+      letter-spacing: 0.1em; padding: 9px 20px; cursor: pointer; transition: 0.2s;
+    }
+    .curr button.sel { background: var(--gold); color: var(--black); }
+
+    .capture-wrap { padding: 72px 0 100px; max-width: 480px; margin: 0 auto; }
+    .field { margin-bottom: 16px; }
+    .field label {
+      display: block;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 8px;
+    }
+    .field input {
+      width: 100%; background: rgba(243, 237, 228, 0.03);
+      border: 1px solid var(--line-soft); border-radius: 2px;
+      color: var(--ink); font-family: 'DM Sans', sans-serif; font-weight: 300;
+      font-size: 1rem; padding: 15px 16px;
+    }
+    .err { color: var(--warn); font-size: 0.82rem; margin-top: 6px; display: none; }
+    .privacy { font-size: 0.78rem; color: var(--muted); margin-top: 20px; line-height: 1.6; }
+
+    .report-wrap { padding: 56px 0 90px; }
+    .rcard {
+      background: rgba(243, 237, 228, 0.025);
+      border: 1px solid var(--line-soft);
+      border-radius: 2px;
+      padding: 36px 32px;
+      margin-bottom: 20px;
+    }
+    .rcard.gold { border-color: var(--line); }
+    .levelhead { text-align: center; padding: 48px 32px; }
+    .levelhead .ln {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: clamp(2.1rem, 6.5vw, 3.1rem);
+      line-height: 1.1;
+      color: var(--ink);
+      margin: 16px 0 8px;
+      letter-spacing: -0.02em;
+    }
+    .levelhead .lt {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .levelhead .lscore { font-size: 0.78rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+    .dots { display: flex; gap: 8px; justify-content: center; margin: 24px 0 6px; }
+    .dots i { width: 34px; height: 4px; background: var(--line-soft); }
+    .dots i.on { background: var(--gold); }
+
+    .dimrow { margin-bottom: 18px; }
+    .dimrow .dt { display: flex; justify-content: space-between; font-size: 0.88rem; margin-bottom: 7px; }
+    .dimrow .dt b { color: var(--ink); font-weight: 500; }
+    .dimrow .dt span { color: var(--muted); }
+    .dbar { height: 5px; background: var(--line-soft); overflow: hidden; }
+    .dbar i { display: block; height: 100%; background: var(--gold); width: 0; transition: width 1s ease 0.3s; }
+    .dbar i.low { background: var(--warn); }
+
+    .f-main { border-left: 2px solid var(--gold); }
+    .ftag {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .ftag::before { content: ''; width: 22px; height: 1px; background: currentColor; }
+    .ftag.warn { color: var(--warn); }
+    .rcard h3 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--ink);
+      margin-bottom: 14px;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+    }
+    .rcard p { font-size: 0.95rem; color: var(--ink-dim); margin-bottom: 14px; line-height: 1.65; }
+    .rcard p:last-child { margin-bottom: 0; }
+
+    .factline {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--ink);
+      line-height: 1.5;
+      margin-bottom: 22px;
+    }
+    .factline b { font-style: normal; color: var(--gold); font-weight: 700; }
+
+    .mathnum {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: clamp(1.9rem, 5.5vw, 2.7rem);
+      color: var(--gold);
+      margin: 12px 0 6px;
+      letter-spacing: -0.015em;
+    }
+    .mathsub { font-size: 0.86rem; color: var(--muted); margin-bottom: 26px; }
+    .slider { margin-bottom: 18px; }
+    .slider .st { display: flex; justify-content: space-between; font-size: 0.86rem; margin-bottom: 7px; }
+    .slider .st span { color: var(--ink-dim); }
+    .slider .st b { color: var(--gold); font-weight: 500; }
+    input[type=range] {
+      width: 100%; -webkit-appearance: none; appearance: none;
+      height: 3px; background: var(--line-soft); outline: none;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%;
+      background: var(--gold); cursor: pointer; border: none;
+    }
+    input[type=range]::-moz-range-thumb {
+      width: 18px; height: 18px; border-radius: 50%;
+      background: var(--gold); cursor: pointer; border: none;
+    }
+    .mathnote {
+      font-size: 0.82rem; color: var(--muted);
+      border-top: 1px solid var(--line-soft);
+      padding-top: 18px; margin-top: 24px; line-height: 1.65;
+    }
+
+    .rcta { text-align: center; padding: 52px 32px; }
+    .rcta h3 { font-size: 1.45rem; margin-bottom: 12px; }
+    .rcta p { max-width: 420px; margin: 0 auto 30px; }
+    .rcta-btns { display: flex; flex-direction: column; gap: 14px; align-items: center; }
+
+    @media (max-width: 640px) {
+      .hero { padding: 72px 0 56px; }
+      .section { padding: 64px 0; }
+      .cta { padding: 72px 0 64px; }
+      .bullets li { grid-template-columns: 42px 1fr; gap: 16px; padding: 22px 0; }
+      .b-num { font-size: 1.15rem; }
+      .b-body strong { font-size: 0.98rem; }
+      .b-body p { font-size: 0.9rem; }
+      .btn-wa { width: 100%; justify-content: center; padding: 16px 24px; }
+      .logos-label::before, .logos-label::after { width: 20px; margin: 0 10px; }
+      footer { flex-direction: column; align-items: flex-start; gap: 6px; }
+      .quiz-wrap { padding: 40px 0 70px; }
+      .rcard { padding: 28px 22px; }
+      .levelhead { padding: 40px 22px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a class="logo" href="/">Daniel <em>García de Celis</em></a>
+      <button class="nav-cta" onclick="startQuiz()">
+        Diagnóstico gratuito
+        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <div class="hero-glow"></div>
+
+  <!-- ════════ LANDING ════════ -->
+  <div id="landing" class="screen on">
+  <div class="container">
+
+    <section class="hero">
+      <div class="chapter-mark">Diagnóstico de Lista · Infoproductores · Gratuito</div>
+
+      <h1>¿Cuánto está <em>dejando de vender</em> tu lista?</h1>
+
+      <p class="subhead">
+        Para infoproductores que ya tienen lista, comunidad o base de datos. Puede que venda,
+        pero casi siempre rinde por debajo de lo que podría. Responde unas preguntas y descubre
+        si tu lista está viva, fría o dormida, y qué campaña activarías primero para que rinda de verdad.
+      </p>
+
+      <div class="cta-inline">
+        <button class="btn-wa" onclick="startQuiz()">
+          Diagnosticar mi lista gratis
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <p class="cta-note">3 minutos. Resultado al instante.</p>
+      </div>
+    </section>
+
+    <section class="section reveal" id="diagnostico">
+      <p class="eyebrow">¿Qué vas a ver?</p>
+      <h2>Una lectura <em>honesta</em> del activo más rentable que tienes.</h2>
+      <p class="section-lead">Nada de consejos genéricos. Todo lo que te diga sale de lo que tú mismo respondas. Si no se puede afirmar con tus datos, no se afirma.</p>
+
+      <ul class="bullets">
+        <li>
+          <span class="b-num">01.</span>
+          <div class="b-body">
+            <strong>El estado real de tu lista, de 1 a 5</strong>
+            <p>El radar de las 6 cosas que deciden si una lista vende: monetización, apertura, frecuencia, actividad, segmentación y si aportas valor o solo vendes.</p>
+          </div>
+        </li>
+        <li>
+          <span class="b-num">02.</span>
+          <div class="b-body">
+            <strong>Tu fuga principal, con nombre</strong>
+            <p>El punto exacto donde, según tus propias respuestas, tu lista rinde por debajo de lo que podría. Y qué pasa si lo dejas como está.</p>
+          </div>
+        </li>
+        <li>
+          <span class="b-num">03.</span>
+          <div class="b-body">
+            <strong>Lo que tu lista podría generar cada mes</strong>
+            <p>Con las asunciones a la vista para que las muevas tú. Aritmética con tus números, no promesas.</p>
+          </div>
+        </li>
+        <li>
+          <span class="b-num">04.</span>
+          <div class="b-body">
+            <strong>Qué campaña activarías primero</strong>
+            <p>Reactivación, nutrición, segmentación, venta directa o recompra. La que pide tu caso, no la de todos. En pantalla.</p>
+          </div>
+        </li>
+      </ul>
+
+      <div class="cta-inline">
+        <button class="btn-wa" onclick="startQuiz()">
+          Diagnosticar mi lista gratis
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <p class="cta-note">3 minutos. Resultado al instante.</p>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <p class="eyebrow">Para quién es</p>
+      <h2>Tiene sentido si <em>ya</em> tienes lista.</h2>
+      <p class="section-lead">Este diagnóstico mide la salud de una base de datos que ya existe: contactos que captaste con webinars, lead magnets, retos, eventos, ads o lanzamientos anteriores. Si todavía no has captado leads o no tienes una oferta validada, tu prioridad ahora es otra, y te lo diré.</p>
+
+      <div class="steps">
+        <div class="step">
+          <h3>Respondes las preguntas.</h3>
+          <p>Sobre tu lista, tu oferta y cómo le escribes hoy. El test se adapta a tu caso. Tres minutos.</p>
+        </div>
+        <div class="step">
+          <h3>Ves tu diagnóstico al instante.</h3>
+          <p>Estado de tu lista, fuga principal, potencial mensual y la primera campaña que activaría. En pantalla, completo.</p>
+        </div>
+        <div class="step">
+          <h3>Si quieres, te doy mi lectura personal.</h3>
+          <p>Me mandas tu resultado por WhatsApp y te digo cómo montaría esa campaña en tu caso, en qué orden y con qué. En menos de 24h. Sin llamada de venta disfrazada.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="quote reveal">
+      <div class="container" style="padding:0;">
+        <span class="quote-mark">"</span>
+        <blockquote>
+          La fuga no suele estar en captar más. Está en activar lo que ya tienes. Esa lista te costó reunirla. Que no venda también te cuesta.
+        </blockquote>
+        <cite style="font-family:'DM Sans',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);display:block;">Daniel García de Celis</cite>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <p class="logos-label">Clientes con los que he trabajado</p>
+      <div class="clients-grid">
+        <div class="client"><img class="avatar" src="/logos/josemunoz.jpg" alt="José Muñoz" loading="lazy" /><span class="name">José Muñoz</span></div>
+        <div class="client"><img class="avatar" src="/logos/hackaviss.jpg" alt="Hackaviss" loading="lazy" /><span class="name">Hackaviss</span></div>
+        <div class="client"><img class="logo" src="/logos/talentnetwork.svg" alt="Talent Network" loading="lazy" data-color /><span class="name">Talent Network</span></div>
+        <div class="client"><img class="logo" src="/logos/crecesinlimite.svg" alt="Crece Sin Límite" loading="lazy" /><span class="name">Crece Sin Límite</span></div>
+        <div class="client"><img class="logo" src="/logos/tutellus.svg" alt="Tutellus" loading="lazy" /><span class="name">Tutellus</span></div>
+        <div class="client"><img class="logo" src="/logos/digitalriders.webp" alt="Digital Riders" loading="lazy" /><span class="name">Digital Riders</span></div>
+        <div class="client"><img class="logo" src="/logos/racks.png" alt="Racks Academy" loading="lazy" /><span class="name">Racks Academy</span></div>
+        <div class="client"><img class="logo" src="/logos/escueladelujo.png" alt="Escuela de Lujo" loading="lazy" data-whiten /><span class="name">Escuela de Lujo</span></div>
+        <div class="client"><img class="avatar" src="/logos/anamoreno.jpg" alt="Ana Moreno Marín" loading="lazy" /><span class="name">Ana Moreno Marín</span></div>
+        <div class="client"><img class="avatar" src="/logos/vanessamarrero.jpg" alt="Vanessa Marrero" loading="lazy" /><span class="name">Vanessa Marrero</span></div>
+        <div class="client"><img class="avatar" src="/logos/zekenovarino.jpg" alt="Zeke Novarino" loading="lazy" /><span class="name">Zeke Novarino</span></div>
+        <div class="client"><img class="avatar" src="/logos/tutobiohacker.jpg" alt="Tuto Biohacker" loading="lazy" /><span class="name">Tuto Biohacker</span></div>
+      </div>
+    </section>
+
+    <section class="cta reveal">
+      <h2>Empieza por el <em>diagnóstico.</em></h2>
+      <p class="cta-sub">Gratis, al instante, y sin dejar tu email hasta el final. Lo que descubras es tuyo, hagas lo que hagas después.</p>
+
+      <button class="btn-wa" onclick="startQuiz()">
+        Diagnosticar mi lista gratis
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+
+      <p class="cta-note">3 minutos. Resultado al instante.</p>
+    </section>
+
+  </div>
+  </div>
+
+  <!-- ════════ QUIZ ════════ -->
+  <div id="quiz" class="screen">
+    <div class="container quiz-wrap">
+      <div class="progress"><i id="pbar"></i></div>
+      <div class="pcount" id="pcount"></div>
+      <div id="qbox"></div>
+    </div>
+  </div>
+
+  <!-- ════════ CAPTURA ════════ -->
+  <div id="capture" class="screen">
+    <div class="container capture-wrap">
+      <p class="eyebrow">Último paso</p>
+      <h2>Tu diagnóstico está listo.</h2>
+      <p class="section-lead" style="margin-bottom:34px;">Dime a quién se lo entrego. Lo ves en pantalla ahora mismo, completo. Si dejas tu WhatsApp, te paso además mi lectura personal de tu caso.</p>
+      <div class="field"><label>Nombre</label><input type="text" id="f-name" placeholder="Tu nombre"></div>
+      <div class="field"><label>Email</label><input type="text" id="f-email" placeholder="tu@email.com"><div class="err" id="e-email">Revisa el email, no parece válido.</div></div>
+      <div style="margin-top:20px;padding:22px;border:1px solid var(--gold);border-radius:14px;background:rgba(201,168,76,0.06);">
+        <p style="font-weight:700;color:var(--ink);margin:0 0 4px;font-size:1rem;">Para mi lectura personal de tu caso</p>
+        <p style="font-size:0.88rem;color:var(--ink-dim);margin:0 0 18px;line-height:1.55;">Tu diagnóstico lo ves en pantalla igual. Esto es lo que necesito para revisar tu caso a mano y decirte qué cambiar, en vez de darte consejos genéricos.</p>
+        <div class="field"><label>Tu web y tus redes</label><textarea id="f-online" placeholder="Pega aquí tu web, Instagram, YouTube o LinkedIn. Es justo lo que miro para que la lectura sea de TU negocio y no de uno cualquiera." style="min-height:80px;"></textarea></div>
+        <div class="field" style="margin-bottom:0;"><label>WhatsApp <span style="text-transform:none;letter-spacing:0;color:var(--gold);">· por aquí te la mando</span></label><input type="text" id="f-wa" placeholder="+57 300 000 0000"></div>
+      </div>
+      <button class="btn-wa" style="margin-top:18px;" onclick="submitCapture()">
+        Ver mi diagnóstico
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="qback" style="margin-top:16px;display:block;" onclick="backToQuiz()">Atrás, quiero revisar una respuesta</button>
+      <p class="privacy">Tus datos se usan solo para entregarte este diagnóstico y, si la pides, mi lectura de tu caso. Nada de secuencias infinitas ni cesión a terceros.</p>
+    </div>
+  </div>
+
+  <!-- ════════ INFORME ════════ -->
+  <div id="report" class="screen">
+    <div class="container report-wrap" id="rbox"></div>
+  </div>
+
+  <div class="container">
+    <footer>
+      <p class="foot-brand">© 2026 Daniel García de Celis</p>
+      <p><a href="https://danielgarciadecelis.com">danielgarciadecelis.com</a></p>
+    </footer>
+  </div>
+
+  <script>
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    /* =====================================================
+       CONFIG
+    ===================================================== */
+    const SUBMIT_URL = "https://script.google.com/macros/s/AKfycbydQsYJmELssd2TC4YWMafMf9zI6NxwJGRLJVCzWYWCSCHL666GvfEdXiaPTLUtgl9s/exec";
+    const WA_NUMBER = "34628347382";
+
+    /* =====================================================
+       BANCO DE PREGUNTAS (flujo ramificado)
+    ===================================================== */
+    const Q = [
+    {id:'modelo', block:'Tu negocio', text:'¿Qué vendes principalmente?', opts:[
+      {v:'curso', t:'Cursos o formaciones grabadas'},
+      {v:'envivo', t:'Formaciones en vivo o por cohortes'},
+      {v:'membresia', t:'Membresía o suscripción'},
+      {v:'highticket', t:'Mentoría, consultoría o programas high ticket'},
+      {v:'mezcla', t:'Una mezcla de varios'}]},
+
+    {id:'ticket', block:'Tu negocio', text:'¿Cuál es tu ticket principal?', sub:'El precio del producto que más vendes o más pesa en tu facturación.', currency:true, opts:[
+      {v:'t1', t:'Menos de 100', mid:60},
+      {v:'t2', t:'Entre 100 y 500', mid:300},
+      {v:'t3', t:'Entre 500 y 2.000', mid:1000},
+      {v:'t4', t:'Entre 2.000 y 5.000', mid:3000},
+      {v:'t5', t:'Más de 5.000', mid:7000}]},
+
+    {id:'herramienta', block:'Tu lista', text:'¿Con qué gestionas tu lista?', sub:'Para entender desde dónde partimos. No afecta a tu resultado.', opts:[
+      {v:'mailchimp', t:'Mailchimp'},
+      {v:'activecampaign', t:'ActiveCampaign, ConvertKit o similar'},
+      {v:'substack', t:'Substack, Beehiiv o newsletter'},
+      {v:'mailerlite', t:'MailerLite, Brevo o Acumbamail'},
+      {v:'excel', t:'Un Excel, el CRM a mano o nada formal'},
+      {v:'otra', t:'Otra herramienta'}]},
+
+    {id:'lista', block:'Tu lista', text:'¿Cuántos contactos tienes en tu lista o base de datos?', opts:[
+      {v:'no', t:'Todavía no tengo lista de email', mid:0},
+      {v:'l1', t:'Menos de 500', mid:250},
+      {v:'l2', t:'Entre 500 y 2.000', mid:1200},
+      {v:'l3', t:'Entre 2.000 y 10.000', mid:5000},
+      {v:'l4', t:'Entre 10.000 y 30.000', mid:18000},
+      {v:'l5', t:'Más de 30.000', mid:40000}]},
+
+    {id:'frec', block:'Tu lista', text:'¿Cada cuánto le escribes a tu lista?', show:a=>a.lista&&a.lista!=='no', opts:[
+      {v:'varias', t:'Varias veces por semana'},
+      {v:'semanal', t:'Una vez por semana'},
+      {v:'mensual', t:'Una o dos veces al mes'},
+      {v:'sololanz', t:'Solo cuando lanzo o promociono algo'},
+      {v:'casinunca', t:'Casi nunca'}]},
+
+    {id:'ultima', block:'Tu lista', text:'¿Cuándo enviaste tu última campaña o email?', show:a=>a.lista&&a.lista!=='no', opts:[
+      {v:'estasemana', t:'Esta semana'},
+      {v:'ultmes', t:'En el último mes'},
+      {v:'m1a6', t:'Hace entre 1 y 6 meses'},
+      {v:'masde6', t:'Hace más de 6 meses'}]},
+
+    {id:'apertura', block:'Tu lista', text:'¿Cuál es tu apertura media aproximada?', sub:'Una estimación basta. Tu plataforma de email lo muestra.', show:a=>a.lista&&a.lista!=='no', opts:[
+      {v:'a1', t:'Más del 45%', mid:48},
+      {v:'a2', t:'Entre 30% y 45%', mid:37},
+      {v:'a3', t:'Entre 15% y 30%', mid:22},
+      {v:'a4', t:'Menos del 15%', mid:10},
+      {v:'nose', t:'No lo sé', mid:20}]},
+
+    {id:'relacion', block:'Tu lista', text:'Cuando escribes a tu lista, ¿qué sueles hacer?', show:a=>a.lista&&a.lista!=='no', opts:[
+      {v:'solovender', t:'Solo le escribo para vender'},
+      {v:'sobretodovender', t:'Sobre todo para vender, algo de contenido'},
+      {v:'mezcla', t:'Mezcla de contenido y oferta'},
+      {v:'contenido', t:'Sobre todo contenido, vendo poco'}]},
+
+    {id:'monetiza', block:'Tu lista', text:'¿Tu lista te genera ventas de forma recurrente?', show:a=>a.lista&&a.lista!=='no', opts:[
+      {v:'casitodos', t:'Sí, casi todos los meses'},
+      {v:'algunmes', t:'Algún mes suelto'},
+      {v:'sololanz', t:'Solo cuando lanzo'},
+      {v:'nunca', t:'Casi nunca, o nunca'}]},
+
+    {id:'segmenta', block:'Tu lista', text:'¿Tienes la lista segmentada o etiquetada?', show:a=>a.lista&&a.lista!=='no', opts:[
+      {v:'si', t:'Sí, por interés o comportamiento'},
+      {v:'basico', t:'Algo básico (clientes vs no clientes)'},
+      {v:'no', t:'No, le escribo a todos igual'}]},
+
+    {id:'frase', block:'Tu lista', text:'¿Qué frase describe mejor tu situación?', show:a=>a.lista&&a.lista!=='no', opts:[
+      {v:'nosequeenviar', t:'Tengo lista, pero no sé qué enviar'},
+      {v:'solocuandolanzo', t:'Solo escribo cuando lanzo'},
+      {v:'vendopoco', t:'Envío emails, pero vendo poco'},
+      {v:'respondemenos', t:'Mi lista responde cada vez menos'},
+      {v:'leadsantiguos', t:'Tengo leads antiguos que nunca reactivé'},
+      {v:'podriavendermas', t:'Mi lista vende, pero creo que podría vender más'}]},
+
+    {id:'canal', block:'Tu audiencia', text:'¿Dónde vive tu audiencia principal?', show:a=>a.lista==='no', opts:[
+      {v:'ig', t:'Instagram'},
+      {v:'yt', t:'YouTube'},
+      {v:'tiktok', t:'TikTok'},
+      {v:'linkedin', t:'LinkedIn'},
+      {v:'otro', t:'Otro canal'}]},
+
+    {id:'audiencia', block:'Tu audiencia', text:'¿De qué tamaño es esa audiencia?', show:a=>a.lista==='no', opts:[
+      {v:'au1', t:'Menos de 1.000 seguidores', mid:500},
+      {v:'au2', t:'Entre 1.000 y 10.000', mid:5000},
+      {v:'au3', t:'Entre 10.000 y 50.000', mid:25000},
+      {v:'au4', t:'Más de 50.000', mid:80000}]},
+
+    {id:'convsocial', block:'Tu audiencia', text:'¿Cómo conviertes esa audiencia en ventas hoy?', show:a=>a.lista==='no', opts:[
+      {v:'dms', t:'Conversaciones por DM'},
+      {v:'lives', t:'Lives, stories o contenido con oferta'},
+      {v:'linkbio', t:'Link en bio hacia mi oferta'},
+      {v:'no', t:'Todavía no la convierto de forma consistente'}]},
+
+    {id:'intentado', block:'Tu foco', text:'¿Qué has intentado ya con tu lista?', sub:'Opcional. Una o dos frases bastan.', free:true}
+    ];
+
+    /* =====================================================
+       ESTADO + NAVEGACION
+    ===================================================== */
+    let A = {}, AL = {}, MID = {}, path = [], cur = -1, currency = '$';
+
+    function visible(){ return Q.filter(q=>!q.show||q.show(A)); }
+
+    function show(id){
+      ['landing','quiz','capture','report'].forEach(s=>document.getElementById(s).classList.remove('on'));
+      document.getElementById(id).classList.add('on');
+      window.scrollTo(0,0);
+    }
+
+    function startQuiz(){ if(path.length===0) next(); else render(); show('quiz'); }
+    function backToQuiz(){ cur = path.length-1; render(); show('quiz'); }
+    function restart(){ A={}; AL={}; MID={}; path=[]; cur=-1; document.getElementById('rbox').innerHTML=''; next(); show('quiz'); }
+
+    function next(){
+      const curQ = path.length>0 ? Q[path[path.length-1]] : null;
+      let startIdx = curQ ? Q.indexOf(curQ)+1 : 0;
+      let nxt = -1;
+      for(let i=startIdx;i<Q.length;i++){ if(!Q[i].show || Q[i].show(A)){ nxt=i; break; } }
+      if(nxt===-1){ show('capture'); return; }
+      path.push(nxt); cur=path.length-1;
+      render();
+    }
+
+    function back(){
+      if(path.length<=1) return;
+      const last = Q[path.pop()];
+      delete A[last.id]; delete AL[last.id]; delete MID[last.id];
+      Q.forEach(q=>{ if(q.show && !q.show(A) && A[q.id]!==undefined){ delete A[q.id]; delete AL[q.id]; delete MID[q.id]; } });
+      cur=path.length-1;
+      render();
+    }
+
+    function render(){
+      const q = Q[path[cur]];
+      const vis = visible();
+      const pos = vis.indexOf(q)+1;
+      document.getElementById('pbar').style.width = Math.round(pos/(vis.length+1)*100)+'%';
+      document.getElementById('pcount').textContent = 'Pregunta '+pos+' de ~'+vis.length;
+      let h = '<div class="qblock">'+q.block+'</div><div class="qtext">'+q.text+'</div>';
+      if(q.sub) h += '<div class="qsub">'+q.sub+'</div>';
+      if(q.currency){
+        h += '<div class="curr"><button class="'+(currency==='$'?'sel':'')+'" onclick="setCurr(\'$\')">USD $</button><button class="'+(currency==='€'?'sel':'')+'" onclick="setCurr(\'€\')">EUR €</button></div>';
+      }
+      if(q.free){
+        h += '<textarea id="freetxt" placeholder="Escribe aquí... (o sáltala, es opcional)">'+(A[q.id]||'')+'</textarea>';
+        h += '<div class="qnav"><button class="qback" onclick="back()">Atrás</button><div style="display:flex;gap:18px;align-items:center;"><button class="qback" onclick="saveFree()">Saltar</button><button class="btn-wa" onclick="saveFree()">Ver mi diagnóstico</button></div></div>';
+      } else {
+        h += '<div class="opts">'+q.opts.map(o=>
+          '<button class="opt'+(A[q.id]===o.v?' sel':'')+'" onclick="pick(\''+q.id+'\',\''+o.v+'\')">'+o.t+'</button>'
+        ).join('')+'</div>';
+        h += '<div class="qnav"><button class="qback" onclick="back()" '+(path.length<=1?'style="visibility:hidden"':'')+'>Atrás</button><span></span></div>';
+      }
+      document.getElementById('qbox').innerHTML = h;
+      window.scrollTo(0,0);
+    }
+
+    function setCurr(c){ currency=c; render(); }
+
+    function pick(id,v){
+      const q = Q.find(x=>x.id===id);
+      const o = q.opts.find(x=>x.v===v);
+      A[id]=v; AL[id]=o.t; if(o.mid!==undefined) MID[id]=o.mid;
+      setTimeout(next, 180);
+    }
+
+    function saveFree(){ A.intentado = document.getElementById('freetxt').value.trim(); next(); }
+
+    /* =====================================================
+       SCORING: 6 dimensiones de salud de lista
+    ===================================================== */
+    function scoreDims(){
+      let d = {monetizacion:[0,0], engagement:[0,0], frecuencia:[0,0], reactivacion:[0,0], segmentacion:[0,0], relacion:[0,0]};
+      const add=(dim,pts,max)=>{ d[dim][0]+=pts; d[dim][1]+=max; };
+
+      add('monetizacion', ({casitodos:10,algunmes:7,sololanz:4,nunca:0})[A.monetiza]||0, 10);
+      add('engagement',   ({a1:10,a2:8,a3:5,a4:2,nose:1})[A.apertura]||0, 10);
+      add('frecuencia',   ({varias:10,semanal:9,mensual:5,sololanz:2,casinunca:0})[A.frec]||0, 10);
+      add('reactivacion', ({estasemana:10,ultmes:8,m1a6:4,masde6:0})[A.ultima]||0, 10);
+      add('segmentacion', ({si:10,basico:5,no:0})[A.segmenta]||0, 10);
+      add('relacion',     ({solovender:0,sobretodovender:4,mezcla:9,contenido:10})[A.relacion]||0, 10);
+
+      const W = {monetizacion:25, engagement:20, frecuencia:15, reactivacion:15, segmentacion:15, relacion:10};
+      let dims={}, total=0;
+      for(const k in d){
+        const pct = d[k][1]>0 ? d[k][0]/d[k][1] : 0;
+        dims[k]=Math.round(pct*100);
+        total += pct*W[k];
+      }
+      return {dims, total:Math.round(total)};
+    }
+
+    const LEVELS = [
+      {min:0,  n:1, t:'Lista abandonada'},
+      {min:21, n:2, t:'Lista fría'},
+      {min:41, n:3, t:'Lista tibia'},
+      {min:61, n:4, t:'Lista activa, por debajo de su techo'},
+      {min:81, n:5, t:'Lista bien monetizada'}
+    ];
+    const DIMNAMES = {monetizacion:'Monetización', engagement:'Apertura', frecuencia:'Frecuencia de envío', reactivacion:'Actividad reciente', segmentacion:'Segmentación', relacion:'Aporte de valor'};
+    const CAMPANAS = {reactivacion:'Campaña de reactivación', nutricion:'Secuencia de nutrición', ventadirecta:'Campaña de venta directa', segmentacion:'Segmentación de la lista', recompra:'Campaña de recompra', medicion:'Medir antes de enviar', captacion:'Construir y captar lista'};
+    const CAMPDESC = {
+      reactivacion:'Despertar a los que dejaron de abrirte, limpiar lo muerto y recuperar la relación antes de venderles nada.',
+      nutricion:'Reconstruir la confianza con contenido que demuestre criterio, para que abrir tu email vuelva a valer la pena.',
+      ventadirecta:'Hacerle a quien ya te lee una oferta clara que hoy no le estás haciendo.',
+      segmentacion:'Partir la lista por interés y por cliente, para que cada mensaje le llegue a quien sí lo compraría.',
+      recompra:'Venderle el siguiente paso a quien ya te compró, el lead más barato y el que mejor convierte.',
+      medicion:'Mirar tus números reales antes de enviar nada, porque sin ellos cualquier campaña es a ciegas.',
+      captacion:'Montar el sistema que convierte tu audiencia prestada en una lista que es tuya.'
+    };
+
+    /* helper: lista grande */
+    function listaGrande(){ return A.lista==='l3'||A.lista==='l4'||A.lista==='l5'; }
+
+    /* =====================================================
+       MOTOR DE HALLAZGOS + CASCADA DE CAMPAÑAS
+    ===================================================== */
+    const RULES = [
+    {id:'quemada', sev:10, campaign:'reactivacion',
+     cond:a=>(a.relacion==='solovender'||a.relacion==='sobretodovender')&&(a.ultima==='masde6'||a.frec==='casinunca'||a.frec==='sololanz'),
+     title:'Tu lista está quemada: solo sabe de ti cuando le vendes',
+     body:()=>`Me has dicho que a tu lista ${AL.relacion?.toLowerCase()} y que ${A.frec==='sololanz'?'le escribes solo cuando lanzas':(A.frec==='casinunca'?'casi nunca le escribes':'tu última campaña fue hace más de 6 meses')}. Esa combinación es la peor para una lista: le has enseñado que tu nombre en el inbox significa "me van a pedir dinero", y encima desapareces entre venta y venta. Cada mes de silencio, una parte deja de abrirte para siempre.`,
+     palanca:'Primero reactivación, después cambiar la dieta. Una secuencia de 3-4 emails que devuelva valor y dé una razón honesta para quedarse, y a partir de ahí una proporción sana de contenido y oferta. La campaña de reactivación es lo primero, la nutrición lo que la sostiene.'},
+
+    {id:'dormida', sev:9, campaign:'reactivacion',
+     cond:a=>a.ultima==='masde6'||a.frec==='casinunca'||a.apertura==='a4',
+     title:()=>A.apertura==='a4'?'Tu lista te ha dejado en visto':'Tu lista está dormida',
+     body:()=>{
+       if(A.apertura==='a4') return `Una apertura por debajo del 15% significa que más de 8 de cada 10 personas que pidieron saber de ti ya no te abren. ${listaGrande()?'Y con tu tamaño de lista, eso es mucho activo caro generando cero.':''} Mandar más emails a esa lista sin reactivarla antes es hablarle a una sala vacía.`;
+       return `Me has dicho que tienes ${AL.lista?.toLowerCase()} contactos y que ${A.ultima==='masde6'?'tu última campaña fue hace más de 6 meses':'casi nunca le escribes'}. Tu activo más caro pasa la mayor parte del tiempo sin generar nada. ${listaGrande()?'Y es una lista grande: cuanto más grande y más dormida, mayor la oportunidad de reactivarla.':''} Una lista no se mantiene caliente sola.`;
+     },
+     palanca:'Campaña de reactivación antes que cualquier otra cosa: 3-4 emails a los inactivos con tu mejor contenido y una razón para quedarse. Los que no reaccionen, fuera. Mejor una lista pequeña que abre que una grande que te ignora.'},
+
+    {id:'nomide', sev:8, campaign:'medicion',
+     cond:a=>a.apertura==='nose',
+     title:'No sabes si tu lista te abre, y ese es el primer agujero',
+     body:()=>`Me has dicho que no conoces tu tasa de apertura. No es un fallo del test, es el diagnóstico: sin ese número no puedes saber si tu lista está viva o muerta, ni si lo que envías funciona. Cualquier campaña que montes encima de eso es a ciegas. La buena noticia es que ese dato lo tienes ya en tu plataforma de email, solo hay que mirarlo.`,
+     palanca:'Antes de enviar nada nuevo: abrir la plataforma y mirar la apertura de los últimos 5 envíos. Con ese número decides si toca reactivar, nutrir o vender. Sin él, todo es corazonada.'},
+
+    {id:'novende', sev:8, campaign:'ventadirecta',
+     cond:a=>a.monetiza==='nunca'&&(a.apertura==='a1'||a.apertura==='a2'||a.apertura==='a3')&&(a.relacion==='mezcla'||a.relacion==='contenido'),
+     title:'Te abren, te leen, y no les vendes nada',
+     body:()=>`Tienes una lista que te abre (${AL.apertura?.toLowerCase()}) y a la que ${AL.relacion?.toLowerCase()}, pero me has dicho que casi nunca te genera ventas. Eso no es un problema de relación, la relación la tienes. Es que no les estás pidiendo la compra. Tienes la confianza construida y la estás dejando sin convertir.`,
+     palanca:'Campaña de venta directa sobre la relación que ya existe: una secuencia corta que presente tu mejor oferta a quien ya te lee. No necesitas más audiencia ni más contenido, necesitas hacer la oferta.'},
+
+    {id:'novendefrio', sev:7, campaign:'nutricion',
+     cond:a=>a.monetiza==='nunca'&&(a.relacion==='solovender'||a.relacion==='sobretodovender'),
+     title:'Le vendes, pero no te compra',
+     body:()=>`Me has dicho que ${AL.relacion?.toLowerCase()} y que casi nunca te genera ventas. Vender más fuerte a una lista que no responde no la hace comprar, la quema más rápido. Cuando el único mensaje que reciben es una oferta, dejan de abrir antes de llegar a confiar.`,
+     palanca:'Secuencia de nutrición antes de la próxima oferta: reconstruir la relación con contenido que demuestre criterio, y solo entonces volver a vender. La venta sube cuando la confianza sube, no antes.'},
+
+    {id:'sololanza', sev:7, campaign:'ventadirecta',
+     cond:a=>a.monetiza==='sololanz',
+     title:'Tu lista solo factura cuando lanzas',
+     body:()=>`Me has dicho que tu lista solo genera ventas cuando lanzas. Eso significa que el resto del año tu activo más rentable está parado, esperando al próximo evento. Entre lanzamiento y lanzamiento hay meses de relación que podrían estar generando, y no lo hacen.`,
+     palanca:'Venta entre lanzamientos: una oferta de entrada siempre disponible y emails que la vendan sin esperar al próximo lanzamiento. No reemplaza tus lanzamientos, les pone un suelo debajo.'},
+
+    {id:'sinsegmentar', sev:6, campaign:'segmentacion',
+     cond:a=>a.segmenta==='no'&&(a.monetiza==='algunmes'||a.monetiza==='casitodos'),
+     title:'Le hablas a toda tu lista igual',
+     body:()=>`Tu lista ya vende, pero me has dicho que le escribes a todos igual, sin segmentar. Eso pone un techo a lo que puede generar: el que ya te compró recibe el mismo email que el que nunca lo ha hecho, y el interesado en un tema recibe lo mismo que el interesado en otro. Cada mensaje genérico es una venta que no llega a quien sí la haría.`,
+     palanca:'Segmentación básica primero: clientes vs no clientes, y por interés principal. Con dos o tres segmentos bien hechos, el mismo esfuerzo de email empieza a convertir bastante más.'},
+
+    {id:'recompra', sev:5, campaign:'recompra',
+     cond:a=>a.monetiza==='casitodos'&&a.modelo!=='membresia',
+     title:'Tu lista vende. La fuga ahora es que no les vuelves a vender',
+     body:()=>`Tu lista genera ventas casi todos los meses, eso es estar por encima de la media. En este punto la fuga ya no está en captar ni en reactivar, está en el cliente que ya te compró y al que no le ofreces el siguiente paso. El lead más barato que tienes es el que ya confió en ti una vez.`,
+     palanca:'Campaña de recompra sobre tus clientes: una oferta del siguiente paso natural a tu producto principal, dirigida solo a quien ya compró. Convierte varias veces mejor que cualquier captación.'},
+
+    {id:'contradiccion', sev:4, campaign:'reactivacion',
+     cond:a=>a.frase==='podriavendermas'&&(a.monetiza==='nunca'||a.monetiza==='sololanz'||a.ultima==='masde6'),
+     title:'Dices que tu lista podría vender más, y tus respuestas dicen por qué',
+     body:()=>`Has marcado que tu lista vende pero podría vender más. Mirando el resto de tus respuestas, el "podría" tiene una causa concreta: ${A.monetiza==='nunca'?'me has dicho que casi nunca te genera ventas':(A.monetiza==='sololanz'?'solo te vende cuando lanzas':'tu última campaña fue hace más de 6 meses')}. No es que le falte un empujón, es que primero hay que despertarla y darle una razón para volver a comprarte.`,
+     palanca:'Empezar por reactivar y medir, no por vender más fuerte. Primero saber quién sigue ahí y devolverles valor, después la oferta. El orden inverso quema la lista que quieres rentabilizar.'},
+
+    {id:'contra_responde', sev:4, campaign:'ventadirecta',
+     cond:a=>a.frase==='respondemenos'&&(a.apertura==='a1'||a.apertura==='a2'),
+     title:'Dices que responde menos, pero tu apertura está sana',
+     body:()=>`Has marcado que tu lista responde cada vez menos, y a la vez me has dicho que tu apertura es ${AL.apertura?.toLowerCase()}. Eso descarta lo obvio: el problema no es que no te abran, te abren. La caída que notas está más abajo, entre que abren y que compran. Algo en la oferta o en el camino al clic no está funcionando.`,
+     palanca:'Campaña de venta directa con una oferta nítida y un solo clic hacia ella. Cuando te abren y no compran, casi siempre falta una oferta clara, no más volumen de emails.'},
+
+    {id:'contra_antiguos', sev:4, campaign:'reactivacion',
+     cond:a=>a.frase==='leadsantiguos'&&(a.ultima==='estasemana'||a.ultima==='ultmes'),
+     title:'Escribes a menudo, pero arrastras un bloque de leads que nunca reactivaste',
+     body:()=>`Me has dicho que tienes leads antiguos que nunca reactivaste, y a la vez que escribes con frecuencia. Lo que falta no es ritmo, es una reactivación dirigida solo a ese bloque dormido. Ahora reciben lo mismo que el resto, o nada, y siguen pesando en tus métricas sin comprar.`,
+     palanca:'Reactivación segmentada: aislar a los que llevan meses sin abrir y mandarles una secuencia propia, separada de tu lista activa. Los que revivan, de vuelta. Los que no, fuera.'}
+    ];
+
+    function antiPriority(findings){
+      const ids = findings.map(f=>f.id);
+      if(ids.includes('nomide')) return {t:'Qué no haría ahora: mandar más campañas a ciegas', b:'Sin saber tu apertura, cada envío es una apuesta y no podrás saber si funcionó. Primero el número, después la campaña.'};
+      if(ids.includes('quemada')||ids.includes('dormida')) return {t:'Qué no haría ahora: captar más suscriptores', b:'Meter leads nuevos en una lista dormida es meter agua en un cubo agujereado. Cada lead nuevo recibirá el mismo silencio que los que ya tienes. Primero reactivar, después captar.'};
+      if(ids.includes('novendefrio')) return {t:'Qué no haría ahora: subir el volumen de ofertas', b:'Vender más fuerte a una lista que no responde la quema más rápido. Primero reconstruir la relación, después la oferta.'};
+      if(ids.includes('sinsegmentar')) return {t:'Qué no haría ahora: añadir más volumen sin segmentar', b:'Más emails genéricos a una lista sin segmentar es más esfuerzo para el mismo techo. Primero segmentar, después escalar.'};
+      return {t:'Qué no haría ahora: cambiarlo todo a la vez', b:'Tu diagnóstico apunta a una palanca concreta. Tocar cinco cosas a la vez diluye el resultado y no sabrás qué movió la aguja. Una campaña, bien hecha, primero.'};
+    }
+
+    /* fallback por dimensión más floja: garantiza que SIEMPRE hay campaña */
+    const FALLBACK = {
+      monetizacion:{campaign:'ventadirecta', title:'Tu lista funciona, pero monetiza por debajo de lo que podría', palanca:'Campaña de venta directa: una oferta clara a quien ya te lee. La relación está, falta pedir la venta con criterio.'},
+      engagement:{campaign:'reactivacion', title:'Tu lista te abre menos de lo que debería', palanca:'Campaña de reactivación: limpiar y recuperar a los que dejaron de abrir antes de seguir enviando.'},
+      frecuencia:{campaign:'nutricion', title:'Le escribes demasiado poco para que la relación se sostenga', palanca:'Secuencia de nutrición con ritmo estable: pasar a un mínimo de 4 envíos al mes que aporten y vendan sin pedir perdón.'},
+      reactivacion:{campaign:'reactivacion', title:'Tu lista lleva demasiado sin saber de ti', palanca:'Campaña de reactivación: volver con valor y dar una razón honesta para quedarse antes de cualquier oferta.'},
+      segmentacion:{campaign:'segmentacion', title:'Le hablas a toda tu lista igual y eso pone un techo', palanca:'Segmentación básica: clientes vs no clientes y por interés. El mismo esfuerzo convierte más.'},
+      relacion:{campaign:'nutricion', title:'Tu lista recibe sobre todo ofertas y poco valor', palanca:'Secuencia de nutrición: equilibrar contenido y oferta para que abrir tu email valga la pena.'}
+    };
+
+    function buildResult(){
+      if(A.lista==='no'){
+        const finding = {id:'sinlista', campaign:'captacion',
+          title:'Todavía no tienes el activo más rentable',
+          body:()=>`Me has dicho que aún no tienes lista de email. ${A.audiencia&&A.audiencia!=='au1'?`Tienes una audiencia de ${AL.audiencia?.toLowerCase()} en ${AL.canal}, y eso es bueno, pero es terreno alquilado: tu acceso a esas personas depende de un algoritmo que no controlas. El día que el alcance baje, y siempre baja, tus ventas bajan con él.`:'Eso significa que cada venta depende de volver a captar atención desde cero.'} Una lista propia es lo que convierte audiencia prestada en activo tuyo.`,
+          palanca:'Antes que diagnosticar una lista, construirla: un lead magnet específico para tu audiencia y un sistema de captura. Objetivo realista, convertir un 1-2% de tu audiencia en suscriptores cada mes.'};
+        return {noList:true, findings:[finding], level:{n:0,t:'Sin lista todavía'}, total:0, dims:{}};
+      }
+      const {dims,total} = scoreDims();
+      const level = [...LEVELS].reverse().find(l=>total>=l.min);
+      let findings = RULES.filter(r=>r.cond(A)).sort((a,b)=>b.sev-a.sev).slice(0,3);
+      if(findings.length===0){
+        const weakest = Object.keys(dims).sort((a,b)=>dims[a]-dims[b])[0];
+        const fb = FALLBACK[weakest];
+        findings = [{id:'fallback', sev:1, campaign:fb.campaign,
+          title:fb.title,
+          body:()=>`Tus respuestas no apuntan a un único agujero grande, sino a una lista que rinde de forma despareja. Tu dimensión más floja ahora mismo es ${DIMNAMES[weakest].toLowerCase()} (${dims[weakest]}/100), y es por donde empezaría. Cuando no hay un incendio, la palanca es elegir un frente y cerrarlo bien antes de abrir el siguiente.`,
+          palanca:fb.palanca}];
+      }
+      return {dims,total,level,findings};
+    }
+
+    /* =====================================================
+       MODULO DE NUMEROS
+    ===================================================== */
+    let MM = null;
+    function dormPhrase(){
+      return ({estasemana:'Les has escrito esta semana.', ultmes:'Les escribiste en el último mes.', m1a6:'Hace entre 1 y 6 meses que no les envías una campaña.', masde6:'Llevas más de 6 meses sin enviarles una campaña.'})[A.ultima]||'';
+    }
+    function mathModule(){
+      const fmt = n => currency + Math.round(n).toLocaleString('es');
+      if(A.lista && A.lista!=='no' && A.lista!=='l1'){
+        return {
+          type:'lista',
+          title:'Qué podría estar generando tu lista cada mes',
+          fact:()=>`Tienes <b>${AL.lista?.toLowerCase()}</b> contactos que un día decidieron darte su email. ${dormPhrase()}`,
+          sliders:[
+            {id:'s-act', label:'% de tu lista que asumimos activa', min:20, max:80, val:50, unit:'%'},
+            {id:'s-env', label:'Envíos al mes', min:2, max:12, val:4, unit:''},
+            {id:'s-open', label:'Tasa de apertura', min:5, max:50, val:MID.apertura||20, unit:'%'},
+            {id:'s-ctr', label:'% de clic sobre aperturas (asumido)', min:1, max:8, val:2, unit:'%'},
+            {id:'s-conv', label:'% de conversión sobre clics (asumido)', min:1, max:5, val:1, unit:'%'}
+          ],
+          calc:(v)=> (MID.lista||0) * v['s-act']/100 * v['s-env'] * v['s-open']/100 * v['s-ctr']/100 * v['s-conv']/100 * (MID.ticket||300),
+          sub:()=>`Con tu lista de ${AL.lista?.toLowerCase()} contactos y tu ticket de ${AL.ticket?.toLowerCase()} ${currency==='$'?'USD':'EUR'}, solo de email recurrente, antes de lanzamientos.`,
+          fmt, suffix:'/mes'
+        };
+      }
+      if(A.lista==='no' && A.audiencia){
+        return {
+          type:'audiencia',
+          title:'La lista que no estás construyendo',
+          fact:()=>`Una audiencia de <b>${AL.audiencia?.toLowerCase()}</b> en ${AL.canal}, y ningún sitio propio donde guardarla.`,
+          sliders:[
+            {id:'s-cap', label:'% de tu audiencia capturable al mes (asumido)', min:1, max:5, val:1.5, step:.5, unit:'%'}
+          ],
+          calc:(v)=> (MID.audiencia||0) * v['s-cap']/100,
+          sub:()=>`Suscriptores nuevos al mes que tu audiencia podría estar generando con un sistema de captura. En 12 meses, ese es el activo que hoy se queda en el algoritmo.`,
+          fmt: n => Math.round(n).toLocaleString('es') + ' suscriptores/mes',
+          isLeads:true, suffix:''
+        };
+      }
+      return null;
+    }
+
+    /* =====================================================
+       CAPTURA + INFORME
+    ===================================================== */
+    function submitCapture(){
+      const name = document.getElementById('f-name').value.trim();
+      const email = document.getElementById('f-email').value.trim();
+      const eOK = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+      document.getElementById('e-email').style.display = eOK?'none':'block';
+      if(!eOK) return;
+
+      const wa = document.getElementById('f-wa').value.trim();
+      const online = document.getElementById('f-online').value.trim();
+      const result = buildResult();
+      if(SUBMIT_URL){
+        const ref = new URLSearchParams(location.search).get('r')||'';
+        const detalle = path.map(i=>Q[i]).filter(q=>AL[q.id]).map(q=>q.text+' -> '+AL[q.id]).join('\n');
+        const dims = result.dims||{};
+        const dimStr = Object.keys(dims).map(k=>DIMNAMES[k]+': '+dims[k]+'/100').join(' | ');
+        const fugaTitulo = typeof result.findings[0].title==='function'?result.findings[0].title():result.findings[0].title;
+        const campañaPrimaria = CAMPANAS[result.findings[0].campaign]||'';
+        const campañaSecundaria = result.findings[1]?CAMPANAS[result.findings[1].campaign]:'';
+
+        const diag = result.findings.map((f,i)=>{
+          const t = typeof f.title==='function'?f.title():f.title;
+          const etq = i===0?'FUGA PRINCIPAL':'HALLAZGO '+(i+1);
+          return etq+' ['+(CAMPANAS[f.campaign]||'')+']: '+t+'\n'+f.body()+'\nPALANCA: '+f.palanca;
+        }).join('\n\n');
+        const anti = antiPriority(result.findings);
+        const mm = mathModule();
+        let potencial = '';
+        if(mm){ let v={}; mm.sliders.forEach(s=>v[s.id]=s.val); potencial = mm.title+': '+mm.fmt(mm.calc(v))+(mm.suffix||'')+'\n('+mm.sub()+')'; }
+
+        const origen = ref ? 'via enlace enviado (r='+ref+')' : 'acceso directo';
+        const nivelStr = result.noList ? 'Sin lista todavía' : ('Nivel '+result.level.n+'/5 ('+result.level.t+') · Score '+result.total+'/100');
+        const sub = 'Lead Diagnóstico de Lista: '+(name||'sin nombre')+' | '+(result.noList?'SIN LISTA':('Nivel '+result.level.n+'/5'))+' | '+fugaTitulo;
+        const linea = '====================================================';
+        const body =
+          'NUEVO DIAGNOSTICO DE LISTA COMPLETADO  ('+origen+')\n'+linea+'\n\n'+
+          'CONTACTO\n'+
+          '  Nombre:      '+(name||'')+'\n'+
+          '  Email:       '+(email||'')+'\n'+
+          '  WhatsApp:    '+(wa||'(no ha dejado)')+'\n'+
+          '  Online:      '+(online||'(no ha dejado enlaces)')+'\n'+
+          '  Herramienta: '+(AL.herramienta||'(no indicada)')+'\n\n'+
+          'RESULTADO\n'+
+          '  '+nivelStr+'\n'+
+          (dimStr?('  Dimensiones: '+dimStr+'\n'):'')+
+          '  Campaña recomendada: '+campañaPrimaria+(campañaSecundaria?(' (y después: '+campañaSecundaria+')'):'')+'\n\n'+
+          'DIAGNOSTICO DE LA HERRAMIENTA\n'+linea+'\n'+diag+'\n\n'+
+          'QUE NO HARIA AHORA\n'+anti.t+'\n'+anti.b+'\n\n'+
+          (potencial?('POTENCIAL (estimacion con asunciones por defecto)\n'+potencial+'\n\n'):'')+
+          'RESPUESTAS COMPLETAS\n'+linea+'\n'+detalle+'\n\n'+
+          'QUE HA INTENTADO YA\n'+linea+'\n'+(A.intentado&&A.intentado.trim()?A.intentado:'(no ha escrito nada)')+'\n\n'+
+          linea+'\nMaterial listo para investigar su presencia online y, si merece la pena, montar un strategy doc.\n';
+
+        const payload = {tool:'lista', name, email, wa, online, ts:new Date().toISOString(),
+          nivel:result.noList?0:result.level.n, nivelTitulo:result.noList?'Sin lista':result.level.t, score:result.total,
+          arquetipo:result.findings[0]?.id||'', fugaTitulo,
+          dimensiones: dimStr, detalle,
+          respuestas: Object.keys(AL).map(k=>k+': '+AL[k]).join(' | '),
+          intentado: A.intentado||'', ref,
+          emailSubject: sub, emailBody: body};
+        fetch(SUBMIT_URL, {method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain'}, body:JSON.stringify(payload)}).catch(()=>{});
+      }
+      showReport(result, name);
+    }
+
+    function waLink(r, name){
+      const camp = (CAMPANAS[r.findings[0].campaign]||'').toLowerCase();
+      const estado = r.noList ? 'Acabo de hacer el diagnóstico de lista y aún no tengo lista montada' : ('Acabo de hacer el diagnóstico de lista, me sale '+r.level.t.toLowerCase()+' y mi primera palanca es '+camp);
+      const msg = 'Hola Daniel, soy '+(name||'')+'. '+estado+'. '+(r.noList?'Quiero saber por dónde empezar en mi caso.':'Quiero saber cómo la montaría en mi caso.');
+      return 'https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(msg);
+    }
+
+    function showReport(r, name){
+      MM = mathModule();
+      const fugaTitulo = typeof r.findings[0].title==='function'?r.findings[0].title():r.findings[0].title;
+      let h = '';
+
+      if(r.noList){
+        h += `
+        <div class="rcard gold levelhead">
+          <p class="eyebrow" style="margin-bottom:0;">Diagnóstico de ${name||'tu negocio'}</p>
+          <div class="ln">Todavía no tienes lista</div>
+          <div class="lt">y ese es el punto de partida</div>
+        </div>`;
+      } else {
+        const weakest = Object.keys(r.dims).sort((a,b)=>r.dims[a]-r.dims[b])[0];
+        h += `
+        <div class="rcard gold levelhead">
+          <p class="eyebrow" style="margin-bottom:0;">Diagnóstico de ${name||'tu lista'}</p>
+          <div class="ln">Nivel ${r.level.n} de 5</div>
+          <div class="lt">${r.level.t}</div>
+          <div class="dots">${[1,2,3,4,5].map(i=>'<i class="'+(i<=r.level.n?'on':'')+'"></i>').join('')}</div>
+          <div class="lscore">Score global: ${r.total}/100</div>
+        </div>
+
+        <div class="rcard">
+          <div class="ftag">El radar de tu lista</div>
+          ${Object.keys(r.dims).map(k=>`
+            <div class="dimrow">
+              <div class="dt"><b>${DIMNAMES[k]}</b><span>${r.dims[k]}/100</span></div>
+              <div class="dbar"><i class="${r.dims[k]<35?'low':''}" data-w="${r.dims[k]}"></i></div>
+            </div>`).join('')}
+          <p style="font-size:0.9rem;color:var(--muted);margin-top:20px;margin-bottom:0;line-height:1.6;">Tu eslabón más flojo ahora mismo es <b style="color:var(--ink);">${DIMNAMES[weakest].toLowerCase()}</b> (${r.dims[weakest]}/100). Y una lista rinde lo que rinde su parte más débil.</p>
+        </div>`;
+      }
+
+      h += `${(()=>{
+        const sym=currency;
+        const rows=[
+          ['Modelo', AL.modelo],
+          ['Ticket', AL.ticket?AL.ticket+' '+sym:''],
+          ['Tamaño de lista', AL.lista],
+          ['Frecuencia de envío', AL.frec],
+          ['Apertura media', AL.apertura],
+          ['¿Te genera ventas?', AL.monetiza],
+          ['Herramienta', AL.herramienta]
+        ].filter(x=>x[1]);
+        if(!rows.length) return '';
+        return `<div class="rcard"><div class="ftag">Tu punto de partida</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px 24px;">`+
+          rows.map(x=>`<div><span style="display:block;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:3px;">${x[0]}</span><b style="font-size:0.96rem;color:var(--ink);">${x[1]}</b></div>`).join('')+
+          `</div><p style="font-size:0.9rem;color:var(--muted);margin:18px 0 0;line-height:1.6;">Todo lo que sigue está calculado sobre estos datos. Los tuyos, no los de un promedio.</p></div>`;
+      })()}`;
+
+      if(MM){
+        h += `
+        <div class="rcard">
+          <div class="ftag">${MM.title}</div>
+          <p class="factline">${MM.fact()}</p>
+          <div class="mathnum" id="mathout"></div>
+          <div class="mathsub">${MM.sub()}</div>
+          ${MM.sliders.map(s=>`
+            <div class="slider">
+              <div class="st"><span>${s.label}</span><b id="${s.id}-v"></b></div>
+              <input type="range" id="${s.id}" min="${s.min}" max="${s.max}" step="${s.step||1}" value="${s.val}" oninput="recalc()">
+            </div>`).join('')}
+          <div class="mathnote">Esto es aritmética, no una promesa. Cada asunción está a la vista y puedes moverla tú mismo. Una lista fría no convierte al precio completo ni de golpe. El valor no está en la cifra exacta: está en la diferencia entre lo que tu lista podría generar y lo que genera hoy.</div>
+        </div>`;
+      }
+
+      if(MID.lista>0){
+        h += `
+        <div class="rcard">
+          <div class="ftag">Lo que vale mover una palanca pequeña</div>
+          <p class="factline">Tu lista de ${AL.lista?.toLowerCase()} contactos. La pregunta no es cuánta gente entra, es cuánta te compra cada mes.</p>
+          <div class="mathnum" id="cmpout"></div>
+          <div class="mathsub" id="cmpsub"></div>
+          <div class="slider">
+            <div class="st"><span>% de tu lista que te compra al mes hoy</span><b id="c-act-v"></b></div>
+            <input type="range" id="c-act" min="0.1" max="2" step="0.1" value="0.3" oninput="recalcCmp()">
+          </div>
+          <div class="slider">
+            <div class="st"><span>A dónde podría llegar</span><b id="c-obj-v"></b></div>
+            <input type="range" id="c-obj" min="0.1" max="3" step="0.1" value="0.5" oninput="recalcCmp()">
+          </div>
+          <div class="mathnote">Es la misma lista, comprándote un poco más. Subir ese porcentaje aunque sea unas décimas no es trabajar el doble, es escribirle mejor a quien ya te dio su email. Aritmética, no promesa, y el porcentaje lo ajustas a tu realidad.</div>
+        </div>`;
+      }
+
+      const primaryCampaign = r.findings[0].campaign;
+      const teaser = r.noList
+        ? `Lo difícil no es ver que te falta lista. Es el plan: qué lead magnet, qué sistema de captura y en qué orden montarlo para tu audiencia concreta. Eso sale de mirar tu caso, no de un test.`
+        : (r.findings.length>=2
+          ? `Y no es lo único. He detectado <b style="color:var(--ink);">${r.findings.length} puntos</b> donde tu lista deja ventas por el camino. El orden en que los toques decide el resultado, y ese orden sale de tus números.`
+          : `Tu lista ya tiene buena base. Aun así hay un punto claro por donde apretar, y un orden para hacerlo bien.`);
+
+      h += `
+      <div class="rcard f-main">
+        <div class="ftag warn">El titular de tu diagnóstico</div>
+        <h3>${fugaTitulo}</h3>
+        <p style="margin-bottom:0;">${teaser}</p>
+      </div>
+
+      <div class="rcard">
+        <div class="ftag">Tu primera palanca</div>
+        <h3 style="color:var(--gold);">${CAMPANAS[primaryCampaign]}</h3>
+        <p>${CAMPDESC[primaryCampaign]||''}</p>
+        <p style="margin-bottom:0;">Saber la palanca es lo fácil. Sobre qué segmento montarla, con qué emails y en qué orden frente a tus otras fugas, ahí se gana o se pierde el dinero. Eso lo reviso a mano sobre tus respuestas y lo que vea en tu web y tus redes.</p>
+      </div>
+
+      <div class="rcard gold rcta">
+        <h3>El cómo te lo doy yo.</h3>
+        <p>La palanca ya la tienes en pantalla. Lo que decide si funciona es la ejecución: el orden, los emails, el segmento. Mándame tu resultado y te digo cómo lo montaría en tu caso. En menos de 24h, sin llamada de venta disfrazada.</p>
+        <div class="rcta-btns">
+          <a class="btn-wa" href="${waLink(r,name)}" target="_blank" rel="noopener">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Quiero mi lectura completa
+          </a>
+        </div>
+        <p class="cta-note">La reviso personalmente y te escribo en breve.</p>
+      </div>
+
+      <div style="text-align:center;padding:8px 0 0;">
+        <button class="qback" onclick="restart()">Hacer el diagnóstico de nuevo</button>
+      </div>`;
+
+      document.getElementById('rbox').innerHTML = h;
+      show('report');
+      setTimeout(()=>{document.querySelectorAll('.dbar i').forEach(b=>b.style.width=b.dataset.w+'%')},100);
+      if(MM) recalc();
+      window._listaN = MID.lista||0;
+      window._ticketN = MID.ticket||300;
+      recalcCmp();
+      window._lastResult = r;
+      window._lastName = name;
+    }
+
+    function fmtMoney(n){ return currency + Math.round(n).toLocaleString('es'); }
+
+    function recalcCmp(){
+      const aEl=document.getElementById('c-act'), oEl=document.getElementById('c-obj');
+      if(!aEl||!oEl) return;
+      const act=parseFloat(aEl.value), obj=parseFloat(oEl.value);
+      document.getElementById('c-act-v').textContent = act.toFixed(1).replace('.',',')+'%';
+      document.getElementById('c-obj-v').textContent = obj.toFixed(1).replace('.',',')+'%';
+      const lista=window._listaN||0, ticket=window._ticketN||300;
+      const out=document.getElementById('cmpout'), sub=document.getElementById('cmpsub');
+      if(obj<=act){
+        out.textContent='—';
+        sub.textContent='Sube el objetivo por encima de lo de hoy para ver el efecto.';
+        return;
+      }
+      const hoy=lista*act/100*ticket, proj=lista*obj/100*ticket, delta=proj-hoy;
+      out.textContent='+'+fmtMoney(delta)+'/mes';
+      sub.innerHTML='Tu lista pasaría de <b style="color:var(--ink);">'+fmtMoney(hoy)+'</b> a <b style="color:var(--ink);">'+fmtMoney(proj)+'</b> al mes. Son <b style="color:var(--ink);">'+fmtMoney(delta*12)+' al año</b>, de la misma gente que ya tienes.';
+    }
+
+    function recalc(){
+      if(!MM) return;
+      let v={};
+      MM.sliders.forEach(s=>{
+        const el=document.getElementById(s.id);
+        v[s.id]=parseFloat(el.value);
+        document.getElementById(s.id+'-v').textContent = el.value + s.unit;
+      });
+      document.getElementById('mathout').textContent = MM.fmt(MM.calc(v)) + (MM.suffix||'');
+    }
+  </script>
+
+</body>
+</html>

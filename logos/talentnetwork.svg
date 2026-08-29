@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 80" fill="#22BC3C">
+  <!-- Icon: hexagonal network mark with 3 connected nodes -->
+  <g transform="translate(4, 14)">
+    <path d="M 26 0 L 50 14 L 50 38 L 26 52 L 2 38 L 2 14 Z" fill="none" stroke="#22BC3C" stroke-width="2.5"/>
+    <circle cx="14" cy="20" r="4"/>
+    <circle cx="38" cy="20" r="4"/>
+    <circle cx="26" cy="38" r="4"/>
+    <line x1="14" y1="20" x2="38" y2="20" stroke="#22BC3C" stroke-width="2"/>
+    <line x1="14" y1="20" x2="26" y2="38" stroke="#22BC3C" stroke-width="2"/>
+    <line x1="38" y1="20" x2="26" y2="38" stroke="#22BC3C" stroke-width="2"/>
+  </g>
+  <!-- Text -->
+  <text x="70" y="56" font-family="Arial Black, Helvetica, sans-serif" font-weight="900" font-size="46" letter-spacing="-1.5">talentnetwork</text>
+  <!-- Registered mark -->
+  <text x="404" y="24" font-family="Arial, sans-serif" font-size="11" fill="#22BC3C">®</text>
+</svg>
