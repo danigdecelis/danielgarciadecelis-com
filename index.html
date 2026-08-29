@@ -194,7 +194,7 @@
 
         </div>
 
-        <div style="font-family: var(--mono); font-size: 10px; color: var(--gold); border: 1px dashed var(--line-gold); padding: 8px 12px; display: inline-block; margin-top: 18px;">fotos de perfil a 88px de origen · hacen falta a 320px o más para verse nítidas</div>
+        <div style="font-family: var(--mono); font-size: 10px; color: var(--gold); border: 1px dashed var(--line-gold); padding: 8px 12px; display: inline-block; margin-top: 18px;">pendiente · 5 fotos a baja resolución: escuela de lujo, crece, tutellus, digital riders y racks</div>
 
       </div>
     </div>
@@ -489,10 +489,10 @@
   </div>
 
   <!-- ============ POP-UP EXIT INTENT ============ -->
-  <sc-if value="{{ abierto }}" hint-placeholder-val="{{ false }}">
+  <div id="popup-lista" hidden>
     <div style="position: fixed; left: 0; top: 0; right: 0; bottom: 0; background: rgba(4,4,6,0.86); z-index: 100; display: flex; align-items: center; justify-content: center; padding: 24px;">
       <div style="background: var(--noir-2); border: 1px solid var(--line-gold); max-width: 560px; width: 100%; padding: 44px 40px 40px; position: relative;">
-        <div onClick="{{ cerrar }}" style="position: absolute; top: 12px; right: 18px; font-family: var(--mono); font-size: 24px; color: var(--bone-2); cursor: pointer; line-height: 1;">×</div>
+        <div data-cerrar="1" style="position: absolute; top: 12px; right: 18px; font-family: var(--mono); font-size: 24px; color: var(--bone-2); cursor: pointer; line-height: 1;">×</div>
         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 22px;">
           <div style="width: 8px; height: 8px; background: var(--gold);"></div>
           <div style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; color: var(--gold);">antes de irte</div>
@@ -506,10 +506,41 @@
         <div style="font-family: var(--mono); font-size: 11px; color: var(--bone-3); margin-top: 14px;">sin spam. te das de baja cuando quieras.</div>
       </div>
     </div>
-  </sc-if>
+  </div>
 
 </div>
 
 
+<script>
+(function () {
+  var caja = document.getElementById('popup-lista');
+  if (!caja) return;
+  var CLAVE = 'dgc_lista_popup';
+  var visto = false;
+  try { visto = localStorage.getItem(CLAVE) === '1'; } catch (e) {}
+  function marcar() { try { localStorage.setItem(CLAVE, '1'); } catch (e) {} }
+  function abrir() {
+    if (visto || !caja.hidden) return;
+    visto = true; marcar();
+    caja.hidden = false;
+    document.body.style.overflow = 'hidden';
+    var campo = caja.querySelector('input');
+    if (campo) campo.focus();
+  }
+  function cerrar() {
+    caja.hidden = true;
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('mouseout', function (e) {
+    if (e.clientY <= 0 && !e.relatedTarget) abrir();
+  });
+  caja.addEventListener('click', function (e) {
+    if (e.target === caja || e.target.closest('[data-cerrar]')) cerrar();
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !caja.hidden) cerrar();
+  });
+})();
+</script>
 </body>
 </html>
