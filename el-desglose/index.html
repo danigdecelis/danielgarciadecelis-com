@@ -91,10 +91,196 @@
   </div>
 
   <!-- ============ 2 · CLIENTES · COLLAGE ============ -->
+  <style>
+    .clientes-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--line); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .cli { background: var(--noir); padding: 24px 22px; display: flex; align-items: center; gap: 18px; }
+    .cli-foto { width: 88px; height: 88px; border-radius: 50%; object-fit: cover; flex: none; background: var(--noir-3); }
+    .cli-nombre { font-size: 18px; font-weight: 700; font-stretch: 90%; letter-spacing: -0.015em; line-height: 1.2; color: var(--bone); }
+    .cli-handle { font-family: var(--mono); font-size: 11px; line-height: 1.3; color: var(--bone-3); margin-top: 5px; overflow-wrap: anywhere; }
+    .cli-stats { display: flex; gap: 16px; margin-top: 13px; padding-top: 11px; border-top: 1px solid var(--line); }
+    .cli-stats b { display: block; font-family: var(--mono); font-size: 12px; font-weight: 600; line-height: 1.2; color: var(--bone); }
+    .cli-stats span { display: block; font-family: var(--mono); font-size: 10px; line-height: 1.2; color: var(--bone-3); margin-top: 3px; }
+    @media (max-width: 980px) { .clientes-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 620px) {
+      .cli { flex-direction: column; align-items: flex-start; gap: 12px; padding: 18px 14px 20px; }
+      .cli-foto { width: 64px; height: 64px; }
+      .cli-nombre { font-size: 14px; }
+      .cli-handle { font-size: 10px; margin-top: 4px; }
+      .cli-stats { display: block; margin-top: 11px; padding-top: 10px; }
+      .cli-stats b, .cli-stats span { display: inline; font-size: 10px; }
+      .cli-stats span { margin-left: 4px; }
+      .cli-stats div + div { margin-top: 4px; }
+    }
+  </style>
   <div class="wrap" style="padding-bottom: 76px;">
-    <div style="aspect-ratio: 16 / 7; width: 100%; background: var(--noir-2); border: 2px dashed #E8C63A; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 28px; text-align: center;">
-      <div style="font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold);">Placeholder · sustituir por la imagen real</div>
-      <div style="font-family: var(--mono); font-size: 13px; line-height: 1.7; color: var(--bone-2); max-width: 62ch;">[[[COLLAGE DE CLIENTES PENDIENTE DE SUBIR. Imagen tipo grid de perfiles de Instagram, sin enlaces activos, sin descripciones de nicho visibles. No incluye a Borja Vilaseca por ahora.]]]</div>
+
+    <div style="margin-bottom: 26px; display: flex; align-items: center; gap: 10px;">
+      <div style="width: 8px; height: 8px; background: var(--mark); flex: none;"></div>
+      <div style="font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--bone-3);">Algunas de las personas con las que he trabajado</div>
+    </div>
+
+    <div class="clientes-grid">
+
+      <div class="cli">
+        <img class="cli-foto" src="/josemunoz.png" alt="" loading="lazy">
+        <div>
+          <div class="cli-nombre">José Muñoz</div>
+          <div class="cli-handle">josemunoz.pro</div>
+          <div class="cli-stats">
+          <div><b>1.000</b><span>publicaciones</span></div>
+          <div><b>100 mil</b><span>seguidores</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cli">
+        <img class="cli-foto" src="/crece.png" alt="" loading="lazy">
+        <div>
+          <div class="cli-nombre">Crece Sin Límite</div>
+          <div class="cli-handle">crecesinlimite_</div>
+          <div class="cli-stats">
+          <div><b>28,8 mil</b><span>seguidores</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cli">
+        <img class="cli-foto" src="/riders.png" alt="" loading="lazy">
+        <div>
+          <div class="cli-nombre">Digital Riders</div>
+          <div class="cli-handle">digitalriders_</div>
+          <div class="cli-stats">
+          <div><b>473</b><span>publicaciones</span></div>
+          <div><b>8.023</b><span>seguidores</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cli">
+        <img class="cli-foto" src="/anamoreno.png" alt="" loading="lazy">
+        <div>
+          <div class="cli-nombre">Ana Moreno Marín</div>
+          <div class="cli-handle">ana.moreno.marin</div>
+          <div class="cli-stats">
+          <div><b>793</b><span>publicaciones</span></div>
+          <div><b>330 mil</b><span>seguidores</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cli">
+        <img class="cli-foto" src="/pauanto.png" alt="" loading="lazy">
+        <div>
+          <div class="cli-nombre">Pau Antó</div>
+          <div class="cli-handle">pau_anto</div>
+          <div class="cli-stats">
+          <div><b>1.038</b><span>publicaciones</span></div>
+          <div><b>184 mil</b><span>seguidores</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cli">
+        <img class="cli-foto" src="/hackaviss.png" alt="" loading="lazy">
+        <div>
+          <div class="cli-nombre">Jose Javier Pastor</div>
+          <div class="cli-handle">hackaviss</div>
+          <div class="cli-stats">
+          <div><b>70</b><span>publicaciones</span></div>
+          <div><b>142 mil</b><span>seguidores</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cli">
+        <img class="cli-foto" src="/orozco.png" alt="" loading="lazy">
+        <div>
+          <div class="cli-nombre">Juan de Dios Orozco</div>
+          <div class="cli-handle">orozcolopezjuan</div>
+          <div class="cli-stats">
+          <div><b>1.079</b><span>publicaciones</span></div>
+          <div><b>104 mil</b><span>seguidores</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cli">
+        <img class="cli-foto" src="/zeke.png" alt="" loading="lazy">
+        <div>
+          <div class="cli-nombre">Zeke Novarino</div>
+          <div class="cli-handle">zeke.novarino</div>
+          <div class="cli-stats">
+          <div><b>498</b><span>publicaciones</span></div>
+          <div><b>74,4 mil</b><span>seguidores</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cli">
+        <img class="cli-foto" src="/talent.png" alt="" loading="lazy">
+        <div>
+          <div class="cli-nombre">Talent Network</div>
+          <div class="cli-handle">talent.network</div>
+          <div class="cli-stats">
+          <div><b>7.560</b><span>publicaciones</span></div>
+          <div><b>61,6 mil</b><span>seguidores</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cli">
+        <img class="cli-foto" src="/tuto.png" alt="" loading="lazy">
+        <div>
+          <div class="cli-nombre">Tuto Marolla</div>
+          <div class="cli-handle">tutobiohacker</div>
+          <div class="cli-stats">
+          <div><b>1.011</b><span>publicaciones</span></div>
+          <div><b>57,5 mil</b><span>seguidores</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cli">
+        <img class="cli-foto" src="/tutellus.png" alt="" loading="lazy">
+        <div>
+          <div class="cli-nombre">Tutellus</div>
+          <div class="cli-handle">tutellus</div>
+          <div class="cli-stats">
+          <div><b>838</b><span>publicaciones</span></div>
+          <div><b>11,5 mil</b><span>seguidores</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cli">
+        <img class="cli-foto" src="/racks.png" alt="" loading="lazy">
+        <div>
+          <div class="cli-nombre">Racks Academy</div>
+          <div class="cli-handle">racks.academy</div>
+          <div class="cli-stats">
+          <div><b>73</b><span>publicaciones</span></div>
+          <div><b>3.456</b><span>seguidores</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- BORJA VILASECA · descomentar cuando dé permiso, y añadir los dos rellenos
+           de abajo para que la última fila no deje hueco gris.
+      <div class="cli">
+        <img class="cli-foto" src="/borjavilaseca.png" alt="" loading="lazy">
+        <div>
+          <div class="cli-nombre">Borja Vilaseca</div>
+          <div class="cli-handle">borjavilaseca</div>
+          <div class="cli-stats">
+            <div><b>000</b><span>publicaciones</span></div>
+            <div><b>000 mil</b><span>seguidores</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="cli"></div>
+      <div class="cli"></div>
+      -->
+
     </div>
   </div>
 
