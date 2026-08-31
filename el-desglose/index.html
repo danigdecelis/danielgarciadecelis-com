@@ -53,6 +53,7 @@
     .wrap { max-width: 1120px; margin: 0 auto; padding-left: 40px; padding-right: 40px; }
     .lectura { max-width: 60ch; }
     .col-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .col-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .col-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
     .cta-caja { grid-template-columns: minmax(0, 1fr) auto; }
     .h-hero { font-size: clamp(40px, 7.4vw, 96px); }
@@ -61,7 +62,7 @@
     .cifra-xl { font-size: clamp(64px, 9vw, 128px); }
     @media (max-width: 760px) {
       .wrap { padding-left: 22px; padding-right: 22px; }
-      .col-2, .col-4, .cta-caja { grid-template-columns: minmax(0, 1fr); }
+      .col-2, .col-3, .col-4, .cta-caja { grid-template-columns: minmax(0, 1fr); }
     }
   </style>
 
@@ -90,202 +91,89 @@
     <p style="font-size: clamp(18px, 2vw, 23px); font-weight: 400; line-height: 1.5; color: var(--bone-2); margin: 0; max-width: 46ch;">Descubre qué tiene que pasar por la cabeza del lector en cada momento del lanzamiento, y cómo cada pieza interactúa con las demás para preparar el terreno hacia la venta.</p>
   </div>
 
-  <!-- ============ 2 · CLIENTES · COLLAGE ============ -->
-  <style>
-    .clientes-banda { background: var(--bone); padding: 68px 0 72px; }
-    .clientes-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: rgba(255,255,255,0.11); border-top: 1px solid rgba(255,255,255,0.11); border-bottom: 1px solid rgba(255,255,255,0.11); }
-    .cli { background: var(--bone); padding: 26px 24px; display: flex; align-items: center; gap: 20px; }
-    .cli-foto { width: 96px; height: 96px; border-radius: 50%; object-fit: cover; flex: none; background: #1A1A1A; box-shadow: 0 0 0 1px rgba(255,255,255,0.16); }
-    .cli-handle { display: flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 12px; line-height: 1.3; color: rgba(255,255,255,0.5); overflow-wrap: anywhere; }
-    .cli-handle::before { content: ""; width: 13px; height: 13px; flex: none; opacity: 0.55; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2'%3E%3Crect x='2' y='2' width='20' height='20' rx='5.5'/%3E%3Ccircle cx='12' cy='12' r='4.2'/%3E%3Ccircle cx='17.5' cy='6.5' r='1.3' fill='%23ffffff' stroke='none'/%3E%3C/svg%3E") center / contain no-repeat; }
-    .cli-nombre { margin-top: 5px; font-size: 18px; font-weight: 700; font-stretch: 90%; letter-spacing: -0.015em; line-height: 1.2; color: var(--noir); }
-    .cli-stats { margin-top: 14px; padding-top: 13px; border-top: 1px solid rgba(255,255,255,0.11); }
-    .cli-seg { display: flex; align-items: baseline; gap: 7px; }
-    .cli-seg b { font-size: 21px; font-weight: 800; font-stretch: 85%; letter-spacing: -0.02em; line-height: 1; color: var(--noir); }
-    .cli-seg span { font-family: var(--mono); font-size: 11px; color: rgba(255,255,255,0.45); }
-    .cli-pub { font-family: var(--mono); font-size: 11px; line-height: 1.3; color: rgba(255,255,255,0.42); margin-top: 6px; }
-    @media (max-width: 980px) { .clientes-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-    @media (max-width: 620px) {
-      .clientes-banda { padding: 48px 0 52px; }
-      .cli { flex-direction: column; align-items: flex-start; gap: 14px; padding: 20px 16px 22px; }
-      .cli-foto { width: 76px; height: 76px; }
-      .cli-handle { font-size: 10px; }
-      .cli-nombre { font-size: 15px; }
-      .cli-seg b { font-size: 19px; }
-      .cli-seg span, .cli-pub { font-size: 10px; }
-    }
-  </style>
-  <div class="clientes-banda">
-    <div class="wrap">
+  <!-- ============ 2 · CLIENTES ============ -->
+  <div class="wrap" style="padding-bottom: 76px;">
+    <div style="font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.04em; color: var(--bone-3); margin-bottom: 26px;">he escrito para</div>
 
-      <div style="margin-bottom: 26px; display: flex; align-items: center; gap: 10px;">
-        <div style="width: 8px; height: 8px; background: var(--mark); flex: none;"></div>
-        <div style="font-family: var(--mono); font-size: 12px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.55);">Algunas de las personas con las que he trabajado</div>
+    <div class="col-3" style="display: grid; gap: 1px; background: var(--line);">
+
+      <div style="background: var(--noir); padding: 22px 20px 24px;">
+        <img src="/josemunoz.png" alt="José Muñoz" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; display: block; margin-bottom: 16px;">
+        <div style="font-size: 19px; font-weight: 700; font-stretch: 90%; letter-spacing: -0.015em; color: var(--bone); line-height: 1.2;">José Muñoz</div>
+        <div style="font-size: 14px; color: var(--bone-2); margin-top: 4px;">Inversor inmobiliario</div>
+        <div style="font-family: var(--mono); font-size: 10px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">josemunoz.pro · 1.000 publicaciones · 100 mil seguidores</div>
       </div>
 
-      <div class="clientes-grid">
-
-      <div class="cli">
-        <img class="cli-foto" src="/josemunoz.png" alt="" loading="lazy">
-        <div>
-          <div class="cli-handle">josemunoz.pro</div>
-          <div class="cli-nombre">José Muñoz</div>
-          <div class="cli-stats">
-            <div class="cli-seg"><b>100 mil</b><span>seguidores</span></div>
-            <div class="cli-pub">1.000 publicaciones</div>
-          </div>
-        </div>
+      <div style="background: var(--noir); padding: 22px 20px 24px;">
+        <img src="/crece.png" alt="Crece Sin Límite" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; display: block; margin-bottom: 16px;">
+        <div style="font-size: 19px; font-weight: 700; font-stretch: 90%; letter-spacing: -0.015em; color: var(--bone); line-height: 1.2;">Crece Sin Límite</div>
+        <div style="font-size: 14px; color: var(--bone-2); margin-top: 4px;">Publicidad y marketing</div>
+        <div style="font-family: var(--mono); font-size: 10px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">crecesinlimite_ · 12 publicaciones · 29,5 mil seguidores</div>
       </div>
 
-      <div class="cli">
-        <img class="cli-foto" src="/crece.png" alt="" loading="lazy">
-        <div>
-          <div class="cli-handle">crecesinlimite_</div>
-          <div class="cli-nombre">Crece Sin Límite</div>
-          <div class="cli-stats">
-            <div class="cli-seg"><b>28,8 mil</b><span>seguidores</span></div>
-          </div>
-        </div>
+      <div style="background: var(--noir); padding: 22px 20px 24px;">
+        <img src="/riders.png" alt="Digital Riders" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; display: block; margin-bottom: 16px;">
+        <div style="font-size: 19px; font-weight: 700; font-stretch: 90%; letter-spacing: -0.015em; color: var(--bone); line-height: 1.2;">Digital Riders</div>
+        <div style="font-size: 14px; color: var(--bone-2); margin-top: 4px;">Lanzamientos y embudos</div>
+        <div style="font-family: var(--mono); font-size: 10px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">digitalriders_ · 484 publicaciones · 7.899 seguidores</div>
       </div>
 
-      <div class="cli">
-        <img class="cli-foto" src="/riders.png" alt="" loading="lazy">
-        <div>
-          <div class="cli-handle">digitalriders_</div>
-          <div class="cli-nombre">Digital Riders</div>
-          <div class="cli-stats">
-            <div class="cli-seg"><b>8.023</b><span>seguidores</span></div>
-            <div class="cli-pub">473 publicaciones</div>
-          </div>
-        </div>
+      <div style="background: var(--noir); padding: 22px 20px 24px;">
+        <img src="/talent.png" alt="Talent Network" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; display: block; margin-bottom: 16px;">
+        <div style="font-size: 19px; font-weight: 700; font-stretch: 90%; letter-spacing: -0.015em; color: var(--bone); line-height: 1.2;">Talent Network</div>
+        <div style="font-size: 14px; color: var(--bone-2); margin-top: 4px;">Ciencia y tecnología</div>
+        <div style="font-family: var(--mono); font-size: 10px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">talent.network · 7.560 publicaciones · 61,6 mil seguidores</div>
       </div>
 
-      <div class="cli">
-        <img class="cli-foto" src="/anamoreno.png" alt="" loading="lazy">
-        <div>
-          <div class="cli-handle">ana.moreno.marin</div>
-          <div class="cli-nombre">Ana Moreno Marín</div>
-          <div class="cli-stats">
-            <div class="cli-seg"><b>330 mil</b><span>seguidores</span></div>
-            <div class="cli-pub">793 publicaciones</div>
-          </div>
-        </div>
+      <div style="background: var(--noir); padding: 22px 20px 24px;">
+        <img src="/hackaviss.png" alt="Jose Javier Pastor" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; display: block; margin-bottom: 16px;">
+        <div style="font-size: 19px; font-weight: 700; font-stretch: 90%; letter-spacing: -0.015em; color: var(--bone); line-height: 1.2;">Jose Javier Pastor</div>
+        <div style="font-size: 14px; color: var(--bone-2); margin-top: 4px;">Ciberseguridad</div>
+        <div style="font-family: var(--mono); font-size: 10px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">hackaviss · 70 publicaciones · 142 mil seguidores</div>
       </div>
 
-      <div class="cli">
-        <img class="cli-foto" src="/pauanto.png" alt="" loading="lazy">
-        <div>
-          <div class="cli-handle">pau_anto</div>
-          <div class="cli-nombre">Pau Antó</div>
-          <div class="cli-stats">
-            <div class="cli-seg"><b>184 mil</b><span>seguidores</span></div>
-            <div class="cli-pub">1.038 publicaciones</div>
-          </div>
-        </div>
+      <div style="background: var(--noir); padding: 22px 20px 24px;">
+        <img src="/anamoreno.png" alt="Ana Moreno Marín" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; display: block; margin-bottom: 16px;">
+        <div style="font-size: 19px; font-weight: 700; font-stretch: 90%; letter-spacing: -0.015em; color: var(--bone); line-height: 1.2;">Ana Moreno Marín</div>
+        <div style="font-size: 14px; color: var(--bone-2); margin-top: 4px;">Comunicadora</div>
+        <div style="font-family: var(--mono); font-size: 10px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">ana.moreno.marin · 793 publicaciones · 330 mil seguidores</div>
       </div>
 
-      <div class="cli">
-        <img class="cli-foto" src="/hackaviss.png" alt="" loading="lazy">
-        <div>
-          <div class="cli-handle">hackaviss</div>
-          <div class="cli-nombre">Jose Javier Pastor</div>
-          <div class="cli-stats">
-            <div class="cli-seg"><b>142 mil</b><span>seguidores</span></div>
-            <div class="cli-pub">70 publicaciones</div>
-          </div>
-        </div>
+      <div style="background: var(--noir); padding: 22px 20px 24px;">
+        <img src="/orozco.png" alt="Juan de Dios Orozco" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; display: block; margin-bottom: 16px;">
+        <div style="font-size: 19px; font-weight: 700; font-stretch: 90%; letter-spacing: -0.015em; color: var(--bone); line-height: 1.2;">Juan de Dios Orozco</div>
+        <div style="font-size: 14px; color: var(--bone-2); margin-top: 4px;">Escuela de Lujo</div>
+        <div style="font-family: var(--mono); font-size: 10px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">orozcolopezjuan · 1.147 publicaciones · 112 mil seguidores</div>
       </div>
 
-      <div class="cli">
-        <img class="cli-foto" src="/orozco.png" alt="" loading="lazy">
-        <div>
-          <div class="cli-handle">orozcolopezjuan</div>
-          <div class="cli-nombre">Juan de Dios Orozco</div>
-          <div class="cli-stats">
-            <div class="cli-seg"><b>104 mil</b><span>seguidores</span></div>
-            <div class="cli-pub">1.079 publicaciones</div>
-          </div>
-        </div>
+      <div style="background: var(--noir); padding: 22px 20px 24px;">
+        <img src="/zeke.png" alt="Zeke Novarino" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; display: block; margin-bottom: 16px;">
+        <div style="font-size: 19px; font-weight: 700; font-stretch: 90%; letter-spacing: -0.015em; color: var(--bone); line-height: 1.2;">Zeke Novarino</div>
+        <div style="font-size: 14px; color: var(--bone-2); margin-top: 4px;">Contenido Rentable</div>
+        <div style="font-family: var(--mono); font-size: 10px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">zeke.novarino · 498 publicaciones · 74,4 mil seguidores</div>
       </div>
 
-      <div class="cli">
-        <img class="cli-foto" src="/zeke.png" alt="" loading="lazy">
-        <div>
-          <div class="cli-handle">zeke.novarino</div>
-          <div class="cli-nombre">Zeke Novarino</div>
-          <div class="cli-stats">
-            <div class="cli-seg"><b>74,4 mil</b><span>seguidores</span></div>
-            <div class="cli-pub">498 publicaciones</div>
-          </div>
-        </div>
+      <div style="background: var(--noir); padding: 22px 20px 24px;">
+        <img src="/tuto.png" alt="Tuto Marolla" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; display: block; margin-bottom: 16px;">
+        <div style="font-size: 19px; font-weight: 700; font-stretch: 90%; letter-spacing: -0.015em; color: var(--bone); line-height: 1.2;">Tuto Marolla</div>
+        <div style="font-size: 14px; color: var(--bone-2); margin-top: 4px;">Biohacking</div>
+        <div style="font-family: var(--mono); font-size: 10px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">tutobiohacker · 1.011 publicaciones · 57,5 mil seguidores</div>
       </div>
 
-      <div class="cli">
-        <img class="cli-foto" src="/talent.png" alt="" loading="lazy">
-        <div>
-          <div class="cli-handle">talent.network</div>
-          <div class="cli-nombre">Talent Network</div>
-          <div class="cli-stats">
-            <div class="cli-seg"><b>61,6 mil</b><span>seguidores</span></div>
-            <div class="cli-pub">7.560 publicaciones</div>
-          </div>
-        </div>
+      <div style="background: var(--noir); padding: 22px 20px 24px;">
+        <img src="/tutellus.png" alt="Tutellus" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; display: block; margin-bottom: 16px;">
+        <div style="font-size: 19px; font-weight: 700; font-stretch: 90%; letter-spacing: -0.015em; color: var(--bone); line-height: 1.2;">Tutellus</div>
+        <div style="font-size: 14px; color: var(--bone-2); margin-top: 4px;">Crypto y Web3</div>
+        <div style="font-family: var(--mono); font-size: 10px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">tutellus · 919 publicaciones · 15,1 mil seguidores</div>
       </div>
 
-      <div class="cli">
-        <img class="cli-foto" src="/tuto.png" alt="" loading="lazy">
-        <div>
-          <div class="cli-handle">tutobiohacker</div>
-          <div class="cli-nombre">Tuto Marolla</div>
-          <div class="cli-stats">
-            <div class="cli-seg"><b>57,5 mil</b><span>seguidores</span></div>
-            <div class="cli-pub">1.011 publicaciones</div>
-          </div>
-        </div>
+      <div style="background: var(--noir); padding: 22px 20px 24px;">
+        <img src="/racks.png" alt="Racks Academy" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; display: block; margin-bottom: 16px;">
+        <div style="font-size: 19px; font-weight: 700; font-stretch: 90%; letter-spacing: -0.015em; color: var(--bone); line-height: 1.2;">Racks Academy</div>
+        <div style="font-size: 14px; color: var(--bone-2); margin-top: 4px;">IA y desarrollo web3</div>
+        <div style="font-family: var(--mono); font-size: 10px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">racks.academy · 91 publicaciones · 3.753 seguidores</div>
       </div>
 
-      <div class="cli">
-        <img class="cli-foto" src="/tutellus.png" alt="" loading="lazy">
-        <div>
-          <div class="cli-handle">tutellus</div>
-          <div class="cli-nombre">Tutellus</div>
-          <div class="cli-stats">
-            <div class="cli-seg"><b>11,5 mil</b><span>seguidores</span></div>
-            <div class="cli-pub">838 publicaciones</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="cli">
-        <img class="cli-foto" src="/racks.png" alt="" loading="lazy">
-        <div>
-          <div class="cli-handle">racks.academy</div>
-          <div class="cli-nombre">Racks Academy</div>
-          <div class="cli-stats">
-            <div class="cli-seg"><b>3.456</b><span>seguidores</span></div>
-            <div class="cli-pub">73 publicaciones</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- BORJA VILASECA · descomentar cuando dé permiso, y añadir los dos rellenos
-           de abajo para que la última fila no deje hueco.
-      <div class="cli">
-        <img class="cli-foto" src="/borjavilaseca.png" alt="" loading="lazy">
-        <div>
-          <div class="cli-handle">borjavilaseca</div>
-          <div class="cli-nombre">Borja Vilaseca</div>
-          <div class="cli-stats">
-            <div class="cli-seg"><b>000 mil</b><span>seguidores</span></div>
-            <div class="cli-pub">000 publicaciones</div>
-          </div>
-        </div>
-      </div>
-      <div class="cli"></div>
-      <div class="cli"></div>
-      -->
-
-      </div>
     </div>
   </div>
 
