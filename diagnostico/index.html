@@ -708,6 +708,16 @@
     .field label.nsck { display: inline-flex; align-items: center; gap: 8px; margin: 8px 0 0; cursor: pointer; letter-spacing: 0.1em; }
     .field label.nsck input { width: auto; padding: 0; }
     .field input:disabled { opacity: 0.35; }
+    /* Modo auditoría: documentos */
+    .dtools { flex-wrap: wrap; }
+    .dsteps { margin: 26px 0 0 20px; color: var(--ink-dim); font-size: 0.92rem; line-height: 1.6; }
+    .dsteps li { margin-bottom: 8px; } .dsteps b { color: var(--ink); font-weight: 600; }
+    .dnote { margin-top: 14px; font-size: 0.85rem; color: var(--gold); line-height: 1.55; }
+    .dbox { margin-top: 22px; } .dup { cursor: pointer; } .dhint { font-size: 0.8rem; color: var(--muted); margin-top: 10px; }
+    .field label.dpii { display: flex; margin: 0 0 16px; text-transform: none; font-size: 0.85rem; letter-spacing: 0; color: var(--ink-dim); }
+    .dfile { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid var(--line-soft); font-size: 0.9rem; color: var(--ink-dim); overflow-wrap: anywhere; }
+    .dfile em { color: var(--muted); font-style: normal; } .dfile small { color: var(--muted); } .dfile.ok span { color: var(--ink); } .dfile.error small { color: var(--warn); } .dfile button { white-space: nowrap; }
+    .field input[type=date] { color-scheme: dark; }
 
     /* Informe */
     .report-wrap { padding: 56px 0 90px; }
@@ -1089,6 +1099,11 @@
        y le manda a Daniel la foto entera. Sin el parámetro, la herramienta es la pública de siempre. */
     const AUDIT = new URLSearchParams(location.search).get('modo')==='auditoria';
     const LZ = a=>AUDIT&&(a.venta==='lanz'||a.venta==='ambos');
+    const EV = a=>AUDIT&&(a.evergreen==='si_vende'||a.evergreen==='si_nose');
+    /* Documentos: script APARTE del de la Calculadora ("Auditorías · arranque"). El enlace del cliente lleva &r=<cliente>&k=<clave>. */
+    const AUDIT_URL = "https://script.google.com/macros/s/AKfycbzeYKoJogKgUk7JmCz7tPnShcrm1kA_atbBy16M7q2EoqND5cxuhbb4qrLP_ldk1Qya/exec";
+    const AREF = new URLSearchParams(location.search).get('r')||'';
+    const AKEY = new URLSearchParams(location.search).get('k')||'';
 
     /* Analytics del quiz: pings por GET a la misma URL. Si el Apps Script no tiene doGet,
        no hacen nada (ni filas ni emails). Un evento por hito y sesión, sin duplicados. */
@@ -1246,6 +1261,11 @@
       {v:'ampliado', t:'Anuncié una fecha, pero lo amplié o lo reabrí'},
       {v:'nada', t:'Nada: se cerró sin anunciarlo', excl:true}]},
 
+    {id:'l_fechas', block:'Tu último lanzamiento', text:'¿Cuándo fue?', sub:'Las fechas me sirven para no mezclar este lanzamiento con el anterior. Aproximadas valen.', show:LZ, dates:[
+      {k:'conv', t:'Empezó la convocatoria (el primer aviso invitando a apuntarse)'},
+      {k:'apertura', t:'Abriste el carrito'},
+      {k:'cierre', t:'Cerraste el carrito', show:a=>a.l_carrito!=='siempre'}]},
+
     {id:'l_trafico', block:'Tu último lanzamiento', text:'¿De dónde salió la gente de ese lanzamiento?', sub:'Marca todas las fuentes que pesaron.', show:LZ, multi:true, opts:[
       {v:'lista', t:'Mi lista de email'},
       {v:'ads', t:'Anuncios de pago'},
@@ -1265,20 +1285,51 @@
       {v:'resaca', t:'La resaca: escribiste después del cierre, a compradores y a los que no'},
       {v:'nose', t:'No lo sé', excl:true}]},
 
-    {id:'l_material', block:'Tu último lanzamiento', text:'¿Qué me puedes pasar de ese lanzamiento?', sub:'Marca lo que tengas. Con esto sé qué pedirte y qué no.', show:LZ, multi:true, opts:[
-      {v:'acceso', t:'Acceso de lectura a mi herramienta de email'},
-      {v:'export', t:'Una exportación de los emails con sus métricas'},
-      {v:'paginas', t:'Las páginas (registro, ventas, gracias), en vivo o en capturas'},
-      {v:'grabacion', t:'La grabación del directo'},
-      {v:'ads', t:'Los anuncios y sus resultados'},
-      {v:'ninguno', t:'Ahora mismo, nada de esto', excl:true}]},
-
     {id:'l_objetivo', block:'Tu último lanzamiento', text:'¿Qué objetivo te pusiste y qué salió? ¿En qué momento sentiste que se torcía, o que iba bien?', sub:'Dos o tres frases. Aquí vale más lo que sentiste que la cifra exacta.', show:LZ, free:true},
 
     {id:'evergreen', block:'Conversión', text:'¿Tienes una secuencia o funnel evergreen que venda sin que tú estés?', show:a=>a.venta!=='manual', opts:[
       {v:'si_vende', t:'Sí, y sé que vende'},
       {v:'si_nose', t:'Sí, pero no sé si realmente vende'},
       {v:'no', t:'No'}]},
+
+    /* ── Bloque "Tu embudo evergreen": solo en modo auditoría y si tiene un embudo que vende sin él ── */
+    {id:'e_entrada', block:'Tu embudo evergreen', text:'¿Cómo entra la gente en tu embudo?', sub:'Si tienes varios, piensa en el que más vende.', show:EV, opts:[
+      {v:'leadmagnet', t:'Con un recurso gratuito (guía, clase, plantilla) y después emails'},
+      {v:'webinar', t:'Con un webinar o una clase grabada que se emite sola'},
+      {v:'vsl', t:'Directo a una página de ventas o a un VSL'},
+      {v:'reto', t:'Con un reto o un minicurso automatizado de varios días'},
+      {v:'otra', t:'Otra'}]},
+
+    {id:'e_numeros', block:'Tu embudo evergreen', text:'Los números de ese embudo en los últimos 90 días', sub:'Aproximados valen. Si alguno no lo sabes, márcalo: saber qué falta también es un dato.', show:EV, nums:[
+      {k:'leads', t:'Personas nuevas que entraron al embudo', show:a=>a.e_entrada!=='vsl'},
+      {k:'visitas', t:'Visitas a la página de ventas'},
+      {k:'ventas', t:'Ventas'},
+      {k:'ingresos', t:'Ingresos del embudo', money:true}]},
+
+    {id:'e_secuencia', block:'Tu embudo evergreen', text:'¿Cuántos emails recibe alguien desde que entra hasta que termina la secuencia?', show:EV, opts:[
+      {v:'s1', t:'De 1 a 3'},
+      {v:'s2', t:'De 4 a 7'},
+      {v:'s3', t:'De 8 a 14'},
+      {v:'s4', t:'Más de 14'},
+      {v:'ninguno', t:'No hay secuencia: solo la página'},
+      {v:'nose', t:'No lo sé'}]},
+
+    {id:'e_urgencia', block:'Tu embudo evergreen', text:'¿La oferta de ese embudo tiene fecha límite?', show:EV, opts:[
+      {v:'real', t:'Sí: un plazo real para cada persona, y se cumple'},
+      {v:'falsa', t:'Hay un contador, pero se reinicia o no se cumple'},
+      {v:'no', t:'No: la oferta está siempre igual'},
+      {v:'nose', t:'No lo sé'}]},
+
+    {id:'e_trafico', block:'Tu embudo evergreen', text:'¿De dónde sale la gente que entra en ese embudo?', sub:'Marca todas las fuentes que pesan.', show:EV, multi:true, opts:[
+      {v:'lista', t:'Mi lista de email'},
+      {v:'ads', t:'Anuncios de pago'},
+      {v:'organico', t:'Contenido orgánico (redes, YouTube, podcast)'},
+      {v:'colabs', t:'Colaboraciones o afiliados'}]},
+
+    {id:'e_gasto', block:'Tu embudo evergreen', text:'¿Cuánto has invertido en anuncios para ese embudo en los últimos 90 días?', show:a=>EV(a)&&Array.isArray(a.e_trafico)&&a.e_trafico.includes('ads'), nums:[
+      {k:'gasto', t:'Inversión en anuncios', money:true}]},
+
+    {id:'e_objetivo', block:'Tu embudo evergreen', text:'¿Cuánto esperabas que vendiera ese embudo y cuánto vende? ¿Desde cuándo está así?', sub:'Dos o tres frases. Aquí vale más lo que has visto que la cifra exacta.', show:EV, free:true},
 
     {id:'cierre', block:'Conversión', text:'¿Conoces tu tasa de cierre en llamadas o propuestas?', show:a=>a.modelo==='highticket'||a.venta==='manual', opts:[
       {v:'si', t:'Sí, la mido'},
@@ -1311,7 +1362,75 @@
       {v:'tiempo', t:'Todo depende de mí y no escalo'},
       {v:'nolose', t:'No lo tengo claro'}]},
 
-    {id:'intentado', block:'Tu foco', text:'¿Qué has intentado ya para resolverlo?', sub:'Opcional. Una o dos frases bastan.', free:true}
+    {id:'intentado', block:'Tu foco', text:'¿Qué has intentado ya para resolverlo?', sub:'Opcional. Una o dos frases bastan.', free:true},
+
+    /* ── Bloque "Tu material": solo en modo auditoría. Cada documento: lo subo · te lo mando aparte · no lo tengo ── */
+    {id:'d_email_lanz', block:'Tu material', slot:'Emails del lanzamiento', text:'Las métricas de los emails del lanzamiento', sub:'Por cada email: fecha y hora de envío, enviados, aperturas, clics y bajas. Solo los totales de cada email: nada de listas de suscriptores.', show:LZ, doc:{
+      tools:[['ac','ActiveCampaign'],['otra','Otra herramienta']],
+      steps:{
+        ac:()=>['En ActiveCampaign, en el menú de la izquierda: <b>Reports</b> → <b>Campaigns Performance</b>. En cuentas nuevas puede llamarse <b>All Campaigns Performance</b>.',
+                'Filtra por fecha de envío (<b>Campaign Sent Date</b> → <b>Custom Range</b>): del primer al último email del lanzamiento.',
+                'Descárgalo: pasa el ratón por la tabla, pulsa los tres puntos <b>⋮</b> → <b>Download Data</b> → <b>CSV</b>. En <i>All Campaigns Performance</i> es el botón <b>Export</b> → <b>Export.csv</b>.'],
+        otra:()=>['En tu herramienta de email, busca el informe de campañas (suele estar en <b>Informes</b> o <b>Reports</b>).',
+                  'Filtra las fechas del lanzamiento y expórtalo en CSV o Excel.',
+                  'Si no deja exportar, una captura del listado con sus métricas también vale.']},
+      note:{ac:'No uses los informes de «Opens» o «Clicks» de cada campaña: esos llevan los emails de tus suscriptores, y no los necesito.'}}},
+
+    {id:'d_email_auto', block:'Tu material', slot:'Emails del embudo', text:'Las métricas de los emails de tu embudo evergreen', sub:'Por cada email de la secuencia: enviados, aperturas, clics y bajas. Solo los totales de cada email.', show:EV, doc:{
+      tools:[['ac','ActiveCampaign'],['otra','Otra herramienta']],
+      steps:{
+        ac:()=>['En ActiveCampaign: <b>Reports</b> → <b>Automation Reports</b>, y abre el informe de la automatización de tu embudo (<b>Automation Overview</b>).',
+                'Busca la tabla con las métricas de cada email (<b>Automation Campaign Metrics</b>).',
+                'Pasa el ratón por la tabla, pulsa <b>⋮</b> → <b>Download Data</b> → <b>CSV</b>.'],
+        otra:()=>['En tu herramienta de email, abre el informe de la automatización o secuencia del embudo.',
+                  'Exporta las métricas de cada email en CSV o Excel.',
+                  'Si no deja exportar, una captura con las métricas de cada email también vale.']}}},
+
+    {id:'d_ventas', block:'Tu material', slot:'Ventas', text:'Tus ventas, día a día', sub:()=>'Cada venta con su fecha, producto, importe y estado (pagada, reembolsada) '+periodo()+'. Solo cifras: nada de datos de tus compradores.', show:a=>LZ(a)||EV(a), doc:{
+      pii:true,
+      tools:[['hotmart','Hotmart'],['otra','Otra plataforma']],
+      steps:{
+        hotmart:()=>['Entra en app.hotmart.com → menú <b>Ventas</b> → <b>Mis ventas</b> (en portugués: <i>Vendas → Minhas vendas</i>).',
+                     'Pulsa <b>Exportar</b>, elige el modelo <b>Estándar</b> y el formato <b>CSV</b>.',
+                     'Filtra el periodo '+periodo()+' y deja todos los estados, para que salgan también los reembolsos. Confirma.',
+                     'Cuando Hotmart tenga el archivo listo, súbelo aquí tal cual.'],
+        otra:()=>['En tu plataforma de cobro (Stripe, Kajabi, Systeme…), exporta el listado de ventas '+periodo()+'.',
+                  'Mejor en CSV: así esta página quita sola los datos de tus compradores.',
+                  'Si solo te deja Excel o PDF, borra tú antes nombres, emails y teléfonos.']},
+      note:{hotmart:'El archivo de Hotmart trae nombre, email y teléfono de tus compradores. No hace falta que los borres: si lo subes en CSV, esta página los quita antes de subirlo y te dice qué ha quitado.'}}},
+
+    {id:'d_ads', block:'Tu material', slot:'Anuncios', text:'Los resultados de tus anuncios', sub:()=>'Por anuncio y por día '+periodo()+': gasto, impresiones, clics y resultados.', show:a=>(LZ(a)&&Array.isArray(a.l_trafico)&&a.l_trafico.includes('ads'))||(EV(a)&&Array.isArray(a.e_trafico)&&a.e_trafico.includes('ads')), doc:{
+      tools:[['meta','Meta (Facebook e Instagram)'],['otra','Otra plataforma']],
+      steps:{
+        meta:()=>['En el Administrador de anuncios, entra en la pestaña <b>Anuncios</b>.',
+                  'Elige las fechas '+periodo()+'.',
+                  'Pulsa <b>Desglose</b> → <b>Por tiempo</b> → <b>Día</b>, para que salga una fila por anuncio y día.',
+                  'Pulsa <b>Exportar</b>, arriba a la derecha → <b>Exportar como .csv</b>. Con las columnas de rendimiento que salen por defecto vale; si puedes, añade los clics en el enlace y el CTR.'],
+        otra:()=>['En tu plataforma de anuncios, saca el informe por anuncio y por día '+periodo()+'.',
+                  'Que lleve gasto, impresiones, clics y resultados, y expórtalo en CSV o Excel.']}}},
+
+    {id:'d_paginas', block:'Tu material', slot:'Páginas', text:'Las visitas y conversiones de tus páginas', sub:()=>'La página de registro (u opt-in) y la de ventas '+periodo()+': cuánta gente entró y cuánta se registró o compró.', show:a=>LZ(a)||EV(a), doc:{
+      tools:[['otra','Cualquier herramienta']],
+      steps:{
+        otra:()=>['Ve a donde tengas tus páginas (Hotmart, Systeme, ClickFunnels, WordPress, Google Analytics…).',
+                  'Saca las visitas y las conversiones de cada página en ese periodo.',
+                  'Exportación o captura del panel: lo que te sea más fácil.']}}},
+
+    {id:'d_directo', block:'Tu material', slot:'Directo', text:'Los datos de tu directo', sub:'Registrados, asistentes en vivo, pico y cuánto aguantó la gente. Y la grabación, si la tienes.', show:a=>LZ(a)&&['webinar','reto','directos','otra'].includes(a.l_mecanica), doc:{
+      tools:[['otra','Zoom, StreamYard, WebinarJam…']],
+      steps:{
+        otra:()=>['Del panel de tu herramienta de directos, una captura con los totales: registrados, asistentes en vivo, pico y duración media.',
+                  'Nada de listas de asistentes con nombres: solo los totales.',
+                  'Si tienes la grabación, pega abajo el enlace (Drive, YouTube oculto, Vimeo…).']}}},
+
+    {id:'d_recorrido', block:'Tu material', slot:'Recorrido del embudo', text:'Un vídeo recorriendo tu embudo', sub:'Es lo que más me ayuda a entender qué querías que pasara, antes de mirar qué pasó.', show:a=>LZ(a)||EV(a), doc:{
+      tools:[['otra','Loom o cualquier grabador de pantalla']],
+      steps:{
+        otra:()=>['Graba tu pantalla unos cinco minutos recorriendo tu embudo como si fueras un cliente: el anuncio o el post, la página, el formulario, la de gracias, los emails.',
+                  'Mientras, cuéntame en voz alta qué querías que pasara en cada paso.',
+                  'Con Loom (tiene versión gratis) basta: pega aquí el enlace.']}}},
+
+    {id:'d_otros', block:'Tu material', slot:'Otros', text:'¿Algo más que quieras que vea?', sub:'Opcional. Datos de WhatsApp, directos extra, una encuesta, tus propias notas. Lo que creas que me ayuda.', show:a=>AUDIT, doc:{optional:true, tools:[], steps:{}}}
     ];
 
     /* =====================================================
@@ -1362,8 +1481,8 @@
     function back(){
       if(path.length<=1) return;
       const last = Q[path.pop()];
-      delete A[last.id]; delete AL[last.id]; delete MID[last.id];
-      Q.forEach(q=>{ if(q.show && !q.show(A) && A[q.id]!==undefined){ delete A[q.id]; delete AL[q.id]; delete MID[q.id]; } });
+      if(!last.doc){ delete A[last.id]; delete AL[last.id]; delete MID[last.id]; }
+      Q.forEach(q=>{ if(!q.doc && q.show && !q.show(A) && A[q.id]!==undefined){ delete A[q.id]; delete AL[q.id]; delete MID[q.id]; } });
       cur=path.length-1;
       render();
     }
@@ -1376,7 +1495,7 @@
       document.getElementById('pcount').textContent = 'Pregunta '+pos+' de ~'+vis.length;
       ping('q', q.id, pos);
       let h = '<div class="qblock">'+q.block+'</div><div class="qtext">'+q.text+'</div>';
-      if(q.sub) h += '<div class="qsub">'+q.sub+'</div>';
+      if(q.sub) h += '<div class="qsub">'+TXT(q.sub)+'</div>';
       if(q.currency){
         h += '<div class="curr"><button class="'+(currency==='$'?'sel':'')+'" onclick="setCurr(\'$\')">USD $</button><button class="'+(currency==='€'?'sel':'')+'" onclick="setCurr(\'€\')">EUR €</button></div>';
       }
@@ -1389,6 +1508,10 @@
           '<button class="opt'+(sel.includes(o.v)?' sel':'')+'" onclick="toggleMulti(\''+q.id+'\',\''+o.v+'\')">'+o.t+'</button>'
         ).join('')+'</div><div class="err" id="qerr">Marca al menos una opción.</div>';
         h += '<div class="qnav"><button class="qback" onclick="back()">Atrás</button><button class="btn-wa" onclick="saveMulti()">Siguiente</button></div>';
+      } else if(q.doc){
+        h += renderDoc(q);
+      } else if(q.dates){
+        h += renderDates(q);
       } else if(q.nums){
         const cv = A[q.id]||{};
         h += '<div class="numgrid">'+numFields(q).map(f=>{
@@ -1406,6 +1529,7 @@
       }
       document.getElementById('qbox').innerHTML = h;
       window.scrollTo(0,0);
+      saveDraft();
     }
 
     function setCurr(c){ currency=c; render(); }
@@ -1790,7 +1914,7 @@
 
         const origen = ref0 ? 'via enlace enviado (r='+ref0+')' : 'acceso directo';
         const sub = (AUDIT?'AUDITORIA · arranque: ':'Lead diagnostico: ')+(name||'sin nombre')+' | Nivel '+result.level.n+'/5 | '+fugaTitulo;
-        const lanzTxt = AUDIT ? launchEmail() : '';
+        const lanzTxt = AUDIT ? launchEmail()+evergreenEmail()+docsEmail() : '';
         const linea = '====================================================';
         const body =
           (AUDIT?'CUESTIONARIO DE ARRANQUE DE AUDITORIA':'NUEVO DIAGNOSTICO COMPLETADO')+'  ('+origen+')\n'+linea+'\n\n'+
@@ -1819,6 +1943,7 @@
           respuestas: Object.keys(AL).map(k=>k+': '+AL[k]).join(' | '),
           intentado: A.intentado||'', ref,
           emailSubject: sub, emailBody: body};
+        if(AUDIT){ auditSend(payload); return; }
         fetch(SUBMIT_URL, {method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain'}, body:JSON.stringify(payload)}).catch(()=>{});
       }
       showReport(result, name);
@@ -1833,6 +1958,7 @@
       const show = (k,f)=>{ const v=n[k]; return v===undefined?null:(v==='nose'?'no lo sabe':f(v)); };
       let s = head;
       s += row('Mecanica', AL.l_mecanica);
+      s += fechasRow();
       [['registros','Registros',fmtNum],['asistencia','Asistencia en vivo',v=>fmtNum(v)+'%'],['visitas','Visitas a ventas',fmtNum],['ventas','Ventas',fmtNum],['ingresos','Ingresos',money]]
         .forEach(([k,l,f])=>{ const v=show(k,f); if(v!==null) s += row(l, v); });
       if(A.l_gasto) s += row('Inversion en ads', A.l_gasto.gasto==='nose'?'no lo sabe':money(A.l_gasto.gasto));
@@ -1842,7 +1968,6 @@
       const vac = fasesVacias();
       s += row('Tramos con pieza', AL.l_fases);
       s += row('Tramos VACIOS', A.l_fases&&A.l_fases.includes('nose')?'no lo sabe':(vac.length?listaY(vac.map(k=>FASES[k])):'ninguno'));
-      s += row('Material disponible', AL.l_material);
       const u = launchUnknown();
       s += row('Numeros que no sabe', u.nose+' de '+u.total);
       // Ratios que salen de sus propios números (solo si los dos términos existen)
@@ -1855,7 +1980,7 @@
       s += '\n  RATIOS (calculados con sus numeros)\n'+(R.length?R.map(x=>'  '+x).join('\n'):'  (faltan numeros para calcular ninguno)')+'\n\n';
       s += 'OBJETIVO Y CUANDO SE TORCIO (sus palabras)\n'+linea+'\n'+(A.l_objetivo&&A.l_objetivo.trim()?A.l_objetivo:'(no ha escrito nada)')+'\n\n';
       const lf = launchFindings();
-      s += 'HALLAZGOS DEL LANZAMIENTO (el cliente ve titulo y diagnostico; la palanca, no)\n'+linea+'\n'+
+      s += 'HALLAZGOS DEL LANZAMIENTO (el cliente no los ve: al enviar solo ve el gracias)\n'+linea+'\n'+
         (lf.length ? lf.map(f=>'REGLA: '+TXT(f.title)+'\n'+f.body()+'\nPALANCA: '+f.palanca).join('\n\n') : '(no salta ninguna regla de lanzamiento)')+'\n\n';
       return s;
     }
@@ -2061,6 +2186,300 @@
       navigator.clipboard.writeText(txt).then(()=>alert('Resultado copiado.'));
     }
 
+    /* =====================================================
+       MODO AUDITORÍA · DOCUMENTOS, FECHAS, BORRADOR Y ENVÍO
+       Nada de esto se ejecuta sin ?modo=auditoria.
+    ===================================================== */
+    const MAXB = 20*1024*1024;   // igual que MAX_BYTES en el script
+    const DKEY = 'auditoria:'+(AREF||'-');
+    const periodo = ()=>{ const l=LZ(A), e=EV(A);
+      return l&&e ? 'de los últimos 90 días y del lanzamiento (si puedes, en un solo archivo que cubra los dos)'
+        : l ? 'del lanzamiento, desde que empezó la convocatoria hasta una semana después del cierre'
+        : 'de los últimos 90 días'; };
+    const esc = s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const kb = n=>n<1048576 ? Math.max(1,Math.round(n/1024))+' KB' : (n/1048576).toFixed(1).replace('.',',')+' MB';
+
+    /* ── Borrador en su navegador (se retoma en el mismo navegador) ── */
+    function saveDraft(){
+      if(!AUDIT) return;
+      try{ localStorage.setItem(DKEY, JSON.stringify({v:1, t:Date.now(), A, AL, MID, path, cur, currency})); }catch(e){}
+    }
+    function loadDraft(){
+      try{ const d = JSON.parse(localStorage.getItem(DKEY)||'null'); return d&&d.v===1&&Array.isArray(d.path)&&d.path.length ? d : null; }catch(e){ return null; }
+    }
+    function clearDraft(){ try{ localStorage.removeItem(DKEY); }catch(e){} }
+    function resumeDraft(d){
+      A=d.A||{}; AL=d.AL||{}; MID=d.MID||{}; path=d.path; cur=Math.min(d.cur,path.length-1); currency=d.currency||'$';
+      // Una subida que se cortó al cerrar la pestaña no llegó: se marca para repetirla
+      Object.keys(A).forEach(k=>{ const s=A[k]; if(s&&Array.isArray(s.files)) s.files.forEach(f=>{ if(f.state==='subiendo'){ f.state='error'; f.err='Se interrumpió al cerrar la página. Vuelve a elegirlo.'; } }); });
+      render(); show('quiz');
+    }
+
+    /* ── Fechas ── */
+    function dateFields(q){ return q.dates.filter(f=>!f.show||f.show(A)); }
+    function toggleNoseD(k){
+      const el = document.getElementById('d-'+k);
+      el.disabled = document.getElementById('nsd-'+k).checked;
+      if(el.disabled) el.value = '';
+    }
+    const fmtDate = s=>{ const [y,m,d]=s.split('-'); return d+'/'+m+'/'+y; };
+    function saveDates(){
+      const q = Q[path[cur]], out = {}, txt = [];
+      for(const f of dateFields(q)){
+        let v;
+        if(document.getElementById('nsd-'+f.k).checked) v = 'nose';
+        else { v = document.getElementById('d-'+f.k).value; if(!/^\d{4}-\d{2}-\d{2}$/.test(v)){ document.getElementById('qerr').style.display='block'; return; } }
+        out[f.k] = v; txt.push(f.t+': '+(v==='nose'?'no lo sé':fmtDate(v)));
+      }
+      A[q.id] = out; AL[q.id] = txt.join(' · ');
+      next();
+    }
+    function renderDates(q){
+      const cv = A[q.id]||{};
+      let h = '<div class="numgrid">'+dateFields(q).map(f=>{
+        const v = cv[f.k], ns = v==='nose';
+        return '<div class="field"><label for="d-'+f.k+'">'+f.t+'</label>'+
+          '<input type="date" id="d-'+f.k+'" value="'+(ns||!v?'':v)+'"'+(ns?' disabled':'')+'>'+
+          '<label class="nsck"><input type="checkbox" id="nsd-'+f.k+'"'+(ns?' checked':'')+' onchange="toggleNoseD(\''+f.k+'\')"> No lo sé</label></div>';
+      }).join('')+'</div><div class="err" id="qerr">Pon una fecha en cada casilla o marca «No lo sé».</div>';
+      return h+'<div class="qnav"><button class="qback" onclick="back()">Atrás</button><button class="btn-wa" onclick="saveDates()">Siguiente</button></div>';
+    }
+
+    /* ── Documentos ── */
+    const DST = {sube:'Lo subo aquí', aparte:'Te lo mando aparte o te doy acceso', no:'No lo tengo'};
+    function docState(q){
+      if(!A[q.id]||typeof A[q.id]!=='object') A[q.id] = {st:q.doc.optional?'':'', tool:(q.doc.tools[0]||[''])[0], files:[], link:'', ok:false};
+      return A[q.id];
+    }
+    function renderDoc(q){
+      const d = q.doc, s = docState(q);
+      let h = '';
+      if(d.tools.length>1) h += '<div class="curr dtools">'+d.tools.map(([k,t])=>'<button class="'+(s.tool===k?'sel':'')+'" onclick="docTool(\''+q.id+'\',\''+k+'\')">'+t+'</button>').join('')+'</div>';
+      const st = d.steps[s.tool];
+      if(st) h += '<ol class="dsteps">'+st().map(x=>'<li>'+x+'</li>').join('')+'</ol>';
+      if(d.note&&d.note[s.tool]) h += '<p class="dnote">'+d.note[s.tool]+'</p>';
+      const opts = d.optional ? [['sube','Sí, lo subo aquí'],['no','No, nada más']] : Object.entries(DST);
+      h += '<div class="opts">'+opts.map(([k,t])=>'<button class="opt'+(s.st===k?' sel':'')+'" onclick="docSt(\''+q.id+'\',\''+k+'\')">'+t+'</button>').join('')+'</div>';
+      if(s.st==='sube'){
+        h += '<div class="dbox">';
+        if(d.pii) h += '<label class="nsck dpii"><input type="checkbox" id="dpii"'+(s.ok?' checked':'')+' onchange="docPii(\''+q.id+'\')"> Si no es CSV: confirmo que he quitado nombres, emails y teléfonos de mis compradores</label>';
+        h += '<label class="btn-wa ghost dup">Elegir archivos<input type="file" multiple hidden onchange="docFiles(\''+q.id+'\',this)"></label>'+
+             '<p class="dhint">CSV, Excel, PDF o capturas. Hasta 20 MB por archivo; lo más pesado, por enlace.</p>'+
+             '<div id="doclist">'+docList(q)+'</div>'+
+             '<div class="field" style="margin:18px 0 0;"><label for="dlink">O pega un enlace (Drive, Loom, WeTransfer…)</label><input type="text" id="dlink" value="'+esc(s.link)+'" placeholder="https://" oninput="docLink(\''+q.id+'\',this.value)"></div>'+
+             '</div>';
+      }
+      h += '<div class="err" id="qerr"></div>';
+      return h+'<div class="qnav"><button class="qback" onclick="back()">Atrás</button><button class="btn-wa" onclick="saveDoc()">Siguiente</button></div>';
+    }
+    function docList(q){
+      return (docState(q).files||[]).map((f,i)=>'<div class="dfile '+f.state+'"><span>'+
+        (f.state==='ok'?'✓ ':f.state==='subiendo'?'Subiendo… ':'✗ ')+esc(f.n)+' <em>'+kb(f.size)+'</em>'+
+        (f.limpio&&f.limpio.length?'<br><small>He quitado '+f.limpio.length+(f.limpio.length===1?' columna':' columnas')+' con datos de personas antes de subirlo: '+esc(f.limpio.join(', '))+'.</small>':'')+
+        (f.state==='error'?'<br><small>'+esc(f.err||'No se ha podido subir.')+'</small>':'')+
+        '</span>'+(f.state==='error'?'<button class="qback" onclick="docDrop(\''+q.id+'\','+i+')">Quitar</button>':'')+'</div>').join('');
+    }
+    function curDoc(id){ const q=Q[path[cur]]; return q&&q.id===id; }
+    function refreshList(id){ if(curDoc(id)){ const el=document.getElementById('doclist'); if(el) el.innerHTML=docList(Q.find(x=>x.id===id)); } saveDraft(); }
+    function docTool(id,k){ docState(Q.find(x=>x.id===id)).tool=k; render(); }
+    function docSt(id,k){ docState(Q.find(x=>x.id===id)).st=k; render(); }
+    function docPii(id){ docState(Q.find(x=>x.id===id)).ok=document.getElementById('dpii').checked; saveDraft(); }
+    function docLink(id,v){ docState(Q.find(x=>x.id===id)).link=v.trim(); saveDraft(); }
+    function docDrop(id,i){ const s=docState(Q.find(x=>x.id===id)); s.files.splice(i,1); refreshList(id); }
+    let UPQ = Promise.resolve();   // una subida detrás de otra: la carpeta del cliente se crea una sola vez
+    function docFiles(id,input){
+      const q = Q.find(x=>x.id===id), s = docState(q);
+      Array.from(input.files).forEach(file=>{
+        const f = {n:file.name, size:file.size, state:'subiendo'};
+        s.files.push(f);
+        if(file.size>MAXB){ f.state='error'; f.err='Pesa más de 20 MB. Súbelo a tu Drive, a Loom o a WeTransfer y pega el enlace abajo.'; return; }
+        if(q.doc.pii&&!isCSV(file)&&!s.ok){ f.state='error'; f.err='No es CSV, así que no puedo quitar yo los datos de tus compradores. Bórralos, marca la casilla de arriba y vuelve a elegirlo. O súbelo en CSV.'; return; }
+        UPQ = UPQ.then(()=>uploadOne(q,file,f));
+      });
+      input.value = '';
+      refreshList(id);
+    }
+    const isCSV = f=>/\.csv$/i.test(f.name)||f.type==='text/csv';
+    async function uploadOne(q,file,f){
+      try{
+        let blob = file;
+        if(isCSV(file)){ const r = await scrubCSV(file, !!q.doc.pii); blob = r.blob; f.limpio = r.removed; }
+        const data = await toB64(blob);
+        const res = await fetch(AUDIT_URL, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'},
+          body:JSON.stringify({action:'subir', r:AREF, k:AKEY, slot:q.slot, name:file.name, mime:blob.type||file.type||'application/octet-stream', data})});
+        const j = await res.json();
+        if(!j.ok) throw new Error(j.error==='clave'?'El enlace no es válido. Pídele a Daniel el tuyo.':j.error==='grande'?'Pesa demasiado. Pega un enlace abajo.':'El servidor no lo ha aceptado ('+j.error+').');
+        f.state='ok'; f.id=j.id; f.url=j.url;
+        const s = docState(q); s.files = s.files.filter(x=>!(x.state==='error'&&x.n===f.n));   // el intento fallido del mismo archivo sobra
+      }catch(e){
+        f.state='error'; f.err = (e&&e.message&&!/fetch|network|json/i.test(e.message)) ? e.message : 'Se ha cortado la conexión. Vuelve a elegirlo.';
+      }
+      refreshList(q.id);
+    }
+    function toB64(blob){
+      return new Promise((ok,ko)=>{ const r=new FileReader(); r.onload=()=>ok(String(r.result).split(',')[1]||''); r.onerror=()=>ko(r.error); r.readAsDataURL(blob); });
+    }
+    function saveDoc(){
+      const q = Q[path[cur]], s = docState(q), err = document.getElementById('qerr');
+      const say = t=>{ err.textContent=t; err.style.display='block'; };
+      if(!s.st) return say('Elige una de las opciones.');
+      if(s.st==='sube'){
+        if(s.files.some(f=>f.state==='subiendo')) return say('Espera a que termine de subir.');
+        if(s.link && !/^https?:\/\/\S+\.\S+/i.test(s.link)) return say('El enlace no parece válido: tiene que empezar por https://');
+        if(!s.files.some(f=>f.state==='ok') && !s.link) return say('Sube al menos un archivo o pega un enlace. Si al final no lo tienes, elige otra opción.');
+      }
+      const okF = s.files.filter(f=>f.state==='ok');
+      AL[q.id] = (q.doc.optional&&s.st==='no') ? 'nada más'
+        : DST[s.st]+(s.st==='sube'?' ('+[okF.length?okF.length+(okF.length===1?' archivo':' archivos'):'', s.link?'enlace':''].filter(Boolean).join(' + ')+')':'');
+      next();
+    }
+
+    /* ── Limpieza de CSV: se quitan las columnas con datos de personas ANTES de subir ── */
+    async function readText(file){
+      const buf = await file.arrayBuffer();
+      try{ return new TextDecoder('utf-8',{fatal:true}).decode(buf); }
+      catch(e){ return new TextDecoder('windows-1252').decode(buf); }
+    }
+    function parseCSV(t, dl){
+      const rows=[]; let row=[], f='', q=false;
+      for(let i=0;i<t.length;i++){
+        const c=t[i];
+        if(q){ if(c==='"'){ if(t[i+1]==='"'){ f+='"'; i++; } else q=false; } else f+=c; }
+        else if(c==='"') q=true;
+        else if(c===dl){ row.push(f); f=''; }
+        else if(c==='\n'||c==='\r'){ if(c==='\r'&&t[i+1]==='\n') i++; row.push(f); rows.push(row); row=[]; f=''; }
+        else f+=c;
+      }
+      if(f!==''||row.length){ row.push(f); rows.push(row); }
+      return rows;
+    }
+    function sniff(t){
+      const line = t.split(/\r?\n/)[0]||'';
+      let best=',', n=-1;
+      [',',';','\t'].forEach(d=>{ let c=0, q=false; for(const ch of line){ if(ch==='"') q=!q; else if(ch===d&&!q) c++; } if(c>n){ n=c; best=d; } });
+      return best;
+    }
+    const NRM = s=>String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').trim();
+    const EMAILV = /^[^\s@,;]+@[^\s@,;]+\.[a-z]{2,}$/i;
+    const H_SIEMPRE = /(telefon|phone|celular|movil|whatsapp|\bddd\b|\bcpf\b|\bcnpj\b|\bdni\b|documento|\bnif\b|\bnie\b|\brut\b|\bcuit\b|\brfc\b|\bcurp\b|tax ?id|direccion|endereco|address|\bcep\b|codigo postal|zip ?code|\bcalle\b|\brua\b|complemento|\bbarrio\b|\bbairro\b)/;
+    const H_VENTAS = /(e-?mail|correo|(^|[^a-z])(nome|nombre|name|apellido|sobrenome|comprador|buyer)([^a-z]|$))/;
+    const H_NO = /(produto|producto|product|oferta|offer|plano|\bplan\b|campa|anuncio|moeda|moneda|pais|country|origem|origen|utm|\bsrc\b|\bsck\b|codigo|code)/;
+    async function scrubCSV(file, ventas){
+      let t = await readText(file);
+      if(t.charCodeAt(0)===0xFEFF) t = t.slice(1);
+      const dl = sniff(t), rows = parseCSV(t, dl).filter(r=>r.length>1||r[0]!=='');
+      if(!rows.length) return {blob:file, removed:[]};
+      const head = rows[0], drop = [];
+      head.forEach((h,i)=>{
+        const n = NRM(h);
+        const vals = rows.slice(1).map(r=>(r[i]||'').trim()).filter(Boolean);
+        const mails = vals.filter(v=>EMAILV.test(v)).length;
+        const byContent = vals.length>0 && mails/vals.length>=0.3;
+        const byHead = H_SIEMPRE.test(n) || (ventas && H_VENTAS.test(n) && !H_NO.test(n));
+        if(byContent||byHead) drop.push(i);
+      });
+      if(!drop.length) return {blob:file, removed:[]};
+      const keep = head.map((_,i)=>i).filter(i=>!drop.includes(i));
+      const cell = v=>/["\r\n]/.test(v)||v.includes(dl) ? '"'+v.replace(/"/g,'""')+'"' : v;
+      const out = rows.map(r=>keep.map(i=>cell(r[i]||'')).join(dl)).join('\r\n');
+      return {blob:new Blob(['﻿'+out], {type:'text/csv'}), removed:drop.map(i=>head[i]||('columna '+(i+1)))};
+    }
+
+    /* ── Email a Daniel: bloque evergreen y bloque de material ── */
+    function evergreenEmail(){
+      const linea = '====================================================';
+      const head = 'TU EMBUDO EVERGREEN (bloque de auditoria)\n'+linea+'\n';
+      if(!A.e_entrada) return head+'No ha visto este bloque (evergreen: '+(AL.evergreen||'no se le pregunto')+').\n\n';
+      const row = (k,v)=>'  '+(k+':').padEnd(22)+(v||'(sin responder)')+'\n';
+      const n = A.e_numeros||{}, money = v=>currency+fmtNum(Math.round(v)), N = k=>typeof n[k]==='number'?n[k]:null;
+      const G = (A.e_gasto&&typeof A.e_gasto.gasto==='number') ? A.e_gasto.gasto : null;
+      let s = head+row('Entrada', AL.e_entrada);
+      [['leads','Leads nuevos (90 d)',fmtNum],['visitas','Visitas a ventas',fmtNum],['ventas','Ventas',fmtNum],['ingresos','Ingresos',money]]
+        .forEach(([k,l,f])=>{ if(n[k]!==undefined) s += row(l, n[k]==='nose'?'no lo sabe':f(n[k])); });
+      if(A.e_gasto) s += row('Inversion en ads', A.e_gasto.gasto==='nose'?'no lo sabe':money(A.e_gasto.gasto));
+      s += row('Emails secuencia', AL.e_secuencia)+row('Fecha limite', AL.e_urgencia)+row('Trafico', AL.e_trafico);
+      const R = [];
+      if(N('leads')>0&&N('ventas')!==null) R.push('Lead -> venta: '+PCT(N('ventas'),N('leads')));
+      if(N('visitas')>0&&N('ventas')!==null) R.push('Visita a ventas -> venta: '+PCT(N('ventas'),N('visitas')));
+      if(N('ventas')>0&&N('ingresos')!==null) R.push('Ingreso medio por venta: '+money(Math.round(N('ingresos')/N('ventas'))));
+      if(G>0&&N('leads')>0) R.push('Coste por lead: '+currency+(G/N('leads')).toLocaleString('es',{minimumFractionDigits:2,maximumFractionDigits:2}));
+      if(G>0&&N('ventas')>0) R.push('Coste por venta: '+money(Math.round(G/N('ventas'))));
+      if(G>0&&N('ingresos')!==null) R.push('Ingresos / inversion en ads: '+fmtNum(Math.round(N('ingresos')/G*10)/10));
+      s += '\n  RATIOS (calculados con sus numeros)\n'+(R.length?R.map(x=>'  '+x).join('\n'):'  (faltan numeros para calcular ninguno)')+'\n\n';
+      s += 'LO QUE ESPERABA Y LO QUE VENDE (sus palabras)\n'+linea+'\n'+(A.e_objetivo&&A.e_objetivo.trim()?A.e_objetivo:'(no ha escrito nada)')+'\n\n';
+      return s;
+    }
+    function docsSummary(){
+      const docs = visible().filter(q=>q.doc), out = {recibido:[], aparte:[], no:[], n:0};
+      docs.forEach(q=>{ const s=A[q.id]; if(!s||!s.st) return;
+        if(s.st==='sube'){ const k=s.files.filter(f=>f.state==='ok').length; out.n+=k; out.recibido.push(q.slot+(k?' ('+k+')':'')+(s.link?' + enlace':'')); }
+        else if(s.st==='aparte') out.aparte.push(q.slot);
+        else if(!q.doc.optional) out.no.push(q.slot); });
+      return out;
+    }
+    function docsEmail(){
+      const linea = '====================================================';
+      let s = 'MATERIAL (lo que ha subido, lo que manda aparte y lo que no tiene)\n'+linea+'\n';
+      visible().filter(q=>q.doc).forEach(q=>{
+        const d = A[q.id]||{};
+        if(q.doc.optional&&d.st!=='sube') return;
+        s += '- '+q.slot.toUpperCase()+': '+(d.st?DST[d.st]:'(sin responder)')+(q.doc.tools.length>1&&d.tool?'  [herramienta: '+(q.doc.tools.find(t=>t[0]===d.tool)||['',''])[1]+']':'')+'\n';
+        (d.files||[]).filter(f=>f.state==='ok').forEach(f=>{ s += '    '+f.n+'  '+f.url+'\n'+(f.limpio&&f.limpio.length?'      (columnas quitadas antes de subir: '+f.limpio.join(', ')+')\n':''); });
+        if(d.link) s += '    Enlace: '+d.link+'\n';
+        if(d.st==='sube'&&q.doc.pii&&d.ok) s += '    (confirma que ha quitado los datos de compradores de lo que no era CSV)\n';
+      });
+      const sm = docsSummary();
+      s += '\n  PENDIENTE: '+(sm.aparte.length||sm.no.length ? [sm.aparte.length?'lo manda aparte o da acceso: '+sm.aparte.join(', '):'', sm.no.length?'no lo tiene: '+sm.no.join(', '):''].filter(Boolean).join(' | ') : 'nada')+'\n';
+      s += '  El reloj de la auditoria arranca con el material completo.\n\n';
+      return s;
+    }
+    function fechasRow(){
+      if(!A.l_fechas) return '';
+      const f = A.l_fechas, v = k=>f[k]===undefined?null:(f[k]==='nose'?'no lo sabe':fmtDate(f[k]));
+      return '  '+'Fechas:'.padEnd(22)+[['conv','convocatoria'],['apertura','apertura'],['cierre','cierre']].filter(([k])=>v(k)!==null).map(([k,l])=>l+' '+v(k)).join(' · ')+'\n';
+    }
+
+    /* ── Envío al script de auditorías y pantalla final ── */
+    async function auditSend(p){
+      const btn = document.querySelector('#capture .btn-wa'), e = document.getElementById('e-send');
+      btn.disabled = true; e.style.display = 'none';
+      const sm = docsSummary();
+      try{
+        const res = await fetch(AUDIT_URL, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'},
+          body:JSON.stringify({action:'enviar', r:AREF, k:AKEY, name:p.name, email:p.email, wa:p.wa, detalle:p.detalle,
+            emailSubject:p.emailSubject, emailBody:p.emailBody, nArchivos:sm.n, recibido:sm.recibido.join(', '), acceso:sm.aparte.join(', '), noTiene:sm.no.join(', ')})});
+        const j = await res.json();
+        if(!j.ok) throw new Error(j.error);
+        clearDraft();
+        document.getElementById('rbox').innerHTML = '<div class="rcard gold rcta" style="margin-top:40px;"><h3>Gracias, ya te contactaré.</h3></div>';
+        show('report');
+      }catch(err){
+        e.style.display = 'block'; btn.disabled = false;
+      }
+    }
+
+    function auditBlocked(){
+      document.getElementById('qbox').innerHTML = '<div class="qtext">Este enlace no está completo o no es válido.</div><div class="qsub">Pídele a Daniel el tuyo: cada cuestionario va unido a tu carpeta.</div>';
+      document.getElementById('pbar').style.width='0'; document.getElementById('pcount').textContent='';
+      show('quiz');
+    }
+    async function auditStart(){
+      if(!AREF||!AKEY||!AUDIT_URL) return auditBlocked();
+      try{
+        const j = await (await fetch(AUDIT_URL+'?check=1&r='+encodeURIComponent(AREF)+'&k='+encodeURIComponent(AKEY))).json();
+        if(j&&j.ok===false) return auditBlocked();
+      }catch(e){ /* sin conexión con el script: se deja rellenar; las subidas dirán si falla */ }
+      const d = loadDraft();
+      if(d){
+        document.getElementById('qbox').innerHTML = '<div class="qtext">Tienes el cuestionario a medias.</div><div class="qsub">Lo que ya habías contestado y subido sigue aquí.</div>'+
+          '<div class="opts"><button class="opt" onclick="resumeDraft(loadDraft())">Seguir donde lo dejé</button><button class="opt" onclick="clearDraft();startQuiz()">Empezar de cero</button></div>';
+        document.getElementById('pbar').style.width='0'; document.getElementById('pcount').textContent='';
+        show('quiz');
+        return;
+      }
+      startQuiz();
+    }
+
     /* Modo auditoría: quien llega ya es cliente. Nada de landing "gratis", textos de captura acordes y fuera de buscadores. */
     if(AUDIT){
       const m = document.createElement('meta'); m.name='robots'; m.content='noindex, nofollow'; document.head.appendChild(m);
@@ -2069,14 +2488,18 @@
       const eb = document.createElement('p'); eb.className='eyebrow'; eb.textContent='Cuestionario de arranque de tu auditoría';
       qw.insertBefore(eb, qw.firstChild);
       const cw = document.querySelector('#capture .capture-wrap');
-      cw.querySelector('.section-lead').textContent = 'Dime a quién se lo entrego. Al enviar, ves tu resultado aquí en pantalla y a mí me llegan todas tus respuestas, las del lanzamiento incluidas.';
+      cw.querySelector('h2').textContent = 'Ya está. Solo falta enviármelo.';
+      cw.querySelector('.section-lead').textContent = 'Al enviar, me llegan todas tus respuestas y el material que has subido.';
+      const sb = cw.querySelector('.btn-wa'); sb.firstChild.textContent = 'Enviar ';
+      const se = document.createElement('div'); se.className='err'; se.id='e-send'; se.textContent='No se ha podido enviar. Tus respuestas siguen guardadas: vuelve a pulsar Enviar en un momento.';
+      sb.insertAdjacentElement('afterend', se);
       const box = document.getElementById('f-online').closest('div[style]');
       const bp = box.querySelectorAll(':scope > p');
       bp[0].textContent = 'Para llegar a la conversación de arranque con tu caso leído';
       bp[1].textContent = 'Cuanto más concreto seas aquí, menos tiempo perdemos en esa conversación preguntando lo que ya podía saber.';
       document.getElementById('f-wa').closest('.field').querySelector('label span').textContent = '· por aquí coordinamos';
       cw.querySelector('.privacy').textContent = 'Tus datos se usan solo para preparar tu auditoría. No entran en ninguna secuencia ni se ceden a terceros.';
-      startQuiz();
+      auditStart();
     }
   </script>
 
