@@ -703,6 +703,11 @@
     }
     .err { color: var(--warn); font-size: 0.82rem; margin-top: 6px; display: none; }
     .privacy { font-size: 0.78rem; color: var(--muted); margin-top: 20px; line-height: 1.6; }
+    /* Modo auditoría: campos numéricos del bloque de lanzamiento */
+    .numgrid { margin-top: 30px; }
+    .field label.nsck { display: inline-flex; align-items: center; gap: 8px; margin: 8px 0 0; cursor: pointer; letter-spacing: 0.1em; }
+    .field label.nsck input { width: auto; padding: 0; }
+    .field input:disabled { opacity: 0.35; }
 
     /* Informe */
     .report-wrap { padding: 56px 0 90px; }
@@ -1079,6 +1084,12 @@
     const SUBMIT_URL = "https://script.google.com/macros/s/AKfycbydQsYJmELssd2TC4YWMafMf9zI6NxwJGRLJVCzWYWCSCHL666GvfEdXiaPTLUtgl9s/exec"; // Apps Script: guarda lead + aviso por email
     const WA_NUMBER = "34628347382";
 
+    /* MODO AUDITORÍA (escalón 3): /diagnostico/?modo=auditoria
+       Arranque de la auditoría de pago. Añade el bloque "Tu último lanzamiento", 4 reglas propias
+       y le manda a Daniel la foto entera. Sin el parámetro, la herramienta es la pública de siempre. */
+    const AUDIT = new URLSearchParams(location.search).get('modo')==='auditoria';
+    const LZ = a=>AUDIT&&(a.venta==='lanz'||a.venta==='ambos');
+
     /* Analytics del quiz: pings por GET a la misma URL. Si el Apps Script no tiene doGet,
        no hacen nada (ni filas ni emails). Un evento por hito y sesión, sin duplicados. */
     const SID = Math.random().toString(36).slice(2,10);
@@ -1087,7 +1098,7 @@
       try{
         const k = ev+':'+(step||'');
         if(_evSent[k]) return; _evSent[k]=1;
-        const u = SUBMIT_URL+'?ev='+ev+'&sid='+SID+'&tool=calc'+(step?'&step='+encodeURIComponent(step):'')+(pos?'&pos='+pos:'');
+        const u = SUBMIT_URL+'?ev='+ev+'&sid='+SID+'&tool='+(AUDIT?'auditoria':'calc')+(step?'&step='+encodeURIComponent(step):'')+(pos?'&pos='+pos:'');
         fetch(u,{mode:'no-cors',keepalive:true}).catch(()=>{});
       }catch(e){}
     }
@@ -1204,6 +1215,66 @@
       {v:'peor', t:'Peor'},
       {v:'nocomparo', t:'No comparo los números'}]},
 
+    /* ── Bloque "Tu último lanzamiento": solo en modo auditoría y si vende por lanzamientos o ambos ── */
+    {id:'l_mecanica', block:'Tu último lanzamiento', text:'¿Con qué mecánica lo hiciste?', sub:'Si mezclaste varias, elige la que llevó el peso de la venta.', show:LZ, opts:[
+      {v:'webinar', t:'Webinar o masterclass'},
+      {v:'reto', t:'Reto o evento de varios días'},
+      {v:'vsl', t:'VSL y carrito, sin directo'},
+      {v:'directos', t:'Directos en redes'},
+      {v:'emails', t:'Solo emails'},
+      {v:'otra', t:'Otra'}]},
+
+    {id:'l_numeros', block:'Tu último lanzamiento', text:'Los números de ese lanzamiento, de punta a punta', sub:'Aproximados valen. Si alguno no lo sabes, márcalo: saber qué falta también es un dato.', show:LZ, nums:[
+      {k:'registros', t:'Personas registradas', show:a=>a.l_mecanica!=='emails'},
+      {k:'asistencia', t:'% de registrados que vio el directo en vivo', unit:'%', show:a=>['webinar','reto','directos','otra'].includes(a.l_mecanica)},
+      {k:'visitas', t:'Visitas a la página de ventas'},
+      {k:'ventas', t:'Ventas'},
+      {k:'ingresos', t:'Ingresos del lanzamiento', money:true}]},
+
+    {id:'l_carrito', block:'Tu último lanzamiento', text:'¿Cuántos días estuvo abierto el carrito?', show:LZ, opts:[
+      {v:'c1', t:'De 1 a 3 días'},
+      {v:'c2', t:'De 4 a 7 días'},
+      {v:'c3', t:'De 8 a 14 días'},
+      {v:'c4', t:'Más de 14 días'},
+      {v:'siempre', t:'No cerró: la oferta sigue disponible'},
+      {v:'nose', t:'No lo sé'}]},
+
+    {id:'l_cierre', block:'Tu último lanzamiento', text:'¿Qué cerró la puerta?', sub:'Marca todo lo que pasó.', show:a=>LZ(a)&&a.l_carrito!=='siempre', multi:true, opts:[
+      {v:'fecha', t:'Una fecha de cierre anunciada, y se cumplió'},
+      {v:'precio', t:'Una subida de precio'},
+      {v:'bonus', t:'Un bonus que se retiró'},
+      {v:'ampliado', t:'Anuncié una fecha, pero lo amplié o lo reabrí'},
+      {v:'nada', t:'Nada: se cerró sin anunciarlo', excl:true}]},
+
+    {id:'l_trafico', block:'Tu último lanzamiento', text:'¿De dónde salió la gente de ese lanzamiento?', sub:'Marca todas las fuentes que pesaron.', show:LZ, multi:true, opts:[
+      {v:'lista', t:'Mi lista de email'},
+      {v:'ads', t:'Anuncios de pago'},
+      {v:'organico', t:'Contenido orgánico (redes, YouTube, podcast)'},
+      {v:'colabs', t:'Colaboraciones o afiliados'}]},
+
+    {id:'l_gasto', block:'Tu último lanzamiento', text:'¿Cuánto invertiste en anuncios en ese lanzamiento?', show:a=>LZ(a)&&Array.isArray(a.l_trafico)&&a.l_trafico.includes('ads'), nums:[
+      {k:'gasto', t:'Inversión en anuncios', money:true}]},
+
+    {id:'l_fases', block:'Tu último lanzamiento', text:'¿En qué tramos del lanzamiento mandaste alguna pieza?', sub:'Email, WhatsApp, directo o vídeo: cualquier cosa cuenta. Si un tramo se quedó vacío, dilo sin miedo: es de lo primero que miro.', show:LZ, multi:true, opts:[
+      {v:'convocatoria', t:'La convocatoria: invitaste a tu audiencia a registrarse'},
+      {v:'cortejo', t:'El cortejo: calentaste a los registrados antes del evento'},
+      {v:'cita', t:'La cita: empujaste para que aparecieran en el directo'},
+      {v:'accion', t:'La acción: abriste el carrito y presentaste la oferta y los bonus'},
+      {v:'valle', t:'El valle de las sombras: respondiste objeciones con el carrito abierto'},
+      {v:'remate', t:'El remate: apretaste en los últimos días y el día del cierre'},
+      {v:'resaca', t:'La resaca: escribiste después del cierre, a compradores y a los que no'},
+      {v:'nose', t:'No lo sé', excl:true}]},
+
+    {id:'l_material', block:'Tu último lanzamiento', text:'¿Qué me puedes pasar de ese lanzamiento?', sub:'Marca lo que tengas. Con esto sé qué pedirte y qué no.', show:LZ, multi:true, opts:[
+      {v:'acceso', t:'Acceso de lectura a mi herramienta de email'},
+      {v:'export', t:'Una exportación de los emails con sus métricas'},
+      {v:'paginas', t:'Las páginas (registro, ventas, gracias), en vivo o en capturas'},
+      {v:'grabacion', t:'La grabación del directo'},
+      {v:'ads', t:'Los anuncios y sus resultados'},
+      {v:'ninguno', t:'Ahora mismo, nada de esto', excl:true}]},
+
+    {id:'l_objetivo', block:'Tu último lanzamiento', text:'¿Qué objetivo te pusiste y qué salió? ¿En qué momento sentiste que se torcía, o que iba bien?', sub:'Dos o tres frases. Aquí vale más lo que sentiste que la cifra exacta.', show:LZ, free:true},
+
     {id:'evergreen', block:'Conversión', text:'¿Tienes una secuencia o funnel evergreen que venda sin que tú estés?', show:a=>a.venta!=='manual', opts:[
       {v:'si_vende', t:'Sí, y sé que vende'},
       {v:'si_nose', t:'Sí, pero no sé si realmente vende'},
@@ -1311,7 +1382,22 @@
       }
       if(q.free){
         h += '<textarea id="freetxt" placeholder="Escribe aquí... (o sáltala, es opcional)">'+(A[q.id]||'')+'</textarea>';
-        h += '<div class="qnav"><button class="qback" onclick="back()">Atrás</button><div style="display:flex;gap:18px;align-items:center;"><button class="qback" onclick="saveFree()">Saltar</button><button class="btn-wa" onclick="saveFree()">Ver mi diagnóstico</button></div></div>';
+        h += '<div class="qnav"><button class="qback" onclick="back()">Atrás</button><div style="display:flex;gap:18px;align-items:center;"><button class="qback" onclick="saveFree()">Saltar</button><button class="btn-wa" onclick="saveFree()">'+(vis[vis.length-1]===q?'Ver mi diagnóstico':'Siguiente')+'</button></div></div>';
+      } else if(q.multi){
+        const sel = A[q.id]||[];
+        h += '<div class="opts">'+q.opts.map(o=>
+          '<button class="opt'+(sel.includes(o.v)?' sel':'')+'" onclick="toggleMulti(\''+q.id+'\',\''+o.v+'\')">'+o.t+'</button>'
+        ).join('')+'</div><div class="err" id="qerr">Marca al menos una opción.</div>';
+        h += '<div class="qnav"><button class="qback" onclick="back()">Atrás</button><button class="btn-wa" onclick="saveMulti()">Siguiente</button></div>';
+      } else if(q.nums){
+        const cv = A[q.id]||{};
+        h += '<div class="numgrid">'+numFields(q).map(f=>{
+          const v = cv[f.k], ns = v==='nose';
+          return '<div class="field"><label for="n-'+f.k+'">'+f.t+(f.money?' ('+currency+')':'')+'</label>'+
+            '<input type="text" inputmode="decimal" id="n-'+f.k+'" value="'+(typeof v==='number'?v:'')+'"'+(ns?' disabled':'')+' placeholder="'+(f.unit==='%'?'Por ejemplo: 25':'Por ejemplo: 1200')+'">'+
+            '<label class="nsck"><input type="checkbox" id="ns-'+f.k+'"'+(ns?' checked':'')+' onchange="toggleNose(\''+f.k+'\')"> No lo sé</label></div>';
+        }).join('')+'</div><div class="err" id="qerr">Pon un número en cada casilla o marca «No lo sé».</div>';
+        h += '<div class="qnav"><button class="qback" onclick="back()">Atrás</button><button class="btn-wa" onclick="saveNums()">Siguiente</button></div>';
       } else {
         h += '<div class="opts">'+q.opts.map(o=>
           '<button class="opt'+(A[q.id]===o.v?' sel':'')+'" onclick="pick(\''+q.id+'\',\''+o.v+'\')">'+o.t+'</button>'
@@ -1332,7 +1418,59 @@
     }
 
     function saveFree(){
-      A.intentado = document.getElementById('freetxt').value.trim();
+      A[Q[path[cur]].id] = document.getElementById('freetxt').value.trim();
+      next();
+    }
+
+    /* Modo auditoría: selección múltiple y campos numéricos */
+    function toggleMulti(id,v){
+      const q = Q.find(x=>x.id===id);
+      const o = q.opts.find(x=>x.v===v);
+      let sel = (A[id]||[]).slice();
+      if(sel.includes(v)) sel = sel.filter(x=>x!==v);
+      else if(o.excl) sel = [v];
+      else sel = sel.filter(x=>!q.opts.find(y=>y.v===x).excl).concat(v);
+      A[id] = sel;
+      render();
+    }
+    function saveMulti(){
+      const q = Q[path[cur]];
+      const sel = A[q.id]||[];
+      if(!sel.length){ document.getElementById('qerr').style.display='block'; return; }
+      AL[q.id] = q.opts.filter(o=>sel.includes(o.v)).map(o=>o.t).join(' · ');
+      next();
+    }
+    function numFields(q){ return q.nums.filter(f=>!f.show||f.show(A)); }
+    function toggleNose(k){
+      const el = document.getElementById('n-'+k);
+      el.disabled = document.getElementById('ns-'+k).checked;
+      if(el.disabled) el.value = '';
+    }
+    // Acepta 1200, 1.200, 1,200, 1.200,50, 25%, 3.000 €...
+    function parseNum(s){
+      s = (s||'').replace(/[^0-9.,]/g,'');
+      if(!s) return null;
+      if(s.includes('.')&&s.includes(',')) s = s.lastIndexOf(',')>s.lastIndexOf('.') ? s.replace(/\./g,'').replace(',','.') : s.replace(/,/g,'');
+      else if(/^\d{1,3}([.,]\d{3})+$/.test(s)) s = s.replace(/[.,]/g,'');
+      else s = s.replace(',','.');
+      const n = parseFloat(s);
+      return isFinite(n) ? n : null;
+    }
+    function fmtNum(n){ return n.toLocaleString('es',{maximumFractionDigits:1}); }
+    function saveNums(){
+      const q = Q[path[cur]];
+      const out = {}, txt = [];
+      for(const f of numFields(q)){
+        let v;
+        if(document.getElementById('ns-'+f.k).checked) v = 'nose';
+        else {
+          v = parseNum(document.getElementById('n-'+f.k).value);
+          if(v===null||(f.unit==='%'&&v>100)){ document.getElementById('qerr').style.display='block'; return; }
+        }
+        out[f.k] = v;
+        txt.push(f.t+': '+(v==='nose'?'no lo sé':(f.money?currency+fmtNum(Math.round(v)):fmtNum(v))+(f.unit||'')));
+      }
+      A[q.id] = out; AL[q.id] = txt.join(' · ');
       next();
     }
 
@@ -1497,6 +1635,56 @@
      palanca:'Revisar los últimos 50 clientes: cuántos compraron algo más. Un porcentaje. Veinte minutos de trabajo que cambian tu matemática de captación.'}
     ];
 
+    /* =====================================================
+       REGLAS DE LANZAMIENTO (solo modo auditoría)
+       Van aparte de las 17: no compiten en el top-3 ni cuentan para "vuelas a ciegas".
+       Umbrales [PROP, Daniel ajusta]: asistencia en vivo < 20 % · venta sobre registros < 1 %.
+    ===================================================== */
+    const LN = k=>{ const v=(A.l_numeros||{})[k]; return typeof v==='number'?v:null; };
+    const LG = ()=>{ const v=(A.l_gasto||{}).gasto; return typeof v==='number'?v:null; };
+    const PCT = (a,b)=>fmtNum(Math.round(a/b*1000)/10)+'%';
+    const FASES = {convocatoria:'la convocatoria', cortejo:'el cortejo', cita:'la cita', accion:'la acción', valle:'el valle de las sombras', remate:'el remate', resaca:'la resaca'};
+    function fasesVacias(){
+      const f = A.l_fases;
+      if(!Array.isArray(f)||f.includes('nose')) return [];
+      return Object.keys(FASES).filter(k=>!(k==='cita'&&(A.l_mecanica==='vsl'||A.l_mecanica==='emails'))&&!f.includes(k));
+    }
+    function listaY(arr){ return arr.length<2 ? arr.join('') : arr.slice(0,-1).join(', ')+' y '+arr[arr.length-1]; }
+
+    const LAUNCH_RULES = [
+    {id:'sincierre', sev:9, cond:a=>a.l_carrito==='siempre'||(Array.isArray(a.l_cierre)&&(a.l_cierre.includes('nada')||a.l_cierre.includes('ampliado'))),
+     title:'Tu carrito no tuvo un cierre de verdad',
+     body:()=> A.l_carrito==='siempre'
+       ? `Me has dicho que la oferta sigue disponible. Un lanzamiento sin cierre es una venta continua con un pico al principio: el que dudaba no tiene ningún motivo para decidir hoy, y "ya lo haré" es la forma más educada de decir que no. El remate es donde se factura entre el 40 y el 60% de un lanzamiento, y sin puerta que se cierre no hay remate.`
+       : A.l_cierre.includes('ampliado')
+       ? `Me has dicho que anunciaste una fecha y luego ampliaste o reabriste. Se entiende: el último día siempre parece que queda gente por entrar. Pero una fecha que no se cumple le enseña a tu lista que tus fechas son orientativas, y la próxima vez que digas "cierra el viernes", una parte ya sabe que no. Esa parte espera. Y la espera es justo lo que el cierre existe para evitar.`
+       : `Me has dicho que el carrito se cerró sin anunciarlo. O sea que te saltaste el tramo que más factura: el aviso de que se acaba. Sin una fecha a la vista, el que dudaba no tenía ningún motivo para decidir, y cuando quiso, ya no había puerta.`,
+     palanca:'Una fecha de cierre anunciada desde la apertura y cumplida, aunque duela. Si quieres rescatar a los que se quedaron fuera, eso se planifica como una reapertura en la resaca, con su propia razón y su propio plazo, no como una prórroga de última hora.'},
+
+    {id:'citafalla', sev:8, cond:a=>['webinar','reto','directos','otra'].includes(a.l_mecanica)&&LN('registros')>0&&LN('asistencia')!==null&&LN('asistencia')<20,
+     title:'La cita falla: se registran, pero no aparecen',
+     body:()=>`Se registraron ${fmtNum(LN('registros'))} personas y al directo llegó en vivo el ${fmtNum(LN('asistencia'))}%. O sea que ${fmtNum(Math.round((100-LN('asistencia'))*10)/10)} de cada 100 que levantaron la mano no estaban cuando llegó la oferta. Registrarse cuesta un clic; presentarse cuesta una hora de su día. Entre la gente que se registra y la gente que aparece hay un abismo, y ese abismo no se cruza con un recordatorio: se cruza con una escalera.`,
+     palanca:'La fase de la cita: una escalera de asistencia, con toques de densidad creciente los días previos y el mismo día del directo, y un incentivo que solo exista en vivo. Y ojo: si lo puedes mandar por email al día siguiente, no es un incentivo, es contenido.'},
+
+    {id:'remateflojo', sev:8, cond:a=>LN('asistencia')!==null&&LN('asistencia')>=20&&LN('registros')>0&&LN('ventas')!==null&&LN('ventas')/LN('registros')<0.01,
+     title:'La gente vino, pero no compró: la fuga está en la oferta o en el carrito',
+     body:()=>`Al directo llegó el ${fmtNum(LN('asistencia'))}% de los registrados, así que la cita hizo su trabajo. Pero de ${fmtNum(LN('registros'))} registrados compraron ${fmtNum(LN('ventas'))}: un ${PCT(LN('ventas'),LN('registros'))}.${LN('visitas')>0?` Por la página de ventas pasaron ${fmtNum(LN('visitas'))} personas y compró el ${PCT(LN('ventas'),LN('visitas'))} de ellas.`:''} Cuando la gente aparece y no compra, hay dos sospechosos: la oferta, que no se entendió o no convenció, o el tramo del carrito, que no la sostuvo hasta el cierre. Y es en el remate, no en la apertura, donde se factura entre el 40 y el 60% de un lanzamiento.`,
+     palanca:'Separar a los dos sospechosos antes de tocar nada. Si mucha gente vio la página de ventas y no compró, el problema está en la oferta. Si apenas llegó a verla, el problema está en los emails del carrito. Los clics de cada email y las visitas de cada día lo dicen.'},
+
+    {id:'fasesvacias', sev:7, cond:a=>fasesVacias().length>0,
+     title:()=>{ const v=fasesVacias(); return v.length===1 ? 'Un tramo de tu lanzamiento se quedó sin ninguna pieza' : v.length+' tramos de tu lanzamiento se quedaron sin ninguna pieza'; },
+     body:()=>{ const v=fasesVacias(); return `En tu último lanzamiento no hubo ninguna pieza en ${listaY(v.map(k=>FASES[k]))}.${v.includes('valle')?' Y el valle de las sombras es donde casi siempre está el agujero: el carrito lleva días abierto, la novedad ya pasó y todavía falta para el cierre. Es donde la gente se cae, y donde casi nadie manda nada que merezca la pena leer.':''} Un tramo vacío no aparece en ninguna métrica, porque no hay email del que medir aperturas ni clics. Por eso casi nadie lo ve.`; },
+     palanca:'Antes de reescribir nada de lo que ya mandaste, llenar los tramos vacíos, empezando por el más cercano a la venta. Cada tramo tiene un trabajo distinto, y ninguna pieza de otro tramo lo hace por él.'}
+    ];
+
+    function launchUnknown(){
+      const q = Q.find(x=>x.id==='l_numeros'), n = A.l_numeros||{};
+      const ks = numFields(q).map(f=>f.k).filter(k=>n[k]!==undefined);
+      return {total:ks.length, nose:ks.filter(k=>n[k]==='nose').length};
+    }
+    function launchFindings(){ return A.l_mecanica ? LAUNCH_RULES.filter(r=>r.cond(A)).sort((a,b)=>b.sev-a.sev) : []; }
+    const TXT = x=>typeof x==='function'?x():x;
+
     function antiPriority(findings){
       const ids = findings.map(f=>f.id);
       if(ids.includes('ciegas')) return {t:'Qué no haría ahora: cambiar nada importante', b:'Ni la oferta, ni la web, ni el funnel. Sin datos, cualquier cambio es una apuesta y no podrás saber si funcionó. Primero 30 días midiendo, después decidimos qué tocar.'};
@@ -1581,7 +1769,8 @@
       const modeloOpen = document.getElementById('f-modelo').value.trim();
       const result = buildResult();
       if(SUBMIT_URL){
-        const ref = new URLSearchParams(location.search).get('r')||'';
+        const ref0 = new URLSearchParams(location.search).get('r')||'';
+        const ref = AUDIT ? 'AUDITORIA'+(ref0?' r='+ref0:'') : ref0;
         // Respuestas completas: ¿pregunta? -> respuesta, en el orden en que las contestó
         const detalle = path.map(i=>Q[i]).filter(q=>AL[q.id]).map(q=>q.text+' -> '+AL[q.id]).join('\n');
         const dims = result.dims;
@@ -1599,11 +1788,12 @@
         let potencial = '';
         if(mm){ let v={}; mm.sliders.forEach(s=>v[s.id]=s.val); potencial = mm.title+': '+mm.fmt(mm.calc(v))+(mm.isLeads?'':'/mes')+'\n('+mm.sub()+')'; }
 
-        const origen = ref ? 'via enlace enviado (r='+ref+')' : 'acceso directo';
-        const sub = 'Lead diagnostico: '+(name||'sin nombre')+' | Nivel '+result.level.n+'/5 | '+fugaTitulo;
+        const origen = ref0 ? 'via enlace enviado (r='+ref0+')' : 'acceso directo';
+        const sub = (AUDIT?'AUDITORIA · arranque: ':'Lead diagnostico: ')+(name||'sin nombre')+' | Nivel '+result.level.n+'/5 | '+fugaTitulo;
+        const lanzTxt = AUDIT ? launchEmail() : '';
         const linea = '====================================================';
         const body =
-          'NUEVO DIAGNOSTICO COMPLETADO  ('+origen+')\n'+linea+'\n\n'+
+          (AUDIT?'CUESTIONARIO DE ARRANQUE DE AUDITORIA':'NUEVO DIAGNOSTICO COMPLETADO')+'  ('+origen+')\n'+linea+'\n\n'+
           'CONTACTO\n'+
           '  Nombre:    '+(name||'')+'\n'+
           '  Email:     '+(email||'')+'\n'+
@@ -1614,12 +1804,13 @@
           '  Nivel '+result.level.n+'/5  ('+result.level.t+')\n'+
           '  Score '+result.total+'/100\n'+
           '  Dimensiones: '+dimStr+'\n\n'+
+          lanzTxt+
           'DIAGNOSTICO DE LA HERRAMIENTA\n'+linea+'\n'+diag+'\n\n'+
           'QUE NO HARIA AHORA\n'+anti.t+'\n'+anti.b+'\n\n'+
           (potencial?('POTENCIAL (estimacion con asunciones por defecto)\n'+potencial+'\n\n'):'')+
           'RESPUESTAS COMPLETAS\n'+linea+'\n'+detalle+'\n\n'+
           'QUE HA INTENTADO YA\n'+linea+'\n'+(A.intentado&&A.intentado.trim()?A.intentado:'(no ha escrito nada)')+'\n\n'+
-          linea+'\nMaterial listo para investigar su presencia online y, si merece la pena, montar un strategy doc.\n';
+          linea+'\n'+(AUDIT?'Arranque de auditoria: llegar a la conversacion de arranque con esto leido y pedir el material que falte.':'Material listo para investigar su presencia online y, si merece la pena, montar un strategy doc.')+'\n';
 
         const payload = {name, email, wa, online, modeloOpen, ts:new Date().toISOString(),
           nivel:result.level.n, nivelTitulo:result.level.t, score:result.total,
@@ -1631,6 +1822,42 @@
         fetch(SUBMIT_URL, {method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain'}, body:JSON.stringify(payload)}).catch(()=>{});
       }
       showReport(result, name);
+    }
+
+    function launchEmail(){
+      const linea = '====================================================';
+      const head = 'TU ULTIMO LANZAMIENTO (bloque de auditoria)\n'+linea+'\n';
+      if(!A.l_mecanica) return head+'No vende por lanzamientos (ha elegido: '+(AL.venta||'?')+'), asi que no ha visto este bloque.\n\n';
+      const row = (k,v)=>'  '+(k+':').padEnd(22)+(v||'(sin responder)')+'\n';
+      const n = A.l_numeros||{}, money = v=>currency+fmtNum(Math.round(v));
+      const show = (k,f)=>{ const v=n[k]; return v===undefined?null:(v==='nose'?'no lo sabe':f(v)); };
+      let s = head;
+      s += row('Mecanica', AL.l_mecanica);
+      [['registros','Registros',fmtNum],['asistencia','Asistencia en vivo',v=>fmtNum(v)+'%'],['visitas','Visitas a ventas',fmtNum],['ventas','Ventas',fmtNum],['ingresos','Ingresos',money]]
+        .forEach(([k,l,f])=>{ const v=show(k,f); if(v!==null) s += row(l, v); });
+      if(A.l_gasto) s += row('Inversion en ads', A.l_gasto.gasto==='nose'?'no lo sabe':money(A.l_gasto.gasto));
+      s += row('Carrito abierto', AL.l_carrito);
+      if(AL.l_cierre) s += row('Que cerro la puerta', AL.l_cierre);
+      s += row('Trafico', AL.l_trafico);
+      const vac = fasesVacias();
+      s += row('Tramos con pieza', AL.l_fases);
+      s += row('Tramos VACIOS', A.l_fases&&A.l_fases.includes('nose')?'no lo sabe':(vac.length?listaY(vac.map(k=>FASES[k])):'ninguno'));
+      s += row('Material disponible', AL.l_material);
+      const u = launchUnknown();
+      s += row('Numeros que no sabe', u.nose+' de '+u.total);
+      // Ratios que salen de sus propios números (solo si los dos términos existen)
+      const R = [];
+      if(LN('registros')>0&&LN('ventas')!==null) R.push('Registro -> venta: '+PCT(LN('ventas'),LN('registros')));
+      if(LN('visitas')>0&&LN('ventas')!==null) R.push('Visita a ventas -> venta: '+PCT(LN('ventas'),LN('visitas')));
+      if(LN('ventas')>0&&LN('ingresos')!==null) R.push('Ingreso medio por venta: '+money(Math.round(LN('ingresos')/LN('ventas'))));
+      if(LG()>0&&LN('registros')>0) R.push('Coste por registro: '+currency+(LG()/LN('registros')).toLocaleString('es',{minimumFractionDigits:2,maximumFractionDigits:2}));
+      if(LG()>0&&LN('ingresos')!==null) R.push('Ingresos / inversion en ads: '+fmtNum(Math.round(LN('ingresos')/LG()*10)/10));
+      s += '\n  RATIOS (calculados con sus numeros)\n'+(R.length?R.map(x=>'  '+x).join('\n'):'  (faltan numeros para calcular ninguno)')+'\n\n';
+      s += 'OBJETIVO Y CUANDO SE TORCIO (sus palabras)\n'+linea+'\n'+(A.l_objetivo&&A.l_objetivo.trim()?A.l_objetivo:'(no ha escrito nada)')+'\n\n';
+      const lf = launchFindings();
+      s += 'HALLAZGOS DEL LANZAMIENTO (el cliente ve titulo y diagnostico; la palanca, no)\n'+linea+'\n'+
+        (lf.length ? lf.map(f=>'REGLA: '+TXT(f.title)+'\n'+f.body()+'\nPALANCA: '+f.palanca).join('\n\n') : '(no salta ninguna regla de lanzamiento)')+'\n\n';
+      return s;
     }
 
     function waLink(r, name){
@@ -1751,11 +1978,15 @@
         <p style="margin-bottom:0;">El <b style="color:var(--ink);">porqué</b> de cada uno, <b style="color:var(--ink);">en qué orden</b> taparlos y <b style="color:var(--ink);">con qué</b>, lo reviso a mano sobre tus respuestas y lo que vea en tu web y tus redes. Eso no sale de un test, sale de mirar tu caso.</p>
       </div>
 
-      <div class="rcard gold rcta">
+      ${AUDIT ? launchCard()+`<div class="rcard gold rcta">
+        <h3>Esto es el punto de partida, no la auditoría.</h3>
+        <p>Lo que ves aquí sale de tus respuestas, y tus respuestas son lo que tú crees que pasó. La auditoría es otra cosa: leer lo que pasó de verdad, en tus emails, tus páginas y tus números. Todo lo que has contestado me llega a mí, y con eso llego a nuestra conversación de arranque con tu caso leído y las preguntas hechas.</p>
+        <p class="cta-note">Si quieres adelantarte con el material, <a href="https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hola Daniel, soy '+(name||'')+'. Ya he rellenado el cuestionario de arranque de la auditoría.')}" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:underline;">escríbeme por WhatsApp</a>.</p>
+      </div>` : `<div class="rcard gold rcta">
         <h3>Tu lectura completa te la entrego yo.</h3>
         <p>No es un PDF que se genera solo y sirve para cualquiera. Es tu caso, leído por mí: cada fuga explicada y en qué orden taparla. No tienes que hacer nada más: reviso tus respuestas y te escribo yo, en breve, al contacto que me has dejado.</p>
         <p class="cta-note">Tu resultado en pantalla ya es tuyo. La lectura personal te la mando yo. Si prefieres adelantarte, <a href="${waLink(r,name)}" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:underline;">escríbeme por WhatsApp</a>.</p>
-      </div>
+      </div>`}
 
       <div style="text-align:center;padding:8px 0 0;display:flex;gap:24px;justify-content:center;flex-wrap:wrap;">
         <button class="qback" onclick="copyResult()">Copiar mi resultado</button>
@@ -1770,6 +2001,17 @@
       recalcCmp();
       window._lastResult = r;
       window._lastName = name;
+    }
+
+    function launchCard(){
+      if(!A.l_mecanica) return '';
+      const lf = launchFindings(), u = launchUnknown();
+      let h = '<div class="rcard"><div class="ftag">Tu último lanzamiento</div>';
+      if(u.nose>=2) h += `<p>De los ${u.total} números del lanzamiento que te he pedido, ${u.nose} no los sabes. No pasa nada: son lo primero que vamos a buscar, y hasta tenerlos, lo que sale de aquí es una hipótesis, no un diagnóstico.</p>`;
+      h += lf.length
+        ? lf.map(f=>`<h3 style="margin-top:24px;">${TXT(f.title)}</h3><p>${f.body()}</p>`).join('')
+        : '<p>Con lo que me has contado, no salta ninguna alarma evidente en el lanzamiento. Eso no quiere decir que no haya fuga: quiere decir que está en un sitio que un cuestionario no ve. Para eso están los números de verdad.</p>';
+      return h+'</div>';
     }
 
     function recalc(){
@@ -1817,6 +2059,24 @@
         Object.keys(r.dims).map(k=>`- ${DIMNAMES[k]}: ${r.dims[k]}/100`).join('\n')+
         `\nFuga principal: ${typeof r.findings[0].title==='function'?r.findings[0].title():r.findings[0].title}`;
       navigator.clipboard.writeText(txt).then(()=>alert('Resultado copiado.'));
+    }
+
+    /* Modo auditoría: quien llega ya es cliente. Nada de landing "gratis", textos de captura acordes y fuera de buscadores. */
+    if(AUDIT){
+      const m = document.createElement('meta'); m.name='robots'; m.content='noindex, nofollow'; document.head.appendChild(m);
+      document.querySelector('.nav-cta').style.display='none';
+      const qw = document.querySelector('.quiz-wrap');
+      const eb = document.createElement('p'); eb.className='eyebrow'; eb.textContent='Cuestionario de arranque de tu auditoría';
+      qw.insertBefore(eb, qw.firstChild);
+      const cw = document.querySelector('#capture .capture-wrap');
+      cw.querySelector('.section-lead').textContent = 'Dime a quién se lo entrego. Al enviar, ves tu resultado aquí en pantalla y a mí me llegan todas tus respuestas, las del lanzamiento incluidas.';
+      const box = document.getElementById('f-online').closest('div[style]');
+      const bp = box.querySelectorAll(':scope > p');
+      bp[0].textContent = 'Para llegar a la conversación de arranque con tu caso leído';
+      bp[1].textContent = 'Cuanto más concreto seas aquí, menos tiempo perdemos en esa conversación preguntando lo que ya podía saber.';
+      document.getElementById('f-wa').closest('.field').querySelector('label span').textContent = '· por aquí coordinamos';
+      cw.querySelector('.privacy').textContent = 'Tus datos se usan solo para preparar tu auditoría. No entran en ninguna secuencia ni se ceden a terceros.';
+      startQuiz();
     }
   </script>
 
