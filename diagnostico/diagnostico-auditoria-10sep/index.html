@@ -1,0 +1,2507 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Diagnóstico de Fuga de Ingresos gratuito para infoproductores: responde unas preguntas sobre tu lista, oferta y sistema de venta y descubre dónde se te está escapando el dinero." />
+  <title>Diagnóstico de Fuga de Ingresos para Infoproductores · Daniel García de Celis</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="/favicon.png">
+
+  <meta property="og:title" content="Diagnóstico de Fuga de Ingresos" />
+  <meta property="og:description" content="Para infoproductores que ya tienen producto, pero ven cómo el funnel no convierte lo que debería. Diagnóstico interactivo, resultado al instante." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://danielgarciadecelis.com/diagnostico/" />
+  <meta property="og:image" content="https://danielgarciadecelis.com/og.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Diagnóstico de Fuga de Ingresos para Infoproductores" />
+  <meta name="twitter:description" content="Responde unas preguntas y descubre dónde se te está escapando el dinero. Resultado al instante." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:     #060606;
+      --black-2:   #0c0b0a;
+      --ink:       #f3ede4;
+      --ink-dim:   #b6ada1;
+      --muted:     #6e655b;
+      --line:      rgba(201, 168, 76, 0.16);
+      --line-soft: rgba(243, 237, 228, 0.08);
+      --gold:      #c9a84c;
+      --gold-hi:   #e6c97a;
+      --gold-lo:   #8a7129;
+      --warn:      #d98a6e;
+    }
+
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+    body {
+      background: var(--black);
+      color: var(--ink);
+      font-family: 'DM Sans', system-ui, sans-serif;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 1.65;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Grain */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity: 0.045;
+      pointer-events: none;
+      z-index: 0;
+      mix-blend-mode: overlay;
+    }
+
+    .hero-glow {
+      position: absolute;
+      top: -120px;
+      left: 0;
+      width: 100%;
+      height: 720px;
+      /* Mismo brillo que antes (círculo de 720 px centrado; 509px = su radio hasta la esquina), pero sin desbordar en móvil */
+      background: radial-gradient(circle 509.12px at 50% 360px, rgba(201,168,76,0.10) 0%, rgba(201,168,76,0.03) 35%, transparent 65%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 28px;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* ──────────────── NAV ──────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(6, 6, 6, 0.78);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--line-soft);
+    }
+    .nav-inner {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 16px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo-mark {
+      width: 22px;
+      height: 22px;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 0.7rem;
+      color: var(--gold);
+      letter-spacing: 0;
+    }
+    .logo em { font-style: italic; color: var(--gold); font-weight: 400; margin-left: 2px; }
+
+    .nav-cta {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--ink-dim);
+      text-decoration: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.2s;
+    }
+    .nav-cta:hover { color: var(--gold); }
+    .nav-cta svg { width: 13px; height: 13px; transition: transform 0.2s; }
+    .nav-cta:hover svg { transform: translateX(3px); }
+
+    /* ──────────────── HERO ──────────────── */
+    .hero {
+      position: relative;
+      padding: 96px 0 80px;
+      text-align: center;
+    }
+
+    .chapter-mark {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 0.85rem;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+      margin-bottom: 28px;
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.05s forwards;
+    }
+    .chapter-mark::before,
+    .chapter-mark::after {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: var(--gold);
+      opacity: 0.5;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: clamp(2.35rem, 5.8vw, 3.75rem);
+      line-height: 1.06;
+      letter-spacing: -0.022em;
+      max-width: 18ch;
+      margin: 0 auto 28px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.2s forwards;
+    }
+    h1 em {
+      font-style: italic;
+      font-weight: 700;
+      background: linear-gradient(120deg, var(--gold-hi) 0%, var(--gold) 50%, var(--gold-lo) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      color: var(--gold);
+    }
+
+    .subhead {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      font-size: 1.08rem;
+      line-height: 1.65;
+      color: var(--ink-dim);
+      max-width: 540px;
+      margin: 0 auto 44px;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.35s forwards;
+    }
+
+    /* ──────────────── SECTION HEAD ──────────────── */
+    .section {
+      padding: 88px 0;
+      position: relative;
+    }
+    .section + .section { border-top: 1px solid var(--line-soft); }
+
+    .eyebrow {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .eyebrow::before {
+      content: '';
+      width: 22px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: clamp(1.65rem, 3.2vw, 2.15rem);
+      line-height: 1.18;
+      letter-spacing: -0.012em;
+      color: var(--ink);
+      margin-bottom: 14px;
+      max-width: 22ch;
+    }
+    h2 em { font-style: italic; color: var(--gold); font-weight: 400; }
+
+    .section-lead {
+      font-size: 1rem;
+      color: var(--ink-dim);
+      max-width: 540px;
+      margin-bottom: 48px;
+    }
+
+    /* ──────────────── BULLETS ──────────────── */
+    .bullets {
+      list-style: none;
+      display: grid;
+      gap: 0;
+    }
+    .bullets li {
+      display: grid;
+      grid-template-columns: 56px 1fr;
+      gap: 24px;
+      align-items: start;
+      padding: 28px 0;
+      border-top: 1px solid var(--line-soft);
+      transition: background 0.3s;
+    }
+    .bullets li:last-child { border-bottom: 1px solid var(--line-soft); }
+    .bullets li:hover { background: rgba(201, 168, 76, 0.02); }
+
+    .b-num {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.35rem;
+      color: var(--gold);
+      line-height: 1;
+      padding-top: 4px;
+    }
+    .b-body strong {
+      display: block;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 1.05rem;
+      color: var(--ink);
+      margin-bottom: 6px;
+      letter-spacing: -0.005em;
+    }
+    .b-body p {
+      font-size: 0.94rem;
+      color: var(--ink-dim);
+      line-height: 1.6;
+    }
+
+    /* ──────────────── STEPS ──────────────── */
+    .steps {
+      display: grid;
+      gap: 32px;
+      counter-reset: step;
+    }
+    .step {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      padding-left: 28px;
+      position: relative;
+    }
+    .step::before {
+      counter-increment: step;
+      content: "0" counter(step);
+      position: absolute;
+      left: 0;
+      top: 2px;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 0.95rem;
+      color: var(--gold);
+    }
+    .step h3 {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 1rem;
+      color: var(--ink);
+      letter-spacing: -0.005em;
+    }
+    .step p {
+      font-size: 0.92rem;
+      color: var(--ink-dim);
+      line-height: 1.55;
+    }
+
+    /* ──────────────── PULL QUOTE ──────────────── */
+    .quote {
+      padding: 64px 0;
+      text-align: center;
+      border-top: 1px solid var(--line-soft);
+      border-bottom: 1px solid var(--line-soft);
+    }
+    .quote-mark {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      color: var(--gold);
+      font-size: 3rem;
+      line-height: 1;
+      display: block;
+      margin-bottom: 8px;
+    }
+    .quote blockquote {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(1.25rem, 2.4vw, 1.55rem);
+      line-height: 1.4;
+      color: var(--ink);
+      max-width: 560px;
+      margin: 0 auto 20px;
+      letter-spacing: -0.005em;
+    }
+    .quote cite {
+      font-family: 'DM Sans', sans-serif;
+      font-style: normal;
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ──────────────── CLIENTS GRID ──────────────── */
+    .logos-label {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-align: center;
+      margin-bottom: 36px;
+      position: relative;
+    }
+    .logos-label::before,
+    .logos-label::after {
+      content: '';
+      width: 40px;
+      height: 1px;
+      background: var(--line);
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0 18px;
+    }
+    .clients-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border-top: 1px solid var(--line-soft);
+      border-left: 1px solid var(--line-soft);
+    }
+    .clients-grid .client {
+      padding: 22px 14px 18px;
+      text-align: center;
+      border-right: 1px solid var(--line-soft);
+      border-bottom: 1px solid var(--line-soft);
+      transition: background 0.35s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 150px;
+    }
+    .clients-grid .client:hover { background: rgba(201, 168, 76, 0.04); }
+
+    .clients-grid .avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      object-fit: cover;
+      filter: grayscale(100%) brightness(0.92) contrast(1.05);
+      opacity: 0.72;
+      transition: filter 0.35s, opacity 0.35s;
+      border: 1px solid rgba(201, 168, 76, 0.18);
+    }
+    .clients-grid .client:hover .avatar {
+      filter: grayscale(0%) brightness(1) contrast(1);
+      opacity: 1;
+    }
+
+    .clients-grid .logo {
+      height: 56px;
+      max-width: 130px;
+      width: auto;
+      object-fit: contain;
+      filter: grayscale(100%) brightness(1.5);
+      opacity: 0.72;
+      transition: filter 0.35s, opacity 0.35s;
+    }
+    .clients-grid .logo[data-whiten] {
+      filter: brightness(0) invert(1);
+      opacity: 0.78;
+    }
+    .clients-grid .logo[data-color] {
+      filter: none;
+      opacity: 0.85;
+    }
+    .clients-grid .client:hover .logo {
+      filter: grayscale(0%) brightness(1) contrast(1);
+      opacity: 1;
+    }
+    .clients-grid .client:hover .logo[data-whiten] {
+      filter: brightness(0) invert(1);
+      opacity: 1;
+    }
+    .clients-grid .client:hover .logo[data-color] {
+      filter: none;
+      opacity: 1;
+    }
+
+    .clients-grid .name {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      font-size: 0.74rem;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      line-height: 1.3;
+      transition: color 0.35s;
+      min-height: 2.6em;
+      display: flex;
+      align-items: center;
+      text-align: center;
+    }
+    .clients-grid .client:hover .name { color: var(--ink-dim); }
+
+    @media (max-width: 640px) {
+      .clients-grid { grid-template-columns: repeat(3, 1fr); }
+      .clients-grid .client { padding: 18px 8px 14px; min-height: 130px; gap: 8px; }
+      .clients-grid .avatar { width: 52px; height: 52px; }
+      .clients-grid .logo { height: 44px; max-width: 90px; }
+      .clients-grid .name { font-size: 0.66rem; }
+    }
+
+    /* ──────────────── CTA ──────────────── */
+    .cta-inline {
+      margin-top: 44px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      text-align: center;
+    }
+    .cta-inline.left { align-items: flex-start; text-align: left; }
+    .cta-inline .cta-note { margin-top: 0; }
+
+    .cta {
+      padding: 96px 0 88px;
+      text-align: center;
+      position: relative;
+    }
+    .cta::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 1px;
+      background: var(--gold);
+    }
+    .cta h2 {
+      margin: 0 auto 18px;
+      max-width: 18ch;
+    }
+    .cta-sub {
+      font-size: 1rem;
+      color: var(--ink-dim);
+      max-width: 480px;
+      margin: 0 auto 40px;
+    }
+
+    .btn-wa {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--gold);
+      color: var(--black);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 0.98rem;
+      letter-spacing: 0.01em;
+      padding: 18px 34px;
+      text-decoration: none;
+      border: 1px solid var(--gold);
+      border-radius: 2px;
+      cursor: pointer;
+      transition: background 0.25s, color 0.25s, transform 0.15s, box-shadow 0.25s;
+      box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.4);
+    }
+    .btn-wa:hover {
+      background: transparent;
+      color: var(--gold);
+      box-shadow: 0 8px 32px -8px rgba(201, 168, 76, 0.45);
+      transform: translateY(-2px);
+    }
+    .btn-wa svg { flex-shrink: 0; }
+
+    .btn-wa.ghost {
+      background: transparent;
+      color: var(--gold);
+      box-shadow: none;
+    }
+    .btn-wa.ghost:hover {
+      background: var(--gold);
+      color: var(--black);
+      box-shadow: 0 8px 32px -8px rgba(201, 168, 76, 0.45);
+    }
+
+    .cta-note {
+      margin-top: 18px;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 0.95rem;
+      letter-spacing: 0;
+      text-transform: none;
+      color: var(--ink-dim);
+      display: block;
+    }
+
+    /* ──────────────── FOOTER ──────────────── */
+    footer {
+      padding: 40px 0 48px;
+      border-top: 1px solid var(--line-soft);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 18px;
+      flex-wrap: wrap;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+    footer a { color: var(--ink-dim); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--gold); }
+    .foot-brand {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: var(--ink-dim);
+    }
+
+    /* ──────────────── ANIMATIONS ──────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal.in { opacity: 1; transform: translateY(0); }
+
+    /* ════════════════ DIAGNOSTICO (quiz / captura / informe) ════════════════ */
+    .screen { display: none; animation: fadeIn 0.4s ease; }
+    .screen.on { display: block; }
+
+    /* Quiz */
+    .quiz-wrap { padding: 56px 0 90px; min-height: 70vh; }
+    .progress { height: 2px; background: var(--line-soft); margin-bottom: 10px; overflow: hidden; }
+    .progress i { display: block; height: 100%; background: var(--gold); width: 0; transition: width 0.35s ease; }
+    .pcount {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 44px;
+    }
+    .qblock {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .qblock::before { content: ''; width: 22px; height: 1px; background: var(--gold); }
+    .qtext {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: clamp(1.45rem, 4vw, 1.95rem);
+      line-height: 1.22;
+      letter-spacing: -0.012em;
+      color: var(--ink);
+      margin-bottom: 10px;
+    }
+    .qsub { font-size: 0.92rem; color: var(--muted); margin-bottom: 30px; }
+    .opts { display: flex; flex-direction: column; gap: 10px; margin-top: 30px; }
+    .opt {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      border: 1px solid var(--line-soft);
+      background: rgba(243, 237, 228, 0.02);
+      padding: 17px 20px;
+      font-size: 0.97rem;
+      color: var(--ink-dim);
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s, color 0.2s;
+      text-align: left;
+      line-height: 1.5;
+      border-radius: 2px;
+    }
+    .opt:hover { border-color: var(--line); background: rgba(201, 168, 76, 0.04); color: var(--ink); }
+    .opt.sel { border-color: var(--gold); background: rgba(201, 168, 76, 0.08); color: var(--ink); }
+    .qnav { display: flex; justify-content: space-between; align-items: center; margin-top: 36px; }
+    .qback {
+      background: none; border: none; cursor: pointer;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted); padding: 8px 0; transition: color 0.2s;
+    }
+    .qback:hover { color: var(--ink-dim); }
+    textarea {
+      width: 100%; background: rgba(243, 237, 228, 0.03);
+      border: 1px solid var(--line-soft); border-radius: 2px;
+      color: var(--ink); font-family: 'DM Sans', sans-serif; font-weight: 400;
+      font-size: 0.97rem; padding: 16px; min-height: 110px; resize: vertical; line-height: 1.6;
+      margin-top: 30px;
+    }
+    textarea:focus, .field input:focus { outline: none; border-color: var(--gold); }
+    .curr { display: inline-flex; border: 1px solid var(--line-soft); border-radius: 2px; overflow: hidden; margin-top: 22px; }
+    .curr button {
+      background: none; border: none; color: var(--muted);
+      font-family: 'DM Sans', sans-serif; font-size: 0.78rem; font-weight: 500;
+      letter-spacing: 0.1em; padding: 9px 20px; cursor: pointer; transition: 0.2s;
+    }
+    .curr button.sel { background: var(--gold); color: var(--black); }
+
+    /* Captura */
+    .capture-wrap { padding: 72px 0 100px; max-width: 480px; margin: 0 auto; }
+    .field { margin-bottom: 16px; }
+    .field label {
+      display: block;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 8px;
+    }
+    .field input {
+      width: 100%; background: rgba(243, 237, 228, 0.03);
+      border: 1px solid var(--line-soft); border-radius: 2px;
+      color: var(--ink); font-family: 'DM Sans', sans-serif; font-weight: 400;
+      font-size: 1rem; padding: 15px 16px;
+    }
+    .err { color: var(--warn); font-size: 0.82rem; margin-top: 6px; display: none; }
+    .privacy { font-size: 0.78rem; color: var(--muted); margin-top: 20px; line-height: 1.6; }
+    /* Modo auditoría: campos numéricos del bloque de lanzamiento */
+    .numgrid { margin-top: 30px; }
+    .field label.nsck { display: inline-flex; align-items: center; gap: 8px; margin: 8px 0 0; cursor: pointer; letter-spacing: 0.1em; }
+    .field label.nsck input { width: auto; padding: 0; }
+    .field input:disabled { opacity: 0.35; }
+    /* Modo auditoría: documentos */
+    .dtools { flex-wrap: wrap; }
+    .dsteps { margin: 26px 0 0 20px; color: var(--ink-dim); font-size: 0.92rem; line-height: 1.6; }
+    .dsteps li { margin-bottom: 8px; } .dsteps b { color: var(--ink); font-weight: 600; }
+    .dnote { margin-top: 14px; font-size: 0.85rem; color: var(--gold); line-height: 1.55; }
+    .dbox { margin-top: 22px; } .dup { cursor: pointer; } .dhint { font-size: 0.8rem; color: var(--muted); margin-top: 10px; }
+    .field label.dpii { display: flex; margin: 0 0 16px; text-transform: none; font-size: 0.85rem; letter-spacing: 0; color: var(--ink-dim); }
+    .dfile { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; padding: 10px 0; border-bottom: 1px solid var(--line-soft); font-size: 0.9rem; color: var(--ink-dim); overflow-wrap: anywhere; }
+    .dfile em { color: var(--muted); font-style: normal; } .dfile small { color: var(--muted); } .dfile.ok span { color: var(--ink); } .dfile.error small { color: var(--warn); } .dfile button { white-space: nowrap; }
+    .field input[type=date] { color-scheme: dark; }
+
+    /* Informe */
+    .report-wrap { padding: 56px 0 90px; }
+    .rcard {
+      background: rgba(243, 237, 228, 0.025);
+      border: 1px solid var(--line-soft);
+      border-radius: 2px;
+      padding: 36px 32px;
+      margin-bottom: 20px;
+    }
+    .rcard.gold { border-color: var(--line); }
+    .levelhead { text-align: center; padding: 48px 32px; }
+    .levelhead .ln {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: clamp(2.1rem, 6.5vw, 3.1rem);
+      line-height: 1.1;
+      color: var(--ink);
+      margin: 16px 0 8px;
+      letter-spacing: -0.02em;
+    }
+    .levelhead .lt {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.05rem;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .levelhead .lscore { font-size: 0.78rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+    .dots { display: flex; gap: 8px; justify-content: center; margin: 24px 0 6px; }
+    .dots i { width: 34px; height: 4px; background: var(--line-soft); }
+    .dots i.on { background: var(--gold); }
+
+    .dimrow { margin-bottom: 18px; }
+    .dimrow .dt { display: flex; justify-content: space-between; font-size: 0.88rem; margin-bottom: 7px; }
+    .dimrow .dt b { color: var(--ink); font-weight: 500; }
+    .dimrow .dt span { color: var(--muted); }
+    .dbar { height: 5px; background: var(--line-soft); overflow: hidden; }
+    .dbar i { display: block; height: 100%; background: var(--gold); width: 0; transition: width 1s ease 0.3s; }
+    .dbar i.low { background: var(--warn); }
+
+    .f-main { border-left: 2px solid var(--gold); }
+    .ftag {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .ftag::before { content: ''; width: 22px; height: 1px; background: currentColor; }
+    .ftag.warn { color: var(--warn); }
+    .rcard h3 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 700;
+      font-size: 1.3rem;
+      color: var(--ink);
+      margin-bottom: 14px;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+    }
+    .rcard p { font-size: 0.95rem; color: var(--ink-dim); margin-bottom: 14px; line-height: 1.65; }
+    .rcard p:last-child { margin-bottom: 0; }
+    .palanca {
+      background: rgba(201, 168, 76, 0.05);
+      border: 1px solid var(--line);
+      padding: 16px 18px;
+      font-size: 0.9rem;
+      color: var(--ink-dim);
+      margin-top: 18px;
+      line-height: 1.6;
+    }
+    .palanca b { color: var(--gold); font-weight: 500; }
+
+    .mathnum {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900;
+      font-size: clamp(1.9rem, 5.5vw, 2.7rem);
+      color: var(--gold);
+      margin: 12px 0 6px;
+      letter-spacing: -0.015em;
+    }
+    .mathsub { font-size: 0.86rem; color: var(--muted); margin-bottom: 26px; }
+    .slider { margin-bottom: 18px; }
+    .slider .st { display: flex; justify-content: space-between; font-size: 0.86rem; margin-bottom: 7px; }
+    .slider .st span { color: var(--ink-dim); }
+    .slider .st b { color: var(--gold); font-weight: 500; }
+    input[type=range] {
+      width: 100%; -webkit-appearance: none; appearance: none;
+      height: 3px; background: var(--line-soft); outline: none;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%;
+      background: var(--gold); cursor: pointer; border: none;
+    }
+    input[type=range]::-moz-range-thumb {
+      width: 18px; height: 18px; border-radius: 50%;
+      background: var(--gold); cursor: pointer; border: none;
+    }
+    .mathnote {
+      font-size: 0.82rem; color: var(--muted);
+      border-top: 1px solid var(--line-soft);
+      padding-top: 18px; margin-top: 24px; line-height: 1.65;
+    }
+
+    .rcta { text-align: center; padding: 52px 32px; }
+    .rcta h3 { font-size: 1.45rem; margin-bottom: 12px; }
+    .rcta p { max-width: 420px; margin: 0 auto 30px; }
+    .rcta-btns { display: flex; flex-direction: column; gap: 14px; align-items: center; }
+
+    @media (max-width: 640px) {
+      .hero { padding: 72px 0 56px; }
+      .section { padding: 64px 0; }
+      .cta { padding: 72px 0 64px; }
+      .bullets li { grid-template-columns: 42px 1fr; gap: 16px; padding: 22px 0; }
+      .b-num { font-size: 1.15rem; }
+      .b-body strong { font-size: 0.98rem; }
+      .b-body p { font-size: 0.9rem; }
+      .btn-wa { width: 100%; justify-content: center; padding: 16px 24px; }
+      .logos-label::before, .logos-label::after { width: 20px; margin: 0 10px; }
+      footer { flex-direction: column; align-items: flex-start; gap: 6px; }
+      .quiz-wrap { padding: 40px 0 70px; }
+      .rcard { padding: 28px 22px; }
+      .levelhead { padding: 40px 22px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-inner">
+      <a class="logo" href="/">Daniel <em>García de Celis</em></a>
+      <button class="nav-cta" onclick="startQuiz()">
+        Diagnóstico gratuito
+        <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </nav>
+
+  <div class="hero-glow"></div>
+
+  <!-- ════════ LANDING ════════ -->
+  <div id="landing" class="screen on">
+  <div class="container">
+
+    <section class="hero">
+      <div class="chapter-mark">Diagnóstico de Fuga de Ingresos · Infoproductores · Gratuito</div>
+
+      <h1>Encuentra el dinero que tu negocio está dejando <em>escapar.</em></h1>
+
+      <p class="subhead">
+        Para infoproductores que ya tienen producto, pero ven cómo el funnel no convierte
+        lo que debería. Responde unas preguntas sobre tu lista, tu oferta y tu sistema de venta.
+        El diagnóstico se adapta a tus respuestas y lo ves al instante.
+      </p>
+
+      <div class="cta-inline">
+        <button class="btn-wa" onclick="startQuiz()">
+          Hacer mi diagnóstico gratuito
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <p class="cta-note">3 minutos. Resultado al instante.</p>
+      </div>
+    </section>
+
+    <section class="section reveal" id="diagnostico">
+      <p class="eyebrow">¿Qué vas a ver en tu diagnóstico?</p>
+      <h2>Una radiografía <em>honesta</em> de tu sistema de venta.</h2>
+      <p class="section-lead">Nada de consejos genéricos. Todo lo que te diga sale de lo que tú mismo respondas. Si no se puede afirmar con tus datos, no se afirma.</p>
+
+      <ul class="bullets">
+        <li>
+          <span class="b-num">01.</span>
+          <div class="b-body">
+            <strong>Tu nivel de madurez de monetización, de 1 a 5</strong>
+            <p>Con el radar de las 5 dimensiones de tu sistema: captación, lista, conversión, recurrencia y medición.</p>
+          </div>
+        </li>
+        <li>
+          <span class="b-num">02.</span>
+          <div class="b-body">
+            <strong>Tu fuga principal, con nombre y apellidos</strong>
+            <p>El punto exacto donde tus propias respuestas dicen que se está escapando más dinero. Y por qué importa.</p>
+          </div>
+        </li>
+        <li>
+          <span class="b-num">03.</span>
+          <div class="b-body">
+            <strong>El potencial conservador de tus activos</strong>
+            <p>Calculado con asunciones a la vista que puedes ajustar tú mismo. Aritmética, no promesas.</p>
+          </div>
+        </li>
+        <li>
+          <span class="b-num">04.</span>
+          <div class="b-body">
+            <strong>Qué palanca tocar primero, y cuál todavía no</strong>
+            <p>Las prioridades en orden, y en qué no perder tiempo ni dinero por ahora.</p>
+          </div>
+        </li>
+      </ul>
+
+      <div class="cta-inline">
+        <button class="btn-wa" onclick="startQuiz()">
+          Hacer mi diagnóstico gratuito
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <p class="cta-note">3 minutos. Resultado al instante.</p>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <p class="eyebrow">Cómo funciona</p>
+      <h2>Tres pasos, sin <em>vueltas.</em></h2>
+
+      <div class="steps">
+        <div class="step">
+          <h3>Respondes las preguntas.</h3>
+          <p>Sobre tu lista, tu oferta y tu forma de vender. El test se adapta a tu modelo de negocio. Tres minutos.</p>
+        </div>
+        <div class="step">
+          <h3>Ves tu diagnóstico al instante.</h3>
+          <p>Nivel de madurez, fuga principal, potencial de tus activos y prioridades. En pantalla, completo.</p>
+        </div>
+        <div class="step">
+          <h3>Si quieres, te doy mi lectura personal.</h3>
+          <p>Me mandas tu resultado por WhatsApp y te digo qué palanca tocaría primero en tu caso concreto. En menos de 24h. Sin llamada de venta disfrazada.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="quote reveal">
+      <div class="container" style="padding:0;">
+        <span class="quote-mark">“</span>
+        <blockquote>
+          Los funnels complejos son una pérdida de tiempo para la mayoría si ni siquiera están haciendo bien lo sencillo.
+        </blockquote>
+      </div>
+    </section>
+
+    <section class="section reveal">
+      <p class="logos-label">Clientes con los que he trabajado</p>
+      <div class="clients-grid">
+        <div class="client">
+          <img class="avatar" src="/logos/josemunoz.jpg" alt="José Muñoz" loading="lazy" />
+          <span class="name">José Muñoz</span>
+        </div>
+        <div class="client">
+          <img class="avatar" src="/logos/hackaviss.jpg" alt="Hackaviss" loading="lazy" />
+          <span class="name">Hackaviss</span>
+        </div>
+        <div class="client">
+          <img class="logo" src="/logos/talentnetwork.svg" alt="Talent Network" loading="lazy" data-color />
+          <span class="name">Talent Network</span>
+        </div>
+        <div class="client">
+          <img class="logo" src="/logos/crecesinlimite.svg" alt="Crece Sin Límite" loading="lazy" />
+          <span class="name">Crece Sin Límite</span>
+        </div>
+        <div class="client">
+          <img class="logo" src="/logos/tutellus.svg" alt="Tutellus" loading="lazy" />
+          <span class="name">Tutellus</span>
+        </div>
+        <div class="client">
+          <img class="logo" src="/logos/digitalriders.webp" alt="Digital Riders" loading="lazy" />
+          <span class="name">Digital Riders</span>
+        </div>
+        <div class="client">
+          <img class="logo" src="/logos/racks.png" alt="Racks Academy" loading="lazy" />
+          <span class="name">Racks Academy</span>
+        </div>
+        <div class="client">
+          <img class="logo" src="/logos/escueladelujo.png" alt="Escuela de Lujo" loading="lazy" data-whiten />
+          <span class="name">Escuela de Lujo</span>
+        </div>
+        <div class="client">
+          <img class="avatar" src="/logos/anamoreno.jpg" alt="Ana Moreno Marín" loading="lazy" />
+          <span class="name">Ana Moreno Marín</span>
+        </div>
+        <div class="client">
+          <img class="avatar" src="/logos/vanessamarrero.jpg" alt="Vanessa Marrero" loading="lazy" />
+          <span class="name">Vanessa Marrero</span>
+        </div>
+        <div class="client">
+          <img class="avatar" src="/logos/zekenovarino.jpg" alt="Zeke Novarino" loading="lazy" />
+          <span class="name">Zeke Novarino</span>
+        </div>
+        <div class="client">
+          <img class="avatar" src="/logos/tutobiohacker.jpg" alt="Tuto Biohacker" loading="lazy" />
+          <span class="name">Tuto Biohacker</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta reveal">
+      <h2>Empieza por el <em>diagnóstico.</em></h2>
+      <p class="cta-sub">Gratis, al instante, y sin dejar tu email hasta el final. Lo que descubras es tuyo, hagas lo que hagas después.</p>
+
+      <button class="btn-wa" onclick="startQuiz()">
+        Hacer mi diagnóstico gratuito
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+
+      <p class="cta-note">3 minutos. Resultado al instante.</p>
+    </section>
+
+  </div>
+  </div>
+
+  <!-- ════════ QUIZ ════════ -->
+  <div id="quiz" class="screen">
+    <div class="container quiz-wrap">
+      <div class="progress"><i id="pbar"></i></div>
+      <div class="pcount" id="pcount"></div>
+      <div id="qbox"></div>
+    </div>
+  </div>
+
+  <!-- ════════ CAPTURA ════════ -->
+  <div id="capture" class="screen">
+    <div class="container capture-wrap">
+      <p class="eyebrow">Último paso</p>
+      <h2>Tu diagnóstico está listo.</h2>
+      <p class="section-lead" style="margin-bottom:34px;">Dime a quién se lo entrego. Al enviar, tu diagnóstico completo aparece aquí en pantalla. Si además dejas tu WhatsApp, te paso mi lectura personal de tu caso.</p>
+      <div class="field"><label>Nombre</label><input type="text" id="f-name" placeholder="Tu nombre"></div>
+      <div class="field"><label>Email</label><input type="text" id="f-email" placeholder="tu@email.com"><div class="err" id="e-email">Revisa el email, no parece válido.</div></div>
+      <div style="margin-top:20px;padding:22px;border:1px solid var(--gold);border-radius:14px;background:rgba(201,168,76,0.06);">
+        <p style="font-weight:700;color:var(--ink);margin:0 0 4px;font-size:1rem;">Para mi lectura personal de tu caso</p>
+        <p style="font-size:0.88rem;color:var(--ink-dim);margin:0 0 18px;line-height:1.55;">Tu diagnóstico lo ves igual al enviar, no hace falta el WhatsApp para eso. Pero aquí funciona así: <b style="color:var(--ink);">precisión a cambio de precisión</b>. Cuanto más concreto seas en estos campos, más afinada es la lectura que te devuelvo. Si los dejas vacíos, solo puedo darte lo genérico, y lo genérico ya lo tienes en pantalla.</p>
+        <div class="field"><label>Tu web y tus redes</label><textarea id="f-online" placeholder="Pega aquí tu web, Instagram, YouTube o LinkedIn. Es justo lo que miro para que la lectura sea de TU negocio y no de uno cualquiera." style="min-height:80px;"></textarea></div>
+        <div class="field"><label>¿Qué vendes y cómo lo vendes? Tu funnel en una sola línea.</label><textarea id="f-modelo" placeholder="Por ejemplo: vendo un curso de fotografía y lo vendo con anuncios a un webinar gratis. O: mentoría 1:1 que cierro por llamada desde Instagram." style="min-height:70px;"></textarea></div>
+        <div class="field" style="margin-bottom:0;"><label>WhatsApp <span style="text-transform:none;letter-spacing:0;color:var(--gold);">· por aquí te la mando</span></label><input type="text" id="f-wa" placeholder="+57 300 000 0000"></div>
+        <p style="font-size:0.78rem;color:var(--ink-dim);margin:14px 0 0;line-height:1.5;">Tus datos los veo yo y nadie más. Cero spam, cero cesión a terceros.</p>
+      </div>
+      <button class="btn-wa" style="margin-top:18px;" onclick="submitCapture()">
+        Ver mi diagnóstico
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="qback" style="margin-top:16px;display:block;" onclick="backToQuiz()">Atrás, quiero revisar una respuesta</button>
+      <p class="privacy">Tus datos se usan solo para entregarte este diagnóstico y, si la pides, mi lectura de tu caso. Nada de secuencias infinitas ni cesión a terceros.</p>
+    </div>
+  </div>
+
+  <!-- ════════ INFORME ════════ -->
+  <div id="report" class="screen">
+    <div class="container report-wrap" id="rbox"></div>
+  </div>
+
+  <div class="container">
+    <footer>
+      <p class="foot-brand">© 2026 Daniel García de Celis</p>
+      <p><a href="https://danielgarciadecelis.com">danielgarciadecelis.com</a></p>
+    </footer>
+  </div>
+
+  <script>
+    // Reveal on scroll
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+    /* =====================================================
+       CONFIG
+    ===================================================== */
+    const SUBMIT_URL = "https://script.google.com/macros/s/AKfycbydQsYJmELssd2TC4YWMafMf9zI6NxwJGRLJVCzWYWCSCHL666GvfEdXiaPTLUtgl9s/exec"; // Apps Script: guarda lead + aviso por email
+    const WA_NUMBER = "34628347382";
+
+    /* MODO AUDITORÍA (escalón 3): /diagnostico/?modo=auditoria
+       Arranque de la auditoría de pago. Añade el bloque "Tu último lanzamiento", 4 reglas propias
+       y le manda a Daniel la foto entera. Sin el parámetro, la herramienta es la pública de siempre. */
+    const AUDIT = new URLSearchParams(location.search).get('modo')==='auditoria';
+    const LZ = a=>AUDIT&&(a.venta==='lanz'||a.venta==='ambos');
+    const EV = a=>AUDIT&&(a.evergreen==='si_vende'||a.evergreen==='si_nose');
+    /* Documentos: script APARTE del de la Calculadora ("Auditorías · arranque"). El enlace del cliente lleva &r=<cliente>&k=<clave>. */
+    const AUDIT_URL = "https://script.google.com/macros/s/AKfycbzeYKoJogKgUk7JmCz7tPnShcrm1kA_atbBy16M7q2EoqND5cxuhbb4qrLP_ldk1Qya/exec";
+    const AREF = new URLSearchParams(location.search).get('r')||'';
+    const AKEY = new URLSearchParams(location.search).get('k')||'';
+
+    /* Analytics del quiz: pings por GET a la misma URL. Si el Apps Script no tiene doGet,
+       no hacen nada (ni filas ni emails). Un evento por hito y sesión, sin duplicados. */
+    const SID = Math.random().toString(36).slice(2,10);
+    const _evSent = {};
+    function ping(ev, step, pos){
+      try{
+        const k = ev+':'+(step||'');
+        if(_evSent[k]) return; _evSent[k]=1;
+        const u = SUBMIT_URL+'?ev='+ev+'&sid='+SID+'&tool='+(AUDIT?'auditoria':'calc')+(step?'&step='+encodeURIComponent(step):'')+(pos?'&pos='+pos:'');
+        fetch(u,{mode:'no-cors',keepalive:true}).catch(()=>{});
+      }catch(e){}
+    }
+
+    /* =====================================================
+       BANCO DE PREGUNTAS (flujo ramificado)
+    ===================================================== */
+    const Q = [
+    {id:'modelo', block:'Tu negocio', text:'¿Qué vendes principalmente?', opts:[
+      {v:'curso', t:'Cursos o formaciones online (grabadas, en vivo o cohortes)'},
+      {v:'producto', t:'Productos digitales que no son formación (plantillas, recursos, kits, comunidad)'},
+      {v:'membresia', t:'Membresía o suscripción'},
+      {v:'highticket', t:'Mentoría, consultoría o programas high ticket'},
+      {v:'servicio', t:'Servicios digitales hechos para el cliente'},
+      {v:'mezcla', t:'Una mezcla de varios'}]},
+
+    {id:'ticket', block:'Tu negocio', text:'¿Cuál es tu ticket principal?', sub:'El precio del producto que más vendes o más pesa en tu facturación.', currency:true, opts:[
+      {v:'t1', t:'Menos de 100', mid:60},
+      {v:'t2', t:'Entre 100 y 500', mid:300},
+      {v:'t3', t:'Entre 500 y 2.000', mid:1000},
+      {v:'t4', t:'Entre 2.000 y 5.000', mid:3000},
+      {v:'t5', t:'Más de 5.000', mid:5000}]},
+
+    {id:'fact', block:'Tu negocio', text:'¿Facturación mensual aproximada?', opts:[
+      {v:'f1', t:'Menos de 2.000', mid:1500},
+      {v:'f2', t:'Entre 2.000 y 10.000', mid:6000},
+      {v:'f3', t:'Entre 10.000 y 30.000', mid:20000},
+      {v:'f4', t:'Entre 30.000 y 100.000', mid:60000},
+      {v:'f5', t:'Más de 100.000', mid:100000},
+      {v:'fx', t:'Prefiero no decirlo', mid:0}]},
+
+    {id:'tiempo', block:'Tu negocio', text:'¿Cuánto llevas vendiendo online?', opts:[
+      {v:'menos1', t:'Menos de 1 año'},
+      {v:'1a3', t:'Entre 1 y 3 años'},
+      {v:'mas3', t:'Más de 3 años'}]},
+
+    {id:'fuente', block:'Captación', text:'¿Cuál es hoy tu principal fuente de leads?', opts:[
+      {v:'organico', t:'Contenido orgánico (redes, YouTube, podcast, SEO)'},
+      {v:'ads', t:'Publicidad de pago'},
+      {v:'colabs', t:'Colaboraciones, afiliados o apariciones en audiencias ajenas'},
+      {v:'referidos', t:'Referidos y boca a boca'},
+      {v:'nocapto', t:'Ahora mismo no capto leads de forma activa'}]},
+
+    {id:'leadmagnet', block:'Captación', text:'¿Tienes un lead magnet activo captando emails?', opts:[
+      {v:'si_mide', t:'Sí, y sé cuánto convierte'},
+      {v:'si_nomide', t:'Sí, pero no mido su conversión'},
+      {v:'no', t:'No'}]},
+
+    {id:'cpl', block:'Captación', text:'¿Conoces tu coste por lead?', show:a=>a.fuente==='ads', opts:[
+      {v:'si', t:'Sí, lo tengo controlado'},
+      {v:'aprox', t:'Aproximadamente'},
+      {v:'no', t:'No lo sé'}]},
+
+    {id:'lista', block:'Tu lista', text:'¿Cuántos contactos tienes en tu lista de email?', opts:[
+      {v:'no', t:'No tengo lista de email', mid:0},
+      {v:'l1', t:'Menos de 500', mid:250},
+      {v:'l2', t:'Entre 500 y 2.000', mid:1200},
+      {v:'l3', t:'Entre 2.000 y 10.000', mid:5000},
+      {v:'l4', t:'Entre 10.000 y 30.000', mid:18000},
+      {v:'l5', t:'Más de 30.000', mid:30000}]},
+
+    {id:'frec', block:'Tu lista', text:'¿Cada cuánto le escribes a tu lista?', show:a=>a.lista&&a.lista!=='no', opts:[
+      {v:'varias', t:'Varias veces por semana'},
+      {v:'semanal', t:'Una vez por semana'},
+      {v:'mensual', t:'Una o dos veces al mes'},
+      {v:'sololanz', t:'Solo cuando lanzo o promociono algo'},
+      {v:'casinunca', t:'Casi nunca'}]},
+
+    {id:'apertura', block:'Tu lista', text:'¿Cuál es tu tasa de apertura media?', show:a=>a.lista&&a.lista!=='no', opts:[
+      {v:'a1', t:'Más del 40%', mid:45},
+      {v:'a2', t:'Entre 25% y 40%', mid:32},
+      {v:'a3', t:'Entre 15% y 25%', mid:20},
+      {v:'a4', t:'Menos del 15%', mid:10},
+      {v:'nose', t:'No lo sé', mid:20}]},
+
+    {id:'atrib', block:'Tu lista', text:'¿Sabes cuánto facturas atribuible a email, separado del resto?', show:a=>a.lista&&a.lista!=='no', opts:[
+      {v:'mido', t:'Sí, lo mido'},
+      {v:'aprox', t:'Aproximadamente'},
+      {v:'nose', t:'No lo sé'}]},
+
+    {id:'canal', block:'Tu audiencia', text:'¿Dónde vive tu audiencia principal?', show:a=>a.lista==='no', opts:[
+      {v:'ig', t:'Instagram'},
+      {v:'yt', t:'YouTube'},
+      {v:'tiktok', t:'TikTok'},
+      {v:'linkedin', t:'LinkedIn'},
+      {v:'otro', t:'Otro canal'}]},
+
+    {id:'audiencia', block:'Tu audiencia', text:'¿De qué tamaño es esa audiencia?', show:a=>a.lista==='no', opts:[
+      {v:'au1', t:'Menos de 1.000 seguidores', mid:500},
+      {v:'au2', t:'Entre 1.000 y 10.000', mid:5000},
+      {v:'au3', t:'Entre 10.000 y 50.000', mid:25000},
+      {v:'au4', t:'Más de 50.000', mid:50000}]},
+
+    {id:'convsocial', block:'Tu audiencia', text:'¿Cómo conviertes esa audiencia en ventas hoy?', show:a=>a.lista==='no', opts:[
+      {v:'dms', t:'Conversaciones por DM'},
+      {v:'lives', t:'Lives, stories o contenido con oferta'},
+      {v:'linkbio', t:'Link en bio hacia mi oferta'},
+      {v:'no', t:'Todavía no la convierto de forma consistente'}]},
+
+    {id:'venta', block:'Conversión', text:'¿Cómo vendes principalmente?', opts:[
+      {v:'lanz', t:'Lanzamientos: abro y cierro puertas'},
+      {v:'evergreen', t:'Venta continua: mi oferta está siempre disponible'},
+      {v:'ambos', t:'Ambas cosas'},
+      {v:'manual', t:'A mano: DMs, llamadas, propuestas una a una'}]},
+
+    {id:'nlanz', block:'Conversión', text:'¿Cuántos lanzamientos haces al año?', show:a=>a.venta==='lanz'||a.venta==='ambos', opts:[
+      {v:'uno', t:'Uno'},
+      {v:'dostres', t:'Dos o tres'},
+      {v:'cuatro', t:'Cuatro o más'}]},
+
+    {id:'ultlanz', block:'Conversión', text:'¿Cómo fue tu último lanzamiento comparado con el anterior?', show:a=>a.venta==='lanz'||a.venta==='ambos', opts:[
+      {v:'mejor', t:'Mejor'},
+      {v:'igual', t:'Más o menos igual'},
+      {v:'peor', t:'Peor'},
+      {v:'nocomparo', t:'No comparo los números'}]},
+
+    /* ── Bloque "Tu último lanzamiento": solo en modo auditoría y si vende por lanzamientos o ambos ── */
+    {id:'l_mecanica', block:'Tu último lanzamiento', text:'¿Con qué mecánica lo hiciste?', sub:'Si mezclaste varias, elige la que llevó el peso de la venta.', show:LZ, opts:[
+      {v:'webinar', t:'Webinar o masterclass'},
+      {v:'reto', t:'Reto o evento de varios días'},
+      {v:'vsl', t:'VSL y carrito, sin directo'},
+      {v:'directos', t:'Directos en redes'},
+      {v:'emails', t:'Solo emails'},
+      {v:'otra', t:'Otra'}]},
+
+    {id:'l_numeros', block:'Tu último lanzamiento', text:'Los números de ese lanzamiento, de punta a punta', sub:'Aproximados valen. Si alguno no lo sabes, márcalo: saber qué falta también es un dato.', show:LZ, nums:[
+      {k:'registros', t:'Personas registradas', show:a=>a.l_mecanica!=='emails'},
+      {k:'asistencia', t:'% de registrados que vio el directo en vivo', unit:'%', show:a=>['webinar','reto','directos','otra'].includes(a.l_mecanica)},
+      {k:'visitas', t:'Visitas a la página de ventas'},
+      {k:'ventas', t:'Ventas'},
+      {k:'ingresos', t:'Ingresos del lanzamiento', money:true}]},
+
+    {id:'l_carrito', block:'Tu último lanzamiento', text:'¿Cuántos días estuvo abierto el carrito?', show:LZ, opts:[
+      {v:'c1', t:'De 1 a 3 días'},
+      {v:'c2', t:'De 4 a 7 días'},
+      {v:'c3', t:'De 8 a 14 días'},
+      {v:'c4', t:'Más de 14 días'},
+      {v:'siempre', t:'No cerró: la oferta sigue disponible'},
+      {v:'nose', t:'No lo sé'}]},
+
+    {id:'l_cierre', block:'Tu último lanzamiento', text:'¿Qué cerró la puerta?', sub:'Marca todo lo que pasó.', show:a=>LZ(a)&&a.l_carrito!=='siempre', multi:true, opts:[
+      {v:'fecha', t:'Una fecha de cierre anunciada, y se cumplió'},
+      {v:'precio', t:'Una subida de precio'},
+      {v:'bonus', t:'Un bonus que se retiró'},
+      {v:'ampliado', t:'Anuncié una fecha, pero lo amplié o lo reabrí'},
+      {v:'nada', t:'Nada: se cerró sin anunciarlo', excl:true}]},
+
+    {id:'l_fechas', block:'Tu último lanzamiento', text:'¿Cuándo fue?', sub:'Las fechas me sirven para no mezclar este lanzamiento con el anterior. Aproximadas valen.', show:LZ, dates:[
+      {k:'conv', t:'Empezó la convocatoria (el primer aviso invitando a apuntarse)'},
+      {k:'apertura', t:'Abriste el carrito'},
+      {k:'cierre', t:'Cerraste el carrito', show:a=>a.l_carrito!=='siempre'}]},
+
+    {id:'l_trafico', block:'Tu último lanzamiento', text:'¿De dónde salió la gente de ese lanzamiento?', sub:'Marca todas las fuentes que pesaron.', show:LZ, multi:true, opts:[
+      {v:'lista', t:'Mi lista de email'},
+      {v:'ads', t:'Anuncios de pago'},
+      {v:'organico', t:'Contenido orgánico (redes, YouTube, podcast)'},
+      {v:'colabs', t:'Colaboraciones o afiliados'}]},
+
+    {id:'l_gasto', block:'Tu último lanzamiento', text:'¿Cuánto invertiste en anuncios en ese lanzamiento?', show:a=>LZ(a)&&Array.isArray(a.l_trafico)&&a.l_trafico.includes('ads'), nums:[
+      {k:'gasto', t:'Inversión en anuncios', money:true}]},
+
+    {id:'l_fases', block:'Tu último lanzamiento', text:'¿En qué tramos del lanzamiento mandaste alguna pieza?', sub:'Email, WhatsApp, directo o vídeo: cualquier cosa cuenta. Si un tramo se quedó vacío, dilo sin miedo: es de lo primero que miro.', show:LZ, multi:true, opts:[
+      {v:'convocatoria', t:'La convocatoria: invitaste a tu audiencia a registrarse'},
+      {v:'cortejo', t:'El cortejo: calentaste a los registrados antes del evento'},
+      {v:'cita', t:'La cita: empujaste para que aparecieran en el directo'},
+      {v:'accion', t:'La acción: abriste el carrito y presentaste la oferta y los bonus'},
+      {v:'valle', t:'El valle de las sombras: respondiste objeciones con el carrito abierto'},
+      {v:'remate', t:'El remate: apretaste en los últimos días y el día del cierre'},
+      {v:'resaca', t:'La resaca: escribiste después del cierre, a compradores y a los que no'},
+      {v:'nose', t:'No lo sé', excl:true}]},
+
+    {id:'l_objetivo', block:'Tu último lanzamiento', text:'¿Qué objetivo te pusiste y qué salió? ¿En qué momento sentiste que se torcía, o que iba bien?', sub:'Dos o tres frases. Aquí vale más lo que sentiste que la cifra exacta.', show:LZ, free:true},
+
+    {id:'evergreen', block:'Conversión', text:'¿Tienes una secuencia o funnel evergreen que venda sin que tú estés?', show:a=>a.venta!=='manual', opts:[
+      {v:'si_vende', t:'Sí, y sé que vende'},
+      {v:'si_nose', t:'Sí, pero no sé si realmente vende'},
+      {v:'no', t:'No'}]},
+
+    /* ── Bloque "Tu embudo evergreen": solo en modo auditoría y si tiene un embudo que vende sin él ── */
+    {id:'e_entrada', block:'Tu embudo evergreen', text:'¿Cómo entra la gente en tu embudo?', sub:'Si tienes varios, piensa en el que más vende.', show:EV, opts:[
+      {v:'leadmagnet', t:'Con un recurso gratuito (guía, clase, plantilla) y después emails'},
+      {v:'webinar', t:'Con un webinar o una clase grabada que se emite sola'},
+      {v:'vsl', t:'Directo a una página de ventas o a un VSL'},
+      {v:'reto', t:'Con un reto o un minicurso automatizado de varios días'},
+      {v:'otra', t:'Otra'}]},
+
+    {id:'e_numeros', block:'Tu embudo evergreen', text:'Los números de ese embudo en los últimos 90 días', sub:'Aproximados valen. Si alguno no lo sabes, márcalo: saber qué falta también es un dato.', show:EV, nums:[
+      {k:'leads', t:'Personas nuevas que entraron al embudo', show:a=>a.e_entrada!=='vsl'},
+      {k:'visitas', t:'Visitas a la página de ventas'},
+      {k:'ventas', t:'Ventas'},
+      {k:'ingresos', t:'Ingresos del embudo', money:true}]},
+
+    {id:'e_secuencia', block:'Tu embudo evergreen', text:'¿Cuántos emails recibe alguien desde que entra hasta que termina la secuencia?', show:EV, opts:[
+      {v:'s1', t:'De 1 a 3'},
+      {v:'s2', t:'De 4 a 7'},
+      {v:'s3', t:'De 8 a 14'},
+      {v:'s4', t:'Más de 14'},
+      {v:'ninguno', t:'No hay secuencia: solo la página'},
+      {v:'nose', t:'No lo sé'}]},
+
+    {id:'e_urgencia', block:'Tu embudo evergreen', text:'¿La oferta de ese embudo tiene fecha límite?', show:EV, opts:[
+      {v:'real', t:'Sí: un plazo real para cada persona, y se cumple'},
+      {v:'falsa', t:'Hay un contador, pero se reinicia o no se cumple'},
+      {v:'no', t:'No: la oferta está siempre igual'},
+      {v:'nose', t:'No lo sé'}]},
+
+    {id:'e_trafico', block:'Tu embudo evergreen', text:'¿De dónde sale la gente que entra en ese embudo?', sub:'Marca todas las fuentes que pesan.', show:EV, multi:true, opts:[
+      {v:'lista', t:'Mi lista de email'},
+      {v:'ads', t:'Anuncios de pago'},
+      {v:'organico', t:'Contenido orgánico (redes, YouTube, podcast)'},
+      {v:'colabs', t:'Colaboraciones o afiliados'}]},
+
+    {id:'e_gasto', block:'Tu embudo evergreen', text:'¿Cuánto has invertido en anuncios para ese embudo en los últimos 90 días?', show:a=>EV(a)&&Array.isArray(a.e_trafico)&&a.e_trafico.includes('ads'), nums:[
+      {k:'gasto', t:'Inversión en anuncios', money:true}]},
+
+    {id:'e_objetivo', block:'Tu embudo evergreen', text:'¿Cuánto esperabas que vendiera ese embudo y cuánto vende? ¿Desde cuándo está así?', sub:'Dos o tres frases. Aquí vale más lo que has visto que la cifra exacta.', show:EV, free:true},
+
+    {id:'cierre', block:'Conversión', text:'¿Conoces tu tasa de cierre en llamadas o propuestas?', show:a=>a.modelo==='highticket'||a.venta==='manual', opts:[
+      {v:'si', t:'Sí, la mido'},
+      {v:'aprox', t:'Aproximadamente'},
+      {v:'no', t:'No la sé'},
+      {v:'nollamadas', t:'No vendo por llamadas'}]},
+
+    {id:'recurrente', block:'Recurrencia', text:'¿Parte de tu facturación se repite cada mes sin tener que cerrar una venta nueva? (una membresía, una suscripción, un retainer o un servicio con cobro mensual)', show:a=>a.modelo!=='membresia', opts:[
+      {v:'si', t:'Sí, tengo ingresos que se repiten cada mes'},
+      {v:'pensada', t:'No, pero lo tengo pensado'},
+      {v:'no', t:'No, cada mes empiezo de cero'}]},
+
+    {id:'churn', block:'Recurrencia', text:'¿Sabes tu tasa de baja mensual (churn)?', show:a=>a.modelo==='membresia', opts:[
+      {v:'si', t:'Sí, la mido'},
+      {v:'aprox', t:'Aproximadamente'},
+      {v:'no', t:'No la sé'}]},
+
+    {id:'recompra', block:'Recurrencia', text:'¿Qué parte de tus clientes te vuelve a comprar?', opts:[
+      {v:'alta', t:'Lo sé, y es más del 30%'},
+      {v:'baja', t:'Lo sé, y es menos del 30%'},
+      {v:'aprox', t:'Tengo una idea aproximada'},
+      {v:'nose', t:'No lo sé'},
+      {v:'unica', t:'No tengo una segunda oferta que comprar'}]},
+
+    {id:'friccion', block:'Tu foco', text:'¿Dónde sientes más fricción ahora mismo?', opts:[
+      {v:'captar', t:'Captar leads nuevos'},
+      {v:'convertir', t:'Convertir los que ya tengo'},
+      {v:'recomprar', t:'Que me compren más de una vez'},
+      {v:'ticket', t:'Subir el ticket'},
+      {v:'tiempo', t:'Todo depende de mí y no escalo'},
+      {v:'nolose', t:'No lo tengo claro'}]},
+
+    {id:'intentado', block:'Tu foco', text:'¿Qué has intentado ya para resolverlo?', sub:'Opcional. Una o dos frases bastan.', free:true},
+
+    /* ── Bloque "Tu material": solo en modo auditoría. Cada documento: lo subo · te lo mando aparte · no lo tengo ── */
+    {id:'d_email_lanz', block:'Tu material', slot:'Emails del lanzamiento', text:'Las métricas de los emails del lanzamiento', sub:'Por cada email: fecha y hora de envío, enviados, aperturas, clics y bajas. Solo los totales de cada email: nada de listas de suscriptores.', show:LZ, doc:{
+      tools:[['ac','ActiveCampaign'],['otra','Otra herramienta']],
+      steps:{
+        ac:()=>['En ActiveCampaign, en el menú de la izquierda: <b>Reports</b> → <b>Campaigns Performance</b>. En cuentas nuevas puede llamarse <b>All Campaigns Performance</b>.',
+                'Filtra por fecha de envío (<b>Campaign Sent Date</b> → <b>Custom Range</b>): del primer al último email del lanzamiento.',
+                'Descárgalo: pasa el ratón por la tabla, pulsa los tres puntos <b>⋮</b> → <b>Download Data</b> → <b>CSV</b>. En <i>All Campaigns Performance</i> es el botón <b>Export</b> → <b>Export.csv</b>.'],
+        otra:()=>['En tu herramienta de email, busca el informe de campañas (suele estar en <b>Informes</b> o <b>Reports</b>).',
+                  'Filtra las fechas del lanzamiento y expórtalo en CSV o Excel.',
+                  'Si no deja exportar, una captura del listado con sus métricas también vale.']},
+      note:{ac:'No uses los informes de «Opens» o «Clicks» de cada campaña: esos llevan los emails de tus suscriptores, y no los necesito.'}}},
+
+    {id:'d_email_auto', block:'Tu material', slot:'Emails del embudo', text:'Las métricas de los emails de tu embudo evergreen', sub:'Por cada email de la secuencia: enviados, aperturas, clics y bajas. Solo los totales de cada email.', show:EV, doc:{
+      tools:[['ac','ActiveCampaign'],['otra','Otra herramienta']],
+      steps:{
+        ac:()=>['En ActiveCampaign: <b>Reports</b> → <b>Automation Reports</b>, y abre el informe de la automatización de tu embudo (<b>Automation Overview</b>).',
+                'Busca la tabla con las métricas de cada email (<b>Automation Campaign Metrics</b>).',
+                'Pasa el ratón por la tabla, pulsa <b>⋮</b> → <b>Download Data</b> → <b>CSV</b>.'],
+        otra:()=>['En tu herramienta de email, abre el informe de la automatización o secuencia del embudo.',
+                  'Exporta las métricas de cada email en CSV o Excel.',
+                  'Si no deja exportar, una captura con las métricas de cada email también vale.']}}},
+
+    {id:'d_ventas', block:'Tu material', slot:'Ventas', text:'Tus ventas, día a día', sub:()=>'Cada venta con su fecha, producto, importe y estado (pagada, reembolsada) '+periodo()+'. Solo cifras: nada de datos de tus compradores.', show:a=>LZ(a)||EV(a), doc:{
+      pii:true,
+      tools:[['hotmart','Hotmart'],['otra','Otra plataforma']],
+      steps:{
+        hotmart:()=>['Entra en app.hotmart.com → menú <b>Ventas</b> → <b>Mis ventas</b> (en portugués: <i>Vendas → Minhas vendas</i>).',
+                     'Pulsa <b>Exportar</b>, elige el modelo <b>Estándar</b> y el formato <b>CSV</b>.',
+                     'Filtra el periodo '+periodo()+' y deja todos los estados, para que salgan también los reembolsos. Confirma.',
+                     'Cuando Hotmart tenga el archivo listo, súbelo aquí tal cual.'],
+        otra:()=>['En tu plataforma de cobro (Stripe, Kajabi, Systeme…), exporta el listado de ventas '+periodo()+'.',
+                  'Mejor en CSV: así esta página quita sola los datos de tus compradores.',
+                  'Si solo te deja Excel o PDF, borra tú antes nombres, emails y teléfonos.']},
+      note:{hotmart:'El archivo de Hotmart trae nombre, email y teléfono de tus compradores. No hace falta que los borres: si lo subes en CSV, esta página los quita antes de subirlo y te dice qué ha quitado.'}}},
+
+    {id:'d_ads', block:'Tu material', slot:'Anuncios', text:'Los resultados de tus anuncios', sub:()=>'Por anuncio y por día '+periodo()+': gasto, impresiones, clics y resultados.', show:a=>(LZ(a)&&Array.isArray(a.l_trafico)&&a.l_trafico.includes('ads'))||(EV(a)&&Array.isArray(a.e_trafico)&&a.e_trafico.includes('ads')), doc:{
+      tools:[['meta','Meta (Facebook e Instagram)'],['otra','Otra plataforma']],
+      steps:{
+        meta:()=>['En el Administrador de anuncios, entra en la pestaña <b>Anuncios</b>.',
+                  'Elige las fechas '+periodo()+'.',
+                  'Pulsa <b>Desglose</b> → <b>Por tiempo</b> → <b>Día</b>, para que salga una fila por anuncio y día.',
+                  'Pulsa <b>Exportar</b>, arriba a la derecha → <b>Exportar como .csv</b>. Con las columnas de rendimiento que salen por defecto vale; si puedes, añade los clics en el enlace y el CTR.'],
+        otra:()=>['En tu plataforma de anuncios, saca el informe por anuncio y por día '+periodo()+'.',
+                  'Que lleve gasto, impresiones, clics y resultados, y expórtalo en CSV o Excel.']}}},
+
+    {id:'d_paginas', block:'Tu material', slot:'Páginas', text:'Las visitas y conversiones de tus páginas', sub:()=>'La página de registro (u opt-in) y la de ventas '+periodo()+': cuánta gente entró y cuánta se registró o compró.', show:a=>LZ(a)||EV(a), doc:{
+      tools:[['otra','Cualquier herramienta']],
+      steps:{
+        otra:()=>['Ve a donde tengas tus páginas (Hotmart, Systeme, ClickFunnels, WordPress, Google Analytics…).',
+                  'Saca las visitas y las conversiones de cada página en ese periodo.',
+                  'Exportación o captura del panel: lo que te sea más fácil.']}}},
+
+    {id:'d_directo', block:'Tu material', slot:'Directo', text:'Los datos de tu directo', sub:'Registrados, asistentes en vivo, pico y cuánto aguantó la gente. Y la grabación, si la tienes.', show:a=>LZ(a)&&['webinar','reto','directos','otra'].includes(a.l_mecanica), doc:{
+      tools:[['otra','Zoom, StreamYard, WebinarJam…']],
+      steps:{
+        otra:()=>['Del panel de tu herramienta de directos, una captura con los totales: registrados, asistentes en vivo, pico y duración media.',
+                  'Nada de listas de asistentes con nombres: solo los totales.',
+                  'Si tienes la grabación, pega abajo el enlace (Drive, YouTube oculto, Vimeo…).']}}},
+
+    {id:'d_recorrido', block:'Tu material', slot:'Recorrido del embudo', text:'Un vídeo recorriendo tu embudo', sub:'Es lo que más me ayuda a entender qué querías que pasara, antes de mirar qué pasó.', show:a=>LZ(a)||EV(a), doc:{
+      tools:[['otra','Loom o cualquier grabador de pantalla']],
+      steps:{
+        otra:()=>['Graba tu pantalla unos cinco minutos recorriendo tu embudo como si fueras un cliente: el anuncio o el post, la página, el formulario, la de gracias, los emails.',
+                  'Mientras, cuéntame en voz alta qué querías que pasara en cada paso.',
+                  'Con Loom (tiene versión gratis) basta: pega aquí el enlace.']}}},
+
+    {id:'d_otros', block:'Tu material', slot:'Otros', text:'¿Algo más que quieras que vea?', sub:'Opcional. Datos de WhatsApp, directos extra, una encuesta, tus propias notas. Lo que creas que me ayuda.', show:a=>AUDIT, doc:{optional:true, tools:[], steps:{}}}
+    ];
+
+    /* =====================================================
+       ESTADO + NAVEGACION
+    ===================================================== */
+    let A = {}, AL = {}, MID = {}, path = [], cur = -1, currency = '$';
+
+    function visible(){ return Q.filter(q=>!q.show||q.show(A)); }
+
+    function show(id){
+      ['landing','quiz','capture','report'].forEach(s=>document.getElementById(s).classList.remove('on'));
+      document.getElementById(id).classList.add('on');
+      window.scrollTo(0,0);
+    }
+
+    function startQuiz(){
+      ping('start');
+      if(path.length===0) next();
+      else render();
+      show('quiz');
+    }
+
+    function backToQuiz(){
+      cur = path.length-1;
+      render();
+      show('quiz');
+    }
+
+    function restart(){
+      A = {}; AL = {}; MID = {}; path = []; cur = -1;
+      document.getElementById('rbox').innerHTML = '';
+      next();
+      show('quiz');
+    }
+
+    function next(){
+      const curQ = path.length>0 ? Q[path[path.length-1]] : null;
+      let startIdx = curQ ? Q.indexOf(curQ)+1 : 0;
+      let nxt = -1;
+      for(let i=startIdx;i<Q.length;i++){
+        if(!Q[i].show || Q[i].show(A)){ nxt=i; break; }
+      }
+      if(nxt===-1){ ping('capture'); show('capture'); return; }
+      path.push(nxt); cur=path.length-1;
+      render();
+    }
+
+    function back(){
+      if(path.length<=1) return;
+      const last = Q[path.pop()];
+      if(!last.doc){ delete A[last.id]; delete AL[last.id]; delete MID[last.id]; }
+      Q.forEach(q=>{ if(!q.doc && q.show && !q.show(A) && A[q.id]!==undefined){ delete A[q.id]; delete AL[q.id]; delete MID[q.id]; } });
+      cur=path.length-1;
+      render();
+    }
+
+    function render(){
+      const q = Q[path[cur]];
+      const vis = visible();
+      const pos = vis.indexOf(q)+1;
+      document.getElementById('pbar').style.width = Math.round(pos/(vis.length+1)*100)+'%';
+      document.getElementById('pcount').textContent = 'Pregunta '+pos+' de ~'+vis.length;
+      ping('q', q.id, pos);
+      let h = '<div class="qblock">'+q.block+'</div><div class="qtext">'+q.text+'</div>';
+      if(q.sub) h += '<div class="qsub">'+TXT(q.sub)+'</div>';
+      if(q.currency){
+        h += '<div class="curr"><button class="'+(currency==='$'?'sel':'')+'" onclick="setCurr(\'$\')">USD $</button><button class="'+(currency==='€'?'sel':'')+'" onclick="setCurr(\'€\')">EUR €</button></div>';
+      }
+      if(q.free){
+        h += '<textarea id="freetxt" placeholder="Escribe aquí... (o sáltala, es opcional)">'+(A[q.id]||'')+'</textarea>';
+        h += '<div class="qnav"><button class="qback" onclick="back()">Atrás</button><div style="display:flex;gap:18px;align-items:center;"><button class="qback" onclick="saveFree()">Saltar</button><button class="btn-wa" onclick="saveFree()">'+(vis[vis.length-1]===q?'Ver mi diagnóstico':'Siguiente')+'</button></div></div>';
+      } else if(q.multi){
+        const sel = A[q.id]||[];
+        h += '<div class="opts">'+q.opts.map(o=>
+          '<button class="opt'+(sel.includes(o.v)?' sel':'')+'" onclick="toggleMulti(\''+q.id+'\',\''+o.v+'\')">'+o.t+'</button>'
+        ).join('')+'</div><div class="err" id="qerr">Marca al menos una opción.</div>';
+        h += '<div class="qnav"><button class="qback" onclick="back()">Atrás</button><button class="btn-wa" onclick="saveMulti()">Siguiente</button></div>';
+      } else if(q.doc){
+        h += renderDoc(q);
+      } else if(q.dates){
+        h += renderDates(q);
+      } else if(q.nums){
+        const cv = A[q.id]||{};
+        h += '<div class="numgrid">'+numFields(q).map(f=>{
+          const v = cv[f.k], ns = v==='nose';
+          return '<div class="field"><label for="n-'+f.k+'">'+f.t+(f.money?' ('+currency+')':'')+'</label>'+
+            '<input type="text" inputmode="decimal" id="n-'+f.k+'" value="'+(typeof v==='number'?v:'')+'"'+(ns?' disabled':'')+' placeholder="'+(f.unit==='%'?'Por ejemplo: 25':'Por ejemplo: 1200')+'">'+
+            '<label class="nsck"><input type="checkbox" id="ns-'+f.k+'"'+(ns?' checked':'')+' onchange="toggleNose(\''+f.k+'\')"> No lo sé</label></div>';
+        }).join('')+'</div><div class="err" id="qerr">Pon un número en cada casilla o marca «No lo sé».</div>';
+        h += '<div class="qnav"><button class="qback" onclick="back()">Atrás</button><button class="btn-wa" onclick="saveNums()">Siguiente</button></div>';
+      } else {
+        h += '<div class="opts">'+q.opts.map(o=>
+          '<button class="opt'+(A[q.id]===o.v?' sel':'')+'" onclick="pick(\''+q.id+'\',\''+o.v+'\')">'+o.t+'</button>'
+        ).join('')+'</div>';
+        h += '<div class="qnav"><button class="qback" onclick="back()" '+(path.length<=1?'style="visibility:hidden"':'')+'>Atrás</button><span></span></div>';
+      }
+      document.getElementById('qbox').innerHTML = h;
+      window.scrollTo(0,0);
+      saveDraft();
+    }
+
+    function setCurr(c){ currency=c; render(); }
+
+    function pick(id,v){
+      const q = Q.find(x=>x.id===id);
+      const o = q.opts.find(x=>x.v===v);
+      A[id]=v; AL[id]=o.t; if(o.mid!==undefined) MID[id]=o.mid;
+      setTimeout(next, 180);
+    }
+
+    function saveFree(){
+      A[Q[path[cur]].id] = document.getElementById('freetxt').value.trim();
+      next();
+    }
+
+    /* Modo auditoría: selección múltiple y campos numéricos */
+    function toggleMulti(id,v){
+      const q = Q.find(x=>x.id===id);
+      const o = q.opts.find(x=>x.v===v);
+      let sel = (A[id]||[]).slice();
+      if(sel.includes(v)) sel = sel.filter(x=>x!==v);
+      else if(o.excl) sel = [v];
+      else sel = sel.filter(x=>!q.opts.find(y=>y.v===x).excl).concat(v);
+      A[id] = sel;
+      render();
+    }
+    function saveMulti(){
+      const q = Q[path[cur]];
+      const sel = A[q.id]||[];
+      if(!sel.length){ document.getElementById('qerr').style.display='block'; return; }
+      AL[q.id] = q.opts.filter(o=>sel.includes(o.v)).map(o=>o.t).join(' · ');
+      next();
+    }
+    function numFields(q){ return q.nums.filter(f=>!f.show||f.show(A)); }
+    function toggleNose(k){
+      const el = document.getElementById('n-'+k);
+      el.disabled = document.getElementById('ns-'+k).checked;
+      if(el.disabled) el.value = '';
+    }
+    // Acepta 1200, 1.200, 1,200, 1.200,50, 25%, 3.000 €...
+    function parseNum(s){
+      s = (s||'').replace(/[^0-9.,]/g,'');
+      if(!s) return null;
+      if(s.includes('.')&&s.includes(',')) s = s.lastIndexOf(',')>s.lastIndexOf('.') ? s.replace(/\./g,'').replace(',','.') : s.replace(/,/g,'');
+      else if(/^\d{1,3}([.,]\d{3})+$/.test(s)) s = s.replace(/[.,]/g,'');
+      else s = s.replace(',','.');
+      const n = parseFloat(s);
+      return isFinite(n) ? n : null;
+    }
+    function fmtNum(n){ return n.toLocaleString('es',{maximumFractionDigits:1}); }
+    function saveNums(){
+      const q = Q[path[cur]];
+      const out = {}, txt = [];
+      for(const f of numFields(q)){
+        let v;
+        if(document.getElementById('ns-'+f.k).checked) v = 'nose';
+        else {
+          v = parseNum(document.getElementById('n-'+f.k).value);
+          if(v===null||(f.unit==='%'&&v>100)){ document.getElementById('qerr').style.display='block'; return; }
+        }
+        out[f.k] = v;
+        txt.push(f.t+': '+(v==='nose'?'no lo sé':(f.money?currency+fmtNum(Math.round(v)):fmtNum(v))+(f.unit||'')));
+      }
+      A[q.id] = out; AL[q.id] = txt.join(' · ');
+      next();
+    }
+
+    /* =====================================================
+       SCORING: 5 dimensiones normalizadas por camino
+    ===================================================== */
+    function scoreDims(){
+      let d = {captacion:[0,0], relacion:[0,0], arquitectura:[0,0], recurrencia:[0,0], medicion:[0,0]};
+      const add=(dim,pts,max)=>{ d[dim][0]+=pts; d[dim][1]+=max; };
+
+      add('captacion', ({organico:8,ads:8,colabs:7,referidos:5,nocapto:1})[A.fuente]||0, 8);
+      add('captacion', ({si_mide:5,si_nomide:3,no:0})[A.leadmagnet]||0, 5);
+      if(A.cpl) add('captacion', ({si:3,aprox:1,no:0})[A.cpl], 3);
+
+      if(A.lista!=='no'){
+        add('relacion', ({varias:10,semanal:9,mensual:5,sololanz:2,casinunca:0})[A.frec]||0, 10);
+        // 'nose' no puntúa NI penaliza aquí: no saber la apertura es un problema de Medición, no de Relación
+        if(A.apertura && A.apertura!=='nose') add('relacion', ({a1:8,a2:7,a3:4,a4:2})[A.apertura]||0, 8);
+      } else {
+        add('relacion', ({dms:5,lives:6,linkbio:3,no:0})[A.convsocial]||0, 10);
+        add('relacion', 0, 8);
+      }
+
+      if(A.evergreen) add('arquitectura', ({si_vende:12,si_nose:5,no:0})[A.evergreen], 12);
+      add('arquitectura', ({ambos:8,evergreen:7,lanz:4,manual:2})[A.venta]||0, 8);
+      if(A.nlanz) add('arquitectura', ({uno:1,dostres:3,cuatro:3})[A.nlanz], 3);
+      if(A.lista==='no') add('arquitectura', 0, 5);
+      else add('arquitectura', 5, 5);
+
+      if(A.modelo==='membresia') add('recurrencia', 10, 10);
+      else if(A.recurrente) add('recurrencia', ({si:10,pensada:3,no:0})[A.recurrente], 10);
+      add('recurrencia', ({alta:10,baja:6,aprox:4,nose:2,unica:1})[A.recompra]||0, 10);
+
+      if(A.apertura) add('medicion', A.apertura==='nose'?0:4, 4);
+      if(A.atrib) add('medicion', ({mido:5,aprox:2,nose:0})[A.atrib], 5);
+      if(A.cpl) add('medicion', ({si:3,aprox:1,no:0})[A.cpl], 3);
+      if(A.cierre&&A.cierre!=='nollamadas') add('medicion', ({si:4,aprox:2,no:0})[A.cierre], 4);
+      if(A.churn) add('medicion', ({si:4,aprox:2,no:0})[A.churn], 4);
+      // Si no hay segunda oferta ('unica'), no hay recompra que medir: ni puntúa ni penaliza en Medición (ya pega en Recurrencia)
+      if(A.recompra!=='unica') add('medicion', (A.recompra==='alta'||A.recompra==='baja')?4:(A.recompra==='aprox'?2:0), 4);
+      add('medicion', A.leadmagnet==='si_mide'?2:0, 2);
+      if(A.ultlanz) add('medicion', A.ultlanz==='nocomparo'?0:2, 2);
+
+      const W = {captacion:15, relacion:20, arquitectura:25, recurrencia:20, medicion:20};
+      let dims={}, total=0;
+      for(const k in d){
+        const pct = d[k][1]>0 ? d[k][0]/d[k][1] : 0;
+        dims[k]=Math.round(pct*100);
+        total += pct*W[k];
+      }
+      return {dims, total:Math.round(total)};
+    }
+
+    const LEVELS = [
+      {min:0,  n:1, t:'Sin sistema: vendes a pulmón'},
+      {min:26, n:2, t:'Monetización irregular'},
+      {min:46, n:3, t:'Sistema parcial: hay piezas, falta engranaje'},
+      {min:66, n:4, t:'Sistema sólido con fugas concretas'},
+      {min:86, n:5, t:'Sistema maduro: toca optimizar, no construir'}
+    ];
+    const DIMNAMES = {captacion:'Captación', relacion:'Relación con tu lista', arquitectura:'Arquitectura de conversión', recurrencia:'Recurrencia y recompra', medicion:'Medición'};
+
+    /* =====================================================
+       MOTOR DE HALLAZGOS
+    ===================================================== */
+    function unknownCount(){
+      let n=0;
+      if(A.apertura==='nose')n++;
+      if(A.atrib==='nose')n++;
+      if(A.cpl==='no')n++;
+      if(A.cierre==='no')n++;
+      if(A.churn==='no')n++;
+      if(A.recompra==='nose')n++;
+      if(A.ultlanz==='nocomparo')n++;
+      return n;
+    }
+
+    const RULES = [
+    {id:'ciegas', sev:10, cond:a=>unknownCount()>=3,
+     title:'Vuelas a ciegas, y eso anula cualquier otro consejo',
+     body:()=>`En este diagnóstico has respondido "no lo sé" a ${unknownCount()} métricas clave de tu propio negocio. Voy a ser directo: cualquier recomendación que te dé alguien sin esos datos, incluida esta herramienta, es humo. No sabes qué funciona, así que no puedes saber qué arreglar. La buena noticia: medir es lo más barato que puedes hacer, y suele revelar la fuga real en menos de 30 días.`,
+     palanca:'Antes de tocar nada: una hoja de cálculo con 4 columnas por semana (leads nuevos, emails enviados, ventas, origen de cada venta). Sin herramientas caras. Treinta días de datos valen más que cualquier consejo.'},
+
+    {id:'sinlista', sev:10, cond:a=>a.lista==='no'&&a.audiencia&&a.audiencia!=='au1',
+     title:'Construyes sobre terreno alquilado',
+     body:()=>`Tienes una audiencia de ${AL.audiencia?.toLowerCase()} en ${AL.canal} y ninguna lista propia. Eso significa que tu acceso a cada una de esas personas depende de un algoritmo que no controlas. El día que el alcance baje (y siempre baja), tu facturación baja con él. Una audiencia sin lista no es un activo, es una concesión.`,
+     palanca:'Un lead magnet específico para tu audiencia y un sistema de captura. Objetivo realista: convertir 1-2% de tu audiencia en suscriptores cada mes. Eso es construir sobre terreno propio.'},
+
+    {id:'dormida', sev:9, cond:a=>(a.lista==='l3'||a.lista==='l4'||a.lista==='l5')&&(a.frec==='mensual'||a.frec==='sololanz'||a.frec==='casinunca'),
+     title:'Tu lista está dormida',
+     body:()=>`Me has dicho que tienes ${AL.lista?.toLowerCase()} contactos y que les escribes ${AL.frec?.toLowerCase()}. Tu activo más caro pasa la mayor parte del mes sin generar nada. Una lista no se mantiene caliente sola: cada semana de silencio, una parte deja de abrirte para siempre. Y cuando solo escribes para vender, enseñas a tu lista que tu nombre en el inbox significa "me van a pedir dinero".`,
+     palanca:'Frecuencia antes que captación: pasar a 4-6 envíos al mes con emails que aporten y vendan sin pedir perdón. Es la palanca más barata que tienes ahora mismo.'},
+
+    {id:'apulmon', sev:9, cond:a=>(a.venta==='lanz')&&a.evergreen==='no',
+     title:'Vendes a pulmón: sin lanzamiento no hay ingresos',
+     body:()=>`Vendes solo con lanzamientos y no tienes ningún sistema evergreen. Eso significa que tu facturación es una línea de picos y valles, y los valles los pagas tú: en caja y en ansiedad. Cada lanzamiento parte de cero. ${A.nlanz==='uno'?'Y con un solo lanzamiento al año, tu negocio entero depende de que una semana salga bien.':''}`,
+     palanca:'Construir el suelo: una secuencia evergreen que venda tu oferta de entrada entre lanzamientos. No reemplaza los lanzamientos, les quita el peso de sostener todo el negocio.'},
+
+    {id:'evergreenciega', sev:7, cond:a=>a.evergreen==='si_nose',
+     title:'Tienes un evergreen del que no sabes nada',
+     body:()=>`Me has dicho que tienes una secuencia evergreen activa pero que no sabes si vende. Eso es tener un empleado al que no le pides cuentas. O está generando y no lo capitalizas, o está quemando leads nuevos con una secuencia rota y no te enteras. Las dos opciones son caras.`,
+     palanca:'Auditar la secuencia esta semana: cuántos entran, cuántos la terminan, cuántos compran. Tres números. Con eso ya sabes si tienes una máquina o un agujero.'},
+
+    {id:'cubo', sev:8, cond:a=>a.friccion==='captar'&&((a.frec&&a.frec!=='varias'&&a.frec!=='semanal')||a.evergreen==='no'),
+     title:'Quieres captar más, pero tu cubo tiene agujeros',
+     body:()=>`Tu fricción declarada es captar leads nuevos. Pero tus propias respuestas dicen otra cosa: ${A.frec&&A.frec!=='varias'&&A.frec!=='semanal'?'le escribes poco a la lista que ya tienes':''}${A.frec&&A.frec!=='varias'&&A.frec!=='semanal'&&A.evergreen==='no'?' y ':''}${A.evergreen==='no'?'no tienes sistema que convierta en automático':''}. Captar más leads hoy es meter agua en un cubo agujereado: cada lead nuevo recibirá el mismo trato que los que ya tienes.`,
+     palanca:'Invertir el orden: primero el sistema de conversión sobre los leads que ya tienes, después el grifo de captación. Lo contrario es pagar dos veces por el mismo problema.'},
+
+    {id:'adsciegas', sev:8, cond:a=>a.fuente==='ads'&&a.cpl==='no',
+     title:'Compras leads sin saber el precio',
+     body:()=>`Tu principal fuente de leads es publicidad de pago y no conoces tu coste por lead. Estás comprando algo todos los días sin mirar la etiqueta. Puede que estés pagando bien, puede que estés financiando la fiesta de la plataforma. Sin ese número, escalar ads es apostar, no invertir.`,
+     palanca:'Coste por lead y coste por venta, esta semana. Están en tu administrador de anuncios, solo hay que dividir. Con esos dos números decides si pisar el acelerador o el freno.'},
+
+    {id:'sinrecurrencia', sev:7, cond:a=>a.recurrente==='no'&&a.tiempo!=='menos1',
+     title:'Cada mes empiezas de cero',
+     body:()=>`Llevas ${AL.tiempo?.toLowerCase()} en esto y no tienes ninguna oferta recurrente. Eso significa que el día 1 de cada mes tu facturación vuelve a cero y toda la presión cae sobre la próxima venta. Los negocios digitales que duermen tranquilos tienen un suelo recurrente que paga los fijos antes de empezar el mes.`,
+     palanca:'No hace falta montar una membresía mañana. Empieza por la pregunta: ¿qué necesitan tus clientes DESPUÉS de tu producto principal? Ahí suele estar la oferta recurrente esperando.'},
+
+    {id:'monoproducto', sev:6, cond:a=>a.recompra==='unica',
+     title:'Tu cliente más caro solo te compra una vez',
+     body:()=>`No tienes una segunda oferta que tus clientes puedan comprar. El lead más caro de conseguir es el primero; el más barato es el que ya te compró y confía en ti. Ahora mismo ese segundo lead, el barato, no tiene nada que comprarte. Estás pagando precio de cliente nuevo por cada euro que facturas.`,
+     palanca:'Diseñar el siguiente paso natural de tu producto principal: profundización, acompañamiento o implementación. Venderle a quien ya te compró convierte 3-5 veces mejor que a un desconocido.'},
+
+    {id:'lanzestancado', sev:7, cond:a=>a.ultlanz==='igual'||a.ultlanz==='peor',
+     title:()=>A.ultlanz==='peor'?'Tu último lanzamiento fue peor, y eso es una señal':'Tus lanzamientos se han estancado',
+     body:()=>`Me has dicho que tu último lanzamiento fue ${A.ultlanz==='peor'?'peor que':'más o menos igual que'} el anterior. Cuando un lanzamiento deja de crecer con la misma audiencia, casi siempre es una de dos: la lista está quemada de ver la misma mecánica, o la oferta dejó de ser nueva para quien ya la vio dos veces. Repetir lo mismo esperando otro resultado sale caro.`,
+     palanca:'Antes del próximo lanzamiento: revisar cuánta gente NUEVA entró a tu lista desde el anterior. Si lanzas a la misma audiencia de siempre, el problema no es el lanzamiento, es la captación entre lanzamientos.'},
+
+    {id:'manualsinsistema', sev:7, cond:a=>a.venta==='manual'&&(a.fact==='f3'||a.fact==='f4'||a.fact==='f5'),
+     title:'Facturas bien, pero el sistema eres tú',
+     body:()=>`Facturas ${AL.fact?.toLowerCase()} al mes vendiendo a mano: DMs, llamadas, propuestas. Eso habla bien de ti y mal de tu sistema. Tu facturación tiene un techo exacto: tus horas. Y tiene un riesgo exacto: cualquier semana que tú no estés al 100%, la máquina se para, porque la máquina eres tú.`,
+     palanca:'No se trata de dejar de vender a mano (cierras bien así). Se trata de que el sistema te traiga conversaciones cualificadas en vez de empezarlas tú todas: lead magnet, secuencia corta, y filtro antes de la llamada.'},
+
+    {id:'tiempobotella', sev:7, cond:a=>a.friccion==='tiempo',
+     title:'El cuello de botella tiene tu nombre',
+     body:()=>`Tu propia respuesta: todo depende de ti y no escalas. Eso no se arregla trabajando más horas, se arregla con activos que vendan sin ti${A.evergreen==='no'?', y me has dicho que hoy no tienes ninguno funcionando':''}. Cada mes que pasa sin sistema es un mes de techo autoimpuesto.`,
+     palanca:'Elegir UNA pieza que venda sin ti y construirla hasta que funcione: una secuencia evergreen sobre tu mejor oferta. Una. No cinco funnels a medias.'},
+
+    {id:'aperturabaja', sev:6, cond:a=>a.apertura==='a4',
+     title:'Tu lista te ha dejado en visto',
+     body:()=>`Una tasa de apertura por debajo del 15% significa que 85 de cada 100 personas que pidieron saber de ti ya no te abren. Antes de mandar más emails a esa lista, toca entender por qué: frecuencia errática, asuntos planos, o una lista llena de gente que entró por un lead magnet y nunca recibió nada más de valor.`,
+     palanca:'Campaña de reactivación: 3-4 emails a los inactivos con tu mejor contenido y una razón honesta para quedarse. Los que no reaccionen, fuera de la lista. Mejor 2.000 que abren que 10.000 que te ignoran.'},
+
+    {id:'churnciego', sev:8, cond:a=>a.modelo==='membresia'&&a.churn==='no',
+     title:'Tienes una membresía y no sabes cuánta gente se va',
+     body:()=>`Tu negocio es recurrente y no mides el churn. En una membresía, la tasa de baja ES el negocio: define cuánto vale cada alta, cuánto puedes pagar por captar, y si estás llenando una bañera con el tapón quitado. Sin ese número, todo lo demás son conjeturas.`,
+     palanca:'Calcular el churn de los últimos 3 meses hoy mismo: bajas del mes entre socios al inicio del mes. Si sale más del 8-10% mensual, la prioridad no es captar socios, es entender por qué se van.'},
+
+    {id:'sinleadmagnet', sev:6, cond:a=>a.leadmagnet==='no'&&a.fuente!=='nocapto',
+     title:'Captas atención pero no la conviertes en activo',
+     body:()=>`Tienes una fuente de leads funcionando (${AL.fuente?.toLowerCase()}) pero ningún lead magnet activo capturando emails. Toda esa atención que generas se evapora: la ve gente, le gusta, y se va sin dejar rastro. Es tener una tienda con escaparate y sin puerta.`,
+     palanca:'Un lead magnet que resuelva UN problema específico de tu cliente ideal, conectado a una secuencia de 3-5 emails. No hace falta más para empezar a convertir atención en activo.'},
+
+    {id:'nocapta', sev:8, cond:a=>a.fuente==='nocapto',
+     title:'Sin captación activa, tu negocio vive de las rentas',
+     body:()=>`Me has dicho que ahora mismo no captas leads de forma activa. Eso significa que vendes a la audiencia que ya te conoce, y esa audiencia se agota: compra, se enfría o se va. Todo lo demás que mejores en tu sistema dará igual si no entra gente nueva por la puerta.`,
+     palanca:'Un canal, no cinco: elegir donde ya tienes tracción natural y sistematizarlo. Contenido con captura de email o colaboraciones con audiencias afines. Volumen pequeño pero constante gana a campañas heroicas puntuales.'},
+
+    {id:'recompraciega', sev:5, cond:a=>a.recompra==='nose'||a.recompra==='aprox',
+     title:'No sabes cuánto vale un cliente después de la primera compra',
+     body:()=>`${A.recompra==='nose'?'No sabes':'Solo sabes aproximadamente'} qué parte de tus clientes vuelve a comprar. Ese número decide cuánto puedes invertir en captar: si un cliente vale 2 compras, puedes pagar el doble por conseguirlo que tu competencia que solo mira la primera venta.`,
+     palanca:'Revisar los últimos 50 clientes: cuántos compraron algo más. Un porcentaje. Veinte minutos de trabajo que cambian tu matemática de captación.'}
+    ];
+
+    /* =====================================================
+       REGLAS DE LANZAMIENTO (solo modo auditoría)
+       Van aparte de las 17: no compiten en el top-3 ni cuentan para "vuelas a ciegas".
+       Umbrales [PROP, Daniel ajusta]: asistencia en vivo < 20 % · venta sobre registros < 1 %.
+    ===================================================== */
+    const LN = k=>{ const v=(A.l_numeros||{})[k]; return typeof v==='number'?v:null; };
+    const LG = ()=>{ const v=(A.l_gasto||{}).gasto; return typeof v==='number'?v:null; };
+    const PCT = (a,b)=>fmtNum(Math.round(a/b*1000)/10)+'%';
+    const FASES = {convocatoria:'la convocatoria', cortejo:'el cortejo', cita:'la cita', accion:'la acción', valle:'el valle de las sombras', remate:'el remate', resaca:'la resaca'};
+    function fasesVacias(){
+      const f = A.l_fases;
+      if(!Array.isArray(f)||f.includes('nose')) return [];
+      return Object.keys(FASES).filter(k=>!(k==='cita'&&(A.l_mecanica==='vsl'||A.l_mecanica==='emails'))&&!f.includes(k));
+    }
+    function listaY(arr){ return arr.length<2 ? arr.join('') : arr.slice(0,-1).join(', ')+' y '+arr[arr.length-1]; }
+
+    const LAUNCH_RULES = [
+    {id:'sincierre', sev:9, cond:a=>a.l_carrito==='siempre'||(Array.isArray(a.l_cierre)&&(a.l_cierre.includes('nada')||a.l_cierre.includes('ampliado'))),
+     title:'Tu carrito no tuvo un cierre de verdad',
+     body:()=> A.l_carrito==='siempre'
+       ? `Me has dicho que la oferta sigue disponible. Un lanzamiento sin cierre es una venta continua con un pico al principio: el que dudaba no tiene ningún motivo para decidir hoy, y "ya lo haré" es la forma más educada de decir que no. El remate es donde se factura entre el 40 y el 60% de un lanzamiento, y sin puerta que se cierre no hay remate.`
+       : A.l_cierre.includes('ampliado')
+       ? `Me has dicho que anunciaste una fecha y luego ampliaste o reabriste. Se entiende: el último día siempre parece que queda gente por entrar. Pero una fecha que no se cumple le enseña a tu lista que tus fechas son orientativas, y la próxima vez que digas "cierra el viernes", una parte ya sabe que no. Esa parte espera. Y la espera es justo lo que el cierre existe para evitar.`
+       : `Me has dicho que el carrito se cerró sin anunciarlo. O sea que te saltaste el tramo que más factura: el aviso de que se acaba. Sin una fecha a la vista, el que dudaba no tenía ningún motivo para decidir, y cuando quiso, ya no había puerta.`,
+     palanca:'Una fecha de cierre anunciada desde la apertura y cumplida, aunque duela. Si quieres rescatar a los que se quedaron fuera, eso se planifica como una reapertura en la resaca, con su propia razón y su propio plazo, no como una prórroga de última hora.'},
+
+    {id:'citafalla', sev:8, cond:a=>['webinar','reto','directos','otra'].includes(a.l_mecanica)&&LN('registros')>0&&LN('asistencia')!==null&&LN('asistencia')<20,
+     title:'La cita falla: se registran, pero no aparecen',
+     body:()=>`Se registraron ${fmtNum(LN('registros'))} personas y al directo llegó en vivo el ${fmtNum(LN('asistencia'))}%. O sea que ${fmtNum(Math.round((100-LN('asistencia'))*10)/10)} de cada 100 que levantaron la mano no estaban cuando llegó la oferta. Registrarse cuesta un clic; presentarse cuesta una hora de su día. Entre la gente que se registra y la gente que aparece hay un abismo, y ese abismo no se cruza con un recordatorio: se cruza con una escalera.`,
+     palanca:'La fase de la cita: una escalera de asistencia, con toques de densidad creciente los días previos y el mismo día del directo, y un incentivo que solo exista en vivo. Y ojo: si lo puedes mandar por email al día siguiente, no es un incentivo, es contenido.'},
+
+    {id:'remateflojo', sev:8, cond:a=>LN('asistencia')!==null&&LN('asistencia')>=20&&LN('registros')>0&&LN('ventas')!==null&&LN('ventas')/LN('registros')<0.01,
+     title:'La gente vino, pero no compró: la fuga está en la oferta o en el carrito',
+     body:()=>`Al directo llegó el ${fmtNum(LN('asistencia'))}% de los registrados, así que la cita hizo su trabajo. Pero de ${fmtNum(LN('registros'))} registrados compraron ${fmtNum(LN('ventas'))}: un ${PCT(LN('ventas'),LN('registros'))}.${LN('visitas')>0?` Por la página de ventas pasaron ${fmtNum(LN('visitas'))} personas y compró el ${PCT(LN('ventas'),LN('visitas'))} de ellas.`:''} Cuando la gente aparece y no compra, hay dos sospechosos: la oferta, que no se entendió o no convenció, o el tramo del carrito, que no la sostuvo hasta el cierre. Y es en el remate, no en la apertura, donde se factura entre el 40 y el 60% de un lanzamiento.`,
+     palanca:'Separar a los dos sospechosos antes de tocar nada. Si mucha gente vio la página de ventas y no compró, el problema está en la oferta. Si apenas llegó a verla, el problema está en los emails del carrito. Los clics de cada email y las visitas de cada día lo dicen.'},
+
+    {id:'fasesvacias', sev:7, cond:a=>fasesVacias().length>0,
+     title:()=>{ const v=fasesVacias(); return v.length===1 ? 'Un tramo de tu lanzamiento se quedó sin ninguna pieza' : v.length+' tramos de tu lanzamiento se quedaron sin ninguna pieza'; },
+     body:()=>{ const v=fasesVacias(); return `En tu último lanzamiento no hubo ninguna pieza en ${listaY(v.map(k=>FASES[k]))}.${v.includes('valle')?' Y el valle de las sombras es donde casi siempre está el agujero: el carrito lleva días abierto, la novedad ya pasó y todavía falta para el cierre. Es donde la gente se cae, y donde casi nadie manda nada que merezca la pena leer.':''} Un tramo vacío no aparece en ninguna métrica, porque no hay email del que medir aperturas ni clics. Por eso casi nadie lo ve.`; },
+     palanca:'Antes de reescribir nada de lo que ya mandaste, llenar los tramos vacíos, empezando por el más cercano a la venta. Cada tramo tiene un trabajo distinto, y ninguna pieza de otro tramo lo hace por él.'}
+    ];
+
+    function launchUnknown(){
+      const q = Q.find(x=>x.id==='l_numeros'), n = A.l_numeros||{};
+      const ks = numFields(q).map(f=>f.k).filter(k=>n[k]!==undefined);
+      return {total:ks.length, nose:ks.filter(k=>n[k]==='nose').length};
+    }
+    function launchFindings(){ return A.l_mecanica ? LAUNCH_RULES.filter(r=>r.cond(A)).sort((a,b)=>b.sev-a.sev) : []; }
+    const TXT = x=>typeof x==='function'?x():x;
+
+    function antiPriority(findings){
+      const ids = findings.map(f=>f.id);
+      if(ids.includes('ciegas')) return {t:'Qué no haría ahora: cambiar nada importante', b:'Ni la oferta, ni la web, ni el funnel. Sin datos, cualquier cambio es una apuesta y no podrás saber si funcionó. Primero 30 días midiendo, después decidimos qué tocar.'};
+      if(ids.includes('cubo')||ids.includes('dormida')) return {t:'Qué no haría ahora: captar más leads', b:'Sería meter agua en un cubo agujereado. Cada lead nuevo que entre hoy recibirá el mismo silencio que los que ya tienes. Primero el sistema de conversión, después el grifo.'};
+      if(ids.includes('sinlista')) return {t:'Qué no haría ahora: publicar más contenido', b:'Más alcance sin sistema de captura es regalar audiencia al algoritmo. Primero la puerta (lead magnet + captura), después el escaparate.'};
+      if(ids.includes('apulmon')) return {t:'Qué no haría ahora: planear otro lanzamiento más grande', b:'Subir la apuesta sin construir el suelo solo hace los valles más profundos. Primero el evergreen que sostenga entre lanzamientos, después escalar los picos.'};
+      return {t:'Qué no haría ahora: añadir piezas nuevas al sistema', b:'Ni más funnels, ni más productos, ni rediseñar la marca. Tu diagnóstico apunta a afinar lo que ya existe, no a construir más cosas a medias.'};
+    }
+
+    function buildResult(){
+      const {dims,total} = scoreDims();
+      const level = [...LEVELS].reverse().find(l=>total>=l.min);
+      let findings = RULES.filter(r=>r.cond(A)).sort((a,b)=>b.sev-a.sev).slice(0,3);
+      if(findings.length===0){
+        const weakest = Object.keys(dims).sort((a,b)=>dims[a]-dims[b])[0];
+        if(level.n>=4){
+          findings = [{id:'maduro', sev:1,
+            title:'Tu sistema está sólido. Tu fuga ahora es de afinado, no de construcción',
+            body:()=>`Tienes las piezas que a la mayoría le faltan: frecuencia, arquitectura, recurrencia y métricas. En este punto, la fuga ya no está en lo que falta sino en lo que rinde por debajo de su techo. Según tus respuestas, tu dimensión más floja es ${DIMNAMES[weakest].toLowerCase()} (${dims[weakest]}/100). Ahí es donde un punto porcentual de mejora vale más dinero que cualquier pieza nueva.`,
+            palanca:'En sistemas maduros la palanca es testar, no construir: asuntos, ofertas, precios y segmentación sobre lo que ya funciona. Una mejora del 10% en cada eslabón de un funnel que ya convierte se multiplica, no se suma.'}];
+        } else {
+          findings = [{id:'disperso', sev:1,
+            title:'No hay una fuga única que destaque: tu margen está repartido',
+            body:()=>`Tus respuestas no apuntan a un único agujero grande, sino a varias piezas a medio rendimiento. Tu dimensión más floja ahora mismo es ${DIMNAMES[weakest].toLowerCase()} (${dims[weakest]}/100), y es por donde empezaría. Cuando no hay un incendio, la palanca es elegir un frente y cerrarlo bien antes de abrir el siguiente.`,
+            palanca:`Foco: trabajar ${DIMNAMES[weakest].toLowerCase()} hasta dejarla sólida antes de tocar el resto. Avanzar en una sola dimensión rinde más que mejorar cuatro a la vez sin terminar ninguna.`}];
+        }
+      }
+      return {dims,total,level,findings};
+    }
+
+    /* =====================================================
+       MODULO DE NUMEROS
+    ===================================================== */
+    let MM = null;
+    function mathModule(){
+      const fmt = n => currency + Math.round(n).toLocaleString('es');
+      if(A.lista && A.lista!=='no' && A.lista!=='l1'){
+        return {
+          type:'lista',
+          title:'Qué podría estar generando tu lista cada mes',
+          sliders:[
+            {id:'s-act', label:'% de tu lista que asumimos activa', min:20, max:80, val:50, unit:'%'},
+            {id:'s-env', label:'Envíos al mes', min:2, max:12, val:4, unit:''},
+            {id:'s-open', label:'Tasa de apertura', min:5, max:50, val:MID.apertura||20, unit:'%'},
+            {id:'s-ctr', label:'% de clic sobre aperturas (asumido)', min:1, max:8, val:2, unit:'%'},
+            {id:'s-conv', label:'% de conversión sobre clics (asumido)', min:1, max:5, val:1, unit:'%'}
+          ],
+          calc:(v)=> (MID.lista||0) * v['s-act']/100 * v['s-env'] * v['s-open']/100 * v['s-ctr']/100 * v['s-conv']/100 * (MID.ticket||300),
+          sub:()=>`Con tu lista de ${AL.lista?.toLowerCase()} contactos y tu ticket de ${AL.ticket?.toLowerCase()} ${currency==='$'?'USD':'EUR'}, solo de email recurrente, antes de lanzamientos.`,
+          fmt
+        };
+      }
+      if(A.lista==='no' && A.audiencia){
+        return {
+          type:'audiencia',
+          title:'La lista que no estás construyendo',
+          sliders:[
+            {id:'s-cap', label:'% de tu audiencia capturable al mes (asumido)', min:1, max:5, val:1.5, step:.5, unit:'%'}
+          ],
+          calc:(v)=> (MID.audiencia||0) * v['s-cap']/100,
+          sub:()=>`Suscriptores nuevos al mes que tu audiencia de ${AL.audiencia?.toLowerCase()} en ${AL.canal} podría estar generando con un sistema de captura. En 12 meses, multiplícalo por 12: ese es el activo que hoy se queda en el algoritmo.`,
+          fmt: n => Math.round(n).toLocaleString('es') + ' suscriptores/mes',
+          isLeads:true
+        };
+      }
+      return null;
+    }
+
+    /* =====================================================
+       CAPTURA + INFORME
+    ===================================================== */
+    function submitCapture(){
+      const name = document.getElementById('f-name').value.trim();
+      const email = document.getElementById('f-email').value.trim();
+      const eOK = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+      document.getElementById('e-email').style.display = eOK?'none':'block';
+      if(!eOK) return;
+
+      ping('submit');
+      const wa = document.getElementById('f-wa').value.trim();
+      const online = document.getElementById('f-online').value.trim();
+      const modeloOpen = document.getElementById('f-modelo').value.trim();
+      const result = buildResult();
+      if(SUBMIT_URL){
+        const ref0 = new URLSearchParams(location.search).get('r')||'';
+        const ref = AUDIT ? 'AUDITORIA'+(ref0?' r='+ref0:'') : ref0;
+        // Respuestas completas: ¿pregunta? -> respuesta, en el orden en que las contestó
+        const detalle = path.map(i=>Q[i]).filter(q=>AL[q.id]).map(q=>q.text+' -> '+AL[q.id]).join('\n');
+        const dims = result.dims;
+        const dimStr = Object.keys(dims).map(k=>DIMNAMES[k]+': '+dims[k]+'/100').join(' | ');
+        const fugaTitulo = typeof result.findings[0].title==='function'?result.findings[0].title():result.findings[0].title;
+
+        // Diagnóstico completo que ya calcula la herramienta (hallazgos + palancas + qué no haría + potencial)
+        const diag = result.findings.map((f,i)=>{
+          const t = typeof f.title==='function'?f.title():f.title;
+          const etq = i===0?'FUGA PRINCIPAL':'HALLAZGO '+(i+1);
+          return etq+': '+t+'\n'+f.body()+'\nPALANCA: '+f.palanca;
+        }).join('\n\n');
+        const anti = antiPriority(result.findings);
+        const mm = mathModule();
+        let potencial = '';
+        if(mm){ let v={}; mm.sliders.forEach(s=>v[s.id]=s.val); potencial = mm.title+': '+mm.fmt(mm.calc(v))+(mm.isLeads?'':'/mes')+'\n('+mm.sub()+')'; }
+
+        const origen = ref0 ? 'via enlace enviado (r='+ref0+')' : 'acceso directo';
+        const sub = (AUDIT?'AUDITORIA · arranque: ':'Lead diagnostico: ')+(name||'sin nombre')+' | Nivel '+result.level.n+'/5 | '+fugaTitulo;
+        const lanzTxt = AUDIT ? launchEmail()+evergreenEmail()+docsEmail() : '';
+        const linea = '====================================================';
+        const body =
+          (AUDIT?'CUESTIONARIO DE ARRANQUE DE AUDITORIA':'NUEVO DIAGNOSTICO COMPLETADO')+'  ('+origen+')\n'+linea+'\n\n'+
+          'CONTACTO\n'+
+          '  Nombre:    '+(name||'')+'\n'+
+          '  Email:     '+(email||'')+'\n'+
+          '  WhatsApp:  '+(wa||'(no ha dejado)')+'\n'+
+          '  Online:    '+(online||'(no ha dejado enlaces)')+'\n'+
+          '  Vende/funnel: '+(modeloOpen||'(no ha especificado)')+'\n\n'+
+          'RESULTADO\n'+
+          '  Nivel '+result.level.n+'/5  ('+result.level.t+')\n'+
+          '  Score '+result.total+'/100\n'+
+          '  Dimensiones: '+dimStr+'\n\n'+
+          lanzTxt+
+          'DIAGNOSTICO DE LA HERRAMIENTA\n'+linea+'\n'+diag+'\n\n'+
+          'QUE NO HARIA AHORA\n'+anti.t+'\n'+anti.b+'\n\n'+
+          (potencial?('POTENCIAL (estimacion con asunciones por defecto)\n'+potencial+'\n\n'):'')+
+          'RESPUESTAS COMPLETAS\n'+linea+'\n'+detalle+'\n\n'+
+          'QUE HA INTENTADO YA\n'+linea+'\n'+(A.intentado&&A.intentado.trim()?A.intentado:'(no ha escrito nada)')+'\n\n'+
+          linea+'\n'+(AUDIT?'Arranque de auditoria: llegar a la conversacion de arranque con esto leido y pedir el material que falte.':'Material listo para investigar su presencia online y, si merece la pena, montar un strategy doc.')+'\n';
+
+        const payload = {name, email, wa, online, modeloOpen, ts:new Date().toISOString(),
+          nivel:result.level.n, nivelTitulo:result.level.t, score:result.total,
+          arquetipo:result.findings[0]?.id||'', fugaTitulo,
+          dimensiones: dimStr, detalle,
+          respuestas: Object.keys(AL).map(k=>k+': '+AL[k]).join(' | '),
+          intentado: A.intentado||'', ref,
+          emailSubject: sub, emailBody: body};
+        if(AUDIT){ auditSend(payload); return; }
+        fetch(SUBMIT_URL, {method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain'}, body:JSON.stringify(payload)}).catch(()=>{});
+      }
+      showReport(result, name);
+    }
+
+    function launchEmail(){
+      const linea = '====================================================';
+      const head = 'TU ULTIMO LANZAMIENTO (bloque de auditoria)\n'+linea+'\n';
+      if(!A.l_mecanica) return head+'No vende por lanzamientos (ha elegido: '+(AL.venta||'?')+'), asi que no ha visto este bloque.\n\n';
+      const row = (k,v)=>'  '+(k+':').padEnd(22)+(v||'(sin responder)')+'\n';
+      const n = A.l_numeros||{}, money = v=>currency+fmtNum(Math.round(v));
+      const show = (k,f)=>{ const v=n[k]; return v===undefined?null:(v==='nose'?'no lo sabe':f(v)); };
+      let s = head;
+      s += row('Mecanica', AL.l_mecanica);
+      s += fechasRow();
+      [['registros','Registros',fmtNum],['asistencia','Asistencia en vivo',v=>fmtNum(v)+'%'],['visitas','Visitas a ventas',fmtNum],['ventas','Ventas',fmtNum],['ingresos','Ingresos',money]]
+        .forEach(([k,l,f])=>{ const v=show(k,f); if(v!==null) s += row(l, v); });
+      if(A.l_gasto) s += row('Inversion en ads', A.l_gasto.gasto==='nose'?'no lo sabe':money(A.l_gasto.gasto));
+      s += row('Carrito abierto', AL.l_carrito);
+      if(AL.l_cierre) s += row('Que cerro la puerta', AL.l_cierre);
+      s += row('Trafico', AL.l_trafico);
+      const vac = fasesVacias();
+      s += row('Tramos con pieza', AL.l_fases);
+      s += row('Tramos VACIOS', A.l_fases&&A.l_fases.includes('nose')?'no lo sabe':(vac.length?listaY(vac.map(k=>FASES[k])):'ninguno'));
+      const u = launchUnknown();
+      s += row('Numeros que no sabe', u.nose+' de '+u.total);
+      // Ratios que salen de sus propios números (solo si los dos términos existen)
+      const R = [];
+      if(LN('registros')>0&&LN('ventas')!==null) R.push('Registro -> venta: '+PCT(LN('ventas'),LN('registros')));
+      if(LN('visitas')>0&&LN('ventas')!==null) R.push('Visita a ventas -> venta: '+PCT(LN('ventas'),LN('visitas')));
+      if(LN('ventas')>0&&LN('ingresos')!==null) R.push('Ingreso medio por venta: '+money(Math.round(LN('ingresos')/LN('ventas'))));
+      if(LG()>0&&LN('registros')>0) R.push('Coste por registro: '+currency+(LG()/LN('registros')).toLocaleString('es',{minimumFractionDigits:2,maximumFractionDigits:2}));
+      if(LG()>0&&LN('ingresos')!==null) R.push('Ingresos / inversion en ads: '+fmtNum(Math.round(LN('ingresos')/LG()*10)/10));
+      s += '\n  RATIOS (calculados con sus numeros)\n'+(R.length?R.map(x=>'  '+x).join('\n'):'  (faltan numeros para calcular ninguno)')+'\n\n';
+      s += 'OBJETIVO Y CUANDO SE TORCIO (sus palabras)\n'+linea+'\n'+(A.l_objetivo&&A.l_objetivo.trim()?A.l_objetivo:'(no ha escrito nada)')+'\n\n';
+      const lf = launchFindings();
+      s += 'HALLAZGOS DEL LANZAMIENTO (el cliente no los ve: al enviar solo ve el gracias)\n'+linea+'\n'+
+        (lf.length ? lf.map(f=>'REGLA: '+TXT(f.title)+'\n'+f.body()+'\nPALANCA: '+f.palanca).join('\n\n') : '(no salta ninguna regla de lanzamiento)')+'\n\n';
+      return s;
+    }
+
+    function waLink(r, name){
+      const t = typeof r.findings[0].title==='function'?r.findings[0].title():r.findings[0].title;
+      const msg = 'Hola Daniel, soy '+(name||'')+'. Acabo de hacer el diagnóstico (Nivel '+r.level.n+'/5, '+t+'). Quiero el desglose completo de mi caso.';
+      return 'https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(msg);
+    }
+
+    /* Radar pentágono SVG (mismo tratamiento gráfico que los strategy docs) */
+    function radarSVG(dims){
+      const order=['captacion','relacion','arquitectura','recurrencia','medicion'];
+      const SHORT={captacion:'Captación',relacion:'Relación',arquitectura:'Arquitectura',recurrencia:'Recurrencia',medicion:'Medición'};
+      const cx=160, cy=145, R=100;
+      const pt=(i,v)=>{const a=i*72*Math.PI/180; return [(cx+R*v/100*Math.sin(a)).toFixed(2),(cy-R*v/100*Math.cos(a)).toFixed(2)];};
+      const poly=order.map((k,i)=>pt(i,dims[k]).join(',')).join(' ');
+      const dots=order.map((k,i)=>{const p=pt(i,dims[k]); return '<circle cx="'+p[0]+'" cy="'+p[1]+'" r="3.5" fill="'+(dims[k]<35?'#D98A86':'#C9A84C')+'"/>';}).join('');
+      const LBL=[[160,24,'middle'],[278,110,'start'],[230,248,'start'],[90,248,'end'],[42,110,'end']];
+      const labels=order.map((k,i)=>{const l=LBL[i]; return '<text x="'+l[0]+'" y="'+l[1]+'" text-anchor="'+l[2]+'" font-size="12" fill="rgba(243,237,228,0.82)">'+SHORT[k]+' <tspan font-weight="700" fill="'+(dims[k]<35?'#D98A86':'#C9A84C')+'">'+dims[k]+'</tspan></text>';}).join('');
+      return '<svg viewBox="-70 5 460 300" width="100%" style="max-width:440px;display:block;margin:0 auto 14px;" font-family="DM Sans,Inter,sans-serif" xmlns="http://www.w3.org/2000/svg">'
+        +'<polygon points="160,45 255.1,114.1 218.8,225.9 101.2,225.9 64.9,114.1" fill="none" stroke="rgba(255,255,255,0.13)" stroke-width="1"/>'
+        +'<polygon points="160,95 207.6,129.5 189.4,185.5 130.6,185.5 112.4,129.5" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>'
+        +'<line x1="160" y1="145" x2="160" y2="45" stroke="rgba(255,255,255,0.10)"/>'
+        +'<line x1="160" y1="145" x2="255.1" y2="114.1" stroke="rgba(255,255,255,0.10)"/>'
+        +'<line x1="160" y1="145" x2="218.8" y2="225.9" stroke="rgba(255,255,255,0.10)"/>'
+        +'<line x1="160" y1="145" x2="101.2" y2="225.9" stroke="rgba(255,255,255,0.10)"/>'
+        +'<line x1="160" y1="145" x2="64.9" y2="114.1" stroke="rgba(255,255,255,0.10)"/>'
+        +'<polygon points="'+poly+'" fill="rgba(201,168,76,0.28)" stroke="#C9A84C" stroke-width="2"/>'
+        +dots+labels+'</svg>';
+    }
+
+    function showReport(r, name){
+      MM = mathModule();
+      const nF = r.findings.length;
+      const fugaTitulo = typeof r.findings[0].title==='function'?r.findings[0].title():r.findings[0].title;
+      const weakest = Object.keys(r.dims).sort((a,b)=>r.dims[a]-r.dims[b])[0];
+
+      let h = `
+      <div class="rcard gold levelhead">
+        <p class="eyebrow" style="margin-bottom:0;">Diagnóstico de ${name||'tu negocio'}</p>
+        <div class="ln">Nivel ${r.level.n} de 5</div>
+        <div class="lt">${r.level.t}</div>
+        <div class="dots">${[1,2,3,4,5].map(i=>'<i class="'+(i<=r.level.n?'on':'')+'"></i>').join('')}</div>
+        <div class="lscore">Score global: ${r.total}/100</div>
+      </div>
+
+      ${(()=>{
+        const sym = currency;
+        const rows = [
+          ['Modelo', AL.modelo],
+          ['Facturación', (AL.fact && A.fact!=='fx') ? AL.fact+' '+sym+'/mes' : ''],
+          ['Ticket', AL.ticket ? AL.ticket+' '+sym : ''],
+          ['Trayectoria', AL.tiempo],
+          ['Fuente de leads', AL.fuente],
+          (A.lista==='no')
+            ? ['Audiencia', AL.audiencia ? (AL.audiencia + (AL.canal?(' · '+AL.canal):'')) : '']
+            : ['Lista de email', AL.lista||'']
+        ].filter(x=>x[1]);
+        if(!rows.length) return '';
+        return `<div class="rcard"><div class="ftag">Tu punto de partida</div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px 24px;">`+
+          rows.map(x=>`<div><span style="display:block;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--ink-dim);margin-bottom:3px;">${x[0]}</span><b style="font-size:0.98rem;color:var(--ink);">${x[1]}</b></div>`).join('')+
+          `</div><p style="font-size:0.9rem;color:var(--ink-dim);margin:18px 0 0;line-height:1.6;">Todo lo que sigue está calculado sobre estos datos. Los tuyos, no los de un promedio.</p></div>`;
+      })()}
+
+      <div class="rcard">
+        <div class="ftag">El radar de tu sistema</div>
+        ${radarSVG(r.dims)}
+        ${Object.keys(r.dims).map(k=>`
+          <div class="dimrow">
+            <div class="dt"><b>${DIMNAMES[k]}</b><span>${r.dims[k]}/100</span></div>
+            <div class="dbar"><i class="${r.dims[k]<35?'low':''}" data-w="${r.dims[k]}"></i></div>
+          </div>`).join('')}
+        <p style="font-size:0.9rem;color:var(--ink-dim);margin-top:20px;margin-bottom:0;line-height:1.6;">Tu eslabón más flojo ahora mismo es <b style="color:var(--ink);">${DIMNAMES[weakest].toLowerCase()}</b> (${r.dims[weakest]}/100). Y un sistema rinde lo que rinde su parte más débil.</p>
+      </div>`;
+
+      if(MM){
+        h += `
+        <div class="rcard">
+          <div class="ftag">${MM.title}</div>
+          <div class="mathnum" id="mathout"></div>
+          <div class="mathsub">${MM.sub()}</div>
+          ${MM.sliders.map(s=>`
+            <div class="slider">
+              <div class="st"><span>${s.label}</span><b id="${s.id}-v"></b></div>
+              <input type="range" id="${s.id}" min="${s.min}" max="${s.max}" step="${s.step||1}" value="${s.val}" oninput="recalc()">
+            </div>`).join('')}
+          <div class="mathnote">Esto es aritmética, no una promesa. Cada asunción está a la vista y puedes moverla tú mismo. El valor no está en la cifra exacta: está en la diferencia entre lo que tus activos podrían generar con asunciones prudentes y lo que generan hoy.</div>
+        </div>`;
+      }
+
+      h += `
+        <div class="rcard">
+          <div class="ftag">Lo que vale mover una palanca pequeña</div>
+          <div style="font-size:0.98rem;color:var(--ink-dim);line-height:1.55;margin-bottom:20px;">Un ejemplo con tus propios números: lo que ganarías convirtiendo un poco mejor a la gente que ya te entra, sin traer a nadie nuevo. Mueve las barras y míralo.</div>
+          <div class="mathnum" id="cmpout"></div>
+          <div class="mathsub" id="cmpsub"></div>
+          <div class="slider">
+            <div class="st"><span>Cuántas de cada 100 te compran hoy</span><b id="c-act-v"></b></div>
+            <input type="range" id="c-act" min="1" max="10" step="0.5" value="2" oninput="recalcCmp()">
+          </div>
+          <div class="slider">
+            <div class="st"><span>A cuántas podrías llegar</span><b id="c-obj-v"></b></div>
+            <input type="range" id="c-obj" min="1" max="12" step="0.5" value="3" oninput="recalcCmp()">
+          </div>
+          <div class="mathnote">El mismo tráfico y la misma oferta, convirtiendo un poco mejor. Pasar de 2% a 3% no es trabajar el doble: es la misma gente, mejor llevada. Esto es aritmética de conversión, no una promesa.</div>
+        </div>`;
+
+      // CLIFFHANGER: el titular de la fuga, pero el desglose se entrega a mano
+      const teaser = nF>=2
+        ? `Y no es la única: he detectado <b style="color:var(--ink);">${nF} puntos</b> donde estás dejando dinero sobre la mesa. Atacarlos en el orden equivocado es perder tiempo, y el orden correcto sale de tus números, no de una corazonada.`
+        : `Tu sistema ya tiene buena base. Aun así hay un punto claro por donde apretar, y un orden para hacerlo bien.`;
+
+      h += `
+      <div class="rcard f-main">
+        <div class="ftag warn">El titular de tu diagnóstico</div>
+        <h3>${fugaTitulo}</h3>
+        <p>${teaser}</p>
+        <p style="margin-bottom:0;">El <b style="color:var(--ink);">porqué</b> de cada uno, <b style="color:var(--ink);">en qué orden</b> taparlos y <b style="color:var(--ink);">con qué</b>, lo reviso a mano sobre tus respuestas y lo que vea en tu web y tus redes. Eso no sale de un test, sale de mirar tu caso.</p>
+      </div>
+
+      ${AUDIT ? launchCard()+`<div class="rcard gold rcta">
+        <h3>Esto es el punto de partida, no la auditoría.</h3>
+        <p>Lo que ves aquí sale de tus respuestas, y tus respuestas son lo que tú crees que pasó. La auditoría es otra cosa: leer lo que pasó de verdad, en tus emails, tus páginas y tus números. Todo lo que has contestado me llega a mí, y con eso llego a nuestra conversación de arranque con tu caso leído y las preguntas hechas.</p>
+        <p class="cta-note">Si quieres adelantarte con el material, <a href="https://wa.me/${WA_NUMBER}?text=${encodeURIComponent('Hola Daniel, soy '+(name||'')+'. Ya he rellenado el cuestionario de arranque de la auditoría.')}" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:underline;">escríbeme por WhatsApp</a>.</p>
+      </div>` : `<div class="rcard gold rcta">
+        <h3>Tu lectura completa te la entrego yo.</h3>
+        <p>No es un PDF que se genera solo y sirve para cualquiera. Es tu caso, leído por mí: cada fuga explicada y en qué orden taparla. No tienes que hacer nada más: reviso tus respuestas y te escribo yo, en breve, al contacto que me has dejado.</p>
+        <p class="cta-note">Tu resultado en pantalla ya es tuyo. La lectura personal te la mando yo. Si prefieres adelantarte, <a href="${waLink(r,name)}" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:underline;">escríbeme por WhatsApp</a>.</p>
+      </div>`}
+
+      <div style="text-align:center;padding:8px 0 0;display:flex;gap:24px;justify-content:center;flex-wrap:wrap;">
+        <button class="qback" onclick="copyResult()">Copiar mi resultado</button>
+        <button class="qback" onclick="restart()">Hacer el diagnóstico de nuevo</button>
+      </div>`;
+
+      document.getElementById('rbox').innerHTML = h;
+      show('report');
+      setTimeout(()=>{document.querySelectorAll('.dbar i').forEach(b=>b.style.width=b.dataset.w+'%')},100);
+      if(MM) recalc();
+      window._factHoy = MID.fact||0;
+      recalcCmp();
+      window._lastResult = r;
+      window._lastName = name;
+    }
+
+    function launchCard(){
+      if(!A.l_mecanica) return '';
+      const lf = launchFindings(), u = launchUnknown();
+      let h = '<div class="rcard"><div class="ftag">Tu último lanzamiento</div>';
+      if(u.nose>=2) h += `<p>De los ${u.total} números del lanzamiento que te he pedido, ${u.nose} no los sabes. No pasa nada: son lo primero que vamos a buscar, y hasta tenerlos, lo que sale de aquí es una hipótesis, no un diagnóstico.</p>`;
+      h += lf.length
+        ? lf.map(f=>`<h3 style="margin-top:24px;">${TXT(f.title)}</h3><p>${f.body()}</p>`).join('')
+        : '<p>Con lo que me has contado, no salta ninguna alarma evidente en el lanzamiento. Eso no quiere decir que no haya fuga: quiere decir que está en un sitio que un cuestionario no ve. Para eso están los números de verdad.</p>';
+      return h+'</div>';
+    }
+
+    function recalc(){
+      if(!MM) return;
+      let v={};
+      MM.sliders.forEach(s=>{
+        const el=document.getElementById(s.id);
+        v[s.id]=parseFloat(el.value);
+        document.getElementById(s.id+'-v').textContent = el.value + s.unit;
+      });
+      document.getElementById('mathout').textContent = MM.isLeads ? MM.fmt(MM.calc(v)) : MM.fmt(MM.calc(v)) + '/mes';
+    }
+
+    function fmtMoney(n){ return currency + Math.round(n).toLocaleString('es'); }
+
+    function recalcCmp(){
+      const aEl=document.getElementById('c-act'), oEl=document.getElementById('c-obj');
+      if(!aEl||!oEl) return;
+      const act=parseFloat(aEl.value), obj=parseFloat(oEl.value);
+      document.getElementById('c-act-v').textContent = act+'%';
+      document.getElementById('c-obj-v').textContent = obj+'%';
+      const fact = window._factHoy||0;
+      const out=document.getElementById('cmpout'), sub=document.getElementById('cmpsub');
+      if(obj<=act){
+        out.textContent='·';
+        sub.textContent='Sube el objetivo por encima de tu conversión de hoy para ver el efecto.';
+        return;
+      }
+      const mult = obj/act;
+      if(fact>0){
+        const proj=fact*mult, delta=proj-fact;
+        out.textContent='+'+fmtMoney(delta)+'/mes';
+        sub.innerHTML='Pasarías de <b style="color:var(--ink);">'+fmtMoney(fact)+'</b> a <b style="color:var(--ink);">'+fmtMoney(proj)+'</b> al mes. Son <b style="color:var(--ink);">'+fmtMoney(delta*12)+' al año</b>, solo por convertir mejor lo que ya te entra.';
+      } else {
+        const pct=Math.round((mult-1)*100);
+        out.textContent='+'+pct+'%';
+        sub.innerHTML='Subir tu conversión de '+act+'% a '+obj+'% es subir tu facturación un <b style="color:var(--ink);">+'+pct+'%</b>, con el mismo tráfico de hoy.';
+      }
+    }
+
+    function copyResult(){
+      const r = window._lastResult;
+      const txt = `Mi diagnóstico de fuga de ingresos (danielgarciadecelis.com/diagnostico)\n`+
+        `Nivel ${r.level.n}/5: ${r.level.t} (score ${r.total}/100)\n`+
+        Object.keys(r.dims).map(k=>`- ${DIMNAMES[k]}: ${r.dims[k]}/100`).join('\n')+
+        `\nFuga principal: ${typeof r.findings[0].title==='function'?r.findings[0].title():r.findings[0].title}`;
+      navigator.clipboard.writeText(txt).then(()=>alert('Resultado copiado.'));
+    }
+
+    /* =====================================================
+       MODO AUDITORÍA · DOCUMENTOS, FECHAS, BORRADOR Y ENVÍO
+       Nada de esto se ejecuta sin ?modo=auditoria.
+    ===================================================== */
+    const MAXB = 20*1024*1024;   // igual que MAX_BYTES en el script
+    const DKEY = 'auditoria:'+(AREF||'-');
+    const periodo = ()=>{ const l=LZ(A), e=EV(A);
+      return l&&e ? 'de los últimos 90 días y del lanzamiento (si puedes, en un solo archivo que cubra los dos)'
+        : l ? 'del lanzamiento, desde que empezó la convocatoria hasta una semana después del cierre'
+        : 'de los últimos 90 días'; };
+    const esc = s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const kb = n=>n<1048576 ? Math.max(1,Math.round(n/1024))+' KB' : (n/1048576).toFixed(1).replace('.',',')+' MB';
+
+    /* ── Borrador en su navegador (se retoma en el mismo navegador) ── */
+    function saveDraft(){
+      if(!AUDIT) return;
+      try{ localStorage.setItem(DKEY, JSON.stringify({v:1, t:Date.now(), A, AL, MID, path, cur, currency})); }catch(e){}
+    }
+    function loadDraft(){
+      try{ const d = JSON.parse(localStorage.getItem(DKEY)||'null'); return d&&d.v===1&&Array.isArray(d.path)&&d.path.length ? d : null; }catch(e){ return null; }
+    }
+    function clearDraft(){ try{ localStorage.removeItem(DKEY); }catch(e){} }
+    function resumeDraft(d){
+      A=d.A||{}; AL=d.AL||{}; MID=d.MID||{}; path=d.path; cur=Math.min(d.cur,path.length-1); currency=d.currency||'$';
+      // Una subida que se cortó al cerrar la pestaña no llegó: se marca para repetirla
+      Object.keys(A).forEach(k=>{ const s=A[k]; if(s&&Array.isArray(s.files)) s.files.forEach(f=>{ if(f.state==='subiendo'){ f.state='error'; f.err='Se interrumpió al cerrar la página. Vuelve a elegirlo.'; } }); });
+      render(); show('quiz');
+    }
+
+    /* ── Fechas ── */
+    function dateFields(q){ return q.dates.filter(f=>!f.show||f.show(A)); }
+    function toggleNoseD(k){
+      const el = document.getElementById('d-'+k);
+      el.disabled = document.getElementById('nsd-'+k).checked;
+      if(el.disabled) el.value = '';
+    }
+    const fmtDate = s=>{ const [y,m,d]=s.split('-'); return d+'/'+m+'/'+y; };
+    function saveDates(){
+      const q = Q[path[cur]], out = {}, txt = [];
+      for(const f of dateFields(q)){
+        let v;
+        if(document.getElementById('nsd-'+f.k).checked) v = 'nose';
+        else { v = document.getElementById('d-'+f.k).value; if(!/^\d{4}-\d{2}-\d{2}$/.test(v)){ document.getElementById('qerr').style.display='block'; return; } }
+        out[f.k] = v; txt.push(f.t+': '+(v==='nose'?'no lo sé':fmtDate(v)));
+      }
+      A[q.id] = out; AL[q.id] = txt.join(' · ');
+      next();
+    }
+    function renderDates(q){
+      const cv = A[q.id]||{};
+      let h = '<div class="numgrid">'+dateFields(q).map(f=>{
+        const v = cv[f.k], ns = v==='nose';
+        return '<div class="field"><label for="d-'+f.k+'">'+f.t+'</label>'+
+          '<input type="date" id="d-'+f.k+'" value="'+(ns||!v?'':v)+'"'+(ns?' disabled':'')+'>'+
+          '<label class="nsck"><input type="checkbox" id="nsd-'+f.k+'"'+(ns?' checked':'')+' onchange="toggleNoseD(\''+f.k+'\')"> No lo sé</label></div>';
+      }).join('')+'</div><div class="err" id="qerr">Pon una fecha en cada casilla o marca «No lo sé».</div>';
+      return h+'<div class="qnav"><button class="qback" onclick="back()">Atrás</button><button class="btn-wa" onclick="saveDates()">Siguiente</button></div>';
+    }
+
+    /* ── Documentos ── */
+    const DST = {sube:'Lo subo aquí', aparte:'Te lo mando aparte o te doy acceso', no:'No lo tengo'};
+    function docState(q){
+      if(!A[q.id]||typeof A[q.id]!=='object') A[q.id] = {st:q.doc.optional?'':'', tool:(q.doc.tools[0]||[''])[0], files:[], link:'', ok:false};
+      return A[q.id];
+    }
+    function renderDoc(q){
+      const d = q.doc, s = docState(q);
+      let h = '';
+      if(d.tools.length>1) h += '<div class="curr dtools">'+d.tools.map(([k,t])=>'<button class="'+(s.tool===k?'sel':'')+'" onclick="docTool(\''+q.id+'\',\''+k+'\')">'+t+'</button>').join('')+'</div>';
+      const st = d.steps[s.tool];
+      if(st) h += '<ol class="dsteps">'+st().map(x=>'<li>'+x+'</li>').join('')+'</ol>';
+      if(d.note&&d.note[s.tool]) h += '<p class="dnote">'+d.note[s.tool]+'</p>';
+      const opts = d.optional ? [['sube','Sí, lo subo aquí'],['no','No, nada más']] : Object.entries(DST);
+      h += '<div class="opts">'+opts.map(([k,t])=>'<button class="opt'+(s.st===k?' sel':'')+'" onclick="docSt(\''+q.id+'\',\''+k+'\')">'+t+'</button>').join('')+'</div>';
+      if(s.st==='sube'){
+        h += '<div class="dbox">';
+        if(d.pii) h += '<label class="nsck dpii"><input type="checkbox" id="dpii"'+(s.ok?' checked':'')+' onchange="docPii(\''+q.id+'\')"> Si no es CSV: confirmo que he quitado nombres, emails y teléfonos de mis compradores</label>';
+        h += '<label class="btn-wa ghost dup">Elegir archivos<input type="file" multiple hidden onchange="docFiles(\''+q.id+'\',this)"></label>'+
+             '<p class="dhint">CSV, Excel, PDF o capturas. Hasta 20 MB por archivo; lo más pesado, por enlace.</p>'+
+             '<div id="doclist">'+docList(q)+'</div>'+
+             '<div class="field" style="margin:18px 0 0;"><label for="dlink">O pega un enlace (Drive, Loom, WeTransfer…)</label><input type="text" id="dlink" value="'+esc(s.link)+'" placeholder="https://" oninput="docLink(\''+q.id+'\',this.value)"></div>'+
+             '</div>';
+      }
+      h += '<div class="err" id="qerr"></div>';
+      return h+'<div class="qnav"><button class="qback" onclick="back()">Atrás</button><button class="btn-wa" onclick="saveDoc()">Siguiente</button></div>';
+    }
+    function docList(q){
+      return (docState(q).files||[]).map((f,i)=>'<div class="dfile '+f.state+'"><span>'+
+        (f.state==='ok'?'✓ ':f.state==='subiendo'?'Subiendo… ':'✗ ')+esc(f.n)+' <em>'+kb(f.size)+'</em>'+
+        (f.limpio&&f.limpio.length?'<br><small>He quitado '+f.limpio.length+(f.limpio.length===1?' columna':' columnas')+' con datos de personas antes de subirlo: '+esc(f.limpio.join(', '))+'.</small>':'')+
+        (f.state==='error'?'<br><small>'+esc(f.err||'No se ha podido subir.')+'</small>':'')+
+        '</span>'+(f.state==='error'?'<button class="qback" onclick="docDrop(\''+q.id+'\','+i+')">Quitar</button>':'')+'</div>').join('');
+    }
+    function curDoc(id){ const q=Q[path[cur]]; return q&&q.id===id; }
+    function refreshList(id){ if(curDoc(id)){ const el=document.getElementById('doclist'); if(el) el.innerHTML=docList(Q.find(x=>x.id===id)); } saveDraft(); }
+    function docTool(id,k){ docState(Q.find(x=>x.id===id)).tool=k; render(); }
+    function docSt(id,k){ docState(Q.find(x=>x.id===id)).st=k; render(); }
+    function docPii(id){ docState(Q.find(x=>x.id===id)).ok=document.getElementById('dpii').checked; saveDraft(); }
+    function docLink(id,v){ docState(Q.find(x=>x.id===id)).link=v.trim(); saveDraft(); }
+    function docDrop(id,i){ const s=docState(Q.find(x=>x.id===id)); s.files.splice(i,1); refreshList(id); }
+    let UPQ = Promise.resolve();   // una subida detrás de otra: la carpeta del cliente se crea una sola vez
+    function docFiles(id,input){
+      const q = Q.find(x=>x.id===id), s = docState(q);
+      Array.from(input.files).forEach(file=>{
+        const f = {n:file.name, size:file.size, state:'subiendo'};
+        s.files.push(f);
+        if(file.size>MAXB){ f.state='error'; f.err='Pesa más de 20 MB. Súbelo a tu Drive, a Loom o a WeTransfer y pega el enlace abajo.'; return; }
+        if(q.doc.pii&&!isCSV(file)&&!s.ok){ f.state='error'; f.err='No es CSV, así que no puedo quitar yo los datos de tus compradores. Bórralos, marca la casilla de arriba y vuelve a elegirlo. O súbelo en CSV.'; return; }
+        UPQ = UPQ.then(()=>uploadOne(q,file,f));
+      });
+      input.value = '';
+      refreshList(id);
+    }
+    const isCSV = f=>/\.csv$/i.test(f.name)||f.type==='text/csv';
+    async function uploadOne(q,file,f){
+      try{
+        let blob = file;
+        if(isCSV(file)){ const r = await scrubCSV(file, !!q.doc.pii); blob = r.blob; f.limpio = r.removed; }
+        const data = await toB64(blob);
+        const res = await fetch(AUDIT_URL, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'},
+          body:JSON.stringify({action:'subir', r:AREF, k:AKEY, slot:q.slot, name:file.name, mime:blob.type||file.type||'application/octet-stream', data})});
+        const j = await res.json();
+        if(!j.ok) throw new Error(j.error==='clave'?'El enlace no es válido. Pídele a Daniel el tuyo.':j.error==='grande'?'Pesa demasiado. Pega un enlace abajo.':'El servidor no lo ha aceptado ('+j.error+').');
+        f.state='ok'; f.id=j.id; f.url=j.url;
+        const s = docState(q); s.files = s.files.filter(x=>!(x.state==='error'&&x.n===f.n));   // el intento fallido del mismo archivo sobra
+      }catch(e){
+        f.state='error'; f.err = (e&&e.message&&!/fetch|network|json/i.test(e.message)) ? e.message : 'Se ha cortado la conexión. Vuelve a elegirlo.';
+      }
+      refreshList(q.id);
+    }
+    function toB64(blob){
+      return new Promise((ok,ko)=>{ const r=new FileReader(); r.onload=()=>ok(String(r.result).split(',')[1]||''); r.onerror=()=>ko(r.error); r.readAsDataURL(blob); });
+    }
+    function saveDoc(){
+      const q = Q[path[cur]], s = docState(q), err = document.getElementById('qerr');
+      const say = t=>{ err.textContent=t; err.style.display='block'; };
+      if(!s.st) return say('Elige una de las opciones.');
+      if(s.st==='sube'){
+        if(s.files.some(f=>f.state==='subiendo')) return say('Espera a que termine de subir.');
+        if(s.link && !/^https?:\/\/\S+\.\S+/i.test(s.link)) return say('El enlace no parece válido: tiene que empezar por https://');
+        if(!s.files.some(f=>f.state==='ok') && !s.link) return say('Sube al menos un archivo o pega un enlace. Si al final no lo tienes, elige otra opción.');
+      }
+      const okF = s.files.filter(f=>f.state==='ok');
+      AL[q.id] = (q.doc.optional&&s.st==='no') ? 'nada más'
+        : DST[s.st]+(s.st==='sube'?' ('+[okF.length?okF.length+(okF.length===1?' archivo':' archivos'):'', s.link?'enlace':''].filter(Boolean).join(' + ')+')':'');
+      next();
+    }
+
+    /* ── Limpieza de CSV: se quitan las columnas con datos de personas ANTES de subir ── */
+    async function readText(file){
+      const buf = await file.arrayBuffer();
+      try{ return new TextDecoder('utf-8',{fatal:true}).decode(buf); }
+      catch(e){ return new TextDecoder('windows-1252').decode(buf); }
+    }
+    function parseCSV(t, dl){
+      const rows=[]; let row=[], f='', q=false;
+      for(let i=0;i<t.length;i++){
+        const c=t[i];
+        if(q){ if(c==='"'){ if(t[i+1]==='"'){ f+='"'; i++; } else q=false; } else f+=c; }
+        else if(c==='"') q=true;
+        else if(c===dl){ row.push(f); f=''; }
+        else if(c==='\n'||c==='\r'){ if(c==='\r'&&t[i+1]==='\n') i++; row.push(f); rows.push(row); row=[]; f=''; }
+        else f+=c;
+      }
+      if(f!==''||row.length){ row.push(f); rows.push(row); }
+      return rows;
+    }
+    function sniff(t){
+      const line = t.split(/\r?\n/)[0]||'';
+      let best=',', n=-1;
+      [',',';','\t'].forEach(d=>{ let c=0, q=false; for(const ch of line){ if(ch==='"') q=!q; else if(ch===d&&!q) c++; } if(c>n){ n=c; best=d; } });
+      return best;
+    }
+    const NRM = s=>String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').trim();
+    const EMAILV = /^[^\s@,;]+@[^\s@,;]+\.[a-z]{2,}$/i;
+    const H_SIEMPRE = /(telefon|phone|celular|movil|whatsapp|\bddd\b|\bcpf\b|\bcnpj\b|\bdni\b|documento|\bnif\b|\bnie\b|\brut\b|\bcuit\b|\brfc\b|\bcurp\b|tax ?id|direccion|endereco|address|\bcep\b|codigo postal|zip ?code|\bcalle\b|\brua\b|complemento|\bbarrio\b|\bbairro\b)/;
+    const H_VENTAS = /(e-?mail|correo|(^|[^a-z])(nome|nombre|name|apellido|sobrenome|comprador|buyer)([^a-z]|$))/;
+    const H_NO = /(produto|producto|product|oferta|offer|plano|\bplan\b|campa|anuncio|moeda|moneda|pais|country|origem|origen|utm|\bsrc\b|\bsck\b|codigo|code)/;
+    async function scrubCSV(file, ventas){
+      let t = await readText(file);
+      if(t.charCodeAt(0)===0xFEFF) t = t.slice(1);
+      const dl = sniff(t), rows = parseCSV(t, dl).filter(r=>r.length>1||r[0]!=='');
+      if(!rows.length) return {blob:file, removed:[]};
+      const head = rows[0], drop = [];
+      head.forEach((h,i)=>{
+        const n = NRM(h);
+        const vals = rows.slice(1).map(r=>(r[i]||'').trim()).filter(Boolean);
+        const mails = vals.filter(v=>EMAILV.test(v)).length;
+        const byContent = vals.length>0 && mails/vals.length>=0.3;
+        const byHead = H_SIEMPRE.test(n) || (ventas && H_VENTAS.test(n) && !H_NO.test(n));
+        if(byContent||byHead) drop.push(i);
+      });
+      if(!drop.length) return {blob:file, removed:[]};
+      const keep = head.map((_,i)=>i).filter(i=>!drop.includes(i));
+      const cell = v=>/["\r\n]/.test(v)||v.includes(dl) ? '"'+v.replace(/"/g,'""')+'"' : v;
+      const out = rows.map(r=>keep.map(i=>cell(r[i]||'')).join(dl)).join('\r\n');
+      return {blob:new Blob(['﻿'+out], {type:'text/csv'}), removed:drop.map(i=>head[i]||('columna '+(i+1)))};
+    }
+
+    /* ── Email a Daniel: bloque evergreen y bloque de material ── */
+    function evergreenEmail(){
+      const linea = '====================================================';
+      const head = 'TU EMBUDO EVERGREEN (bloque de auditoria)\n'+linea+'\n';
+      if(!A.e_entrada) return head+'No ha visto este bloque (evergreen: '+(AL.evergreen||'no se le pregunto')+').\n\n';
+      const row = (k,v)=>'  '+(k+':').padEnd(22)+(v||'(sin responder)')+'\n';
+      const n = A.e_numeros||{}, money = v=>currency+fmtNum(Math.round(v)), N = k=>typeof n[k]==='number'?n[k]:null;
+      const G = (A.e_gasto&&typeof A.e_gasto.gasto==='number') ? A.e_gasto.gasto : null;
+      let s = head+row('Entrada', AL.e_entrada);
+      [['leads','Leads nuevos (90 d)',fmtNum],['visitas','Visitas a ventas',fmtNum],['ventas','Ventas',fmtNum],['ingresos','Ingresos',money]]
+        .forEach(([k,l,f])=>{ if(n[k]!==undefined) s += row(l, n[k]==='nose'?'no lo sabe':f(n[k])); });
+      if(A.e_gasto) s += row('Inversion en ads', A.e_gasto.gasto==='nose'?'no lo sabe':money(A.e_gasto.gasto));
+      s += row('Emails secuencia', AL.e_secuencia)+row('Fecha limite', AL.e_urgencia)+row('Trafico', AL.e_trafico);
+      const R = [];
+      if(N('leads')>0&&N('ventas')!==null) R.push('Lead -> venta: '+PCT(N('ventas'),N('leads')));
+      if(N('visitas')>0&&N('ventas')!==null) R.push('Visita a ventas -> venta: '+PCT(N('ventas'),N('visitas')));
+      if(N('ventas')>0&&N('ingresos')!==null) R.push('Ingreso medio por venta: '+money(Math.round(N('ingresos')/N('ventas'))));
+      if(G>0&&N('leads')>0) R.push('Coste por lead: '+currency+(G/N('leads')).toLocaleString('es',{minimumFractionDigits:2,maximumFractionDigits:2}));
+      if(G>0&&N('ventas')>0) R.push('Coste por venta: '+money(Math.round(G/N('ventas'))));
+      if(G>0&&N('ingresos')!==null) R.push('Ingresos / inversion en ads: '+fmtNum(Math.round(N('ingresos')/G*10)/10));
+      s += '\n  RATIOS (calculados con sus numeros)\n'+(R.length?R.map(x=>'  '+x).join('\n'):'  (faltan numeros para calcular ninguno)')+'\n\n';
+      s += 'LO QUE ESPERABA Y LO QUE VENDE (sus palabras)\n'+linea+'\n'+(A.e_objetivo&&A.e_objetivo.trim()?A.e_objetivo:'(no ha escrito nada)')+'\n\n';
+      return s;
+    }
+    function docsSummary(){
+      const docs = visible().filter(q=>q.doc), out = {recibido:[], aparte:[], no:[], n:0};
+      docs.forEach(q=>{ const s=A[q.id]; if(!s||!s.st) return;
+        if(s.st==='sube'){ const k=s.files.filter(f=>f.state==='ok').length; out.n+=k; out.recibido.push(q.slot+(k?' ('+k+')':'')+(s.link?' + enlace':'')); }
+        else if(s.st==='aparte') out.aparte.push(q.slot);
+        else if(!q.doc.optional) out.no.push(q.slot); });
+      return out;
+    }
+    function docsEmail(){
+      const linea = '====================================================';
+      let s = 'MATERIAL (lo que ha subido, lo que manda aparte y lo que no tiene)\n'+linea+'\n';
+      visible().filter(q=>q.doc).forEach(q=>{
+        const d = A[q.id]||{};
+        if(q.doc.optional&&d.st!=='sube') return;
+        s += '- '+q.slot.toUpperCase()+': '+(d.st?DST[d.st]:'(sin responder)')+(q.doc.tools.length>1&&d.tool?'  [herramienta: '+(q.doc.tools.find(t=>t[0]===d.tool)||['',''])[1]+']':'')+'\n';
+        (d.files||[]).filter(f=>f.state==='ok').forEach(f=>{ s += '    '+f.n+'  '+f.url+'\n'+(f.limpio&&f.limpio.length?'      (columnas quitadas antes de subir: '+f.limpio.join(', ')+')\n':''); });
+        if(d.link) s += '    Enlace: '+d.link+'\n';
+        if(d.st==='sube'&&q.doc.pii&&d.ok) s += '    (confirma que ha quitado los datos de compradores de lo que no era CSV)\n';
+      });
+      const sm = docsSummary();
+      s += '\n  PENDIENTE: '+(sm.aparte.length||sm.no.length ? [sm.aparte.length?'lo manda aparte o da acceso: '+sm.aparte.join(', '):'', sm.no.length?'no lo tiene: '+sm.no.join(', '):''].filter(Boolean).join(' | ') : 'nada')+'\n';
+      s += '  El reloj de la auditoria arranca con el material completo.\n\n';
+      return s;
+    }
+    function fechasRow(){
+      if(!A.l_fechas) return '';
+      const f = A.l_fechas, v = k=>f[k]===undefined?null:(f[k]==='nose'?'no lo sabe':fmtDate(f[k]));
+      return '  '+'Fechas:'.padEnd(22)+[['conv','convocatoria'],['apertura','apertura'],['cierre','cierre']].filter(([k])=>v(k)!==null).map(([k,l])=>l+' '+v(k)).join(' · ')+'\n';
+    }
+
+    /* ── Envío al script de auditorías y pantalla final ── */
+    async function auditSend(p){
+      const btn = document.querySelector('#capture .btn-wa'), e = document.getElementById('e-send');
+      btn.disabled = true; e.style.display = 'none';
+      const sm = docsSummary();
+      try{
+        const res = await fetch(AUDIT_URL, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'},
+          body:JSON.stringify({action:'enviar', r:AREF, k:AKEY, name:p.name, email:p.email, wa:p.wa, detalle:p.detalle,
+            emailSubject:p.emailSubject, emailBody:p.emailBody, nArchivos:sm.n, recibido:sm.recibido.join(', '), acceso:sm.aparte.join(', '), noTiene:sm.no.join(', ')})});
+        const j = await res.json();
+        if(!j.ok) throw new Error(j.error);
+        clearDraft();
+        document.getElementById('rbox').innerHTML = '<div class="rcard gold rcta" style="margin-top:40px;"><h3>Gracias, ya te contactaré.</h3></div>';
+        show('report');
+      }catch(err){
+        e.style.display = 'block'; btn.disabled = false;
+      }
+    }
+
+    function auditBlocked(){
+      document.getElementById('qbox').innerHTML = '<div class="qtext">Este enlace no está completo o no es válido.</div><div class="qsub">Pídele a Daniel el tuyo: cada cuestionario va unido a tu carpeta.</div>';
+      document.getElementById('pbar').style.width='0'; document.getElementById('pcount').textContent='';
+      show('quiz');
+    }
+    async function auditStart(){
+      if(!AREF||!AKEY||!AUDIT_URL) return auditBlocked();
+      try{
+        const j = await (await fetch(AUDIT_URL+'?check=1&r='+encodeURIComponent(AREF)+'&k='+encodeURIComponent(AKEY))).json();
+        if(j&&j.ok===false) return auditBlocked();
+      }catch(e){ /* sin conexión con el script: se deja rellenar; las subidas dirán si falla */ }
+      const d = loadDraft();
+      if(d){
+        document.getElementById('qbox').innerHTML = '<div class="qtext">Tienes el cuestionario a medias.</div><div class="qsub">Lo que ya habías contestado y subido sigue aquí.</div>'+
+          '<div class="opts"><button class="opt" onclick="resumeDraft(loadDraft())">Seguir donde lo dejé</button><button class="opt" onclick="clearDraft();startQuiz()">Empezar de cero</button></div>';
+        document.getElementById('pbar').style.width='0'; document.getElementById('pcount').textContent='';
+        show('quiz');
+        return;
+      }
+      startQuiz();
+    }
+
+    /* Modo auditoría: quien llega ya es cliente. Nada de landing "gratis", textos de captura acordes y fuera de buscadores. */
+    if(AUDIT){
+      const m = document.createElement('meta'); m.name='robots'; m.content='noindex, nofollow'; document.head.appendChild(m);
+      document.querySelector('.nav-cta').style.display='none';
+      const qw = document.querySelector('.quiz-wrap');
+      const eb = document.createElement('p'); eb.className='eyebrow'; eb.textContent='Cuestionario de arranque de tu auditoría';
+      qw.insertBefore(eb, qw.firstChild);
+      const cw = document.querySelector('#capture .capture-wrap');
+      cw.querySelector('h2').textContent = 'Ya está. Solo falta enviármelo.';
+      cw.querySelector('.section-lead').textContent = 'Al enviar, me llegan todas tus respuestas y el material que has subido.';
+      const sb = cw.querySelector('.btn-wa'); sb.firstChild.textContent = 'Enviar ';
+      const se = document.createElement('div'); se.className='err'; se.id='e-send'; se.textContent='No se ha podido enviar. Tus respuestas siguen guardadas: vuelve a pulsar Enviar en un momento.';
+      sb.insertAdjacentElement('afterend', se);
+      const box = document.getElementById('f-online').closest('div[style]');
+      const bp = box.querySelectorAll(':scope > p');
+      bp[0].textContent = 'Para llegar a la conversación de arranque con tu caso leído';
+      bp[1].textContent = 'Cuanto más concreto seas aquí, menos tiempo perdemos en esa conversación preguntando lo que ya podía saber.';
+      document.getElementById('f-wa').closest('.field').querySelector('label span').textContent = '· por aquí coordinamos';
+      cw.querySelector('.privacy').textContent = 'Tus datos se usan solo para preparar tu auditoría. No entran en ninguna secuencia ni se ceden a terceros.';
+      auditStart();
+    }
+  </script>
+
+</body>
+</html>
