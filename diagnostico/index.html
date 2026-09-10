@@ -66,11 +66,11 @@
     .hero-glow {
       position: absolute;
       top: -120px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 720px;
+      left: 0;
+      width: 100%;
       height: 720px;
-      background: radial-gradient(circle at center, rgba(201,168,76,0.10) 0%, rgba(201,168,76,0.03) 35%, transparent 65%);
+      /* Mismo brillo que antes (círculo de 720 px centrado; 509px = su radio hasta la esquina), pero sin desbordar en móvil */
+      background: radial-gradient(circle 509.12px at 50% 360px, rgba(201,168,76,0.10) 0%, rgba(201,168,76,0.03) 35%, transparent 65%);
       pointer-events: none;
       z-index: 0;
     }
