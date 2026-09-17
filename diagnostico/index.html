@@ -1388,16 +1388,21 @@
 
     {id:'d_ventas', block:'Tu material', slot:'Ventas', text:'Tus ventas, día a día', sub:()=>'Cada venta con su fecha, producto, importe y estado (pagada, reembolsada) '+periodo()+'. Solo cifras: nada de datos de tus compradores.', show:a=>LZ(a)||EV(a), doc:{
       pii:true,
-      tools:[['hotmart','Hotmart'],['otra','Otra plataforma']],
+      tools:[['hotmart','Hotmart'],['stripe','Stripe'],['otra','Otra plataforma']],
       steps:{
         hotmart:()=>['Entra en app.hotmart.com → menú <b>Ventas</b> → <b>Mis ventas</b> (en portugués: <i>Vendas → Minhas vendas</i>).',
                      'Pulsa <b>Exportar</b>, elige el modelo <b>Estándar</b> y el formato <b>CSV</b>.',
                      'Filtra el periodo '+periodo()+' y deja todos los estados, para que salgan también los reembolsos. Confirma.',
                      'Cuando Hotmart tenga el archivo listo, súbelo aquí tal cual.'],
-        otra:()=>['En tu plataforma de cobro (Stripe, Kajabi, Systeme…), exporta el listado de ventas '+periodo()+'.',
+        stripe:()=>['Entra en dashboard.stripe.com → menú de la izquierda: <b>Transacciones</b> (<i>Transactions</i>).',
+                    'Pulsa <b>Exportar</b> (<i>Export</i>), arriba a la derecha, y elige las fechas '+periodo()+'.',
+                    'Deja las columnas que vienen por defecto y descarga el CSV. La de reembolsos (<i>Amount Refunded</i>) ya va incluida.',
+                    'Si cobras en más de un sitio (Stripe para unas cosas, otra plataforma para otras), sube un archivo de cada uno.'],
+        otra:()=>['En tu plataforma de cobro (Kajabi, Systeme, PayPal…), exporta el listado de ventas '+periodo()+'.',
                   'Mejor en CSV: así esta página quita sola los datos de tus compradores.',
                   'Si solo te deja Excel o PDF, borra tú antes nombres, emails y teléfonos.']},
-      note:{hotmart:'El archivo de Hotmart trae nombre, email y teléfono de tus compradores. No hace falta que los borres: si lo subes en CSV, esta página los quita antes de subirlo y te dice qué ha quitado.'}}},
+      note:{hotmart:'El archivo de Hotmart trae nombre, email y teléfono de tus compradores. No hace falta que los borres: si lo subes en CSV, esta página los quita antes de subirlo y te dice qué ha quitado.',
+            stripe:'El archivo de Stripe trae el email y otros datos de tus compradores. No hace falta que los borres: si lo subes en CSV, esta página los quita antes de subirlo y te dice qué ha quitado.'}}},
 
     {id:'d_ads', block:'Tu material', slot:'Anuncios', text:'Los resultados de tus anuncios', sub:()=>'Por anuncio y por día '+periodo()+': gasto, impresiones, clics y resultados.', show:a=>(LZ(a)&&Array.isArray(a.l_trafico)&&a.l_trafico.includes('ads'))||(EV(a)&&Array.isArray(a.e_trafico)&&a.e_trafico.includes('ads')), doc:{
       tools:[['meta','Meta (Facebook e Instagram)'],['otra','Otra plataforma']],
@@ -2276,6 +2281,7 @@
       return (docState(q).files||[]).map((f,i)=>'<div class="dfile '+f.state+'"><span>'+
         (f.state==='ok'?'✓ ':f.state==='subiendo'?'Subiendo… ':'✗ ')+esc(f.n)+' <em>'+kb(f.size)+'</em>'+
         (f.limpio&&f.limpio.length?'<br><small>He quitado '+f.limpio.length+(f.limpio.length===1?' columna':' columnas')+' con datos de personas antes de subirlo: '+esc(f.limpio.join(', '))+'.</small>':'')+
+        (f.tachado&&f.tachado.length?'<br><small>Y he tapado los emails que había escritos dentro de: '+esc(f.tachado.join(', '))+'.</small>':'')+
         (f.state==='error'?'<br><small>'+esc(f.err||'No se ha podido subir.')+'</small>':'')+
         '</span>'+(f.state==='error'?'<button class="qback" onclick="docDrop(\''+q.id+'\','+i+')">Quitar</button>':'')+'</div>').join('');
     }
@@ -2303,7 +2309,7 @@
     async function uploadOne(q,file,f){
       try{
         let blob = file;
-        if(isCSV(file)){ const r = await scrubCSV(file, !!q.doc.pii); blob = r.blob; f.limpio = r.removed; }
+        if(isCSV(file)){ const r = await scrubCSV(file, !!q.doc.pii); blob = r.blob; f.limpio = r.removed; f.tachado = r.tachado; }
         const data = await toB64(blob);
         const res = await fetch(AUDIT_URL, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'},
           body:JSON.stringify({action:'subir', r:AREF, k:AKEY, slot:q.slot, name:file.name, mime:blob.type||file.type||'application/octet-stream', data})});
@@ -2362,7 +2368,8 @@
     const NRM = s=>String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').trim();
     const EMAILV = /^[^\s@,;]+@[^\s@,;]+\.[a-z]{2,}$/i;
     const H_SIEMPRE = /(telefon|phone|celular|movil|whatsapp|\bddd\b|\bcpf\b|\bcnpj\b|\bdni\b|documento|\bnif\b|\bnie\b|\brut\b|\bcuit\b|\brfc\b|\bcurp\b|tax ?id|direccion|endereco|address|\bcep\b|codigo postal|zip ?code|\bcalle\b|\brua\b|complemento|\bbarrio\b|\bbairro\b)/;
-    const H_VENTAS = /(e-?mail|correo|(^|[^a-z])(nome|nombre|name|apellido|sobrenome|comprador|buyer)([^a-z]|$))/;
+    const H_VENTAS = /(e-?mail|correo|(customer|cliente) ?(description|descripcion)|(^|[^a-z])(nome|nombre|name|apellido|sobrenome|comprador|buyer)([^a-z]|$))/;
+    const EMAILIN = /[^\s@,;:<>()"']+@[^\s@,;:<>()"']+\.[a-z]{2,}/gi;   // un email escrito dentro de un texto
     const H_NO = /(produto|producto|product|oferta|offer|plano|\bplan\b|campa|anuncio|moeda|moneda|pais|country|origem|origen|utm|\bsrc\b|\bsck\b|codigo|code)/;
     async function scrubCSV(file, ventas){
       let t = await readText(file);
@@ -2378,11 +2385,16 @@
         const byHead = H_SIEMPRE.test(n) || (ventas && H_VENTAS.test(n) && !H_NO.test(n));
         if(byContent||byHead) drop.push(i);
       });
-      if(!drop.length) return {blob:file, removed:[]};
       const keep = head.map((_,i)=>i).filter(i=>!drop.includes(i));
+      // Emails sueltos dentro de columnas que se quedan (por ejemplo, una descripción con el email del comprador)
+      const tach = [];
+      keep.forEach(i=>{ let hit=false;
+        rows.slice(1).forEach(r=>{ if(r[i]&&EMAILIN.test(r[i])){ r[i]=r[i].replace(EMAILIN,'[email quitado]'); hit=true; } EMAILIN.lastIndex=0; });
+        if(hit) tach.push(head[i]||('columna '+(i+1))); });
+      if(!drop.length&&!tach.length) return {blob:file, removed:[], tachado:[]};
       const cell = v=>/["\r\n]/.test(v)||v.includes(dl) ? '"'+v.replace(/"/g,'""')+'"' : v;
       const out = rows.map(r=>keep.map(i=>cell(r[i]||'')).join(dl)).join('\r\n');
-      return {blob:new Blob(['﻿'+out], {type:'text/csv'}), removed:drop.map(i=>head[i]||('columna '+(i+1)))};
+      return {blob:new Blob(['﻿'+out], {type:'text/csv'}), removed:drop.map(i=>head[i]||('columna '+(i+1))), tachado:tach};
     }
 
     /* ── Email a Daniel: bloque evergreen y bloque de material ── */
@@ -2424,7 +2436,7 @@
         const d = A[q.id]||{};
         if(q.doc.optional&&d.st!=='sube') return;
         s += '- '+q.slot.toUpperCase()+': '+(d.st?DST[d.st]:'(sin responder)')+(q.doc.tools.length>1&&d.tool?'  [herramienta: '+(q.doc.tools.find(t=>t[0]===d.tool)||['',''])[1]+']':'')+'\n';
-        (d.files||[]).filter(f=>f.state==='ok').forEach(f=>{ s += '    '+f.n+'  '+f.url+'\n'+(f.limpio&&f.limpio.length?'      (columnas quitadas antes de subir: '+f.limpio.join(', ')+')\n':''); });
+        (d.files||[]).filter(f=>f.state==='ok').forEach(f=>{ s += '    '+f.n+'  '+f.url+'\n'+(f.limpio&&f.limpio.length?'      (columnas quitadas antes de subir: '+f.limpio.join(', ')+')\n':'')+(f.tachado&&f.tachado.length?'      (emails tapados dentro de: '+f.tachado.join(', ')+')\n':''); });
         if(d.link) s += '    Enlace: '+d.link+'\n';
         if(d.st==='sube'&&q.doc.pii&&d.ok) s += '    (confirma que ha quitado los datos de compradores de lo que no era CSV)\n';
       });
