@@ -5,6 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content="Diagnóstico de Fuga de Ingresos gratuito para infoproductores: responde unas preguntas sobre tu lista, oferta y sistema de venta y descubre dónde se te está escapando el dinero." />
   <title>Diagnóstico de Fuga de Ingresos para Infoproductores · Daniel García de Celis</title>
+  <script>
+    /* Quien llega con ?modo=onboarding o ?modo=auditoria ya es cliente: no puede ver, ni un segundo,
+       la portada del test gratuito. Esto corre ANTES de pintar nada; lo del final de la página
+       llegaba tarde, porque primero tiene que contestar el script y eso tarda uno o dos segundos.
+       Sin esos parámetros no hace nada, y la versión pública queda exactamente igual. */
+    (function(){
+      var m = new URLSearchParams(location.search).get('modo');
+      if (m !== 'onboarding' && m !== 'auditoria') return;
+      document.documentElement.className += ' modo-cliente';
+      if (m === 'onboarding') document.title = 'Arranque · Daniel García de Celis';
+    })();
+  </script>
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="alternate icon" href="/favicon.png">
 
@@ -880,10 +892,35 @@
     .opt.obquien b { font-weight: 500; color: var(--ink); font-size: 1.02rem; }
     .opt.obquien em { font-style: normal; font-size: 0.82rem; color: var(--muted); }
     .obcambiar { display: block; margin: 2px 0 14px; padding: 0; }
-    .obresp {
-      white-space: pre-wrap; overflow-wrap: anywhere; margin: 0;
-      font-family: 'DM Sans', sans-serif; font-size: 0.88rem; line-height: 1.6; color: var(--ink-dim);
+    /* Clientes (onboarding y auditoría): la portada del test gratuito no se pinta nunca */
+    .modo-cliente #landing, .modo-cliente .nav-cta { display: none !important; }
+    .obcargando { color: var(--muted); font-size: 0.95rem; padding: 40px 0; }
+
+    /* La puerta: cada socio con su inicial, en el negro y oro de la marca */
+    .opt.obquien { align-items: center; }
+    .obini {
+      flex: 0 0 44px; width: 44px; height: 44px; border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
+      border: 1px solid var(--gold); color: var(--gold); background: rgba(201, 168, 76, 0.07);
+      font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.15rem;
     }
+    .opt.obquien:hover .obini { background: var(--gold); color: var(--black); }
+    .obquien-nom { display: flex; align-items: center; gap: 16px; }
+
+    .obaviso {
+      margin-top: 22px; padding: 16px 18px; border: 1px solid var(--line); border-radius: 2px;
+      background: rgba(201, 168, 76, 0.05); font-size: 0.9rem; line-height: 1.6; color: var(--ink-dim);
+    }
+    .obaviso b { color: var(--ink); font-weight: 500; }
+    .obresp { overflow-wrap: anywhere; }
+    .obresp .obr-sec {
+      font-family: 'DM Sans', sans-serif; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gold); margin: 26px 0 4px;
+    }
+    .obresp .obr-sec:first-child { margin-top: 4px; }
+    .rcard .obresp p.obr-q { color: var(--ink); font-weight: 500; font-size: 0.93rem; margin: 16px 0 4px; }
+    .rcard .obresp p.obr-a { color: var(--ink-dim); font-size: 0.92rem; margin: 0; line-height: 1.6; }
+    .rcard .obresp p.obr-doc { color: var(--ink-dim); font-size: 0.86rem; margin: 12px 0 0; line-height: 1.6; }
     .obline {
       font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.02rem; color: var(--gold);
       line-height: 1.55; margin-top: 30px; padding-left: 18px; border-left: 2px solid var(--gold);
@@ -1529,7 +1566,7 @@
       {k:'nombre', t:'Nombre', type:'text'}, {k:'web', t:'Web', type:'text'}, {k:'redes', t:'Redes', type:'text'}]}},
     {id:'n_logros', onb:1, sec:'negocio', block:'Tu negocio y tu voz', text:'Tus logros, con cifras y casos', sub:'Los que se puedan usar para trabajar autoridad. Si tienes el dato exacto, ponlo: sin cifra no se puede afirmar nada.', free:true},
     {id:'n_urls', onb:1, sec:'negocio', block:'Tu negocio y tu voz', text:'Las URLs del proyecto que me van a situar', sub:'Web, páginas de venta, redes, canal de YouTube, lo que exista.', free:true},
-    {id:'n_ads', onb:1, sec:'negocio', block:'Tu negocio y tu voz', slot:'Anuncios ganadores', text:'Si has invertido en publicidad, ¿tienes detectados tus anuncios ganadores?', sub:'Súbelos o pega el enlace. Si no habéis hecho publicidad, elige «No lo tengo».', doc:{
+    {id:'n_ads', onb:1, sec:'negocio', block:'Tu negocio y tu voz', slot:'Anuncios ganadores', text:'Si habéis invertido en publicidad, ¿tenéis detectados vuestros anuncios ganadores?', sub:'Súbelos o pega el enlace. Si no habéis hecho publicidad, elige «No lo tengo».', doc:{
       tools:[['otra','Meta, Google, TikTok…']],
       steps:{otra:()=>['Del administrador de anuncios, saca los creativos que mejor funcionaron: el vídeo o la imagen y su texto.',
                        'Si es más cómodo, pega el enlace a la carpeta donde los tengáis.']}}},
@@ -1551,8 +1588,8 @@
       {k:'valor', t:'¿Está valorado? ¿Se vende por separado?', type:'text'}]}},
     {id:'o_soporte', onb:1, sec:'oferta', block:'Tu oferta', text:'¿Qué soporte tiene el cliente y cómo le haces seguimiento?', show:()=>ofq(8), free:true},
     {id:'o_despues', onb:1, sec:'oferta', block:'Tu oferta', text:'¿Qué ocurre cuando se termina el soporte o el acceso?', show:()=>ofq(9), free:true},
-    {id:'o_urgencia', onb:1, sec:'oferta', block:'Tu oferta', text:'¿Cómo generas urgencia de compra?', sub:'Plazas, plazo, ediciones al año, bonus limitados. Y si no generáis ninguna, dilo: también es una respuesta.', show:()=>ofq(10), free:true},
-    {id:'o_debiles', onb:1, sec:'oferta', block:'Tu oferta', text:'Tus puntos débiles', sub:'Comparando tu oferta con la competencia: ¿en qué eres más flojo, por qué crees que pasa y qué haces hoy para taparlo? Esta es la pregunta de la que más saco de todo el cuestionario. Contéstala a lo bruto.', show:()=>ofq(11), free:true},
+    {id:'o_urgencia', onb:1, sec:'oferta', block:'Tu oferta', text:'¿Cómo generáis urgencia de compra?', sub:'Plazas, plazo, ediciones al año, bonus limitados, contadores. Y si no generáis ninguna, dilo: también es una respuesta.', show:()=>ofq(10), free:true},
+    {id:'o_debiles', onb:1, sec:'oferta', block:'Tu oferta', text:'Tus puntos débiles', sub:'Comparando tu oferta con la competencia: ¿en qué eres más flojo, por qué crees que pasa y qué haces hoy para taparlo? Es la pregunta de la que más saco de todo el cuestionario. Contéstala sin suavizar. Y recuerda que esto lo van a poder leer tus socios cuando los tres hayáis enviado: si hay una parte que prefieres contarme solo a mí, esa me la dices por privado.', show:()=>ofq(11), free:true},
     {id:'o_precio', onb:1, sec:'oferta', block:'Tu oferta', text:'Precio y formas de pago', sub:'Con financiación, planes y condiciones especiales si las hay.', show:()=>ofq(12), free:true},
     {id:'o_garantia', onb:1, sec:'oferta', block:'Tu oferta', text:'¿Qué garantía ofreces?', sub:'De devolución, de resultados, o ninguna.', show:()=>ofq(13), free:true},
     {id:'o_afiliacion', onb:1, sec:'oferta', block:'Tu oferta', text:'¿Cómo funciona hoy vuestro programa de afiliación o de referidos?', sub:'Condiciones, comisión, quién lo lleva, y si está activo o existe solo sobre el papel.', show:()=>ofq('afiliacion'), free:true},
@@ -2794,6 +2831,8 @@
       bp[1].textContent = 'Cuanto más concreto seas aquí, menos tiempo perdemos en esa conversación preguntando lo que ya podía saber.';
       document.getElementById('f-wa').closest('.field').querySelector('label span').textContent = '· por aquí coordinamos';
       cw.querySelector('.privacy').textContent = 'Tus datos se usan solo para preparar tu auditoría. No entran en ninguna secuencia ni se ceden a terceros.';
+      document.getElementById('qbox').innerHTML = '<div class="obcargando">Abriendo tu cuestionario…</div>';
+      show('quiz');
       auditStart();
     }
 
@@ -2846,7 +2885,7 @@
         '<div class="opts">'+p.map(x=>{
           const e = prog[x.k]||{};
           const est = e.enviado ? 'ya ha terminado' : (e.pct>0 ? 'lo tiene al '+e.pct+'%' : 'no ha empezado');
-          return '<button class="opt obquien" onclick="onbElegir(\''+x.k+'\')"><b>'+esc(x.n)+'</b><em>'+est+'</em></button>';
+          return '<button class="opt obquien" onclick="onbElegir(\''+x.k+'\')"><span class="obquien-nom"><span class="obini">'+esc((x.n||'?').charAt(0).toUpperCase())+'</span><b>'+esc(x.n)+'</b></span><em>'+est+'</em></button>';
         }).join('')+'</div>'+
         '<p class="obline">Si te equivocas, puedes cambiarlo: no se envía nada hasta el final.</p></div>';
       document.getElementById('qbox').innerHTML = s;
@@ -3017,6 +3056,9 @@
       s += '<div class="obsecs">'+secs.map((x,i)=>'<div class="obsec"><span class="obn">'+(i+1)+'</span><div><b>'+esc(x.n)+'</b><p>'+esc(x.d)+'</p></div></div>').join('')+'</div>';
       s += onbProgresoHTML();
       s += '<p class="obline">Si alguna pregunta crees que la contesta mejor otro, dímelo y la muevo. Pero contesta tú lo que puedas: mover preguntas entre tres personas es la forma más rápida de que no la conteste nadie.</p>';
+      /* Se avisa ANTES de escribir, no después. Si alguien contesta algo crudo creyendo que es
+         solo para Daniel y luego lo lee su socio, el problema lo habría creado esta página. */
+      s += '<p class="obaviso"><b>Una cosa antes de empezar:</b> cuando los tres hayáis enviado, cada uno podrá leer lo que contestaron los otros dos. Antes no, para que nadie conteste mirando lo que puso el anterior. Si hay algo que prefieres contarme solo a mí, no lo escribas aquí: dímelo por privado y lo tratamos aparte.</p>';
       s += '<div class="qnav"><button class="qback" onclick="onbIntro()">Atrás</button><button class="btn-wa" onclick="onbGo()">Empezar</button></div></div>';
       document.getElementById('qbox').innerHTML = s;
       show('quiz'); window.scrollTo(0,0);
@@ -3076,7 +3118,7 @@
                        : esc(pend.join(', ')))+
         '. Cuando lo tengáis, me lo mandáis y ya está: no hace falta repetir el cuestionario.</p>';
       if(faltan.length) s += '<p><b>Falta por terminar:</b> '+esc(faltan.map(x=>x.n||x.k).join(' y '))+'. Se lo puedes recordar tú mejor que yo.</p>';
-      else if(otros.length) s += '<p>Los tres habéis terminado. Con esto ya puedo empezar.</p>';
+      else if(otros.length) s += '<p>Los tres habéis enviado. Ahora me toca a mí: lo leo entero antes de escribiros.</p>';
       s += '<p><b>Qué pasa ahora:</b> leo todo lo que habéis entregado y os escribo yo. Si algo importante falta, os lo pido en ese mismo email, no en cinco.</p>'+
         '<p class="mathnote">El reloj arranca con el material completo, no con el cuestionario enviado. Es la única forma de que lo que empiece a hacer salga de lo que hay de verdad y no de lo que falta.</p>'+
         '<div class="rcta-btns" style="margin-top:26px;"><button class="btn-wa" onclick="onbLeer()">Ver lo que han contestado los demás</button></div>'+
@@ -3137,6 +3179,29 @@
       return s;
     }
 
+    /* Lo que escribió un socio, presentado para leerse en pantalla. El texto viaja con el formato
+       del email (títulos subrayados con =====); aquí se convierte en títulos, pregunta en negrita
+       y respuesta debajo, para que un cliente no vea las tripas del envío. */
+    function onbFmt(t){
+      const L = String(t||'').replace(/\r/g,'').split('\n');
+      let out = '', bloque = [];
+      const volcar = ()=>{
+        if(!bloque.length) return;
+        if(/^- /.test(bloque[0])) out += '<p class="obr-doc">'+bloque.map(l=>esc(l.trim())).join('<br>')+'</p>';
+        else out += '<p class="obr-q">'+esc(bloque[0])+'</p>'+(bloque.length>1?'<p class="obr-a">'+bloque.slice(1).map(esc).join('<br>')+'</p>':'');
+        bloque = [];
+      };
+      for(let i=0;i<L.length;i++){
+        const l = L[i];
+        if(l.trim() && /^=+$/.test((L[i+1]||'').trim())){ volcar(); out += '<div class="obr-sec">'+esc(l.trim())+'</div>'; i++; continue; }
+        if(/^=+$/.test(l.trim())) continue;
+        if(!l.trim()){ volcar(); continue; }
+        bloque.push(l);
+      }
+      volcar();
+      return out;
+    }
+
     /* ── Leer lo de los demás, solo cuando ya has enviado lo tuyo ── */
     async function onbLeer(){
       document.getElementById('qbox').innerHTML = '<div class="qtext">Un momento…</div>';
@@ -3159,7 +3224,7 @@
       else s += '<div class="qsub">Tal cual lo escribieron. No hace falta que os pongáis de acuerdo: si veis algo que no cuadra entre vosotros, eso me interesa más que si coincidís.</div>';
       r.forEach(x=>{
         s += '<div class="rcard" style="margin-top:20px;"><div class="ftag">'+esc(x.n)+'</div>'+
-             '<pre class="obresp">'+esc(x.texto||'(sin contenido)')+'</pre></div>';
+             '<div class="obresp">'+(x.texto?onbFmt(x.texto):'<p class="obr-a">(sin contenido)</p>')+'</div></div>';
       });
       if(pend.length) s += '<p class="obline">Falta por enviar: '+esc(pend.join(' y '))+'.</p>';
       s += '<div class="qnav"><span></span><button class="btn-wa" onclick="onbCierre()">Volver</button></div></div>';
@@ -3234,6 +3299,9 @@
       if(box) box.style.display='none';
       cw.querySelectorAll('.field').forEach(f=>f.style.display='none');
       cw.querySelector('.privacy').textContent = 'Todo lo que subes va a una carpeta privada de tu cliente en mi Drive. Cifras, no personas.';
+      // Mientras contesta el script (uno o dos segundos) se ve esto, no la portada del test gratuito
+      document.getElementById('qbox').innerHTML = '<div class="obcargando">Abriendo vuestro cuestionario…</div>';
+      show('quiz');
       onbStart();
     }
   </script>
