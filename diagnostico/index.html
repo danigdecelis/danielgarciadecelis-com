@@ -832,8 +832,70 @@
     .rcta p { max-width: 420px; margin: 0 auto 30px; }
     .rcta-btns { display: flex; flex-direction: column; gap: 14px; align-items: center; }
 
+    /* El texto iba pegado al borde en móvil: .quiz-wrap declara «padding: 56px 0 90px» y ese 0 pisa
+       el margen lateral de .container. Se arregla solo para onboarding, con padding-block, porque
+       cambiarlo en .quiz-wrap tocaría también la versión pública. */
+    body.onb .quiz-wrap { padding: 56px 28px 90px; }
+    @media (max-width: 640px) { body.onb .quiz-wrap { padding: 40px 28px 70px; } }
+
+    /* Modo onboarding: tablas (módulos, bonus, accesos, equipo, creencias) */
+    .gridq { margin-top: 30px; }
+    .grow { border: 1px solid var(--line-soft); border-radius: 2px; padding: 18px 20px; margin-bottom: 12px; }
+    .grow-h {
+      display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+      font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 500; color: var(--ink); margin-bottom: 14px;
+    }
+    .grow-h em { font-style: normal; font-size: 0.82rem; color: var(--muted); font-weight: 400; flex-basis: 100%; }
+    .grow-h .gnum { color: var(--gold); font-size: 0.78rem; letter-spacing: 0.18em; }
+    .grow-h .grm { margin-left: auto; padding: 0; font-size: 0.72rem; }
+    .gcell { margin-bottom: 14px; } .gcell:last-child { margin-bottom: 0; }
+    .gcell label {
+      display: block; font-family: 'DM Sans', sans-serif; font-size: 0.7rem; font-weight: 500;
+      letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 7px;
+    }
+    .gcell input[type=text] {
+      width: 100%; background: rgba(243, 237, 228, 0.03); border: 1px solid var(--line-soft); border-radius: 2px;
+      color: var(--ink); font-family: 'DM Sans', sans-serif; font-size: 0.95rem; padding: 12px 14px;
+    }
+    .gcell textarea { margin-top: 0; min-height: 68px; font-size: 0.95rem; padding: 12px 14px; }
+    .gcell input[type=text]:focus, .gcell textarea:focus { outline: none; border-color: var(--gold); }
+    .gopts { display: flex; flex-wrap: wrap; gap: 8px; }
+    .gopts .opt { padding: 11px 16px; font-size: 0.88rem; flex: 1 1 auto; text-align: center; }
+    .gscale .opt { flex: 0 0 auto; min-width: 48px; }
+    .gadd { display: inline-block; margin-top: 4px; color: var(--gold); letter-spacing: 0.12em; }
+    .gadd:hover { color: var(--ink); }
+
+    /* Modo onboarding: primera pantalla, portada y barras de los tres */
+    .obintro { padding-top: 6px; }
+    .obfind { display: flex; gap: 18px; align-items: flex-start; padding: 22px 0; border-bottom: 1px solid var(--line-soft); }
+    .obsec  { display: flex; gap: 18px; align-items: flex-start; padding: 16px 0; border-bottom: 1px solid var(--line-soft); }
+    .obfind .obn, .obsec .obn {
+      font-family: 'Playfair Display', serif; font-weight: 900; font-size: 1.25rem; color: var(--gold);
+      line-height: 1.2; flex: 0 0 26px;
+    }
+    .obfind b, .obsec b { display: block; font-family: 'DM Sans', sans-serif; font-weight: 500; font-size: 1rem; color: var(--ink); line-height: 1.45; }
+    .obfind p, .obsec p { font-size: 0.9rem; color: var(--ink-dim); margin: 6px 0 0; line-height: 1.6; }
+    .obsecs { margin-top: 26px; }
+    .opt.obquien { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+    .opt.obquien b { font-weight: 500; color: var(--ink); font-size: 1.02rem; }
+    .opt.obquien em { font-style: normal; font-size: 0.82rem; color: var(--muted); }
+    .obcambiar { display: block; margin: 2px 0 14px; padding: 0; }
+    .obresp {
+      white-space: pre-wrap; overflow-wrap: anywhere; margin: 0;
+      font-family: 'DM Sans', sans-serif; font-size: 0.88rem; line-height: 1.6; color: var(--ink-dim);
+    }
+    .obline {
+      font-family: 'Playfair Display', serif; font-style: italic; font-size: 1.02rem; color: var(--gold);
+      line-height: 1.55; margin-top: 30px; padding-left: 18px; border-left: 2px solid var(--gold);
+    }
+    .obprog { margin-top: 34px; padding-top: 26px; border-top: 1px solid var(--line-soft); }
+    .obprog .ftag { margin-bottom: 20px; }
+
     @media (max-width: 640px) {
       .hero { padding: 72px 0 56px; }
+      .grow { padding: 16px 15px; }
+      .gopts .opt { flex: 1 1 100%; text-align: left; }
+      .gscale .opt { flex: 1 1 auto; text-align: center; }
       .section { padding: 64px 0; }
       .cta { padding: 72px 0 64px; }
       .bullets li { grid-template-columns: 42px 1fr; gap: 16px; padding: 22px 0; }
@@ -1104,6 +1166,16 @@
     const AUDIT_URL = "https://script.google.com/macros/s/AKfycbzeYKoJogKgUk7JmCz7tPnShcrm1kA_atbBy16M7q2EoqND5cxuhbb4qrLP_ldk1Qya/exec";
     const AREF = new URLSearchParams(location.search).get('r')||'';
     const AKEY = new URLSearchParams(location.search).get('k')||'';
+
+    /* MODO ONBOARDING (fase 1 del servicio estrella): /diagnostico/?modo=onboarding&r=<cliente>-<persona>&k=<clave>
+       Seis secciones repartidas entre los socios de un mismo cliente. Cada enlace enseña solo lo de esa persona.
+       NADA del contenido de un cliente vive aquí: este repo es público. Los nombres, el reparto, las preguntas
+       con su negocio dentro y los hallazgos de la primera pantalla los entrega el script con clave válida (CFG).
+       Sin el parámetro no se ejecuta una sola línea de esto. */
+    const ONB = new URLSearchParams(location.search).get('modo')==='onboarding';
+    const ONB_URL = "https://script.google.com/macros/s/AKfycby7I98EazBgVN8Is0U-IdLPH1taH-yOC9CgFt5JIjdQQfHsDC6Z6JHUM1eNJr_yp-ARIQ/exec";   // script "Onboarding · arranque", desplegado el 23-sep
+    let CLI = null;       // el cliente entero: empresa, sus personas y el avance de cada una
+    let CFG = null;       // la persona que ha dicho ser; sin ella no se enseña ni una pregunta
 
     /* Analytics del quiz: pings por GET a la misma URL. Si el Apps Script no tiene doGet,
        no hacen nada (ni filas ni emails). Un evento por hito y sesión, sin duplicados. */
@@ -1435,7 +1507,189 @@
                   'Mientras, cuéntame en voz alta qué querías que pasara en cada paso.',
                   'Con Loom (tiene versión gratis) basta: pega aquí el enlace.']}}},
 
-    {id:'d_otros', block:'Tu material', slot:'Otros', text:'¿Algo más que quieras que vea?', sub:'Opcional. Datos de WhatsApp, directos extra, una encuesta, tus propias notas. Lo que creas que me ayuda.', show:a=>AUDIT, doc:{optional:true, tools:[], steps:{}}}
+    {id:'d_otros', block:'Tu material', slot:'Otros', text:'¿Algo más que quieras que vea?', sub:'Opcional. Datos de WhatsApp, directos extra, una encuesta, tus propias notas. Lo que creas que me ayuda.', show:a=>AUDIT, doc:{optional:true, tools:[], steps:{}}},
+
+    /* ═══════════════════════════════════════════════════════════════════
+       MODO ONBOARDING · las seis secciones. Todas llevan onb:true, así que
+       no existen para la versión pública ni para el modo auditoría.
+       Qué ve cada persona lo decide CFG (lo da el script), nunca este archivo.
+    ═══════════════════════════════════════════════════════════════════ */
+
+    /* ── Sección 1 · Tu negocio y tu voz (capa 1) ── */
+    {id:'rot_negocio', onb:1, sec:'negocio', rot:true, block:'Tu negocio y tu voz'},
+    {id:'n_origen', onb:1, sec:'negocio', block:'Tu negocio y tu voz', text:'¿A qué te dedicabas antes de esto, y en qué año empezó el proyecto?', free:true},
+    {id:'n_porque', onb:1, sec:'negocio', block:'Tu negocio y tu voz', text:'¿Por qué decidiste crearlo?', sub:'Si hay una historia detrás que pueda inspirar a alguien, cuéntala entera. Es de lo que más uso.', free:true},
+    {id:'n_tono', onb:1, sec:'negocio', block:'Tu negocio y tu voz', text:'El tono de tu marca', sub:'Marca todos los que te representen.', multi:true, opts:[
+      {v:'serio', t:'Serio'}, {v:'cercano', t:'Cercano'}, {v:'espontaneo', t:'Espontáneo'}, {v:'divertido', t:'Divertido'},
+      {v:'ironico', t:'Irónico'}, {v:'polemico', t:'Polémico'}, {v:'tecnico', t:'Técnico'}, {v:'reivindicativo', t:'Reivindicativo'}, {v:'didactico', t:'Didáctico'}]},
+    {id:'n_coletillas', onb:1, sec:'negocio', block:'Tu negocio y tu voz', text:'Frases o coletillas que usas siempre al comunicarte', sub:'Las que alguien reconocería como tuyas. Cuantas más, mejor.', free:true},
+    {id:'n_prohibidas', onb:1, sec:'negocio', block:'Tu negocio y tu voz', text:'Palabras prohibidas', sub:'Las que no te representan en absoluto y no quieres ver escritas en tu nombre.', free:true},
+    {id:'n_diferencia', onb:1, sec:'negocio', block:'Tu negocio y tu voz', text:'¿Qué tienes tú que no tenga tu competencia? ¿Y qué tienen ellos que no tengas tú?', sub:'Las dos mitades. La segunda me sirve tanto como la primera.', free:true},
+    {id:'n_competidores', onb:1, sec:'negocio', block:'Tu negocio y tu voz', text:'Tus competidores', sub:'De tres a cinco. Más de cinco es perder el tiempo, tuyo y mío.', grid:{min:3, add:'Añadir competidor', cols:[
+      {k:'nombre', t:'Nombre', type:'text'}, {k:'web', t:'Web', type:'text'}, {k:'redes', t:'Redes', type:'text'}]}},
+    {id:'n_logros', onb:1, sec:'negocio', block:'Tu negocio y tu voz', text:'Tus logros, con cifras y casos', sub:'Los que se puedan usar para trabajar autoridad. Si tienes el dato exacto, ponlo: sin cifra no se puede afirmar nada.', free:true},
+    {id:'n_urls', onb:1, sec:'negocio', block:'Tu negocio y tu voz', text:'Las URLs del proyecto que me van a situar', sub:'Web, páginas de venta, redes, canal de YouTube, lo que exista.', free:true},
+    {id:'n_ads', onb:1, sec:'negocio', block:'Tu negocio y tu voz', slot:'Anuncios ganadores', text:'Si has invertido en publicidad, ¿tienes detectados tus anuncios ganadores?', sub:'Súbelos o pega el enlace. Si no habéis hecho publicidad, elige «No lo tengo».', doc:{
+      tools:[['otra','Meta, Google, TikTok…']],
+      steps:{otra:()=>['Del administrador de anuncios, saca los creativos que mejor funcionaron: el vídeo o la imagen y su texto.',
+                       'Si es más cómodo, pega el enlace a la carpeta donde los tengáis.']}}},
+
+    /* ── Sección 2 · Tu oferta (capa 1). Se reparte pregunta a pregunta: CFG.oferta dice cuáles ve esta persona ── */
+    {id:'rot_oferta', onb:1, sec:'oferta', rot:true, block:'Tu oferta'},
+    {id:'o_que', onb:1, sec:'oferta', block:'Tu oferta', text:'¿Qué vendes exactamente?', sub:()=>T('o_que.sub','Lo más detallado que puedas, con la URL de la página de ventas.'), show:()=>ofq(1), free:true},
+    {id:'o_quien', onb:1, sec:'oferta', block:'Tu oferta', text:'¿A quién va dirigida, qué resultados prometes y qué problema resuelve?', show:()=>ofq(2), free:true},
+    {id:'o_unico', onb:1, sec:'oferta', block:'Tu oferta', text:'¿Por qué es única? ¿Qué elementos tiene que no tenga la competencia?', show:()=>ofq(3), free:true},
+    {id:'o_metodo', onb:1, sec:'oferta', block:'Tu oferta', text:'La metodología de entrega y de consumo', sub:'Cómo lo recibe el cliente y cómo lo va consumiendo.', show:()=>ofq(4), free:true},
+    {id:'o_acceso', onb:1, sec:'oferta', block:'Tu oferta', text:'¿Cuánto dura y hasta cuándo hay acceso real?', sub:'El acceso real, no el que pone en la página si no coinciden.', show:()=>ofq(5), free:true},
+    {id:'o_modulos', onb:1, sec:'oferta', block:'Tu oferta', text:'¿En cuántas partes se divide, y qué consigue el cliente con cada una?', sub:'Una fila por módulo o por bloque de contenido. Lo que importa es la segunda columna: el resultado, no el temario.', show:()=>ofq(6), grid:{min:3, add:'Añadir módulo', cols:[
+      {k:'modulo', t:'Módulo o parte', type:'text'}, {k:'resultado', t:'Qué consigue con esa parte', type:'area'}]}},
+    {id:'o_bonus', onb:1, sec:'oferta', block:'Tu oferta', text:'Tus bonus, uno por uno', sub:'La columna que más me importa es la de la objeción: un bonus que no elimina ninguna objeción casi nunca está ganándose su sitio.', show:()=>ofq(7), grid:{min:1, add:'Añadir bonus', cols:[
+      {k:'nombre', t:'Bonus', type:'text'},
+      {k:'tipo', t:'Para qué está', type:'choice', opts:['Aumenta el valor percibido','Elimina una objeción']},
+      {k:'resultado', t:'Qué resultado le da', type:'area'},
+      {k:'objecion', t:'Qué objeción elimina', type:'area'},
+      {k:'valor', t:'¿Está valorado? ¿Se vende por separado?', type:'text'}]}},
+    {id:'o_soporte', onb:1, sec:'oferta', block:'Tu oferta', text:'¿Qué soporte tiene el cliente y cómo le haces seguimiento?', show:()=>ofq(8), free:true},
+    {id:'o_despues', onb:1, sec:'oferta', block:'Tu oferta', text:'¿Qué ocurre cuando se termina el soporte o el acceso?', show:()=>ofq(9), free:true},
+    {id:'o_urgencia', onb:1, sec:'oferta', block:'Tu oferta', text:'¿Cómo generas urgencia de compra?', sub:'Plazas, plazo, ediciones al año, bonus limitados. Y si no generáis ninguna, dilo: también es una respuesta.', show:()=>ofq(10), free:true},
+    {id:'o_debiles', onb:1, sec:'oferta', block:'Tu oferta', text:'Tus puntos débiles', sub:'Comparando tu oferta con la competencia: ¿en qué eres más flojo, por qué crees que pasa y qué haces hoy para taparlo? Esta es la pregunta de la que más saco de todo el cuestionario. Contéstala a lo bruto.', show:()=>ofq(11), free:true},
+    {id:'o_precio', onb:1, sec:'oferta', block:'Tu oferta', text:'Precio y formas de pago', sub:'Con financiación, planes y condiciones especiales si las hay.', show:()=>ofq(12), free:true},
+    {id:'o_garantia', onb:1, sec:'oferta', block:'Tu oferta', text:'¿Qué garantía ofreces?', sub:'De devolución, de resultados, o ninguna.', show:()=>ofq(13), free:true},
+    {id:'o_afiliacion', onb:1, sec:'oferta', block:'Tu oferta', text:'¿Cómo funciona hoy vuestro programa de afiliación o de referidos?', sub:'Condiciones, comisión, quién lo lleva, y si está activo o existe solo sobre el papel.', show:()=>ofq('afiliacion'), free:true},
+
+    /* ── Sección 3 · Tu cliente (capa 1, prepara la capa 4) ──
+       REDACCIÓN OBLIGATORIA: se pregunta por lo que él CREE, nunca por lo que es. Lo que el cliente cree
+       de su avatar no es fuente de verdad sobre el avatar: es la declaración del experto que la capa 4
+       contrasta después, y ese contraste es medio informe de arranque. Sin declaración no hay veredicto
+       sobre los ángulos previstos, que es salida obligatoria de la Fase 1. No tocar sin leer el cuaderno. */
+    {id:'rot_cliente', onb:1, sec:'cliente', rot:true, block:'Tu cliente'},
+    {id:'c_perfiles', onb:1, sec:'cliente', block:'Tu cliente', text:'¿Cuáles crees tú que son tus perfiles de cliente?', sub:'Ordénalos por importancia o por volumen de compra, con los rasgos de cada uno. Me interesa tu lectura, que es la del que lleva años vendiéndoles.', grid:{min:2, add:'Añadir perfil', cols:[
+      {k:'perfil', t:'Perfil', type:'text'}, {k:'rasgos', t:'Cómo es, según tú', type:'area'}]}},
+    {id:'c_central', onb:1, sec:'cliente', block:'Tu cliente', text:'De esos, ¿cuál crees que es el central?', sub:'Con el máximo detalle que puedas. Si crees que hay que enfocar más de uno, dilo y explica por qué.', free:true},
+    {id:'c_externos', onb:1, sec:'cliente', block:'Tu cliente', text:'¿Qué problemas crees que tiene en su día a día que le impiden conseguir lo que quiere?', sub:'Problemas externos: los que se ven desde fuera. Uno por fila.', grid:{min:3, add:'Añadir problema', cols:[
+      {k:'problema', t:'Problema externo', type:'area'}]}},
+    {id:'c_internos', onb:1, sec:'cliente', block:'Tu cliente', text:'Y de esos problemas, ¿qué crees que siente por dentro?', sub:'El conflicto emocional que le genera cada uno. Puntúa del 1 al 5 lo fuerte que crees que lo vive: 1 es una molestia, 5 es lo que no le deja dormir.', grid:{min:3, add:'Añadir conflicto', cols:[
+      {k:'interno', t:'Qué siente', type:'area'}, {k:'fuerza', t:'Del 1 al 5', type:'scale'}]}},
+    {id:'c_importa', onb:1, sec:'cliente', block:'Tu cliente', text:'¿Por qué crees que es tan importante para él resolverlo?', sub:'Qué se juega. Qué cambia en su vida si lo resuelve y qué pasa si no.', free:true},
+    {id:'c_creencias_metodo', onb:1, sec:'cliente', block:'Tu cliente', text:'¿Qué crees que piensa tu cliente sobre tu método que no es verdad?', sub:'Falsas creencias sobre tu sistema. Por ejemplo: «esto solo funciona si ya tienes audiencia», «es demasiado técnico para mí», «con lo que cuesta, seguro que hay que pagar extras después».', grid:{min:2, add:'Añadir creencia', cols:[
+      {k:'creencia', t:'Lo que cree', type:'area'}]}},
+    {id:'c_creencias_internas', onb:1, sec:'cliente', block:'Tu cliente', text:'¿Y qué crees que piensa de sí mismo que le frena?', sub:'Falsas creencias internas. Por ejemplo: «yo no valgo para esto», «a mí se me da fatal venderme», «ya lo intenté una vez y no funcionó».', grid:{min:2, add:'Añadir creencia', cols:[
+      {k:'creencia', t:'Lo que cree de sí mismo', type:'area'}]}},
+    {id:'c_creencias_externas', onb:1, sec:'cliente', block:'Tu cliente', text:'¿Y qué crees que piensa del entorno, del mercado o de su situación?', sub:'Falsas creencias externas. Por ejemplo: «ahora el mercado está saturado», «con la crisis nadie compra», «mi nicho es distinto y esto ahí no funciona».', grid:{min:2, add:'Añadir creencia', cols:[
+      {k:'creencia', t:'Lo que cree del entorno', type:'area'}]}},
+    {id:'c_testimonios', onb:1, sec:'cliente', block:'Tu cliente', slot:'Testimonios y encuestas', text:'Testimonios, casos de éxito y encuestas a clientes', sub:'En cualquier formato: vídeo, audio, capturas de mensajes. Y si habéis hecho encuestas a vuestros clientes, quiero verlas tal cual, sin resumir.', doc:{
+      tools:[['otra','Donde los tengáis']],
+      steps:{otra:()=>['Súbelos aquí, o pega el enlace a la carpeta donde estén (Drive, Dropbox, Notion…).',
+                       'Si tenéis respuestas de encuestas, mejor el archivo en bruto que un resumen: lo que quiero son sus palabras.']}}},
+
+    /* ── Sección 4 · Tus accesos (capa 2 · solo clics) ── */
+    {id:'rot_accesos', onb:1, sec:'accesos', rot:true, block:'Tus accesos'},
+    {id:'a_accesos', onb:1, sec:'accesos', block:'Tus accesos', text:'¿A qué me puedes dar acceso?', sub:'Una línea por herramienta. «No existe» informa igual que «acceso dado»: si algo no lo tenéis montado, eso ya me dice dónde mirar. Cifras, no personas: no me hace falta ni un email ni un nombre de comprador, y si un CSV los trae, esta página se los quita antes de subirlo.', grid:{fixed:true, cols:[
+      {k:'estado', t:'', type:'choice', opts:['Acceso dado','Lo exporto y lo subo','No existe / no lo tenemos']}], rows:[
+      {k:'email', t:'Plataforma de email marketing', h:'Solo lectura o export · para ver el rendimiento email a email'},
+      {k:'pago', t:'Plataforma de pago o checkout', h:'Solo lectura o export · ventas día a día, planes, reembolsos'},
+      {k:'meta', t:'Meta Ads', h:'Solo lectura · qué creativos trajeron ventas, no solo leads'},
+      {k:'analitica', t:'Analítica de las páginas', h:'Solo lectura · visitas y conversión de registro, ventas y gracias'},
+      {k:'producto', t:'Panel de producto o de uso', h:'Solo lectura o export agregado · quién entra y quién no vuelve'},
+      {k:'afiliados', t:'Panel de afiliados', h:'Solo lectura · cuántos hay y qué han vendido'},
+      {k:'agentico', t:'El sistema interno de datos', h:'Lo que decidáis · preguntarle lo que ya sabe en vez de exportarlo a mano'},
+      {k:'slack', t:'Slack o donde trabaje el equipo', h:'Como miembro · es donde se ejecuta el día a día'}]}},
+
+    /* ── Sección 5 · Tu material (capa 2 · subida de archivos) ── */
+    {id:'rot_material', onb:1, sec:'material', rot:true, block:'Tu material'},
+    {id:'m_emails_lanz', onb:1, sec:'material', block:'Tu material', slot:'Emails del lanzamiento', text:'El rendimiento email a email del lanzamiento', sub:()=>T('m_emails_lanz.sub','Por cada email: fecha y hora de envío, enviados, aperturas, clics y ventas atribuidas. Desde la convocatoria hasta una semana después del cierre. Solo totales de cada email: nada de listas de suscriptores.'), doc:{
+      tools:[['ac','ActiveCampaign'],['otra','Otra herramienta']],
+      steps:{
+        ac:()=>['En ActiveCampaign, menú de la izquierda: <b>Reports</b> → <b>Campaigns Performance</b>.',
+                'Filtra por fecha de envío (<b>Campaign Sent Date</b> → <b>Custom Range</b>): del primer al último email del lanzamiento.',
+                'Pasa el ratón por la tabla, pulsa <b>⋮</b> → <b>Download Data</b> → <b>CSV</b>.'],
+        otra:()=>['Busca el informe de campañas de tu herramienta (suele estar en <b>Informes</b> o <b>Reports</b>).',
+                  'Filtra las fechas del lanzamiento y expórtalo en CSV o Excel.',
+                  'Si no deja exportar, una captura del listado con sus métricas también vale.']},
+      note:{ac:'No uses los informes de «Opens» o «Clicks» de cada campaña: esos llevan los emails de vuestros suscriptores y no los necesito.'}}},
+    {id:'m_newsletter', onb:1, sec:'material', block:'Tu material', slot:'Newsletter', text:'El rendimiento de la newsletter', sub:'Los últimos 90 días, email a email. Mismo sitio que lo anterior, cambiando el filtro de fechas.', doc:{
+      tools:[['ac','ActiveCampaign'],['otra','Otra herramienta']],
+      steps:{
+        ac:()=>['Mismo camino: <b>Reports</b> → <b>Campaigns Performance</b>.',
+                'Cambia el rango de fechas a los últimos 90 días y descarga el CSV.'],
+        otra:()=>['El informe de campañas de tu herramienta, filtrado a los últimos 90 días, en CSV o Excel.']}}},
+    {id:'m_ventas', onb:1, sec:'material', block:'Tu material', slot:'Ventas', text:'Las ventas, día a día, con reembolsos', sub:()=>T('m_ventas.sub','Cada venta con su fecha, producto, importe y estado (pagada, reembolsada), desde el 1 de agosto hasta hoy. Solo cifras: nada de datos de vuestros compradores.'), doc:{
+      pii:true,
+      tools:[['hotmart','Hotmart'],['stripe','Stripe'],['otra','Otra plataforma']],
+      steps:{
+        hotmart:()=>['Entra en app.hotmart.com → <b>Ventas</b> → <b>Mis ventas</b>.',
+                     'Pulsa <b>Exportar</b>, modelo <b>Estándar</b>, formato <b>CSV</b>.',
+                     'Filtra el periodo y deja todos los estados, para que salgan también los reembolsos.'],
+        stripe:()=>['Entra en dashboard.stripe.com → <b>Transacciones</b>.',
+                    'Pulsa <b>Exportar</b>, elige las fechas y descarga el CSV con las columnas por defecto.'],
+        otra:()=>['En vuestra plataforma de cobro, exporta el listado de ventas del periodo.',
+                  'Mejor en CSV: así esta página quita sola los datos de vuestros compradores.']},
+      note:{hotmart:'El archivo de Hotmart trae nombre, email y teléfono. No hace falta que los borréis: si lo subís en CSV, esta página los quita antes de subirlo y os dice qué ha quitado.',
+            stripe:'El archivo de Stripe trae el email del comprador. Si lo subís en CSV, esta página lo quita antes de subirlo.'}}},
+    {id:'m_planes', onb:1, sec:'material', block:'Tu material', slot:'Reparto de planes', text:'El reparto por plan o por producto', sub:()=>T('m_planes.sub','Cuánto pesa cada plan y cada producto en las ventas, desde el 1 de septiembre. Del checkout o de vuestro sistema interno.'), doc:{
+      tools:[['otra','Del checkout o de vuestro sistema']],
+      steps:{otra:()=>['Si el export de ventas ya trae la columna del plan o del producto, con ese archivo me vale y puedes elegir «No lo tengo» aquí.',
+                       'Si lo tenéis en un panel aparte, una captura o un export con el reparto.']}}},
+    {id:'m_ads', onb:1, sec:'material', block:'Tu material', slot:'Anuncios', text:'Los anuncios, por anuncio y por día', sub:'Del lanzamiento y los 30 días siguientes: gasto, impresiones, clics y resultados.', doc:{
+      tools:[['meta','Meta'],['otra','Otra plataforma']],
+      steps:{
+        meta:()=>['En el Administrador de anuncios, pestaña <b>Anuncios</b>.',
+                  'Elige las fechas del lanzamiento y los 30 días siguientes.',
+                  'Pulsa <b>Desglose</b> → <b>Por tiempo</b> → <b>Día</b>.',
+                  'Pulsa <b>Exportar</b> → <b>Exportar como .csv</b>.'],
+        otra:()=>['El informe por anuncio y por día del periodo, con gasto, impresiones, clics y resultados, en CSV o Excel.']}}},
+    {id:'m_paginas', onb:1, sec:'material', block:'Tu material', slot:'Páginas', text:'Las visitas y la conversión de las páginas', sub:'Registro, ventas, checkout y gracias, en el mismo periodo del lanzamiento: cuánta gente entró y cuánta pasó a la siguiente.', doc:{
+      tools:[['otra','Vuestra analítica']],
+      steps:{otra:()=>['De donde tengáis la analítica (Google Analytics, el panel de la plataforma de páginas, Plausible…).',
+                       'Las visitas y las conversiones de cada página en ese periodo. Export o captura, lo que sea más rápido.']}}},
+    {id:'m_uso', onb:1, sec:'material', block:'Tu material', slot:'Uso del producto', text:'El uso del producto por dentro', sub:()=>T('m_uso.sub','Desde el 1 de septiembre, en agregado: cuántos entraron, cuántos lo usan de verdad, cuántos lo agotaron y cuántos no han abierto nunca. Números, sin identificadores de personas.'), doc:{
+      tools:[['otra','Del panel de producto']],
+      steps:{otra:()=>['Los totales, no el listado: cuántos de cada cosa.',
+                       'Si sale de una consulta a vuestro sistema interno, el resultado en CSV o una captura valen igual.']}}},
+    {id:'m_afiliacion', onb:1, sec:'material', block:'Tu material', slot:'Afiliación', text:'Los datos de la afiliación', sub:'Desde que existe: condiciones, cuántos afiliados hay y qué ha vendido cada uno.', doc:{
+      tools:[['otra','Del panel de afiliados']],
+      steps:{otra:()=>['Export del panel, o una captura con los totales por afiliado.',
+                       'Y las condiciones tal como se las presentáis a ellos: comisión, cookie, cuándo se paga.']}}},
+    {id:'m_emails_texto', onb:1, sec:'material', block:'Tu material', slot:'Emails tal cual salieron', text:'Los emails del lanzamiento tal cual salieron', sub:'Los textos, no las métricas. Sin el texto al lado, la métrica no dice qué funcionó: es la mitad del trabajo.', doc:{
+      tools:[['otra','Como los tengáis']],
+      steps:{otra:()=>['Un documento con todos, un PDF, o el enlace a la carpeta donde estén.',
+                       'Si es más rápido, exportadlos desde la herramienta de email: sirve cualquier formato donde se lea el texto entero, con su asunto.']}}},
+    {id:'m_whatsapp', onb:1, sec:'material', block:'Tu material', slot:'WhatsApp', text:'Los mensajes de WhatsApp del lanzamiento', sub:'Los textos que salieron por ahí, en el orden en que salieron.', doc:{
+      tools:[['otra','Export o capturas']],
+      steps:{otra:()=>['Si usáis una herramienta de difusión, exportad las campañas.',
+                       'Si se mandaron a mano, capturas del hilo o un documento con los textos.',
+                       'Cifras y textos: nada de listados con los teléfonos de la gente.']}}},
+    {id:'m_webinar', onb:1, sec:'material', block:'Tu material', slot:'Webinar en directo', text:'La grabación del webinar en directo y su presentación', sub:'La grabación entera, sin cortar, y el PDF o las diapositivas que se usaron. La voz vendiendo en directo es de lo que más me sirve.', doc:{
+      tools:[['otra','Enlace o archivo']],
+      steps:{otra:()=>['La grabación, por enlace (Drive, YouTube oculto, Vimeo, Zoom): pesa demasiado para subirla aquí.',
+                       'La presentación sí podéis subirla, en PDF o en el formato original.']}}},
+    {id:'m_reto', onb:1, sec:'material', block:'Tu material', slot:'El reto', text:'El reto de pago: qué se entregó cada día', sub:()=>T('m_reto.sub','Día a día, qué recibía quien estaba dentro. Es la mecánica que mejor os ha funcionado y probablemente no está escrita en ningún sitio: si hay que contarlo a mano, cuéntalo a mano aquí abajo.'), doc:{
+      tools:[['otra','Documento, enlace o escrito a mano']],
+      steps:{otra:()=>['Si existe un documento, subidlo o pegad el enlace.',
+                       'Si no existe, escribidlo aquí en bruto: día 1 esto, día 2 lo otro. Sin pulir.']}}},
+    {id:'m_webinars_viejos', onb:1, sec:'material', block:'Tu material', slot:'Webinars antiguos', text:'Los webinars antiguos y la presentación antigua', sub:'Los que ya me ofrecisteis en la reunión. Aunque estén desfasados, me sirven: enseñan cómo se contaba antes.', doc:{
+      tools:[['otra','Enlace a la carpeta']],
+      steps:{otra:()=>['El enlace a la carpeta donde estén, con acceso de lectura.',
+                       'No hace falta que los ordenéis ni que elijáis: prefiero verlos todos.']}}},
+    {id:'m_paginas_lanz', onb:1, sec:'material', block:'Tu material', slot:'Páginas del lanzamiento', text:'Las páginas del lanzamiento tal cual estaban', sub:'Registro, ventas y gracias. Si ya las habéis cambiado, una captura completa o el archivo guardado. Es para leerlas, no para reescribirlas todavía.', doc:{
+      tools:[['otra','Enlaces o capturas']],
+      steps:{otra:()=>['Si siguen publicadas, con pegar las URLs basta.',
+                       'Si ya no están, capturas de página completa o lo que tengáis guardado.']}}},
+    {id:'m_recorrido', onb:1, sec:'material', block:'Tu material', slot:'Recorrido del embudo', text:'Un vídeo de diez minutos recorriendo el embudo por dentro', sub:'Grabad la pantalla haciendo el camino del cliente y contando en voz alta qué queríais que pasara en cada paso. Este vídeo ahorra tres conversaciones.', doc:{
+      tools:[['otra','Loom o cualquier grabador']],
+      steps:{otra:()=>['Entrad como si fuerais un cliente: el anuncio o el post, la página de registro, los emails, la de ventas, el checkout, la de gracias, y el producto por dentro.',
+                       'Contad en voz alta qué queríais que pasara en cada paso, y dónde sospecháis que se cae la gente.',
+                       'Con Loom (tiene versión gratis) basta: pegad aquí el enlace.']}}},
+    {id:'m_otros', onb:1, sec:'material', block:'Tu material', slot:'Otros', text:'¿Algo más que creas que debería ver?', sub:'Opcional. Notas internas, una encuesta, un documento de estrategia, lo que sea.', doc:{optional:true, tools:[], steps:{}}},
+
+    /* ── Sección 6 · Tu equipo (capa 3 · solo clics) ── */
+    {id:'rot_equipo', onb:1, sec:'equipo', rot:true, block:'Tu equipo'},
+    {id:'eq_equipo', onb:1, sec:'equipo', block:'Tu equipo', text:'¿Quién lleva cada cosa?', sub:'Una fila por función. La última columna es la que decide con quién tengo que hablar: si alguien ejecuta algo que toca el embudo, casi siempre merece la pena una conversación de veinte minutos con esa persona.', grid:{fixed:true, cols:[
+      {k:'quien', t:'¿Quién?', type:'text'},
+      {k:'tipo', t:'¿Interno o externo?', type:'choice', opts:['Interno','Externo','Nadie ahora mismo']},
+      {k:'hablar', t:'¿Hablo con esta persona?', type:'choice', opts:['Sí','No','Lo decidimos luego']}], rows:[
+      {k:'media', t:'Media buying'}, {k:'social', t:'Social media'}, {k:'video', t:'Edición de vídeo'},
+      {k:'soporte', t:'Soporte y atención'}, {k:'desarrollo', t:'Desarrollo'}, {k:'otros', t:'Otros'}]}}
     ];
 
     /* =====================================================
@@ -1443,7 +1697,18 @@
     ===================================================== */
     let A = {}, AL = {}, MID = {}, path = [], cur = -1, currency = '$';
 
-    function visible(){ return Q.filter(q=>!q.show||q.show(A)); }
+    /* Las preguntas del onboarding llevan onb:true y las de los otros dos modos no la llevan.
+       Un modo nunca ve las preguntas del otro: con ONB apagado, inMode() vale true para todas
+       las preguntas de siempre, así que la versión pública y el modo auditoría no cambian. */
+    /* En onboarding, además de la sección, CFG puede repartir documentos sueltos de «Tu material»
+       entre dos personas (uno sube los webinars y otro los datos). Sin lista, ve todos los de su sección. */
+    function inMode(q){
+      if(!ONB) return !q.onb;
+      if(!q.onb || !hasSec(q.sec)) return false;
+      if(q.sec==='material' && !q.rot && CFG && Array.isArray(CFG.material)) return CFG.material.indexOf(q.id)>=0;
+      return true;
+    }
+    function visible(){ return Q.filter(q=>inMode(q)&&(!q.show||q.show(A))); }
 
     function show(id){
       ['landing','quiz','capture','report'].forEach(s=>document.getElementById(s).classList.remove('on'));
@@ -1476,7 +1741,7 @@
       let startIdx = curQ ? Q.indexOf(curQ)+1 : 0;
       let nxt = -1;
       for(let i=startIdx;i<Q.length;i++){
-        if(!Q[i].show || Q[i].show(A)){ nxt=i; break; }
+        if(inMode(Q[i]) && (!Q[i].show || Q[i].show(A))){ nxt=i; break; }
       }
       if(nxt===-1){ ping('capture'); show('capture'); return; }
       path.push(nxt); cur=path.length-1;
@@ -1496,17 +1761,29 @@
       const q = Q[path[cur]];
       const vis = visible();
       const pos = vis.indexOf(q)+1;
-      document.getElementById('pbar').style.width = Math.round(pos/(vis.length+1)*100)+'%';
-      document.getElementById('pcount').textContent = 'Pregunta '+pos+' de ~'+vis.length;
+      const pr = progressInfo(q, vis);
+      document.getElementById('pbar').style.width = Math.round(pr.pct)+'%';
+      document.getElementById('pcount').textContent = pr.txt;
       ping('q', q.id, pos);
+      if(q.rot){
+        document.getElementById('qbox').innerHTML = rotHTML(q, vis);
+        window.scrollTo(0,0); saveDraft();
+        /* El avance de los otros dos se relee al empezar cada sección: es lo que hace que un
+           formulario de tres se termine. Solo avance, nunca lo que ha respondido nadie. */
+        onbRefreshProgreso().then(()=>{ if(Q[path[cur]]===q) document.getElementById('qbox').innerHTML = rotHTML(q, visible()); });
+        return;
+      }
       let h = '<div class="qblock">'+q.block+'</div><div class="qtext">'+q.text+'</div>';
       if(q.sub) h += '<div class="qsub">'+TXT(q.sub)+'</div>';
       if(q.currency){
         h += '<div class="curr"><button class="'+(currency==='$'?'sel':'')+'" onclick="setCurr(\'$\')">USD $</button><button class="'+(currency==='€'?'sel':'')+'" onclick="setCurr(\'€\')">EUR €</button></div>';
       }
       if(q.free){
-        h += '<textarea id="freetxt" placeholder="Escribe aquí... (o sáltala, es opcional)">'+(A[q.id]||'')+'</textarea>';
-        h += '<div class="qnav"><button class="qback" onclick="back()">Atrás</button><div style="display:flex;gap:18px;align-items:center;"><button class="qback" onclick="saveFree()">Saltar</button><button class="btn-wa" onclick="saveFree()">'+(vis[vis.length-1]===q?'Ver mi diagnóstico':'Siguiente')+'</button></div></div>';
+        const ult = vis[vis.length-1]===q ? (ONB?'Terminar':'Ver mi diagnóstico') : 'Siguiente';
+        h += '<textarea id="freetxt" placeholder="'+(ONB?'Escribe aquí. Cuanto más concreto, menos te pregunto después.':'Escribe aquí... (o sáltala, es opcional)')+'">'+(A[q.id]||'')+'</textarea>';
+        h += '<div class="qnav"><button class="qback" onclick="back()">Atrás</button><div style="display:flex;gap:18px;align-items:center;"><button class="qback" onclick="saveFree()">'+(ONB?'No sé qué poner':'Saltar')+'</button><button class="btn-wa" onclick="saveFree()">'+ult+'</button></div></div>';
+      } else if(q.grid){
+        h += renderGrid(q);
       } else if(q.multi){
         const sel = A[q.id]||[];
         h += '<div class="opts">'+q.opts.map(o=>
@@ -2196,7 +2473,11 @@
        Nada de esto se ejecuta sin ?modo=auditoria.
     ===================================================== */
     const MAXB = 20*1024*1024;   // igual que MAX_BYTES en el script
-    const DKEY = 'auditoria:'+(AREF||'-');
+    /* El borrador de cada modo va por su cuenta: un enlace de onboarding no pisa uno de auditoría */
+    const DK = ()=>ONB ? ('onboarding:'+(AREF||'-')+':'+((CFG&&CFG.persona)||'-'))
+                       : ('auditoria:'+(AREF||'-'));
+    /* Las subidas van al script del modo que esté abierto */
+    const UPURL = ()=>ONB?ONB_URL:AUDIT_URL;
     const periodo = ()=>{ const l=LZ(A), e=EV(A);
       return l&&e ? 'de los últimos 90 días y del lanzamiento (si puedes, en un solo archivo que cubra los dos)'
         : l ? 'del lanzamiento, desde que empezó la convocatoria hasta una semana después del cierre'
@@ -2206,13 +2487,13 @@
 
     /* ── Borrador en su navegador (se retoma en el mismo navegador) ── */
     function saveDraft(){
-      if(!AUDIT) return;
-      try{ localStorage.setItem(DKEY, JSON.stringify({v:1, t:Date.now(), A, AL, MID, path, cur, currency})); }catch(e){}
+      if(!AUDIT&&!ONB) return;
+      try{ localStorage.setItem(DK(), JSON.stringify({v:1, t:Date.now(), A, AL, MID, path, cur, currency})); }catch(e){}
     }
     function loadDraft(){
-      try{ const d = JSON.parse(localStorage.getItem(DKEY)||'null'); return d&&d.v===1&&Array.isArray(d.path)&&d.path.length ? d : null; }catch(e){ return null; }
+      try{ const d = JSON.parse(localStorage.getItem(DK())||'null'); return d&&d.v===1&&Array.isArray(d.path)&&d.path.length ? d : null; }catch(e){ return null; }
     }
-    function clearDraft(){ try{ localStorage.removeItem(DKEY); }catch(e){} }
+    function clearDraft(){ try{ localStorage.removeItem(DK()); }catch(e){} }
     function resumeDraft(d){
       A=d.A||{}; AL=d.AL||{}; MID=d.MID||{}; path=d.path; cur=Math.min(d.cur,path.length-1); currency=d.currency||'$';
       // Una subida que se cortó al cerrar la pestaña no llegó: se marca para repetirla
@@ -2259,13 +2540,15 @@
     function renderDoc(q){
       const d = q.doc, s = docState(q);
       let h = '';
-      if(d.tools.length>1) h += '<div class="curr dtools">'+d.tools.map(([k,t])=>'<button class="'+(s.tool===k?'sel':'')+'" onclick="docTool(\''+q.id+'\',\''+k+'\')">'+t+'</button>').join('')+'</div>';
-      const st = d.steps[s.tool];
-      if(st) h += '<ol class="dsteps">'+st().map(x=>'<li>'+x+'</li>').join('')+'</ol>';
-      if(d.note&&d.note[s.tool]) h += '<p class="dnote">'+d.note[s.tool]+'</p>';
+      /* Primero se elige, y solo después salen la herramienta y los pasos. Antes iba todo junto
+         en una pantalla (pestañas + pasos + tres opciones + subida) y era lo que más confundía. */
       const opts = d.optional ? [['sube','Sí, lo subo aquí'],['no','No, nada más']] : Object.entries(DST);
       h += '<div class="opts">'+opts.map(([k,t])=>'<button class="opt'+(s.st===k?' sel':'')+'" onclick="docSt(\''+q.id+'\',\''+k+'\')">'+t+'</button>').join('')+'</div>';
       if(s.st==='sube'){
+        if(d.tools.length>1) h += '<div class="curr dtools">'+d.tools.map(([k,t])=>'<button class="'+(s.tool===k?'sel':'')+'" onclick="docTool(\''+q.id+'\',\''+k+'\')">'+t+'</button>').join('')+'</div>';
+        const st = d.steps[s.tool];
+        if(st) h += '<ol class="dsteps">'+st().map(x=>'<li>'+x+'</li>').join('')+'</ol>';
+        if(d.note&&d.note[s.tool]) h += '<p class="dnote">'+d.note[s.tool]+'</p>';
         h += '<div class="dbox">';
         if(d.pii) h += '<label class="nsck dpii"><input type="checkbox" id="dpii"'+(s.ok?' checked':'')+' onchange="docPii(\''+q.id+'\')"> Si no es CSV: confirmo que he quitado nombres, emails y teléfonos de mis compradores</label>';
         h += '<label class="btn-wa ghost dup">Elegir archivos<input type="file" multiple hidden onchange="docFiles(\''+q.id+'\',this)"></label>'+
@@ -2311,8 +2594,8 @@
         let blob = file;
         if(isCSV(file)){ const r = await scrubCSV(file, !!q.doc.pii); blob = r.blob; f.limpio = r.removed; f.tachado = r.tachado; }
         const data = await toB64(blob);
-        const res = await fetch(AUDIT_URL, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'},
-          body:JSON.stringify({action:'subir', r:AREF, k:AKEY, slot:q.slot, name:file.name, mime:blob.type||file.type||'application/octet-stream', data})});
+        const res = await fetch(UPURL(), {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'},
+          body:JSON.stringify({action:'subir', r:AREF, k:AKEY, persona:(ONB&&CFG)?CFG.persona:'', slot:q.slot, name:file.name, mime:blob.type||file.type||'application/octet-stream', data})});
         const j = await res.json();
         if(!j.ok) throw new Error(j.error==='clave'?'El enlace no es válido. Pídele a Daniel el tuyo.':j.error==='grande'?'Pesa demasiado. Pega un enlace abajo.':'El servidor no lo ha aceptado ('+j.error+').');
         f.state='ok'; f.id=j.id; f.url=j.url;
@@ -2512,6 +2795,446 @@
       document.getElementById('f-wa').closest('.field').querySelector('label span').textContent = '· por aquí coordinamos';
       cw.querySelector('.privacy').textContent = 'Tus datos se usan solo para preparar tu auditoría. No entran en ninguna secuencia ni se ceden a terceros.';
       auditStart();
+    }
+
+    /* =====================================================
+       MODO ONBOARDING · CONFIG, SECCIONES, TABLAS Y CIERRE
+       Nada de esto se ejecuta sin ?modo=onboarding.
+       El contenido del cliente vive en el Drive de Daniel, no aquí: CFG lo trae el script.
+    ===================================================== */
+    const SECS = [
+      {k:'negocio',  n:'Tu negocio y tu voz', d:'De dónde sale esto y cómo hablas. Es lo que hace que lo que yo escriba suene a ti y no a una agencia.'},
+      {k:'oferta',   n:'Tu oferta',           d:'Qué vendéis exactamente, por dentro. Esta sección va repartida entre vosotros: cada uno contesta la parte que mejor conoce.'},
+      {k:'cliente',  n:'Tu cliente',          d:'A quién le vendéis, según vosotros. Ojo a esto: aquí quiero tu lectura, no la verdad. La verdad la contrasto yo después con los datos.'},
+      {k:'accesos',  n:'Tus accesos',         d:'Solo clics. Marcar a qué puedo entrar y a qué no. Lo que no exista, se marca como que no existe: eso también me dice algo.'},
+      {k:'material', n:'Tu material',         d:'Subir lo que ya tenéis. Lo que no tengáis a mano, se marca y se manda después: no hace falta tenerlo todo hoy.'},
+      {k:'equipo',   n:'Tu equipo',           d:'Quién hace qué. Sale de aquí la lista de con quién tengo que hablar, para no ir preguntándolo por el camino.'}
+    ];
+    /* Cada sección abre con su rótulo: qué se pide aquí, por qué y cuánto queda. No es una pregunta
+       y no cuenta en el contador; es la señal de que has cambiado de asunto. */
+    function rotHTML(q, vis){
+      const secs = onbSecs(), i = Math.max(0, secs.findIndex(s=>s.k===q.sec)), sec = secs[i];
+      const n = vis.filter(x=>x.sec===q.sec&&!x.rot).length;
+      const falta = secs.length-i-1;
+      /* El contador de arriba ya dice «Sección 1 de 4 · Tu negocio y tu voz»: aquí no se repite */
+      return '<div class="obintro">'+
+        '<div class="qtext">'+esc(sec.n)+'</div>'+
+        '<div class="qsub">'+esc(sec.d)+'</div>'+
+        '<p class="obline">'+n+(n===1?' pregunta':' preguntas')+' en esta sección'+
+          (falta>0 ? ', y '+falta+(falta===1?' sección más después.':' secciones más después.') : '. Es la última.')+'</p>'+
+        onbProgresoHTML()+
+        '<div class="qnav"><button class="qback" onclick="back()"'+(path.length<=1?' style="visibility:hidden"':'')+'>Atrás</button>'+
+        '<button class="btn-wa" onclick="next()">Empezar</button></div></div>';
+    }
+    function hasSec(s){ return !!(CFG && Array.isArray(CFG.secciones) && CFG.secciones.indexOf(s)>=0); }
+    function ofq(n){ return !!(CFG && Array.isArray(CFG.oferta) && CFG.oferta.indexOf(n)>=0); }
+    function T(k,d){ return (CFG && CFG.textos && CFG.textos[k]) ? CFG.textos[k] : d; }
+    function onbSecs(){ return SECS.filter(s=>hasSec(s.k)); }
+    /* Quién dijo ser en este navegador, para no preguntárselo cada vez que vuelve */
+    const QKEY = ()=>'onboarding-quien:'+(AREF||'-');
+
+    /* Puerta única: un enlace para los tres. Al elegir quién eres se carga tu ficha y a partir
+       de ahí todo funciona igual que si el enlace hubiera sido solo tuyo. */
+    function onbQuien(){
+      const p = (CLI&&CLI.personas)||[];
+      const prog = {};
+      ((CLI&&CLI.progreso)||[]).forEach(x=>{ prog[x.k]=x; });
+      let s = '<div class="obintro">'+
+        '<div class="qblock">'+esc(CLI.empresa||'')+'</div>'+
+        '<div class="qtext">¿Quién eres?</div>'+
+        '<div class="qsub">El cuestionario va repartido entre vosotros: cada uno contesta la parte que mejor conoce. Elige tu nombre y te enseño solo lo tuyo.</div>'+
+        '<div class="opts">'+p.map(x=>{
+          const e = prog[x.k]||{};
+          const est = e.enviado ? 'ya ha terminado' : (e.pct>0 ? 'lo tiene al '+e.pct+'%' : 'no ha empezado');
+          return '<button class="opt obquien" onclick="onbElegir(\''+x.k+'\')"><b>'+esc(x.n)+'</b><em>'+est+'</em></button>';
+        }).join('')+'</div>'+
+        '<p class="obline">Si te equivocas, puedes cambiarlo: no se envía nada hasta el final.</p></div>';
+      document.getElementById('qbox').innerHTML = s;
+      document.getElementById('pbar').style.width='0'; document.getElementById('pcount').textContent='';
+      show('quiz'); window.scrollTo(0,0);
+    }
+
+    function onbElegir(k){
+      const ficha = ((CLI&&CLI.personas)||[]).filter(x=>x.k===k)[0];
+      if(!ficha) return;
+      CFG = {cliente:CLI.cliente, empresa:CLI.empresa, persona:ficha.k, nombre:ficha.n,
+             secciones:ficha.secciones, oferta:ficha.oferta, material:ficha.material,
+             filas:ficha.filas, intro:ficha.intro, textos:ficha.textos, progreso:CLI.progreso};
+      try{ localStorage.setItem(QKEY(), k); }catch(e){}
+      A={}; AL={}; MID={}; path=[]; cur=-1;
+      // Si ya envió lo suyo, no se le devuelve al cuestionario: se le abre la lectura
+      const mio = ((CLI&&CLI.progreso)||[]).filter(x=>x.k===k)[0];
+      if(mio&&mio.enviado){
+        document.getElementById('qbox').innerHTML = '<div class="qtext">Ya enviaste lo tuyo, '+esc(ficha.n)+'.</div>'+
+          '<div class="qsub">Me llegó todo. Ahora puedes leer lo que han contestado tus socios, según vayan enviando.</div>'+
+          '<div class="opts"><button class="opt" onclick="onbLeer()">Ver lo que han contestado</button>'+
+          '<button class="opt" onclick="onbOtro()">No soy '+esc(ficha.n)+'</button></div>';
+        document.getElementById('pbar').style.width='0'; document.getElementById('pcount').textContent='';
+        show('quiz'); window.scrollTo(0,0);
+        return;
+      }
+      const d = loadDraft();
+      if(d){
+        document.getElementById('qbox').innerHTML = '<div class="qtext">Tienes el cuestionario a medias, '+esc(ficha.n)+'.</div><div class="qsub">Lo que ya habías contestado y subido sigue aquí.</div>'+
+          '<div class="opts"><button class="opt" onclick="resumeDraft(loadDraft())">Seguir donde lo dejé</button>'+
+          '<button class="opt" onclick="clearDraft();onbIntro()">Empezar de cero</button>'+
+          '<button class="opt" onclick="onbOtro()">No soy '+esc(ficha.n)+'</button></div>';
+        show('quiz'); window.scrollTo(0,0);
+        return;
+      }
+      onbIntro();
+    }
+
+    /* Volver a la puerta: por si alguien se equivoca de nombre o comparten el ordenador */
+    function onbOtro(){
+      try{ localStorage.removeItem(QKEY()); }catch(e){}
+      CFG = null; A={}; AL={}; MID={}; path=[]; cur=-1;
+      onbQuien();
+    }
+
+    /* ── Contador: por sección, con su nombre. Sustituye al «Pregunta 28 de ~33» que desorientaba.
+       Con ONB y AUDIT apagados devuelve exactamente el contador de siempre: la pública no cambia. ── */
+    function progressInfo(q, vis){
+      if(ONB){
+        const secs = onbSecs(), i = Math.max(0, secs.findIndex(s=>s.k===q.sec));
+        const cab = 'Sección '+(i+1)+' de '+secs.length+' · '+secs[i].n;
+        const hechas = vis.filter(x=>!x.rot&&vis.indexOf(x)<vis.indexOf(q)).length;
+        if(q.rot) return {txt:cab, pct:hechas/Math.max(1,vis.filter(x=>!x.rot).length)*100};
+        const enSec = vis.filter(x=>x.sec===q.sec&&!x.rot), pos = enSec.indexOf(q)+1;
+        return {txt:cab+'  ·  '+pos+'/'+enSec.length, pct:pos/enSec.length*100};
+      }
+      /* El contador por sección NO se aplica al modo auditoría, aunque la idea era que sí.
+         Probado: allí los bloques no son contiguos (las preguntas de «Conversión» están antes y
+         después del bloque de lanzamiento), así que el total crece sobre la marcha (7, 8, 9, 10)
+         y el número de sección llega a ir hacia atrás, de la 6 a la 5. Desorienta más que el
+         contador de siempre, que es justo lo que se quería arreglar. Para aplicarlo allí hay que
+         reordenar las preguntas de auditoría, y eso ya no es presentación: lo decide Daniel. */
+      const pos = vis.indexOf(q)+1;
+      return {txt:'Pregunta '+pos+' de ~'+vis.length, pct:pos/(vis.length+1)*100};
+    }
+
+    /* ── Tablas (grid): módulos, bonus, competidores, problemas, creencias, accesos y equipo.
+       Un solo motor para todas. rows fijas (accesos, equipo) o filas que el cliente va añadiendo. ── */
+    /* Las filas de una tabla fija también se pueden repartir: a Roberto solo le toca la línea
+       de afiliados, no las ocho. Sin lista en CFG, salen todas. */
+    function gridRows(q){
+      const g = q.grid;
+      if(!g.fixed) return null;
+      const lista = (ONB && CFG && CFG.filas) ? CFG.filas[q.id] : null;
+      if(Array.isArray(lista)) return g.rows.filter(r=>lista.indexOf(r.k)>=0);
+      return g.rows;
+    }
+    function gridState(q){
+      if(!Array.isArray(A[q.id])){
+        const rw = gridRows(q);
+        A[q.id] = rw ? rw.map(r=>({_k:r.k})) : Array.from({length:q.grid.min||1}, ()=>({}));
+      }
+      return A[q.id];
+    }
+    function renderGrid(q){
+      const g = q.grid, rows = gridState(q), rw = gridRows(q);
+      let h = '<div class="gridq">';
+      rows.forEach((row,ri)=>{
+        const def = rw ? rw[ri] : null;
+        h += '<div class="grow">';
+        h += '<div class="grow-h">'+(def ? esc(def.t) : '<span class="gnum">'+(ri+1)+'</span>')+
+             (def&&def.h ? '<em>'+esc(def.h)+'</em>' : '')+
+             (!g.fixed&&rows.length>(g.min||1) ? '<button class="qback grm" onclick="gridDel(\''+q.id+'\','+ri+')">Quitar</button>' : '')+'</div>';
+        g.cols.forEach(c=>{
+          const v = row[c.k]===undefined?'':row[c.k];
+          h += '<div class="gcell">'+(c.t?'<label>'+esc(c.t)+'</label>':'');
+          if(c.type==='choice'){
+            h += '<div class="gopts">'+c.opts.map(o=>'<button class="opt'+(v===o?' sel':'')+'" onclick="gridSet(\''+q.id+'\','+ri+',\''+c.k+'\','+JSON.stringify(o).replace(/"/g,'&quot;')+')">'+esc(o)+'</button>').join('')+'</div>';
+          } else if(c.type==='scale'){
+            h += '<div class="gopts gscale">'+[1,2,3,4,5].map(n=>'<button class="opt'+(v===n?' sel':'')+'" onclick="gridSet(\''+q.id+'\','+ri+',\''+c.k+'\','+n+')">'+n+'</button>').join('')+'</div>';
+          } else if(c.type==='area'){
+            h += '<textarea oninput="gridSet(\''+q.id+'\','+ri+',\''+c.k+'\',this.value,1)" placeholder="">'+esc(v)+'</textarea>';
+          } else {
+            h += '<input type="text" value="'+esc(v)+'" oninput="gridSet(\''+q.id+'\','+ri+',\''+c.k+'\',this.value,1)">';
+          }
+          h += '</div>';
+        });
+        h += '</div>';
+      });
+      h += '</div>';
+      if(!g.fixed) h += '<button class="qback gadd" onclick="gridAdd(\''+q.id+'\')">+ '+esc(g.add||'Añadir otra')+'</button>';
+      h += '<div class="err" id="qerr"></div>';
+      return h+'<div class="qnav"><button class="qback" onclick="back()">Atrás</button><button class="btn-wa" onclick="saveGrid()">Siguiente</button></div>';
+    }
+    function gridSet(id,ri,k,v,quiet){
+      const q = Q.find(x=>x.id===id);
+      gridState(q)[ri][k] = v;
+      if(quiet) saveDraft(); else render();
+    }
+    function gridAdd(id){ const q=Q.find(x=>x.id===id); gridState(q).push({}); render(); }
+    function gridDel(id,ri){ const q=Q.find(x=>x.id===id); gridState(q).splice(ri,1); render(); }
+    function saveGrid(){
+      const q = Q[path[cur]], g = q.grid, rows = gridState(q), err = document.getElementById('qerr');
+      const say = t=>{ err.textContent=t; err.style.display='block'; };
+      const lleno = r=>g.cols.some(c=>{ const v=r[c.k]; return v!==undefined && String(v).trim()!==''; });
+      if(g.fixed){
+        const falta = rows.filter(r=>!g.cols.every(c=>c.type!=='choice'||r[c.k]));
+        if(falta.length) return say('Te falta elegir una opción en '+falta.length+(falta.length===1?' línea.':' líneas.'));
+      } else {
+        const con = rows.filter(lleno);
+        if(con.length < (g.min||1)) return say('Rellena al menos '+(g.min||1)+(g.min>1?' filas.':' fila.'));
+        A[q.id] = con;
+      }
+      AL[q.id] = gridText(q);
+      next();
+    }
+    function gridText(q){
+      const g = q.grid, rw = gridRows(q);
+      return (A[q.id]||[]).map((r,i)=>{
+        const et = rw ? (rw[i]||{}).t : '#'+(i+1);
+        return et+': '+g.cols.map(c=>(c.t?c.t+' = ':'')+(r[c.k]===undefined||r[c.k]===''?'(vacío)':r[c.k])).join(' · ');
+      }).join('\n');
+    }
+
+    /* ── Pantalla 1: se enseña antes de preguntar. Los hallazgos los trae CFG; aquí no hay ni uno escrito. ── */
+    function onbIntro(){
+      const h = (CFG.intro&&CFG.intro.hallazgos)||[];
+      let s = '<div class="obintro">'+
+        '<div class="qblock">'+esc(CFG.empresa||'')+'</div>'+
+        '<div class="qtext">'+esc((CFG.intro&&CFG.intro.titulo)||'Antes de pedirte nada, tres cosas que ya he visto.')+'</div>'+
+        '<div class="qsub">Esto sale de mirar vuestro negocio desde fuera, sin acceso a nada. Te lo enseño primero porque es lo justo: antes de pedirte tiempo, algo tengo que poner yo.</div>';
+      s += h.map((x,i)=>'<div class="obfind"><span class="obn">'+(i+1)+'</span><div><b>'+esc(x.t)+'</b>'+(x.b?'<p>'+esc(x.b)+'</p>':'')+'</div></div>').join('');
+      s += '<p class="obline">Esto lo he visto solo mirando desde fuera. A partir de aquí necesito mirar dentro, y para eso es este cuestionario.</p>';
+      s += '<div class="qnav"><span></span><button class="btn-wa" onclick="onbPortada()">Seguir</button></div></div>';
+      document.getElementById('qbox').innerHTML = s;
+      document.getElementById('pbar').style.width='0'; document.getElementById('pcount').textContent='';
+      show('quiz'); window.scrollTo(0,0);
+    }
+
+    /* ── Pantalla 2: qué partes tiene, cuánto dura, qué tener a mano, y por dónde van los demás ── */
+    function onbPortada(){
+      const secs = onbSecs();
+      let s = '<div class="obintro">'+
+        '<div class="qblock">'+esc(CFG.nombre||'')+'</div>'+
+        '<button class="qback obcambiar" onclick="onbOtro()">No soy '+esc(CFG.nombre||'')+', cambiar</button>'+
+        '<div class="qtext">Lo que te toca a ti</div>'+
+        '<div class="qsub">La oferta va repartida entre los tres: cada uno contesta la parte que mejor conoce, para que nadie tenga que rellenar trece preguntas seguidas. Se puede dejar a medias y volver: se guarda solo en este navegador.</div>';
+      s += '<div class="obsecs">'+secs.map((x,i)=>'<div class="obsec"><span class="obn">'+(i+1)+'</span><div><b>'+esc(x.n)+'</b><p>'+esc(x.d)+'</p></div></div>').join('')+'</div>';
+      s += onbProgresoHTML();
+      s += '<p class="obline">Si alguna pregunta crees que la contesta mejor otro, dímelo y la muevo. Pero contesta tú lo que puedas: mover preguntas entre tres personas es la forma más rápida de que no la conteste nadie.</p>';
+      s += '<div class="qnav"><button class="qback" onclick="onbIntro()">Atrás</button><button class="btn-wa" onclick="onbGo()">Empezar</button></div></div>';
+      document.getElementById('qbox').innerHTML = s;
+      show('quiz'); window.scrollTo(0,0);
+    }
+    function onbGo(){ if(path.length===0) next(); else render(); show('quiz'); }
+
+    /* ── Las barras de los tres. Solo avance: el script nunca devuelve respuestas de nadie. ── */
+    function onbProgresoHTML(){
+      const p = (CFG&&CFG.progreso)||[];
+      if(!p.length) return '';
+      return '<div class="obprog"><div class="ftag">Por dónde vais</div>'+p.map(x=>{
+        const pct = Math.max(0, Math.min(100, Number(x.pct)||0));
+        const est = x.enviado ? 'Enviado' : (pct>0 ? pct+'%' : 'Sin empezar');
+        return '<div class="dimrow"><div class="dt"><b>'+esc(x.n||x.k)+(x.k===CFG.persona?' (tú)':'')+'</b><span>'+esc(est)+(x.act?' · '+esc(x.act):'')+'</span></div>'+
+               '<div class="dbar"><i style="width:'+pct+'%"></i></div></div>';
+      }).join('')+'</div>';
+    }
+    /* Cuánto llevo yo: secciones terminadas y porcentaje de mis preguntas. Es lo único que viaja:
+       ni una respuesta sale de aquí hacia el estado compartido. */
+    function onbAvance(){
+      const vis = visible().filter(q=>!q.rot), secs = onbSecs();
+      const hecha = q=>{
+        const v = A[q.id];
+        if(q.doc) return !!(v&&v.st);
+        if(q.grid) return Array.isArray(v)&&v.length>0&&AL[q.id]!==undefined;
+        return AL[q.id]!==undefined || (typeof v==='string'&&v.length>0);
+      };
+      const n = vis.filter(hecha).length;
+      const secsHechas = secs.filter(s=>{ const enS = vis.filter(q=>q.sec===s.k); return enS.length>0 && enS.every(hecha); }).length;
+      return {pct: vis.length?Math.round(n/vis.length*100):0, secs:secsHechas, total:secs.length};
+    }
+    async function onbRefreshProgreso(){
+      if(!ONB_URL||!CFG) return;
+      try{
+        const a = onbAvance();
+        const res = await fetch(ONB_URL, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'},
+          body:JSON.stringify({action:'avance', r:AREF, k:AKEY, persona:CFG.persona, pct:a.pct, secs:a.secs, total:a.total})});
+        const j = await res.json();
+        if(j&&j.ok&&Array.isArray(j.progreso)){ CFG.progreso = j.progreso; if(CLI) CLI.progreso = j.progreso; }
+      }catch(e){}
+    }
+
+    /* ── Cierre: acuse de recibo con hoja de ruta. Todo sale de sus datos.
+       La frase que nombra lo que sus respuestas dejan a la vista NO la escribe la página: va en el email de Daniel. ── */
+    function onbCierre(){
+      const secs = onbSecs();
+      const pend = onbPendiente();
+      const otros = ((CFG&&CFG.progreso)||[]).filter(x=>x.k!==CFG.persona);
+      const faltan = otros.filter(x=>!x.enviado);
+      let s = '<div class="rcard gold rcta" style="margin-top:40px;text-align:left;">'+
+        '<div class="ftag">Recibido</div>'+
+        '<h3>Ya está, '+esc(CFG.nombre||'')+'. Esto es lo que me acabas de entregar.</h3>'+
+        '<p>'+secs.map(x=>x.n).join(' · ')+'.</p>';
+      /* Una lista de diecisiete cosas no se lee: a partir de cinco se dice el número y la lista va en el email */
+      if(pend.length) s += '<p><b>Queda pendiente por tu parte:</b> '+
+        (pend.length>5 ? pend.length+' cosas que has marcado como «lo exporto» o «te lo mando aparte». Te las mando listadas en un email, para que no tengas que volver aquí a mirarlas'
+                       : esc(pend.join(', ')))+
+        '. Cuando lo tengáis, me lo mandáis y ya está: no hace falta repetir el cuestionario.</p>';
+      if(faltan.length) s += '<p><b>Falta por terminar:</b> '+esc(faltan.map(x=>x.n||x.k).join(' y '))+'. Se lo puedes recordar tú mejor que yo.</p>';
+      else if(otros.length) s += '<p>Los tres habéis terminado. Con esto ya puedo empezar.</p>';
+      s += '<p><b>Qué pasa ahora:</b> leo todo lo que habéis entregado y os escribo yo. Si algo importante falta, os lo pido en ese mismo email, no en cinco.</p>'+
+        '<p class="mathnote">El reloj arranca con el material completo, no con el cuestionario enviado. Es la única forma de que lo que empiece a hacer salga de lo que hay de verdad y no de lo que falta.</p>'+
+        '<div class="rcta-btns" style="margin-top:26px;"><button class="btn-wa" onclick="onbLeer()">Ver lo que han contestado los demás</button></div>'+
+        '</div>';
+      document.getElementById('rbox').innerHTML = s;
+      show('report');
+    }
+    function onbPendiente(){
+      const out = [];
+      visible().forEach(q=>{
+        const d = A[q.id];
+        if(q.doc && d && (d.st==='aparte'||(d.st==='no'&&!q.doc.optional))) out.push(q.slot);
+        if(q.grid && q.grid.fixed && q.id==='a_accesos' && Array.isArray(d)){
+          const rw = gridRows(q);
+          d.forEach((r,i)=>{ if(r.estado==='Lo exporto y lo subo') out.push((rw[i]||{}).t); });
+        }
+      });
+      return out;
+    }
+
+    /* ── Email a Daniel + envío ── */
+    /* Lo que ha contestado esta persona, en limpio. Es lo que van a leer sus socios cuando
+       hayan enviado lo suyo, así que aquí no va ninguna nota interna ni nada para Daniel. */
+    function onbCuerpo(){
+      const linea = '====================================================';
+      const secs = onbSecs();
+      let s = '';
+      secs.forEach(sec=>{
+        s += sec.n.toUpperCase()+'\n'+linea+'\n';
+        visible().filter(q=>q.sec===sec.k&&!q.rot).forEach(q=>{
+          if(q.doc){
+            const d = A[q.id]||{};
+            if(q.doc.optional&&d.st!=='sube') return;
+            s += '- '+q.slot.toUpperCase()+': '+(d.st?DST[d.st]:'(sin responder)')+'\n';
+            (d.files||[]).filter(f=>f.state==='ok').forEach(f=>{ s += '    '+f.n+'  '+f.url+'\n'+(f.limpio&&f.limpio.length?'      (columnas quitadas: '+f.limpio.join(', ')+')\n':''); });
+            if(d.link) s += '    Enlace: '+d.link+'\n';
+          } else {
+            const v = AL[q.id]!==undefined?AL[q.id]:A[q.id];
+            s += '\n'+TXT(q.text)+'\n'+(v===undefined||v===''?'(sin responder)':v)+'\n';
+          }
+        });
+        s += '\n';
+      });
+      return s;
+    }
+
+    function onbEmail(){
+      const linea = '====================================================';
+      const secs = onbSecs();
+      const pend = onbPendiente();
+      let s = 'ONBOARDING · '+(CFG.empresa||CFG.cliente||'')+' · '+(CFG.nombre||CFG.persona||'')+'\n'+linea+'\n\n';
+      s += 'QUIEN\n  Persona:   '+(CFG.nombre||'')+' ('+(CFG.persona||'')+')\n  Cliente:   '+(CFG.empresa||CFG.cliente||'')+'\n  Secciones: '+secs.map(x=>x.n).join(', ')+'\n';
+      if(CFG.oferta&&CFG.oferta.length) s += '  Oferta:    preguntas '+CFG.oferta.join(', ')+'\n';
+      s += '\n'+onbCuerpo();
+      s += 'PENDIENTE DE ESTA PERSONA\n'+linea+'\n'+(pend.length?pend.join(', '):'nada')+'\n\n';
+      s += linea+'\n'+'El acuse que ha visto en pantalla es solo logistica. La frase que nombra lo primero que sus\n'+
+           'respuestas dejan a la vista va en TU email de respuesta, escrita despues de leerlas.\n';
+      return s;
+    }
+
+    /* ── Leer lo de los demás, solo cuando ya has enviado lo tuyo ── */
+    async function onbLeer(){
+      document.getElementById('qbox').innerHTML = '<div class="qtext">Un momento…</div>';
+      show('quiz');
+      let j = null;
+      try{
+        j = await (await fetch(ONB_URL+'?leer=1&r='+encodeURIComponent(AREF)+'&k='+encodeURIComponent(AKEY)+'&persona='+encodeURIComponent(CFG.persona))).json();
+      }catch(e){}
+      if(!j||!j.ok){
+        document.getElementById('qbox').innerHTML = '<div class="qtext">Todavía no.</div>'+
+          '<div class="qsub">Las respuestas de tus socios se abren cuando hayas enviado las tuyas. No es por tocar las narices: es que si se leen antes, se acaban contestando mirando lo que puso el otro, y entonces no me sirven.</div>'+
+          '<div class="qnav"><span></span><button class="btn-wa" onclick="onbGo()">Seguir con lo mío</button></div>';
+        window.scrollTo(0,0);
+        return;
+      }
+      const r = j.respuestas||[], pend = j.pendientes||[];
+      let s = '<div class="obintro"><div class="qblock">'+esc(CFG.empresa||'')+'</div>'+
+        '<div class="qtext">Lo que han contestado</div>';
+      if(!r.length) s += '<div class="qsub">Todavía no ha enviado nadie más. En cuanto lo hagan, aparece aquí.</div>';
+      else s += '<div class="qsub">Tal cual lo escribieron. No hace falta que os pongáis de acuerdo: si veis algo que no cuadra entre vosotros, eso me interesa más que si coincidís.</div>';
+      r.forEach(x=>{
+        s += '<div class="rcard" style="margin-top:20px;"><div class="ftag">'+esc(x.n)+'</div>'+
+             '<pre class="obresp">'+esc(x.texto||'(sin contenido)')+'</pre></div>';
+      });
+      if(pend.length) s += '<p class="obline">Falta por enviar: '+esc(pend.join(' y '))+'.</p>';
+      s += '<div class="qnav"><span></span><button class="btn-wa" onclick="onbCierre()">Volver</button></div></div>';
+      document.getElementById('qbox').innerHTML = s;
+      document.getElementById('pbar').style.width='0'; document.getElementById('pcount').textContent='';
+      window.scrollTo(0,0);
+    }
+    async function onbSend(){
+      const btn = document.querySelector('#capture .btn-wa'), e = document.getElementById('e-send');
+      btn.disabled = true; if(e) e.style.display = 'none';
+      const secs = onbSecs();
+      try{
+        const res = await fetch(ONB_URL, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'},
+          body:JSON.stringify({action:'enviar', r:AREF, k:AKEY,
+            cliente:CFG.cliente, persona:CFG.persona, nombre:CFG.nombre,
+            secciones:secs.map(x=>x.k).join(','), pendiente:onbPendiente().join(', '),
+            respuestas:onbCuerpo(),
+            emailSubject:'ONBOARDING · '+(CFG.empresa||CFG.cliente)+' · '+(CFG.nombre||CFG.persona),
+            emailBody:onbEmail()})});
+        const j = await res.json();
+        if(!j.ok) throw new Error(j.error);
+        if(Array.isArray(j.progreso)){ CFG.progreso = j.progreso; if(CLI) CLI.progreso = j.progreso; }
+        clearDraft();
+        onbCierre();
+      }catch(err){
+        if(e) e.style.display = 'block';
+        btn.disabled = false;
+      }
+    }
+
+    /* ── Arranque ── */
+    function onbBlocked(msg){
+      document.getElementById('qbox').innerHTML = '<div class="qtext">'+(msg||'Este enlace no está completo o no es válido.')+'</div>'+
+        '<div class="qsub">Pídele a Daniel el tuyo: cada enlace va unido a una persona y a su carpeta.</div>';
+      document.getElementById('pbar').style.width='0'; document.getElementById('pcount').textContent='';
+      show('quiz');
+    }
+    async function onbStart(){
+      if(!AREF||!AKEY||!ONB_URL) return onbBlocked();
+      try{
+        const j = await (await fetch(ONB_URL+'?check=1&r='+encodeURIComponent(AREF)+'&k='+encodeURIComponent(AKEY))).json();
+        if(!j||j.ok===false||!Array.isArray(j.personas)||!j.personas.length) return onbBlocked();
+        CLI = j;
+      }catch(e){ return onbBlocked('No he podido comprobar el enlace.'); }
+      // Si ya dijo quién era en este navegador, no se le vuelve a preguntar
+      let yo = null;
+      try{ yo = localStorage.getItem(QKEY()); }catch(e){}
+      if(yo && CLI.personas.some(x=>x.k===yo)) return onbElegir(yo);
+      onbQuien();
+    }
+
+    /* Modo onboarding: quien llega ya ha firmado. Ni landing, ni «gratis», ni buscadores. */
+    if(ONB){
+      const m = document.createElement('meta'); m.name='robots'; m.content='noindex, nofollow'; document.head.appendChild(m);
+      document.body.classList.add('onb');
+      document.querySelector('.nav-cta').style.display='none';
+      const qw = document.querySelector('.quiz-wrap');
+      const eb = document.createElement('p'); eb.className='eyebrow'; eb.textContent='Arranque';
+      qw.insertBefore(eb, qw.firstChild);
+      const cw = document.querySelector('#capture .capture-wrap');
+      cw.querySelector('.eyebrow').textContent = 'Último paso';
+      cw.querySelector('h2').textContent = 'Ya está. Solo falta enviármelo.';
+      cw.querySelector('.section-lead').textContent = 'Al enviar me llega todo lo que has contestado y todo lo que has subido.';
+      const sb = cw.querySelector('.btn-wa'); sb.firstChild.textContent = 'Enviar ';
+      sb.setAttribute('onclick','onbSend()');
+      const se = document.createElement('div'); se.className='err'; se.id='e-send'; se.textContent='No se ha podido enviar. Tus respuestas siguen guardadas: vuelve a pulsar Enviar en un momento.';
+      sb.insertAdjacentElement('afterend', se);
+      // La captura de nombre, email y WhatsApp sobra: ya sé quién es por su enlace.
+      // La caja se busca ANTES de ocultar los campos: si no, el .field ya tiene atributo style
+      // y closest('div[style]') se para en él en vez de subir hasta la caja.
+      const box = document.getElementById('f-online').closest('div[style]');
+      if(box) box.style.display='none';
+      cw.querySelectorAll('.field').forEach(f=>f.style.display='none');
+      cw.querySelector('.privacy').textContent = 'Todo lo que subes va a una carpeta privada de tu cliente en mi Drive. Cifras, no personas.';
+      onbStart();
     }
   </script>
 
