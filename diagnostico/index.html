@@ -907,6 +907,11 @@
     .opt.obquien:hover .obini { background: var(--gold); color: var(--black); }
     .obquien-nom { display: flex; align-items: center; gap: 16px; }
 
+    .obaudio { margin-top: 18px; padding-top: 16px; border-top: 1px dashed var(--line-soft); }
+    .obaudio-t { font-size: 0.86rem; color: var(--muted); margin: 0 0 12px; line-height: 1.55; }
+    .obdura { font-size: 0.9rem; color: var(--ink-dim); line-height: 1.6; margin-top: 18px; }
+    .obdura b { color: var(--ink); font-weight: 500; }
+    .rcard .obresp a.obr-audio { color: var(--gold); }
     .obaviso {
       margin-top: 22px; padding: 16px 18px; border: 1px solid var(--line); border-radius: 2px;
       background: rgba(201, 168, 76, 0.05); font-size: 0.9rem; line-height: 1.6; color: var(--ink-dim);
@@ -1733,6 +1738,7 @@
        ESTADO + NAVEGACION
     ===================================================== */
     let A = {}, AL = {}, MID = {}, path = [], cur = -1, currency = '$';
+    let AUD = {};   // onboarding: notas de voz subidas como respuesta a una pregunta abierta
 
     /* Las preguntas del onboarding llevan onb:true y las de los otros dos modos no la llevan.
        Un modo nunca ve las preguntas del otro: con ONB apagado, inMode() vale true para todas
@@ -1818,6 +1824,7 @@
       if(q.free){
         const ult = vis[vis.length-1]===q ? (ONB?'Terminar':'Ver mi diagnóstico') : 'Siguiente';
         h += '<textarea id="freetxt" placeholder="'+(ONB?'Escribe aquí. Cuanto más concreto, menos te pregunto después.':'Escribe aquí... (o sáltala, es opcional)')+'">'+(A[q.id]||'')+'</textarea>';
+        if(ONB) h += audHTML(q);
         h += '<div class="qnav"><button class="qback" onclick="back()">Atrás</button><div style="display:flex;gap:18px;align-items:center;"><button class="qback" onclick="saveFree()">'+(ONB?'No sé qué poner':'Saltar')+'</button><button class="btn-wa" onclick="saveFree()">'+ult+'</button></div></div>';
       } else if(q.grid){
         h += renderGrid(q);
@@ -1861,7 +1868,9 @@
     }
 
     function saveFree(){
-      A[Q[path[cur]].id] = document.getElementById('freetxt').value.trim();
+      const q = Q[path[cur]];
+      if(ONB && audState(q.id).files.some(f=>f.state==='subiendo')){ const e=document.getElementById('qerr'); if(e){ e.textContent='Espera a que termine de subir el audio.'; e.style.display='block'; } return; }
+      A[q.id] = document.getElementById('freetxt').value.trim();
       next();
     }
 
@@ -2525,14 +2534,14 @@
     /* ── Borrador en su navegador (se retoma en el mismo navegador) ── */
     function saveDraft(){
       if(!AUDIT&&!ONB) return;
-      try{ localStorage.setItem(DK(), JSON.stringify({v:1, t:Date.now(), A, AL, MID, path, cur, currency})); }catch(e){}
+      try{ localStorage.setItem(DK(), JSON.stringify({v:1, t:Date.now(), A, AL, MID, AUD, path, cur, currency})); }catch(e){}
     }
     function loadDraft(){
       try{ const d = JSON.parse(localStorage.getItem(DK())||'null'); return d&&d.v===1&&Array.isArray(d.path)&&d.path.length ? d : null; }catch(e){ return null; }
     }
     function clearDraft(){ try{ localStorage.removeItem(DK()); }catch(e){} }
     function resumeDraft(d){
-      A=d.A||{}; AL=d.AL||{}; MID=d.MID||{}; path=d.path; cur=Math.min(d.cur,path.length-1); currency=d.currency||'$';
+      A=d.A||{}; AL=d.AL||{}; MID=d.MID||{}; AUD=d.AUD||{}; path=d.path; cur=Math.min(d.cur,path.length-1); currency=d.currency||'$';
       // Una subida que se cortó al cerrar la pestaña no llegó: se marca para repetirla
       Object.keys(A).forEach(k=>{ const s=A[k]; if(s&&Array.isArray(s.files)) s.files.forEach(f=>{ if(f.state==='subiendo'){ f.state='error'; f.err='Se interrumpió al cerrar la página. Vuelve a elegirlo.'; } }); });
       render(); show('quiz');
@@ -2900,7 +2909,7 @@
              secciones:ficha.secciones, oferta:ficha.oferta, material:ficha.material,
              filas:ficha.filas, intro:ficha.intro, textos:ficha.textos, progreso:CLI.progreso};
       try{ localStorage.setItem(QKEY(), k); }catch(e){}
-      A={}; AL={}; MID={}; path=[]; cur=-1;
+      A={}; AL={}; MID={}; AUD={}; path=[]; cur=-1;
       // Si ya envió lo suyo, no se le devuelve al cuestionario: se le abre la lectura
       const mio = ((CLI&&CLI.progreso)||[]).filter(x=>x.k===k)[0];
       if(mio&&mio.enviado){
@@ -2927,7 +2936,7 @@
     /* Volver a la puerta: por si alguien se equivoca de nombre o comparten el ordenador */
     function onbOtro(){
       try{ localStorage.removeItem(QKEY()); }catch(e){}
-      CFG = null; A={}; AL={}; MID={}; path=[]; cur=-1;
+      CFG = null; A={}; AL={}; MID={}; AUD={}; path=[]; cur=-1;
       onbQuien();
     }
 
@@ -3053,15 +3062,24 @@
         '<button class="qback obcambiar" onclick="onbOtro()">No soy '+esc(CFG.nombre||'')+', cambiar</button>'+
         '<div class="qtext">Lo que te toca a ti</div>'+
         '<div class="qsub">La oferta va repartida entre los tres: cada uno contesta la parte que mejor conoce, para que nadie tenga que rellenar trece preguntas seguidas. Se puede dejar a medias y volver: se guarda solo en este navegador.</div>';
+      s += '<p class="obdura">'+onbDuracion()+'</p>';
       s += '<div class="obsecs">'+secs.map((x,i)=>'<div class="obsec"><span class="obn">'+(i+1)+'</span><div><b>'+esc(x.n)+'</b><p>'+esc(x.d)+'</p></div></div>').join('')+'</div>';
       s += onbProgresoHTML();
       s += '<p class="obline">Si alguna pregunta crees que la contesta mejor otro, dímelo y la muevo. Pero contesta tú lo que puedas: mover preguntas entre tres personas es la forma más rápida de que no la conteste nadie.</p>';
       /* Se avisa ANTES de escribir, no después. Si alguien contesta algo crudo creyendo que es
          solo para Daniel y luego lo lee su socio, el problema lo habría creado esta página. */
-      s += '<p class="obaviso"><b>Una cosa antes de empezar:</b> cuando los tres hayáis enviado, cada uno podrá leer lo que contestaron los otros dos. Antes no, para que nadie conteste mirando lo que puso el anterior. Si hay algo que prefieres contarme solo a mí, no lo escribas aquí: dímelo por privado y lo tratamos aparte.</p>';
+      s += '<p class="obaviso"><b>Una cosa antes de empezar:</b> cuando los tres hayáis enviado, cada uno podrá leer lo que contestaron los otros dos, y escuchar los audios. Antes no, para que nadie conteste mirando lo que puso el anterior. Si hay algo que prefieres contarme solo a mí, no lo escribas aquí: dímelo por privado y lo tratamos aparte.</p>';
       s += '<div class="qnav"><button class="qback" onclick="onbIntro()">Atrás</button><button class="btn-wa" onclick="onbGo()">Empezar</button></div></div>';
       document.getElementById('qbox').innerHTML = s;
       show('quiz'); window.scrollTo(0,0);
+    }
+    /* Cuánto le va a llevar, calculado con lo que le toca: las preguntas abiertas y las tablas son
+       lo que pesa; elegir una opción o marcar un documento es un momento. Es una estimación y se dice. */
+    function onbDuracion(){
+      const vis = visible().filter(q=>!q.rot);
+      const min = vis.reduce((t,q)=>t+(q.free?2:q.grid?3:0.5),0);
+      const r = Math.max(10, Math.round(min/5)*5);
+      return '<b>Calcula unos '+r+' minutos</b> si lo escribes todo, bastante menos si contestas las preguntas largas con notas de voz. <b>No hace falta hacerlo de una vez:</b> se guarda solo, cierras y vuelves cuando quieras desde el mismo móvil u ordenador.';
     }
     function onbGo(){ if(path.length===0) next(); else render(); show('quiz'); }
 
@@ -3084,7 +3102,7 @@
         const v = A[q.id];
         if(q.doc) return !!(v&&v.st);
         if(q.grid) return Array.isArray(v)&&v.length>0&&AL[q.id]!==undefined;
-        return AL[q.id]!==undefined || (typeof v==='string'&&v.length>0);
+        return AL[q.id]!==undefined || (typeof v==='string'&&v.length>0) || audOk(q.id).length>0;
       };
       const n = vis.filter(hecha).length;
       const secsHechas = secs.filter(s=>{ const enS = vis.filter(q=>q.sec===s.k); return enS.length>0 && enS.every(hecha); }).length;
@@ -3157,7 +3175,8 @@
             if(d.link) s += '    Enlace: '+d.link+'\n';
           } else {
             const v = AL[q.id]!==undefined?AL[q.id]:A[q.id];
-            s += '\n'+TXT(q.text)+'\n'+(v===undefined||v===''?'(sin responder)':v)+'\n';
+            const au = audOk(q.id);
+            s += '\n'+TXT(q.text)+'\n'+(v===undefined||v===''?(au.length?'':'(sin responder)'):v)+(v&&au.length?'\n':'')+au.map(f=>'Audio: '+f.url).join('\n')+'\n';
           }
         });
         s += '\n';
@@ -3188,7 +3207,7 @@
       const volcar = ()=>{
         if(!bloque.length) return;
         if(/^- /.test(bloque[0])) out += '<p class="obr-doc">'+bloque.map(l=>esc(l.trim())).join('<br>')+'</p>';
-        else out += '<p class="obr-q">'+esc(bloque[0])+'</p>'+(bloque.length>1?'<p class="obr-a">'+bloque.slice(1).map(esc).join('<br>')+'</p>':'');
+        else out += '<p class="obr-q">'+esc(bloque[0])+'</p>'+(bloque.length>1?'<p class="obr-a">'+bloque.slice(1).map(l=>/^Audio: https?:\/\//.test(l)?'<a class="obr-audio" href="'+esc(l.slice(7))+'" target="_blank" rel="noopener">Escuchar el audio</a>':esc(l)).join('<br>')+'</p>':'');
         bloque = [];
       };
       for(let i=0;i<L.length;i++){
@@ -3200,6 +3219,48 @@
       }
       volcar();
       return out;
+    }
+
+    /* ── Contestar con audio. Se graban una nota de voz con el móvil y la suben: sin botón de
+       grabar dentro de la página, porque cada móvil graba en un formato y el iPhone da guerra con
+       los permisos, y eso no se puede probar sin sus móviles delante. Usa la misma subida que ya
+       funciona con los documentos. El script deja los audios abiertos a quien tenga el enlace,
+       para que los socios puedan escucharlos al leer; el resto de archivos sigue siendo privado. ── */
+    const esAudio = f=>/^audio\//.test(f.type||'')||/\.(m4a|mp3|ogg|opus|wav|aac|webm|amr|3gp|caf)$/i.test(f.name);
+    function audState(id){ return AUD[id] || (AUD[id] = {files:[]}); }
+    function audOk(id){ return ((AUD[id]&&AUD[id].files)||[]).filter(f=>f.state==='ok'); }
+    function audLista(id){
+      return audState(id).files.map((f,i)=>'<div class="dfile '+f.state+'"><span>'+(f.state==='ok'?'✓ ':f.state==='subiendo'?'Subiendo… ':'✗ ')+esc(f.n)+' <em>'+kb(f.size)+'</em>'+
+        (f.state==='error'?'<br><small>'+esc(f.err||'No se ha podido subir.')+'</small>':'')+'</span>'+
+        (f.state!=='subiendo'?'<button class="qback" onclick="audQuitar(\''+id+'\','+i+')">Quitar</button>':'')+'</div>').join('');
+    }
+    function audHTML(q){
+      return '<div class="obaudio"><p class="obaudio-t">¿Te sale mejor hablado? Grábate una nota de voz con el móvil y súbela aquí. Vale igual que escribirlo, y a veces mejor.</p>'+
+        '<label class="btn-wa ghost dup">Subir un audio<input type="file" accept="audio/*,.m4a,.mp3,.ogg,.opus,.wav,.aac" multiple hidden onchange="audSubir(\''+q.id+'\',this)"></label>'+
+        '<div id="audlista">'+audLista(q.id)+'</div><div class="err" id="qerr"></div></div>';
+    }
+    function audRefrescar(id){ const q=Q[path[cur]]; if(q&&q.id===id){ const el=document.getElementById('audlista'); if(el) el.innerHTML=audLista(id); } saveDraft(); }
+    function audQuitar(id,i){ audState(id).files.splice(i,1); audRefrescar(id); }
+    function audSubir(id,input){
+      const q = Q.find(x=>x.id===id), s = audState(id);
+      Array.from(input.files).forEach(file=>{
+        const f = {n:file.name, size:file.size, state:'subiendo'};
+        s.files.push(f);
+        if(!esAudio(file)){ f.state='error'; f.err='Esto no parece un audio. Si es un documento, súbelo en la sección de material.'; return; }
+        if(file.size>MAXB){ f.state='error'; f.err='Pesa más de 20 MB. Pártelo en dos notas, o súbelo a tu Drive y pega el enlace en la caja de texto.'; return; }
+        UPQ = UPQ.then(async()=>{
+          try{
+            const data = await toB64(file);
+            const res = await fetch(UPURL(), {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'},
+              body:JSON.stringify({action:'subir', r:AREF, k:AKEY, persona:CFG.persona, slot:'Audio', name:q.id+' · '+file.name, mime:file.type||'audio/mp4', data})});
+            const j = await res.json();
+            if(!j.ok) throw new Error(j.error==='grande'?'Pesa demasiado.':'El servidor no lo ha aceptado.');
+            f.state='ok'; f.url=j.url;
+          }catch(e){ f.state='error'; f.err=(e&&e.message&&!/fetch|network|json/i.test(e.message))?e.message:'Se ha cortado la conexión. Vuelve a elegirlo.'; }
+          audRefrescar(id);
+        });
+      });
+      input.value=''; audRefrescar(id);
     }
 
     /* ── Leer lo de los demás, solo cuando ya has enviado lo tuyo ── */
