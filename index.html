@@ -468,7 +468,7 @@
           <button type="submit" style="font-family: var(--sans); font-size: 15px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); border: 0; padding: 18px 30px; cursor: pointer;">Quiero estar dentro</button>
         </form>
 
-        <div style="font-family: var(--mono); font-size: 11px; color: var(--bone-2); margin-top: 14px;">sin spam. te das de baja cuando quieras.</div>
+        <div style="font-family: var(--mono); font-size: 11px; color: var(--bone-2); margin-top: 14px;">sin spam. te das de baja cuando quieras. tus datos los trata High Impact Systems LLC para enviarte la lista: <a href="/privacidad/" style="color: inherit; text-decoration: underline;">más info</a>.</div>
       </div>
     </div>
 
@@ -477,6 +477,7 @@
       <div style="display: flex; gap: 16px; flex-wrap: wrap;">
         <a class="js-aviso" href="#" style="font-family: var(--mono); font-size: 11px; color: var(--bone-2);">aviso legal</a>
         <a class="js-privacidad" href="#" style="font-family: var(--mono); font-size: 11px; color: var(--bone-2);">política de privacidad</a>
+        <a href="/cookies/" style="font-family: var(--mono); font-size: 11px; color: var(--bone-2);">cookies</a>
         <a class="js-contacto" href="#" style="font-family: var(--mono); font-size: 11px; color: var(--bone-2);">contacto</a>
       </div>
     </div>
@@ -498,7 +499,7 @@
           <input type="email" name="email" placeholder="tu@email.com" required autocomplete="email" aria-label="Email" style="flex-grow: 1; min-width: 200px; font-family: var(--mono); font-size: 14px; color: var(--bone); background: var(--noir); border: 1px solid var(--line); padding: 17px 18px; outline: none;">
           <button type="submit" style="font-family: var(--sans); font-size: 15px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); border: 0; padding: 17px 28px; cursor: pointer;">Quiero estar dentro</button>
         </form>
-        <div style="font-family: var(--mono); font-size: 11px; color: var(--bone-3); margin-top: 14px;">sin spam. te das de baja cuando quieras.</div>
+        <div style="font-family: var(--mono); font-size: 11px; color: var(--bone-3); margin-top: 14px;">sin spam. te das de baja cuando quieras. tus datos los trata High Impact Systems LLC para enviarte la lista: <a href="/privacidad/" style="color: inherit; text-decoration: underline;">más info</a>.</div>
       </div>
     </div>
   </div>
@@ -511,7 +512,7 @@
   var LISTA_SUBMIT_URL = ''; // PENDIENTE: endpoint de alta (Kit, Mailchimp, Apps Script…)
   var AVISO_LEGAL_URL = '/aviso-legal/';
   var PRIVACIDAD_URL = '/privacidad/';
-  var CONTACTO_URL = '';
+  var CONTACTO_URL = 'mailto:daniel@danielgarciadecelis.com';
 
   function cablearHueco(selector, url) {
     document.querySelectorAll(selector).forEach(function (a) {
