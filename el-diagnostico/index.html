@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>El Diagnóstico · Daniel García de Celis</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400;75..125,500;75..125,600;75..125,800&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  /* El Diagnóstico · escalón 2 de Mi Funnel. Sistema visual de la landing de venta: blanco, negro y amarillo.
+     Esta página solo pregunta y pinta: el motor que calcula el informe vive en el Apps Script (privado). */
+  :root {
+    --fondo: #FFFFFF; --fondo-2: #FAFAF8; --fondo-3: #F4F3EF;
+    --tinta: #0A0A0A; --tinta-2: #4A4A4A; --tinta-3: #8A8A85;
+    --mark: #FFE24D; --line: rgba(10,10,10,0.13); --line-2: rgba(10,10,10,0.22); --error: #B42318;
+    --sans: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-font-smoothing: antialiased; }
+  body { margin: 0; background: var(--fondo); color: var(--tinta); font-family: var(--sans); font-size: 17px; line-height: 1.55; }
+  .wrap { max-width: 680px; margin: 0 auto; padding: 28px 16px 90px; }
+  .top { display: flex; justify-content: space-between; align-items: baseline; font-family: var(--mono); font-size: 11px; color: var(--tinta-3); margin-bottom: 34px; }
+  .mark { background: linear-gradient(transparent 56%, var(--mark) 56%, var(--mark) 94%, transparent 94%); padding: 0 0.06em; }
+  h1 { font-size: clamp(30px, 7vw, 42px); line-height: 1.08; font-weight: 800; font-stretch: 90%; margin: 0 0 18px; letter-spacing: -0.01em; }
+  .lead { font-size: 18px; color: var(--tinta-2); margin: 0 0 22px; }
+  .caja { background: var(--fondo-2); border: 1px solid var(--line); padding: 18px 20px; margin: 22px 0; }
+  .caja b { font-weight: 600; }
+  .caja ul { margin: 8px 0 0; padding-left: 20px; }
+  .btn { font-family: var(--sans); font-size: 17px; font-weight: 600; background: var(--tinta); color: var(--fondo); border: 0; padding: 15px 24px; cursor: pointer; }
+  .btn:hover { background: #2a2a2a; }
+  .btn[disabled] { opacity: .45; cursor: default; }
+  .btn-2 { font-family: var(--sans); font-size: 15px; background: none; border: 0; color: var(--tinta-2); text-decoration: underline; cursor: pointer; padding: 10px 0; }
+
+  /* cuestionario */
+  .prog { margin-bottom: 30px; }
+  .prog-txt { display: flex; justify-content: space-between; font-family: var(--mono); font-size: 11px; color: var(--tinta-3); margin-bottom: 8px; gap: 12px; }
+  .prog-bar { height: 4px; background: var(--fondo-3); }
+  .prog-bar i { display: block; height: 100%; background: var(--tinta); transition: width .25s; }
+  .parte { font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: .03em; text-transform: uppercase; margin-bottom: 10px; }
+  .parte span { background: var(--mark); padding: 2px 6px; }
+  .qtext { font-size: 23px; line-height: 1.3; font-weight: 600; margin: 0 0 8px; }
+  .qsub { color: var(--tinta-2); font-size: 15px; margin: 0 0 6px; }
+  .opts { display: flex; flex-direction: column; gap: 9px; margin-top: 22px; }
+  .opt { text-align: left; font-family: var(--sans); font-size: 16px; line-height: 1.4; background: var(--fondo); color: var(--tinta); border: 1px solid var(--line-2); padding: 14px 16px; cursor: pointer; }
+  .opt:hover { border-color: var(--tinta); }
+  .opt.sel { border-color: var(--tinta); background: var(--mark); }
+  .curr { display: flex; gap: 8px; margin: 14px 0 0; }
+  .curr button { font-family: var(--mono); font-size: 12px; border: 1px solid var(--line-2); background: var(--fondo); padding: 6px 10px; cursor: pointer; }
+  .curr button.sel { background: var(--tinta); color: var(--fondo); border-color: var(--tinta); }
+  .numgrid { display: grid; gap: 16px; margin-top: 22px; }
+  .field label.l { display: block; font-size: 15px; font-weight: 500; margin-bottom: 6px; }
+  .field input[type=text] { width: 100%; font-family: var(--sans); font-size: 18px; padding: 12px 14px; border: 1px solid var(--line-2); background: var(--fondo); }
+  .field input[type=text]:focus { outline: 2px solid var(--tinta); outline-offset: -1px; }
+  .field input[disabled] { background: var(--fondo-3); color: var(--tinta-3); }
+  .nsck { display: inline-flex; gap: 6px; align-items: center; font-size: 14px; color: var(--tinta-2); margin-top: 6px; cursor: pointer; }
+  .err { display: none; color: var(--error); font-size: 15px; margin-top: 14px; }
+  .qnav { display: flex; justify-content: space-between; align-items: center; margin-top: 30px; gap: 12px; }
+  .centro { text-align: center; padding: 60px 0; color: var(--tinta-2); }
+
+  /* informe (el HTML llega del servidor) */
+  .inf-tag { font-family: var(--mono); font-size: 12px; color: var(--tinta-3); margin: 0 0 6px; }
+  .inf-h1 { font-size: clamp(28px, 6.5vw, 38px); line-height: 1.1; font-weight: 800; font-stretch: 90%; margin: 4px 0 10px; }
+  .inf-sec { margin: 40px 0 0; }
+  .inf-h2 { font-size: 21px; line-height: 1.25; margin: 0 0 14px; padding-bottom: 8px; border-bottom: 2px solid var(--tinta); }
+  .inf-radar { width: 100%; max-width: 420px; display: block; margin: 0 auto 14px; }
+  .inf-tabla { width: 100%; border-collapse: collapse; font-size: 15px; }
+  .inf-tabla td, .inf-tabla th { border-bottom: 1px solid var(--line); padding: 8px 6px; text-align: left; vertical-align: top; }
+  .inf-tabla th { border-bottom: 2px solid var(--tinta); font-weight: 600; }
+  .fuga { border: 1px solid var(--line-2); padding: 18px 20px; margin: 0 0 16px; background: var(--fondo); }
+  .fuga-n { font-family: var(--mono); font-size: 12px; color: var(--tinta-3); text-transform: uppercase; letter-spacing: .03em; }
+  .fuga-cifra { background: var(--mark); padding: 10px 12px; margin: 12px 0; font-weight: 600; }
+  .fuga-pal { margin: 12px 0 0; }
+  .fuga-pasos { margin: 6px 0 0; padding-left: 22px; }
+  .fuga-pasos li { margin: 0 0 6px; }
+  .fuga-dest { font-family: var(--mono); font-size: 12px; color: var(--tinta-2); margin: 10px 0 0; }
+  .acciones { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; margin: 26px 0 0; }
+  .aviso { font-size: 14px; color: var(--tinta-2); }
+
+  @media print {
+    .top, .acciones, .noprint { display: none !important; }
+    body { font-size: 12pt; }
+    .fuga { break-inside: avoid; }
+    .wrap { padding: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><span>daniel garcía de celis</span><span>el diagnóstico</span></div>
+  <main id="app"><div class="centro">Cargando…</div></main>
+</div>
+
+<script>
+/* =====================================================================
+   CONFIGURACIÓN
+   ===================================================================== */
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx3AAphfbVzTrNN6C9NNlioiaqs5_n4tSWsSj3ory8sbljrJgOfCZkSuDVwoSq3yJQhsQ/exec';   // URL /exec del Apps Script de El Diagnóstico (se pone al desplegarlo)
+
+const QS = new URLSearchParams(location.search);
+const T = QS.get('t') || '', K = QS.get('k') || '';
+const $app = document.getElementById('app');
+const esc = s => String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+
+/* =====================================================================
+   PREGUNTAS
+   Las mismas del motor (ids y valores), con cifras exactas donde el cálculo las usa.
+   parte: la sección que ve el comprador; show: cuándo aparece.
+   ===================================================================== */
+const LZ = a => a.venta === 'lanz' || a.venta === 'ambos';
+const EV = a => a.evergreen === 'si_vende' || a.evergreen === 'si_nose';
+const Q = [
+  {id:'modelo', parte:'Tu negocio', text:'¿Qué vendes principalmente?', opts:[
+    {v:'curso', t:'Cursos o formaciones online (grabadas, en vivo o cohortes)'},
+    {v:'producto', t:'Productos digitales que no son formación (plantillas, recursos, kits, comunidad)'},
+    {v:'membresia', t:'Membresía o suscripción'},
+    {v:'highticket', t:'Mentoría, consultoría o programas high ticket'},
+    {v:'servicio', t:'Servicios digitales hechos para el cliente'},
+    {v:'mezcla', t:'Una mezcla de varios'}]},
+  {id:'ticket', parte:'Tu negocio', text:'¿Cuál es tu ticket principal?', sub:'El precio del producto que más vendes o que más pesa en tu facturación.', currency:true, opts:[
+    {v:'t1', t:'Menos de 100'}, {v:'t2', t:'Entre 100 y 500'}, {v:'t3', t:'Entre 500 y 2.000'}, {v:'t4', t:'Entre 2.000 y 5.000'}, {v:'t5', t:'Más de 5.000'}]},
+  {id:'fact', parte:'Tu negocio', text:'¿Cuánto facturas al mes, más o menos?', opts:[
+    {v:'f1', t:'Menos de 2.000'}, {v:'f2', t:'Entre 2.000 y 10.000'}, {v:'f3', t:'Entre 10.000 y 30.000'}, {v:'f4', t:'Entre 30.000 y 100.000'}, {v:'f5', t:'Más de 100.000'}, {v:'fx', t:'Prefiero no decirlo'}]},
+  {id:'tiempo', parte:'Tu negocio', text:'¿Cuánto llevas vendiendo online?', opts:[
+    {v:'menos1', t:'Menos de 1 año'}, {v:'1a3', t:'Entre 1 y 3 años'}, {v:'mas3', t:'Más de 3 años'}]},
+
+  {id:'fuente', parte:'Captación', text:'¿Cuál es hoy tu principal fuente de contactos nuevos?', opts:[
+    {v:'organico', t:'Contenido orgánico (redes, YouTube, podcast, SEO)'},
+    {v:'ads', t:'Publicidad de pago'},
+    {v:'colabs', t:'Colaboraciones, afiliados o apariciones en audiencias ajenas'},
+    {v:'referidos', t:'Referidos y boca a boca'},
+    {v:'nocapto', t:'Ahora mismo no capto contactos de forma activa'}]},
+  {id:'leadmagnet', parte:'Captación', text:'¿Tienes un recurso gratuito activo que capte emails?', sub:'Una guía, una clase, una plantilla… a cambio del email.', opts:[
+    {v:'si_mide', t:'Sí, y sé cuánto convierte'}, {v:'si_nomide', t:'Sí, pero no mido su conversión'}, {v:'no', t:'No'}]},
+  {id:'cpl', parte:'Captación', text:'¿Sabes cuánto te cuesta cada contacto nuevo que consigues con anuncios?', show:a=>a.fuente==='ads', opts:[
+    {v:'si', t:'Sí, lo tengo controlado'}, {v:'aprox', t:'Aproximadamente'}, {v:'no', t:'No lo sé'}]},
+
+  {id:'lista', parte:'Tu lista', text:'¿Cuántos contactos tienes en tu lista de email?', opts:[
+    {v:'no', t:'No tengo lista de email'}, {v:'l1', t:'Menos de 500'}, {v:'l2', t:'Entre 500 y 2.000'}, {v:'l3', t:'Entre 2.000 y 10.000'}, {v:'l4', t:'Entre 10.000 y 30.000'}, {v:'l5', t:'Más de 30.000'}]},
+  {id:'frec', parte:'Tu lista', text:'¿Cada cuánto le escribes a tu lista?', show:a=>a.lista&&a.lista!=='no', opts:[
+    {v:'varias', t:'Varias veces por semana'}, {v:'semanal', t:'Una vez por semana'}, {v:'mensual', t:'Una o dos veces al mes'}, {v:'sololanz', t:'Solo cuando lanzo o promociono algo'}, {v:'casinunca', t:'Casi nunca'}]},
+  {id:'apertura_n', parte:'Tu lista', text:'¿Qué porcentaje de tu lista abre tus emails?', sub:'La media de tus últimas campañas. En ActiveCampaign está en Reportes → Campañas. Si no lo sabes, márcalo: el informe te dice cómo sacarlo.', show:a=>a.lista&&a.lista!=='no', nums:[
+    {k:'apertura', t:'Tasa de apertura media', unit:'%'}]},
+  {id:'atrib', parte:'Tu lista', text:'¿Sabes cuánto facturas gracias al email, separado del resto?', show:a=>a.lista&&a.lista!=='no', opts:[
+    {v:'mido', t:'Sí, lo mido'}, {v:'aprox', t:'Aproximadamente'}, {v:'nose', t:'No lo sé'}]},
+
+  {id:'canal', parte:'Tu audiencia', text:'¿Dónde vive tu audiencia principal?', show:a=>a.lista==='no', opts:[
+    {v:'ig', t:'Instagram'}, {v:'yt', t:'YouTube'}, {v:'tiktok', t:'TikTok'}, {v:'linkedin', t:'LinkedIn'}, {v:'otro', t:'Otro canal'}]},
+  {id:'audiencia', parte:'Tu audiencia', text:'¿De qué tamaño es esa audiencia?', show:a=>a.lista==='no', opts:[
+    {v:'au1', t:'Menos de 1.000 seguidores'}, {v:'au2', t:'Entre 1.000 y 10.000'}, {v:'au3', t:'Entre 10.000 y 50.000'}, {v:'au4', t:'Más de 50.000'}]},
+  {id:'convsocial', parte:'Tu audiencia', text:'¿Cómo conviertes esa audiencia en ventas hoy?', show:a=>a.lista==='no', opts:[
+    {v:'dms', t:'Conversaciones por mensaje directo'}, {v:'lives', t:'Directos, stories o contenido con oferta'}, {v:'linkbio', t:'Enlace en la bio hacia mi oferta'}, {v:'no', t:'Todavía no la convierto de forma constante'}]},
+
+  {id:'venta', parte:'Cómo vendes', text:'¿Cómo vendes principalmente?', opts:[
+    {v:'lanz', t:'Lanzamientos: abro y cierro puertas'}, {v:'evergreen', t:'Venta continua: mi oferta está siempre disponible'}, {v:'ambos', t:'Las dos cosas'}, {v:'manual', t:'A mano: mensajes, llamadas, propuestas una a una'}]},
+  {id:'nlanz', parte:'Cómo vendes', text:'¿Cuántos lanzamientos haces al año?', show:LZ, opts:[
+    {v:'uno', t:'Uno'}, {v:'dostres', t:'Dos o tres'}, {v:'cuatro', t:'Cuatro o más'}]},
+  {id:'ultlanz', parte:'Cómo vendes', text:'¿Cómo fue tu último lanzamiento comparado con el anterior?', show:LZ, opts:[
+    {v:'mejor', t:'Mejor'}, {v:'igual', t:'Más o menos igual'}, {v:'peor', t:'Peor'}, {v:'nocomparo', t:'No comparo los números'}]},
+
+  {id:'l_mecanica', parte:'Tu último lanzamiento', text:'¿Con qué mecánica lo hiciste?', sub:'Si mezclaste varias, elige la que llevó el peso de la venta.', show:LZ, opts:[
+    {v:'webinar', t:'Webinar o masterclass'}, {v:'reto', t:'Reto o evento de varios días'}, {v:'vsl', t:'VSL y carrito, sin directo'}, {v:'directos', t:'Directos en redes'}, {v:'emails', t:'Solo emails'}, {v:'otra', t:'Otra'}]},
+  {id:'l_numeros', parte:'Tu último lanzamiento', text:'Los números de ese lanzamiento, de punta a punta', sub:'Con estas cifras te comparo con el sector y, cuando cuadran, te calculo cuánto dinero se quedó por el camino. Aproximadas valen; si alguna no la sabes, márcala.', show:LZ, nums:[
+    {k:'registros', t:'Personas registradas', entero:true, show:a=>a.l_mecanica!=='emails'},
+    {k:'asistencia', t:'% de registrados que vio el directo en vivo', unit:'%', show:a=>['webinar','reto','directos','otra'].includes(a.l_mecanica)},
+    {k:'visitas', t:'Visitas a la página de ventas', entero:true},
+    {k:'ventas', t:'Ventas', entero:true},
+    {k:'ingresos', t:'Ingresos del lanzamiento', money:true}]},
+  {id:'l_carrito', parte:'Tu último lanzamiento', text:'¿Cuántos días estuvo abierto el carrito?', show:LZ, opts:[
+    {v:'c1', t:'De 1 a 3 días'}, {v:'c2', t:'De 4 a 7 días'}, {v:'c3', t:'De 8 a 14 días'}, {v:'c4', t:'Más de 14 días'}, {v:'siempre', t:'No cerró: la oferta sigue disponible'}, {v:'nose', t:'No lo sé'}]},
+  {id:'l_cierre', parte:'Tu último lanzamiento', text:'¿Qué cerró la puerta?', sub:'Marca todo lo que pasó.', show:a=>LZ(a)&&a.l_carrito!=='siempre', multi:true, opts:[
+    {v:'fecha', t:'Una fecha de cierre anunciada, y se cumplió'}, {v:'precio', t:'Una subida de precio'}, {v:'bonus', t:'Un bonus que se retiró'}, {v:'ampliado', t:'Anuncié una fecha, pero lo amplié o lo reabrí'}, {v:'nada', t:'Nada: se cerró sin anunciarlo', excl:true}]},
+  {id:'l_trafico', parte:'Tu último lanzamiento', text:'¿De dónde salió la gente de ese lanzamiento?', sub:'Marca todas las fuentes que pesaron.', show:LZ, multi:true, opts:[
+    {v:'lista', t:'Mi lista de email'}, {v:'ads', t:'Anuncios de pago'}, {v:'organico', t:'Contenido orgánico (redes, YouTube, podcast)'}, {v:'colabs', t:'Colaboraciones o afiliados'}]},
+  {id:'l_gasto', parte:'Tu último lanzamiento', text:'¿Cuánto invertiste en anuncios en ese lanzamiento?', show:a=>LZ(a)&&Array.isArray(a.l_trafico)&&a.l_trafico.includes('ads'), nums:[
+    {k:'gasto', t:'Inversión en anuncios', money:true}]},
+  {id:'l_fases', parte:'Tu último lanzamiento', text:'¿En qué tramos del lanzamiento mandaste alguna pieza?', sub:'Email, WhatsApp, directo o vídeo: cualquier cosa cuenta. Si un tramo se quedó vacío, dilo sin miedo: es de lo primero que mira el informe.', show:LZ, multi:true, opts:[
+    {v:'convocatoria', t:'La convocatoria: invitaste a tu audiencia a registrarse'},
+    {v:'cortejo', t:'El cortejo: calentaste a los registrados antes del evento'},
+    {v:'cita', t:'La cita: empujaste para que aparecieran en el directo'},
+    {v:'accion', t:'La acción: abriste el carrito y presentaste la oferta y los bonus'},
+    {v:'valle', t:'El valle de las sombras: respondiste objeciones con el carrito abierto'},
+    {v:'remate', t:'El remate: apretaste en los últimos días y el día del cierre'},
+    {v:'resaca', t:'La resaca: escribiste después del cierre, a compradores y a los que no'},
+    {v:'nose', t:'No lo sé', excl:true}]},
+
+  {id:'evergreen', parte:'Cómo vendes', text:'¿Tienes una secuencia o un embudo que venda sin que tú estés?', show:a=>a.venta!=='manual', opts:[
+    {v:'si_vende', t:'Sí, y sé que vende'}, {v:'si_nose', t:'Sí, pero no sé si de verdad vende'}, {v:'no', t:'No'}]},
+
+  {id:'e_entrada', parte:'Tu embudo', text:'¿Cómo entra la gente en tu embudo?', sub:'Si tienes varios, piensa en el que más vende.', show:EV, opts:[
+    {v:'leadmagnet', t:'Con un recurso gratuito (guía, clase, plantilla) y después emails'},
+    {v:'webinar', t:'Con un webinar o una clase grabada que se emite sola'},
+    {v:'vsl', t:'Directo a una página de ventas o a un VSL'},
+    {v:'reto', t:'Con un reto o un minicurso automatizado de varios días'},
+    {v:'otra', t:'Otra'}]},
+  {id:'e_numeros', parte:'Tu embudo', text:'Los números de ese embudo en los últimos 90 días', sub:'Aproximados valen. Si alguno no lo sabes, márcalo.', show:EV, nums:[
+    {k:'leads', t:'Personas nuevas que entraron en el embudo', entero:true, show:a=>a.e_entrada!=='vsl'},
+    {k:'visitas', t:'Visitas a la página de ventas', entero:true},
+    {k:'ventas', t:'Ventas', entero:true},
+    {k:'ingresos', t:'Ingresos del embudo', money:true}]},
+  {id:'e_secuencia', parte:'Tu embudo', text:'¿Cuántos emails recibe alguien desde que entra hasta que termina la secuencia?', show:EV, opts:[
+    {v:'s1', t:'De 1 a 3'}, {v:'s2', t:'De 4 a 7'}, {v:'s3', t:'De 8 a 14'}, {v:'s4', t:'Más de 14'}, {v:'ninguno', t:'No hay secuencia: solo la página'}, {v:'nose', t:'No lo sé'}]},
+  {id:'e_urgencia', parte:'Tu embudo', text:'¿La oferta de ese embudo tiene fecha límite?', show:EV, opts:[
+    {v:'real', t:'Sí: un plazo real para cada persona, y se cumple'}, {v:'falsa', t:'Hay un contador, pero se reinicia o no se cumple'}, {v:'no', t:'No: la oferta está siempre igual'}, {v:'nose', t:'No lo sé'}]},
+  {id:'e_trafico', parte:'Tu embudo', text:'¿De dónde sale la gente que entra en ese embudo?', sub:'Marca todas las fuentes que pesan.', show:EV, multi:true, opts:[
+    {v:'lista', t:'Mi lista de email'}, {v:'ads', t:'Anuncios de pago'}, {v:'organico', t:'Contenido orgánico (redes, YouTube, podcast)'}, {v:'colabs', t:'Colaboraciones o afiliados'}]},
+  {id:'e_gasto', parte:'Tu embudo', text:'¿Cuánto has invertido en anuncios para ese embudo en los últimos 90 días?', show:a=>EV(a)&&Array.isArray(a.e_trafico)&&a.e_trafico.includes('ads'), nums:[
+    {k:'gasto', t:'Inversión en anuncios', money:true}]},
+
+  {id:'cierre', parte:'Cómo vendes', text:'¿Conoces tu tasa de cierre en llamadas o propuestas?', show:a=>a.modelo==='highticket'||a.venta==='manual', opts:[
+    {v:'si', t:'Sí, la mido'}, {v:'aprox', t:'Aproximadamente'}, {v:'no', t:'No la sé'}, {v:'nollamadas', t:'No vendo por llamadas'}]},
+
+  {id:'recurrente', parte:'Recurrencia', text:'¿Parte de tu facturación se repite cada mes sin cerrar una venta nueva?', sub:'Una membresía, una suscripción, un retainer o un servicio con cobro mensual.', show:a=>a.modelo!=='membresia', opts:[
+    {v:'si', t:'Sí, tengo ingresos que se repiten cada mes'}, {v:'pensada', t:'No, pero lo tengo pensado'}, {v:'no', t:'No, cada mes empiezo de cero'}]},
+  {id:'churn', parte:'Recurrencia', text:'¿Sabes qué parte de tus socios se da de baja cada mes?', show:a=>a.modelo==='membresia', opts:[
+    {v:'si', t:'Sí, la mido'}, {v:'aprox', t:'Aproximadamente'}, {v:'no', t:'No la sé'}]},
+  {id:'recompra', parte:'Recurrencia', text:'¿Qué parte de tus clientes te vuelve a comprar?', opts:[
+    {v:'alta', t:'Lo sé, y es más del 30 %'}, {v:'baja', t:'Lo sé, y es menos del 30 %'}, {v:'aprox', t:'Tengo una idea aproximada'}, {v:'nose', t:'No lo sé'}, {v:'unica', t:'No tengo una segunda oferta que comprar'}]},
+
+  {id:'friccion', parte:'Tu foco', text:'¿Dónde sientes más fricción ahora mismo?', opts:[
+    {v:'captar', t:'Captar contactos nuevos'}, {v:'convertir', t:'Convertir los que ya tengo'}, {v:'recomprar', t:'Que me compren más de una vez'}, {v:'ticket', t:'Subir el ticket'}, {v:'tiempo', t:'Todo depende de mí y no crezco'}, {v:'nolose', t:'No lo tengo claro'}]}
+];
+
+/* =====================================================================
+   ESTADO (se guarda en este navegador para poder seguir otro rato)
+   ===================================================================== */
+let A = {}, AL = {}, path = [], cur = -1, moneda = '$', nombre = '', pendiente = false;
+const KEY = 'el-diagnostico:' + T;
+const guardar = () => { try { localStorage.setItem(KEY, JSON.stringify({A, AL, path, cur, moneda})); } catch (e) {} };
+const cargar = () => { try { return JSON.parse(localStorage.getItem(KEY) || 'null'); } catch (e) { return null; } };
+const borrar = () => { try { localStorage.removeItem(KEY); } catch (e) {} };
+
+const visible = q => !q.show || q.show(A);
+function siguienteIdx(desde) { for (let i = desde + 1; i < Q.length; i++) if (visible(Q[i])) return i; return -1; }
+function limpiar() {       // si cambia una respuesta, fuera las que ya no aplican
+  Q.forEach(q => {
+    if (visible(q)) return;
+    if (q.id === 'apertura_n') { delete A.apertura_pct; delete AL.apertura; }
+    else if (A[q.id] !== undefined) { delete A[q.id]; delete AL[q.id]; }
+  });
+  path = path.filter(i => visible(Q[i]));
+}
+function partes() { const p = []; Q.filter(visible).forEach(q => { if (!p.includes(q.parte)) p.push(q.parte); }); return p; }
+
+/* =====================================================================
+   PANTALLAS
+   ===================================================================== */
+function pantalla(html) { $app.innerHTML = html; window.scrollTo(0, 0); }
+function mensaje(titulo, texto) { pantalla('<h1>' + titulo + '</h1><p class="lead">' + texto + '</p>'); }
+
+function portada(hayBorrador) {
+  pantalla(
+    '<h1>' + (nombre ? esc(nombre) + ', vamos a ver' : 'Vamos a ver') + ' <span class="mark">dónde se te escapa el dinero</span></h1>' +
+    '<p class="lead">Contestas unas preguntas sobre tu negocio y, al terminar, ves tu informe entero: tus fugas en orden de ataque, qué hacer con cada una, cuánto te cuestan cuando tus cifras permiten calcularlo y, si la solución está en El Desglose, en qué fase.</p>' +
+    '<div class="caja"><b>Antes de empezar</b><ul>' +
+    '<li>Son unos 10-15 minutos.</li>' +
+    '<li>Ten a mano los números de tu último lanzamiento o de tu embudo: registros, visitas a la página de ventas, ventas, ingresos y lo que invertiste en anuncios.</li>' +
+    '<li>Si una cifra no la sabes, la marcas. El informe te dice de dónde sacarla.</li>' +
+    '<li>Se guarda solo en este navegador: si lo dejas a medias, vuelve a abrir el enlace desde aquí y sigues donde estabas.</li></ul></div>' +
+    '<div class="qnav" style="justify-content:flex-start;gap:22px"><button class="btn" data-a="empezar">' + (hayBorrador ? 'Seguir donde lo dejé' : 'Empezar') + '</button>' +
+    (hayBorrador ? '<button class="btn-2" data-a="reiniciar">Empezar de cero</button>' : '') + '</div>');
+}
+
+function progreso(q) {
+  const ps = partes(), n = ps.indexOf(q.parte) + 1;
+  const vis = Q.filter(visible), pos = vis.indexOf(q) + 1;
+  /* Sin «X de Y»: el total cambia según lo que conteste (lanzamientos, embudo…) y un contador que crece desanima. */
+  return '<div class="prog"><div class="prog-txt"><span>Parte ' + n + ' · ' + esc(q.parte) + '</span><span>' + Math.round((pos - 1) / vis.length * 100) + ' %</span></div>' +
+    '<div class="prog-bar"><i style="width:' + Math.round((pos - 1) / vis.length * 100) + '%"></i></div></div>';
+}
+
+function pregunta() {
+  const q = Q[path[cur]];
+  let h = progreso(q) + '<div class="parte"><span>' + esc(q.parte) + '</span></div><div class="qtext">' + q.text + '</div>';
+  if (q.sub) h += '<div class="qsub">' + q.sub + '</div>';
+  if (q.currency) h += '<div class="curr"><button class="' + (moneda === '$' ? 'sel' : '') + '" data-a="moneda" data-v="$">USD $</button><button class="' + (moneda === '€' ? 'sel' : '') + '" data-a="moneda" data-v="€">EUR €</button></div>';
+  const atras = '<button class="btn-2" data-a="atras"' + (cur <= 0 ? ' style="visibility:hidden"' : '') + '>Atrás</button>';
+  if (q.nums) {
+    const cv = A[q.id] || {};
+    const actual = q.id === 'apertura_n' ? { apertura: A.apertura_pct } : cv;
+    h += '<div class="numgrid">' + campos(q).map(f => {
+      const v = actual[f.k], ns = v === 'nose';
+      return '<div class="field"><label class="l" for="n-' + f.k + '">' + f.t + (f.money ? ' (' + moneda + ')' : '') + (f.unit ? ' (%)' : '') + '</label>' +
+        '<input type="text" inputmode="decimal" id="n-' + f.k + '" value="' + (typeof v === 'number' ? v : '') + '"' + (ns ? ' disabled' : '') + ' placeholder="' + (f.unit ? 'Por ejemplo: 25' : 'Por ejemplo: 1200') + '">' +
+        '<label class="nsck"><input type="checkbox" data-a="nose" data-k="' + f.k + '" id="ns-' + f.k + '"' + (ns ? ' checked' : '') + '> No lo sé</label></div>';
+    }).join('') + '</div><div class="err" id="qerr"></div><div class="qnav">' + atras + '<button class="btn" data-a="nums">Siguiente</button></div>';
+  } else if (q.multi) {
+    const sel = A[q.id] || [];
+    h += '<div class="opts">' + q.opts.map(o => '<button class="opt' + (sel.includes(o.v) ? ' sel' : '') + '" data-a="multi" data-v="' + o.v + '">' + o.t + '</button>').join('') + '</div>' +
+      '<div class="err" id="qerr">Marca al menos una opción.</div><div class="qnav">' + atras + '<button class="btn" data-a="multiok">Siguiente</button></div>';
+  } else {
+    h += '<div class="opts">' + q.opts.map(o => '<button class="opt' + (A[q.id] === o.v ? ' sel' : '') + '" data-a="opt" data-v="' + o.v + '">' + o.t + '</button>').join('') + '</div><div class="qnav">' + atras + '<span></span></div>';
+  }
+  pantalla(h);
+  guardar();
+}
+const campos = q => q.nums.filter(f => !f.show || f.show(A));
+
+function avanzar() {
+  limpiar();
+  const idx = siguienteIdx(path[cur]);
+  if (idx < 0) return final();
+  path = path.slice(0, cur + 1); path.push(idx); cur++;
+  pregunta();
+}
+function atras() { if (cur > 0) { cur--; pregunta(); } }
+
+/* números: formato español o inglés, y coherencia antes de dejar pasar */
+function parseNum(s) {
+  s = (s || '').replace(/[^0-9.,]/g, '');
+  if (!s) return null;
+  if (s.includes('.') && s.includes(',')) s = s.lastIndexOf(',') > s.lastIndexOf('.') ? s.replace(/\./g, '').replace(',', '.') : s.replace(/,/g, '');
+  else if (/^\d{1,3}([.,]\d{3})+$/.test(s)) s = s.replace(/[.,]/g, '');
+  else s = s.replace(',', '.');
+  const n = parseFloat(s);
+  return isFinite(n) ? n : null;
+}
+const fmt = n => n.toLocaleString('es', { maximumFractionDigits: 1 });
+function error(txt) { const e = document.getElementById('qerr'); e.textContent = txt; e.style.display = 'block'; }
+function guardarNums() {
+  const q = Q[path[cur]], out = {}, txt = [];
+  for (const f of campos(q)) {
+    let v;
+    if (document.getElementById('ns-' + f.k).checked) v = 'nose';
+    else {
+      v = parseNum(document.getElementById('n-' + f.k).value);
+      if (v === null) return error('Pon un número en «' + f.t + '» o marca «No lo sé».');
+      if (f.unit && v > 100) return error('«' + f.t + '» es un porcentaje: tiene que estar entre 0 y 100.');
+      if (f.entero && v % 1 !== 0) return error('«' + f.t + '» va en números enteros: sin decimales.');
+    }
+    out[f.k] = v;
+    txt.push(f.t + ': ' + (v === 'nose' ? 'no lo sé' : (f.money ? moneda + fmt(Math.round(v)) : fmt(v)) + (f.unit ? ' %' : '')));
+  }
+  /* Las mismas incoherencias que el motor rechaza, avisadas aquí para que las corrija antes de enviar */
+  const n = k => typeof out[k] === 'number' ? out[k] : null;
+  const base = q.id === 'l_numeros' ? ['registros', 'registrados'] : q.id === 'e_numeros' ? ['leads', 'personas que entraron'] : null;
+  if (base) {
+    if (n(base[0]) !== null && n('ventas') !== null && n('ventas') > n(base[0])) return error('Hay más ventas (' + fmt(n('ventas')) + ') que ' + base[1] + ' (' + fmt(n(base[0])) + '). Revisa las dos cifras.');
+    if (n('visitas') !== null && n('visitas') > 0 && n('ventas') !== null && n('ventas') > n('visitas')) return error('Hay más ventas (' + fmt(n('ventas')) + ') que visitas a la página de ventas (' + fmt(n('visitas')) + '). Revisa las dos cifras.');
+    if (n('ventas') !== null && n('ingresos') !== null && (n('ventas') > 0) !== (n('ingresos') > 0)) return error('Ventas e ingresos no cuadran: si hubo ventas, hubo ingresos, y al revés.');
+  }
+  if (q.id === 'apertura_n') { A.apertura_pct = out.apertura; AL.apertura = txt[0]; }
+  else { A[q.id] = out; AL[q.id] = txt.join(' · '); }
+  avanzar();
+}
+
+/* =====================================================================
+   ENVÍO E INFORME
+   ===================================================================== */
+async function llamar(cuerpo) {
+  const r = await fetch(SCRIPT_URL, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(cuerpo) });
+  return r.json();
+}
+function final() {
+  pantalla('<div class="parte"><span>Listo</span></div><div class="qtext">Ya está. ¿Vemos tu diagnóstico?</div>' +
+    '<p class="qsub">Al enviarlo se calcula tu informe con tus respuestas y te llega una copia por email. Después ya no se puede cambiar, así que si quieres repasar algo, este es el momento.</p>' +
+    '<div class="err" id="qerr"></div><div class="qnav"><button class="btn-2" data-a="atras">Atrás</button><button class="btn" data-a="enviar">Ver mi diagnóstico</button></div>');
+  guardar();
+}
+async function enviar(boton) {
+  boton.disabled = true; boton.textContent = 'Calculando tu diagnóstico…';
+  try {
+    const r = await llamar({ accion: 'enviar', t: T, k: K, A, AL, moneda });
+    if (r.ok) { borrar(); return informe(r.html, r.copia !== false); }
+    if (r.motivo === 'revocado') return revocado();
+    error('No se ha podido enviar. Tus respuestas siguen guardadas: vuelve a intentarlo en un momento.');
+  } catch (e) { error('No se ha podido enviar (¿sin conexión?). Tus respuestas siguen guardadas: vuelve a intentarlo.'); }
+  boton.disabled = false; boton.textContent = 'Ver mi diagnóstico';
+}
+function informe(html, copia) {
+  pantalla(html + '<div class="acciones"><button class="btn" data-a="pdf">Guardar en PDF</button>' +
+    '<span class="aviso">' + (copia ? 'Te llega una copia a tu email. ' : '') + 'Guarda también el enlace: con él vuelves a abrir tu informe cuando quieras.</span></div>');
+}
+const revocado = () => mensaje('Este enlace ya no está activo', 'La compra de este diagnóstico se ha reembolsado o cancelado, así que el enlace se ha desactivado. Si crees que es un error, responde al email en el que te llegó el enlace.');
+
+/* =====================================================================
+   EVENTOS
+   ===================================================================== */
+$app.addEventListener('click', ev => {
+  const b = ev.target.closest('[data-a]'); if (!b) return;
+  const a = b.dataset.a, q = cur >= 0 ? Q[path[cur]] : null;
+  if (a === 'empezar') { if (cur < 0) { path = [siguienteIdx(-1)]; cur = 0; } return pregunta(); }
+  if (a === 'reiniciar') { borrar(); A = {}; AL = {}; path = []; cur = -1; return portada(false); }
+  if (a === 'moneda') { moneda = b.dataset.v; return pregunta(); }
+  if (a === 'atras') { return document.querySelector('[data-a=enviar]') ? pregunta() : atras(); }   // desde la pantalla final vuelve a la última pregunta
+  if (a === 'opt') {                     // un solo avance por pregunta aunque pulse dos veces seguidas
+    if (pendiente) return; pendiente = true;
+    const o = q.opts.find(x => x.v === b.dataset.v); A[q.id] = o.v; AL[q.id] = o.t; b.classList.add('sel');
+    return setTimeout(() => { pendiente = false; avanzar(); }, 160);
+  }
+  if (a === 'multi') {
+    const o = q.opts.find(x => x.v === b.dataset.v); let sel = (A[q.id] || []).slice();
+    if (sel.includes(o.v)) sel = sel.filter(x => x !== o.v); else if (o.excl) sel = [o.v]; else sel = sel.filter(x => !q.opts.find(y => y.v === x).excl).concat(o.v);
+    A[q.id] = sel; return pregunta();
+  }
+  if (a === 'multiok') { const sel = A[q.id] || []; if (!sel.length) return error('Marca al menos una opción.'); AL[q.id] = q.opts.filter(o => sel.includes(o.v)).map(o => o.t).join(' · '); return avanzar(); }
+  if (a === 'nums') return guardarNums();
+  if (a === 'enviar') return enviar(b);
+  if (a === 'pdf') return window.print();
+});
+$app.addEventListener('change', ev => {
+  const c = ev.target; if (c.dataset.a !== 'nose') return;
+  const inp = document.getElementById('n-' + c.dataset.k); inp.disabled = c.checked; if (c.checked) inp.value = '';
+});
+
+/* =====================================================================
+   ARRANQUE
+   ===================================================================== */
+(async function () {
+  if (!T || !K) return mensaje('Este enlace no está completo', 'Abre el enlace tal cual te llegó por email, sin recortarlo. Si no encuentras ese email, busca en tu correo «enlace para hacer El Diagnóstico», o escríbeme a daniel.gdecelis@gmail.com y te lo reenvío.');
+  let r;
+  try { r = await llamar({ accion: 'estado', t: T, k: K }); }
+  catch (e) { return mensaje('No se ha podido cargar', 'Comprueba tu conexión y vuelve a abrir el enlace.'); }
+  if (!r.ok) return r.motivo === 'revocado' ? revocado() : mensaje('Este enlace no es válido', 'Abre el enlace tal cual te llegó por email. Si el problema sigue, responde a ese email.');
+  nombre = r.nombre || '';
+  if (r.hecho) return informe(r.html);
+  const b = cargar();
+  if (b && b.path && b.path.length) { A = b.A || {}; AL = b.AL || {}; path = b.path; cur = Math.min(b.cur, path.length - 1); moneda = b.moneda || '$'; return portada(true); }
+  portada(false);
+})();
+</script>
+</body>
+</html>

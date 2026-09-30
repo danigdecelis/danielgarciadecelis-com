@@ -13,7 +13,9 @@
        Sin esos parámetros no hace nada, y la versión pública queda exactamente igual. */
     (function(){
       var m = new URLSearchParams(location.search).get('modo');
-      if (m !== 'onboarding' && m !== 'auditoria') return;
+      /* 29-sep-2026: la versión gratuita se retira (03_OFERTA, escalón 2, V1). Sin modo de cliente,
+         la página manda a la home antes de pintar nada. Los modos auditoría y onboarding no cambian. */
+      if (m !== 'onboarding' && m !== 'auditoria') { location.replace('/'); return; }
       document.documentElement.className += ' modo-cliente';
       if (m === 'onboarding') document.title = 'Arranque · Daniel García de Celis';
     })();
