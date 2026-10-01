@@ -6,17 +6,26 @@
   <meta name="robots" content="noindex, follow" />
   <meta name="description" content="Diagnóstico de Lista gratuito para infoproductores: descubre si tu base de datos está viva, fría o infrautilizada y qué campaña activar primero para que vuelva a generar ventas." />
   <title>Diagnóstico de Lista para Infoproductores · Daniel García de Celis</title>
+  <link rel="canonical" href="https://danielgarciadecelis.com/lista/">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="alternate icon" href="/favicon.png">
+  <link rel="apple-touch-icon" href="/favicon.png">
 
   <meta property="og:title" content="Diagnóstico de Lista" />
   <meta property="og:description" content="¿Tu lista te vende o solo acumula contactos? Diagnóstico interactivo, resultado al instante." />
   <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_ES" />
   <meta property="og:url" content="https://danielgarciadecelis.com/lista/" />
+  <meta property="og:site_name" content="Daniel García de Celis" />
   <meta property="og:image" content="https://danielgarciadecelis.com/og.png" />
-  <meta name="twitter:card" content="summary" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Diagnóstico de Lista para Infoproductores" />
   <meta name="twitter:description" content="Descubre si tu lista está viva, fría o infrautilizada. Resultado al instante." />
+  <meta name="twitter:image" content="https://danielgarciadecelis.com/og.png" />
+  <meta name="twitter:image:alt" content="Diagnóstico de Lista para Infoproductores" />
+  <script src="/js/analytics.js" defer></script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -970,6 +979,8 @@
     ===================================================== */
     const SUBMIT_URL = "https://script.google.com/macros/s/AKfycbydQsYJmELssd2TC4YWMafMf9zI6NxwJGRLJVCzWYWCSCHL666GvfEdXiaPTLUtgl9s/exec";
     const WA_NUMBER = "34628347382";
+    const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    let pendiente = false;
 
     /* =====================================================
        BANCO DE PREGUNTAS (flujo ramificado)
@@ -1087,7 +1098,7 @@
 
     function startQuiz(){ if(path.length===0) next(); else render(); show('quiz'); }
     function backToQuiz(){ cur = path.length-1; render(); show('quiz'); }
-    function restart(){ A={}; AL={}; MID={}; path=[]; cur=-1; document.getElementById('rbox').innerHTML=''; next(); show('quiz'); }
+    function restart(){ A={}; AL={}; MID={}; path=[]; cur=-1; pendiente=false; document.getElementById('rbox').innerHTML=''; next(); show('quiz'); }
 
     function next(){
       const curQ = path.length>0 ? Q[path[path.length-1]] : null;
@@ -1120,7 +1131,7 @@
         h += '<div class="curr"><button class="'+(currency==='$'?'sel':'')+'" onclick="setCurr(\'$\')">USD $</button><button class="'+(currency==='€'?'sel':'')+'" onclick="setCurr(\'€\')">EUR €</button></div>';
       }
       if(q.free){
-        h += '<textarea id="freetxt" placeholder="Escribe aquí... (o sáltala, es opcional)">'+(A[q.id]||'')+'</textarea>';
+        h += '<textarea id="freetxt" placeholder="Escribe aquí... (o sáltala, es opcional)">'+esc(A[q.id]||'')+'</textarea>';
         h += '<div class="qnav"><button class="qback" onclick="back()">Atrás</button><div style="display:flex;gap:18px;align-items:center;"><button class="qback" onclick="saveFree()">Saltar</button><button class="btn-wa" onclick="saveFree()">Ver mi diagnóstico</button></div></div>';
       } else {
         h += '<div class="opts">'+q.opts.map(o=>
@@ -1135,10 +1146,12 @@
     function setCurr(c){ currency=c; render(); }
 
     function pick(id,v){
+      if(pendiente) return;
+      pendiente = true;
       const q = Q.find(x=>x.id===id);
       const o = q.opts.find(x=>x.v===v);
       A[id]=v; AL[id]=o.t; if(o.mid!==undefined) MID[id]=o.mid;
-      setTimeout(next, 180);
+      setTimeout(function(){ pendiente = false; next(); }, 180);
     }
 
     function saveFree(){ A.intentado = document.getElementById('freetxt').value.trim(); next(); }
@@ -1410,6 +1423,7 @@
           intentado: A.intentado||'', ref,
           emailSubject: sub, emailBody: body};
         fetch(SUBMIT_URL, {method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain'}, body:JSON.stringify(payload)}).catch(()=>{});
+        if (window.dgcTrack) window.dgcTrack('lead', { source: 'lista' });
       }
       showReport(result, name);
     }
@@ -1429,7 +1443,7 @@
       if(r.noList){
         h += `
         <div class="rcard gold levelhead">
-          <p class="eyebrow" style="margin-bottom:0;">Diagnóstico de ${name||'tu negocio'}</p>
+          <p class="eyebrow" style="margin-bottom:0;">Diagnóstico de ${name?esc(name):'tu negocio'}</p>
           <div class="ln">Todavía no tienes lista</div>
           <div class="lt">y ese es el punto de partida</div>
         </div>`;
@@ -1437,7 +1451,7 @@
         const weakest = Object.keys(r.dims).sort((a,b)=>r.dims[a]-r.dims[b])[0];
         h += `
         <div class="rcard gold levelhead">
-          <p class="eyebrow" style="margin-bottom:0;">Diagnóstico de ${name||'tu lista'}</p>
+          <p class="eyebrow" style="margin-bottom:0;">Diagnóstico de ${name?esc(name):'tu lista'}</p>
           <div class="ln">Nivel ${r.level.n} de 5</div>
           <div class="lt">${r.level.t}</div>
           <div class="dots">${[1,2,3,4,5].map(i=>'<i class="'+(i<=r.level.n?'on':'')+'"></i>').join('')}</div>

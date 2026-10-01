@@ -12,10 +12,16 @@
 <meta property="og:title" content="Daniel García de Celis · Copywriter de lanzamientos y funnels">
 <meta property="og:description" content="Un copy detrás de lanzamientos de 5, 6 y 7 cifras. Escribo los emails, las páginas y los guiones de lanzamientos para infoproductores.">
 <meta property="og:url" content="https://danielgarciadecelis.com/">
+<meta property="og:site_name" content="Daniel García de Celis">
 <meta property="og:image" content="https://danielgarciadecelis.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <meta name="twitter:image" content="https://danielgarciadecelis.com/og.png">
+<meta name="twitter:image:alt" content="Daniel García de Celis · Copywriter de lanzamientos y funnels">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+<script src="/js/analytics.js" defer></script>
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Daniel García de Celis · Copywriter de lanzamientos y funnels">
 <meta name="twitter:description" content="Un copy detrás de lanzamientos de 5, 6 y 7 cifras. Escribo los emails, las páginas y los guiones de lanzamientos para infoproductores.">
@@ -42,16 +48,18 @@
     .seccion { grid-template-columns: 128px minmax(0, 1fr); }
     .col-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .col-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .col-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
     .hero-h1, .hero-cifra { font-size: clamp(38px, 5.6vw, 76px); }
     .hero-grid { grid-template-columns: minmax(0, 1fr) 260px; }
     .sangre-2 { box-shadow: 0 0 0 100vmax var(--noir-2); clip-path: inset(0 -100vmax); }
     .sangre-3 { box-shadow: 0 0 0 100vmax var(--noir-3); clip-path: inset(0 -100vmax); }
     .video-tarjeta:hover .video-play { transform: scale(1.12); }
     .video-play { transition: transform 0.2s ease; }
+    #la-lista { scroll-margin-top: 72px; }
     @media (max-width: 820px) {
       .seccion { grid-template-columns: minmax(0, 1fr); }
       .seccion-lat { border-right: 0 !important; border-bottom: 1px solid var(--line); padding: 16px 24px !important; display: flex; gap: 12px; align-items: baseline; }
-      .col-3, .col-2, .hero-grid { grid-template-columns: minmax(0, 1fr); }
+      .col-3, .col-2, .col-4, .hero-grid { grid-template-columns: minmax(0, 1fr); }
     }
   </style>
 
@@ -69,7 +77,7 @@
         <div style="width: 8px; height: 8px; background: var(--gold);"></div>
         <div style="font-size: 13px; font-weight: 700; font-stretch: 88%; letter-spacing: 0.02em; text-transform: uppercase; color: var(--bone);">Daniel García de Celis</div>
       </div>
-      <div style="font-family: var(--mono); font-size: 12px; font-weight: 500; color: var(--gold); border: 1px solid var(--line-gold); padding: 6px 14px;">la lista</div>
+      <a href="#la-lista" style="font-family: var(--mono); font-size: 12px; font-weight: 500; color: var(--gold); border: 1px solid var(--line-gold); padding: 6px 14px;">la lista</a>
     </div>
   </div>
 
@@ -88,7 +96,7 @@
           <div class="hero-cifra" style="display: inline-block; font-weight: 900; font-stretch: 82%; line-height: 1; letter-spacing: -0.04em; color: var(--gold); border-bottom: 6px solid var(--gold); padding-bottom: 7px; margin-bottom: 32px;">5, 6 y 7 cifras</div>
           <p style="font-size: clamp(17px, 1.7vw, 21px); line-height: 1.55; color: var(--bone); margin: 0 0 34px; max-width: 44ch;">Escribo los emails, las páginas y los guiones. De principio a fin, y en el orden exacto en que tienen que salir.</p>
           <div style="display: flex; align-items: center; gap: 18px; flex-wrap: wrap;">
-            <div style="font-size: 16px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); padding: 18px 32px;">Apuntarme a la lista</div>
+            <a href="#la-lista" style="display: inline-block; font-size: 16px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); padding: 18px 32px;">Apuntarme a la lista</a>
           </div>
         </div>
         <div>
@@ -184,7 +192,6 @@
             <div style="font-size: 14px; color: var(--bone-2); margin-top: 4px;">IA y desarrollo web3</div>
             <div style="font-family: var(--mono); font-size: 10px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">racks.academy · 91 publicaciones · 3.753 seguidores</div>
           </div>
-          <div style="background: var(--noir);"></div>
         </div>
 
       </div>
@@ -355,7 +362,7 @@
       </div>
       <div style="padding: 24px 28px 26px; display: flex; align-items: center; justify-content: space-between; gap: 22px; flex-wrap: wrap;">
         <div style="font-size: clamp(18px, 2vw, 24px); font-weight: 700; font-stretch: 90%; letter-spacing: -0.02em; color: var(--bone); max-width: 34ch;">Emails con lo que aprendo escribiendo lanzamientos de verdad.</div>
-        <div style="font-size: 15px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); padding: 15px 28px; white-space: nowrap;">Apuntarme a la lista</div>
+        <a href="#la-lista" style="display: inline-block; font-size: 15px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); padding: 15px 28px; white-space: nowrap;">Apuntarme a la lista</a>
       </div>
     </div>
 
@@ -446,8 +453,8 @@
       </div>
     </div>
 
-    <!-- ============ 07 · LA LISTA ============ -->
-    <div class="seccion sangre-3" style="display: grid; border-bottom: 1px solid var(--line); background: var(--noir-3);">
+    <!-- ============ 08 · LA LISTA ============ -->
+    <div id="la-lista" class="seccion sangre-3" style="display: grid; border-bottom: 1px solid var(--line); background: var(--noir-3);">
       <div class="seccion-lat" style="border-right: 1px solid var(--line); padding: 46px 0 0 28px;">
         <div style="font-family: var(--mono); font-size: 11px; font-weight: 600; color: var(--gold);">08</div>
         <div style="font-family: var(--mono); font-size: 10px; color: var(--bone-2); margin-top: 6px;">la lista</div>
@@ -456,10 +463,10 @@
         <h2 style="font-weight: 900; font-stretch: 82%; font-size: clamp(32px, 4vw, 48px); line-height: 1.0; letter-spacing: -0.036em; margin: 0 0 18px; color: var(--bone);">Apúntate a la lista</h2>
         <p style="font-size: clamp(17px, 1.8vw, 20px); line-height: 1.6; color: var(--bone-2); margin: 0 0 30px; max-width: 48ch;">Emails con lo que aprendo escribiendo lanzamientos de verdad. Cuando haya algo que contar, te escribo.</p>
 
-        <div style="display: flex; gap: 0; max-width: 560px; flex-wrap: wrap;">
-          <input type="email" placeholder="tu@email.com" style="flex-grow: 1; min-width: 220px; font-family: var(--mono); font-size: 14px; color: var(--bone); background: var(--noir); border: 1px solid var(--line); padding: 18px 18px; outline: none;">
-          <button style="font-family: var(--sans); font-size: 15px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); border: 0; padding: 18px 30px; cursor: pointer;">Quiero estar dentro</button>
-        </div>
+        <form class="js-lista-form" data-source="home" novalidate style="display: flex; gap: 0; max-width: 560px; flex-wrap: wrap;">
+          <input type="email" name="email" placeholder="tu@email.com" required autocomplete="email" aria-label="Email" style="flex-grow: 1; min-width: 220px; font-family: var(--mono); font-size: 14px; color: var(--bone); background: var(--noir); border: 1px solid var(--line); padding: 18px 18px; outline: none;">
+          <button type="submit" style="font-family: var(--sans); font-size: 15px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); border: 0; padding: 18px 30px; cursor: pointer;">Quiero estar dentro</button>
+        </form>
 
         <div style="font-family: var(--mono); font-size: 11px; color: var(--bone-2); margin-top: 14px;">sin spam. te das de baja cuando quieras.</div>
       </div>
@@ -468,9 +475,9 @@
     <!-- ============ PIE ============ -->
     <div style="padding: 26px 28px 40px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
       <div style="display: flex; gap: 16px; flex-wrap: wrap;">
-        <div style="font-family: var(--mono); font-size: 11px; color: var(--bone-2);">aviso legal</div>
-        <div style="font-family: var(--mono); font-size: 11px; color: var(--bone-2);">política de privacidad</div>
-        <div style="font-family: var(--mono); font-size: 11px; color: var(--bone-2);">contacto</div>
+        <a class="js-aviso" href="#" style="font-family: var(--mono); font-size: 11px; color: var(--bone-2);">aviso legal</a>
+        <a class="js-privacidad" href="#" style="font-family: var(--mono); font-size: 11px; color: var(--bone-2);">política de privacidad</a>
+        <a class="js-contacto" href="#" style="font-family: var(--mono); font-size: 11px; color: var(--bone-2);">contacto</a>
       </div>
     </div>
 
@@ -478,19 +485,19 @@
 
   <!-- ============ POP-UP EXIT INTENT ============ -->
   <div id="popup-lista" hidden>
-    <div style="position: fixed; left: 0; top: 0; right: 0; bottom: 0; background: rgba(4,4,6,0.86); z-index: 100; display: flex; align-items: center; justify-content: center; padding: 24px;">
+    <div data-overlay="1" style="position: fixed; left: 0; top: 0; right: 0; bottom: 0; background: rgba(4,4,6,0.86); z-index: 100; display: flex; align-items: center; justify-content: center; padding: 24px;">
       <div style="background: var(--noir-2); border: 1px solid var(--line-gold); max-width: 560px; width: 100%; padding: 44px 40px 40px; position: relative;">
-        <div data-cerrar="1" style="position: absolute; top: 12px; right: 18px; font-family: var(--mono); font-size: 24px; color: var(--bone-2); cursor: pointer; line-height: 1;">×</div>
+        <button type="button" data-cerrar="1" aria-label="Cerrar" style="position: absolute; top: 12px; right: 18px; font-family: var(--mono); font-size: 24px; color: var(--bone-2); cursor: pointer; line-height: 1; background: none; border: 0; padding: 0;">×</button>
         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 22px;">
           <div style="width: 8px; height: 8px; background: var(--gold);"></div>
           <div style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; color: var(--gold);">antes de irte</div>
         </div>
         <h3 style="font-weight: 900; font-stretch: 82%; font-size: clamp(28px, 4vw, 40px); line-height: 1.0; letter-spacing: -0.036em; margin: 0 0 16px; color: var(--bone);">Apúntate a la lista</h3>
         <p style="font-size: 17px; line-height: 1.6; color: var(--bone-2); margin: 0 0 26px;">Emails con lo que aprendo escribiendo lanzamientos de verdad. Cuando haya algo que contar, te escribo.</p>
-        <div style="display: flex; gap: 0; flex-wrap: wrap;">
-          <input type="email" placeholder="tu@email.com" style="flex-grow: 1; min-width: 200px; font-family: var(--mono); font-size: 14px; color: var(--bone); background: var(--noir); border: 1px solid var(--line); padding: 17px 18px; outline: none;">
-          <button style="font-family: var(--sans); font-size: 15px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); border: 0; padding: 17px 28px; cursor: pointer;">Quiero estar dentro</button>
-        </div>
+        <form class="js-lista-form" data-source="popup" novalidate style="display: flex; gap: 0; flex-wrap: wrap;">
+          <input type="email" name="email" placeholder="tu@email.com" required autocomplete="email" aria-label="Email" style="flex-grow: 1; min-width: 200px; font-family: var(--mono); font-size: 14px; color: var(--bone); background: var(--noir); border: 1px solid var(--line); padding: 17px 18px; outline: none;">
+          <button type="submit" style="font-family: var(--sans); font-size: 15px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); border: 0; padding: 17px 28px; cursor: pointer;">Quiero estar dentro</button>
+        </form>
         <div style="font-family: var(--mono); font-size: 11px; color: var(--bone-3); margin-top: 14px;">sin spam. te das de baja cuando quieras.</div>
       </div>
     </div>
@@ -501,6 +508,60 @@
 
 <script>
 (function () {
+  var LISTA_SUBMIT_URL = ''; // PENDIENTE: endpoint de alta (Kit, Mailchimp, Apps Script…)
+  var AVISO_LEGAL_URL = '/aviso-legal/';
+  var PRIVACIDAD_URL = '/privacidad/';
+  var CONTACTO_URL = '';
+
+  function cablearHueco(selector, url) {
+    document.querySelectorAll(selector).forEach(function (a) {
+      if (url) a.href = url;
+      else a.addEventListener('click', function (e) { e.preventDefault(); });
+    });
+  }
+  cablearHueco('a.js-aviso', AVISO_LEGAL_URL);
+  cablearHueco('a.js-privacidad', PRIVACIDAD_URL);
+  cablearHueco('a.js-contacto', CONTACTO_URL);
+
+  function emailOk(v) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+  }
+
+  function enviarLista(form) {
+    var campo = form.querySelector('input[type="email"]');
+    var boton = form.querySelector('button[type="submit"]');
+    var email = (campo && campo.value || '').trim();
+    if (!emailOk(email)) {
+      if (campo) {
+        campo.style.borderColor = 'var(--gold)';
+        campo.focus();
+      }
+      return;
+    }
+    if (campo) campo.style.borderColor = '';
+    if (boton) boton.disabled = true;
+    if (!LISTA_SUBMIT_URL) return;
+    var payload = {
+      email: email,
+      source: form.getAttribute('data-source') || 'home',
+      ts: new Date().toISOString()
+    };
+    fetch(LISTA_SUBMIT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify(payload)
+    }).catch(function () {});
+    if (window.dgcTrack) window.dgcTrack('lead', { source: payload.source });
+  }
+
+  document.querySelectorAll('form.js-lista-form').forEach(function (form) {
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      enviarLista(form);
+    });
+  });
+
   var caja = document.getElementById('popup-lista');
   if (!caja) return;
   var CLAVE = 'dgc_lista_popup';
@@ -523,7 +584,7 @@
     if (e.clientY <= 0 && !e.relatedTarget) abrir();
   });
   caja.addEventListener('click', function (e) {
-    if (e.target === caja || e.target.closest('[data-cerrar]')) cerrar();
+    if (e.target.hasAttribute('data-overlay') || e.target.closest('[data-cerrar]')) cerrar();
   });
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && !caja.hidden) cerrar();
