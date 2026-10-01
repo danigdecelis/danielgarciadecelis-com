@@ -251,6 +251,19 @@ function partes() { const p = []; Q.filter(visible).forEach(q => { if (!p.includ
    ===================================================================== */
 function pantalla(html) { $app.innerHTML = html; window.scrollTo(0, 0); }
 function mensaje(titulo, texto) { pantalla('<h1>' + titulo + '</h1><p class="lead">' + texto + '</p>'); }
+function recuperar(titulo, intro) {
+  pantalla('<h1>' + titulo + '</h1><p class="lead">' + intro + '</p>' +
+    '<div class="field"><input type="text" id="rec-email" inputmode="email" autocomplete="email" placeholder="El email con el que compraste"></div>' +
+    '<div class="err" id="qerr"></div><div class="acciones"><button class="btn" data-a="recuperar">Envíame mi enlace</button></div>');
+}
+async function pedirEnlace(b) {
+  const email = (document.getElementById('rec-email').value || '').trim();
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) return error('Escribe un email válido.');
+  b.disabled = true;
+  try { await llamar({ accion: 'recuperar', email: email }); }
+  catch (e) { b.disabled = false; return error('No se ha podido enviar. Comprueba tu conexión y vuelve a probar.'); }
+  mensaje('Revisa tu email', 'Si ese email tiene una compra de El Diagnóstico, tu enlace te acaba de salir de camino. Llega en unos minutos: mira también en Promociones y en Spam. Si no aparece, escríbeme a daniel.gdecelis@gmail.com.');
+}
 
 function portada(hayBorrador) {
   pantalla(
@@ -400,7 +413,11 @@ $app.addEventListener('click', ev => {
   if (a === 'multiok') { const sel = A[q.id] || []; if (!sel.length) return error('Marca al menos una opción.'); AL[q.id] = q.opts.filter(o => sel.includes(o.v)).map(o => o.t).join(' · '); return avanzar(); }
   if (a === 'nums') return guardarNums();
   if (a === 'enviar') return enviar(b);
+  if (a === 'recuperar') return pedirEnlace(b);
   if (a === 'pdf') return window.print();
+});
+$app.addEventListener('keydown', ev => {
+  if (ev.key === 'Enter' && ev.target.id === 'rec-email') { const b = document.querySelector('[data-a=recuperar]'); if (b && !b.disabled) pedirEnlace(b); }
 });
 $app.addEventListener('change', ev => {
   const c = ev.target; if (c.dataset.a !== 'nose') return;
@@ -411,7 +428,8 @@ $app.addEventListener('change', ev => {
    ARRANQUE
    ===================================================================== */
 (async function () {
-  if (!T || !K) return mensaje('Este enlace no está completo', 'Abre el enlace tal cual te llegó por email, sin recortarlo. Si no encuentras ese email, busca en tu correo «enlace para hacer El Diagnóstico», o escríbeme a daniel.gdecelis@gmail.com y te lo reenvío.');
+  if (QS.has('recuperar')) return recuperar('Recupera tu enlace', 'Escribe el email con el que compraste El Diagnóstico y te reenvío tu enlace personal a ese mismo email.');
+  if (!T || !K) return recuperar('Este enlace no está completo', 'Abre el enlace tal cual te llegó por email, sin recortarlo. Si no lo encuentras, escribe aquí el email con el que compraste y te lo reenvío.');
   let r;
   try { r = await llamar({ accion: 'estado', t: T, k: K }); }
   catch (e) { return mensaje('No se ha podido cargar', 'Comprueba tu conexión y vuelve a abrir el enlace.'); }
