@@ -262,7 +262,7 @@ async function pedirEnlace(b) {
   b.disabled = true;
   try { await llamar({ accion: 'recuperar', email: email }); }
   catch (e) { b.disabled = false; return error('No se ha podido enviar. Comprueba tu conexión y vuelve a probar.'); }
-  mensaje('Revisa tu email', 'Si ese email tiene una compra de El Diagnóstico, tu enlace te acaba de salir de camino. Llega en unos minutos: mira también en Promociones y en Spam. Si no aparece, escríbeme a daniel.gdecelis@gmail.com.');
+  mensaje('Revisa tu email', 'Si ese email tiene una compra de El Diagnóstico, tu enlace te acaba de salir de camino. Llega en unos minutos: mira también en Promociones y en Spam. Si no aparece, escríbeme a daniel@danielgarciadecelis.com.');
 }
 
 function portada(hayBorrador) {
