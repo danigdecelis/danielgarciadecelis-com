@@ -970,6 +970,8 @@
     ===================================================== */
     const SUBMIT_URL = "https://script.google.com/macros/s/AKfycbydQsYJmELssd2TC4YWMafMf9zI6NxwJGRLJVCzWYWCSCHL666GvfEdXiaPTLUtgl9s/exec";
     const WA_NUMBER = "34628347382";
+    const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    let pendiente = false;
 
     /* =====================================================
        BANCO DE PREGUNTAS (flujo ramificado)
@@ -1087,7 +1089,7 @@
 
     function startQuiz(){ if(path.length===0) next(); else render(); show('quiz'); }
     function backToQuiz(){ cur = path.length-1; render(); show('quiz'); }
-    function restart(){ A={}; AL={}; MID={}; path=[]; cur=-1; document.getElementById('rbox').innerHTML=''; next(); show('quiz'); }
+    function restart(){ A={}; AL={}; MID={}; path=[]; cur=-1; pendiente=false; document.getElementById('rbox').innerHTML=''; next(); show('quiz'); }
 
     function next(){
       const curQ = path.length>0 ? Q[path[path.length-1]] : null;
@@ -1120,7 +1122,7 @@
         h += '<div class="curr"><button class="'+(currency==='$'?'sel':'')+'" onclick="setCurr(\'$\')">USD $</button><button class="'+(currency==='€'?'sel':'')+'" onclick="setCurr(\'€\')">EUR €</button></div>';
       }
       if(q.free){
-        h += '<textarea id="freetxt" placeholder="Escribe aquí... (o sáltala, es opcional)">'+(A[q.id]||'')+'</textarea>';
+        h += '<textarea id="freetxt" placeholder="Escribe aquí... (o sáltala, es opcional)">'+esc(A[q.id]||'')+'</textarea>';
         h += '<div class="qnav"><button class="qback" onclick="back()">Atrás</button><div style="display:flex;gap:18px;align-items:center;"><button class="qback" onclick="saveFree()">Saltar</button><button class="btn-wa" onclick="saveFree()">Ver mi diagnóstico</button></div></div>';
       } else {
         h += '<div class="opts">'+q.opts.map(o=>
@@ -1135,10 +1137,12 @@
     function setCurr(c){ currency=c; render(); }
 
     function pick(id,v){
+      if(pendiente) return;
+      pendiente = true;
       const q = Q.find(x=>x.id===id);
       const o = q.opts.find(x=>x.v===v);
       A[id]=v; AL[id]=o.t; if(o.mid!==undefined) MID[id]=o.mid;
-      setTimeout(next, 180);
+      setTimeout(function(){ pendiente = false; next(); }, 180);
     }
 
     function saveFree(){ A.intentado = document.getElementById('freetxt').value.trim(); next(); }
@@ -1429,7 +1433,7 @@
       if(r.noList){
         h += `
         <div class="rcard gold levelhead">
-          <p class="eyebrow" style="margin-bottom:0;">Diagnóstico de ${name||'tu negocio'}</p>
+          <p class="eyebrow" style="margin-bottom:0;">Diagnóstico de ${name?esc(name):'tu negocio'}</p>
           <div class="ln">Todavía no tienes lista</div>
           <div class="lt">y ese es el punto de partida</div>
         </div>`;
@@ -1437,7 +1441,7 @@
         const weakest = Object.keys(r.dims).sort((a,b)=>r.dims[a]-r.dims[b])[0];
         h += `
         <div class="rcard gold levelhead">
-          <p class="eyebrow" style="margin-bottom:0;">Diagnóstico de ${name||'tu lista'}</p>
+          <p class="eyebrow" style="margin-bottom:0;">Diagnóstico de ${name?esc(name):'tu lista'}</p>
           <div class="ln">Nivel ${r.level.n} de 5</div>
           <div class="lt">${r.level.t}</div>
           <div class="dots">${[1,2,3,4,5].map(i=>'<i class="'+(i<=r.level.n?'on':'')+'"></i>').join('')}</div>

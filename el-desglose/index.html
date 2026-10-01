@@ -61,9 +61,14 @@
     .h-sec { font-size: clamp(32px, 4.6vw, 60px); }
     .h-golpe { font-size: clamp(30px, 4.4vw, 58px); }
     .cifra-xl { font-size: clamp(64px, 9vw, 128px); }
+    .js-hotmart { cursor: pointer; }
+    .cta-hit { min-width: 0; }
     @media (max-width: 760px) {
       .wrap { padding-left: 22px; padding-right: 22px; }
       .col-2, .col-3, .col-4, .cta-caja { grid-template-columns: minmax(0, 1fr); }
+      .barra-top { flex-wrap: wrap; }
+      .fases > details > summary { grid-template-columns: 40px minmax(0, 1fr) 28px; gap: 10px; }
+      .fase-cuerpo { padding-left: 0; padding-right: 0; }
     }
   </style>
 
@@ -76,13 +81,13 @@
 
   <!-- ============ BARRA ============ -->
   <div style="border-bottom: 1px solid var(--line); position: sticky; top: 0; background: rgba(255,255,255,0.94); backdrop-filter: blur(10px); z-index: 20;">
-    <div class="wrap" style="padding-top: 14px; padding-bottom: 14px; display: flex; align-items: center; justify-content: space-between; gap: 16px;">
+    <div class="wrap barra-top" style="padding-top: 14px; padding-bottom: 14px; display: flex; align-items: center; justify-content: space-between; gap: 16px;">
       <div style="display: flex; align-items: center; gap: 10px;">
         <div style="width: 8px; height: 8px; background: var(--mark);"></div>
         <div style="font-size: 13px; font-weight: 700; font-stretch: 88%; letter-spacing: 0.03em; text-transform: uppercase; color: var(--bone);">El Desglose</div>
-        <div style="font-family: var(--mono); font-size: 11px; color: var(--bone-3);">daniel garcía de celis</div>
+        <a href="/" style="font-family: var(--mono); font-size: 11px; color: var(--bone-3);">daniel garcía de celis</a>
       </div>
-      <div style="font-size: 13px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; color: var(--noir); background: var(--gold); padding: 9px 18px;">47 $ · Dame acceso</div>
+      <a class="js-hotmart" href="#" rel="noopener noreferrer" style="font-size: 13px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; color: var(--noir); background: var(--gold); padding: 9px 18px;">47 $ · Dame acceso</a>
     </div>
   </div>
 
@@ -174,8 +179,6 @@
         <div style="font-size: 14px; color: var(--bone-2); margin-top: 4px;">IA y desarrollo web3</div>
         <div style="font-family: var(--mono); font-size: 10px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">racks.academy · 91 publicaciones · 3.753 seguidores</div>
       </div>
-          <div style="background: var(--noir);"></div>
-
     </div>
   </div>
 
@@ -198,8 +201,8 @@
         <div class="cifra-xl" style="font-weight: 900; font-stretch: 78%; line-height: 0.8; letter-spacing: -0.055em; color: var(--gold);">47 $</div>
         <div style="font-family: var(--mono); font-size: 14px; color: var(--bone-2); margin-top: 18px;">pago único. lo tienes entero en cuanto pagas.</div>
       </div>
-      <div style="min-width: 300px;">
-        <div style="font-size: clamp(17px, 1.9vw, 21px); font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); padding: 26px 40px; text-align: center; line-height: 1.2;">Quiero verlo por dentro</div>
+      <div class="cta-hit">
+        <a class="js-hotmart" href="#" rel="noopener noreferrer" style="display: block; font-size: clamp(17px, 1.9vw, 21px); font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); padding: 26px 40px; text-align: center; line-height: 1.2;">Quiero verlo por dentro</a>
         <div style="font-family: var(--mono); font-size: 12px; line-height: 1.7; color: var(--bone-2); text-align: center; margin-top: 14px;">acceso inmediato. sin suscripción<br>y sin nada que se renueve solo.</div>
       </div>
     </div>
@@ -264,8 +267,8 @@
         <div style="font-size: clamp(52px, 7vw, 92px); font-weight: 900; font-stretch: 78%; line-height: 0.8; letter-spacing: -0.055em; color: var(--gold);">47 $</div>
         <div style="font-family: var(--mono); font-size: 13px; color: var(--bone-2); margin-top: 16px;">pago único. acceso inmediato.</div>
       </div>
-      <div style="min-width: 300px;">
-        <div style="font-size: clamp(17px, 1.9vw, 21px); font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); padding: 26px 40px; text-align: center;">Dame acceso ahora</div>
+      <div class="cta-hit">
+        <a class="js-hotmart" href="#" rel="noopener noreferrer" style="display: block; font-size: clamp(17px, 1.9vw, 21px); font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); padding: 26px 40px; text-align: center;">Dame acceso ahora</a>
       </div>
     </div>
   </div>
@@ -279,7 +282,7 @@
       <p style="font-size: 20px; font-style: italic; line-height: 1.6; color: var(--bone); margin: 0;">Con este curso entrenarás tu criterio estratégico para evitar esos errores y para crear exactamente la secuencia que tu lanzamiento necesita.</p>
     </div>
 
-    <div style="border-top: 1px solid var(--line);">
+    <div class="fases" style="border-top: 1px solid var(--line);">
 
       <details style="border-bottom: 1px solid var(--line);">
         <summary style="display: grid; grid-template-columns: 76px minmax(0, 1fr) 34px; gap: 20px; align-items: center; padding: 28px 0;">
@@ -290,7 +293,7 @@
           </div>
           <div class="mas" style="font-family: var(--mono); font-size: 26px; color: var(--gold); text-align: right; line-height: 1;">+</div>
         </summary>
-        <div style="padding: 0 34px 30px 96px;">
+        <div class="fase-cuerpo" style="padding: 0 34px 30px 96px;">
           <p style="font-size: 18px; line-height: 1.7; color: var(--bone); margin: 0; max-width: 58ch;">Porque el evento, aunque sea gratis, también hay que venderlo. Y muy bien.</p>
         </div>
       </details>
@@ -304,7 +307,7 @@
           </div>
           <div class="mas" style="font-family: var(--mono); font-size: 26px; color: var(--gold); text-align: right; line-height: 1;">+</div>
         </summary>
-        <div style="padding: 0 34px 30px 96px;">
+        <div class="fase-cuerpo" style="padding: 0 34px 30px 96px;">
           <p style="font-size: 18px; line-height: 1.7; color: var(--bone); margin: 0; max-width: 58ch;">Hay que provocar esas ganas de estar. Aquí se siembra cuánta gente aparece el día del directo, y eso es un elemento muy diferencial en cualquier lanzamiento, además de un buen termómetro del interés que has sabido generar.</p>
         </div>
       </details>
@@ -318,7 +321,7 @@
           </div>
           <div class="mas" style="font-family: var(--mono); font-size: 26px; color: var(--gold); text-align: right; line-height: 1;">+</div>
         </summary>
-        <div style="padding: 0 34px 30px 96px;">
+        <div class="fase-cuerpo" style="padding: 0 34px 30px 96px;">
           <p style="font-size: 18px; line-height: 1.7; color: var(--bone); margin: 0; max-width: 58ch;">Seis toques en esa jornada, con un patrón detrás que no se ve a simple vista.</p>
         </div>
       </details>
@@ -332,7 +335,7 @@
           </div>
           <div class="mas" style="font-family: var(--mono); font-size: 26px; color: var(--gold); text-align: right; line-height: 1;">+</div>
         </summary>
-        <div style="padding: 0 34px 30px 96px;">
+        <div class="fase-cuerpo" style="padding: 0 34px 30px 96px;">
           <p style="font-size: 18px; line-height: 1.7; color: var(--bone); margin: 0; max-width: 58ch;">Presentamos la oferta, pero no solo eso. Presentamos una versión de la oferta con el valor percibido por las nubes. Aprendemos a hacer esto como un copywriter experto y además a sacarle el máximo partido a recursos como los bonus, las comunidades o las garantías.</p>
         </div>
       </details>
@@ -346,7 +349,7 @@
           </div>
           <div class="mas" style="font-family: var(--mono); font-size: 26px; color: var(--gold); text-align: right; line-height: 1;">+</div>
         </summary>
-        <div style="padding: 0 34px 30px 96px;">
+        <div class="fase-cuerpo" style="padding: 0 34px 30px 96px;">
           <p style="font-size: 18px; line-height: 1.7; color: var(--bone); margin: 0; max-width: 58ch;">La novedad pasó, el bonus de acción rápida murió y todavía faltan días para el cierre. La etapa más descuidada de un lanzamiento, pero aún queda mucho por decidir de cara al cierre. Así que hay que trabajar bien cómo vamos a barrer todas las excusas que quedan.</p>
         </div>
       </details>
@@ -360,7 +363,7 @@
           </div>
           <div class="mas" style="font-family: var(--mono); font-size: 26px; color: var(--gold); text-align: right; line-height: 1;">+</div>
         </summary>
-        <div style="padding: 0 34px 30px 96px;">
+        <div class="fase-cuerpo" style="padding: 0 34px 30px 96px;">
           <p style="font-size: 18px; line-height: 1.7; color: var(--bone); margin: 0; max-width: 58ch;">Incluido el penúltimo email de toda la secuencia, que casi nadie manda, y que es una bomba.</p>
         </div>
       </details>
@@ -374,7 +377,7 @@
           </div>
           <div class="mas" style="font-family: var(--mono); font-size: 26px; color: var(--gold); text-align: right; line-height: 1;">+</div>
         </summary>
-        <div style="padding: 0 34px 30px 96px;">
+        <div class="fase-cuerpo" style="padding: 0 34px 30px 96px;">
           <p style="font-size: 18px; line-height: 1.7; color: var(--bone); margin: 0; max-width: 58ch;">Cómo cierras el lanzamiento y cómo te posicionas de cara a tu audiencia para decidir la mejor manera de continuar junto a ti tiene un impacto tremendo en tus ingresos futuros. He participado en algunos lanzamientos en los que el objetivo de ventas se cumplió solo con una «lista prioritaria» bien trabajada. Descubre las decisiones y acciones que debes tomar en esta fase para que aumentes las oportunidades de cerrar muchas más ventas a medio y largo plazo.</p>
         </div>
       </details>
@@ -419,8 +422,8 @@
         <div style="font-size: clamp(52px, 7vw, 92px); font-weight: 900; font-stretch: 78%; line-height: 0.8; letter-spacing: -0.055em; color: var(--gold);">47 $</div>
         <div style="font-family: var(--mono); font-size: 13px; color: var(--bone-2); margin-top: 16px;">pago único. acceso inmediato.</div>
       </div>
-      <div style="min-width: 300px;">
-        <div style="font-size: clamp(17px, 1.9vw, 21px); font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); padding: 26px 40px; text-align: center;">Dame acceso ahora</div>
+      <div class="cta-hit">
+        <a class="js-hotmart" href="#" rel="noopener noreferrer" style="display: block; font-size: clamp(17px, 1.9vw, 21px); font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); padding: 26px 40px; text-align: center;">Dame acceso ahora</a>
       </div>
     </div>
   </div>
@@ -456,8 +459,8 @@
         <div style="font-size: clamp(52px, 7vw, 92px); font-weight: 900; font-stretch: 78%; line-height: 0.8; letter-spacing: -0.055em; color: var(--gold);">47 $</div>
         <div style="font-family: var(--mono); font-size: 13px; color: var(--bone-2); margin-top: 16px;">pago único. acceso inmediato.</div>
       </div>
-      <div style="min-width: 300px;">
-        <div style="font-size: clamp(17px, 1.9vw, 21px); font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); padding: 26px 40px; text-align: center;">Dame acceso ahora</div>
+      <div class="cta-hit">
+        <a class="js-hotmart" href="#" rel="noopener noreferrer" style="display: block; font-size: clamp(17px, 1.9vw, 21px); font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); padding: 26px 40px; text-align: center;">Dame acceso ahora</a>
       </div>
     </div>
   </div>
@@ -527,8 +530,8 @@
           <div class="cifra-xl" style="font-weight: 900; font-stretch: 78%; line-height: 0.8; letter-spacing: -0.055em; color: var(--gold);">47 $</div>
           <div style="font-family: var(--mono); font-size: 14px; color: var(--bone-2); margin-top: 18px;">pago único. acceso inmediato.</div>
         </div>
-        <div style="min-width: 300px;">
-          <div style="font-size: clamp(18px, 2vw, 22px); font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); padding: 28px 40px; text-align: center;">Dame acceso ahora</div>
+        <div class="cta-hit">
+          <a class="js-hotmart" href="#" rel="noopener noreferrer" style="display: block; font-size: clamp(18px, 2vw, 22px); font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); padding: 28px 40px; text-align: center;">Dame acceso ahora</a>
         </div>
       </div>
     </div>
@@ -606,7 +609,7 @@
         <p style="font-size: clamp(21px, 2.4vw, 28px); line-height: 1.5; color: var(--bone); margin: 0;">Y si te vale, me alegro mucho, te doy la bienvenida a bordo y espero tu feedback con muchas ganas.</p>
       </div>
 
-      <div style="font-size: clamp(20px, 2.6vw, 32px); font-weight: 900; font-stretch: 82%; letter-spacing: -0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); padding: 34px 40px; text-align: center; line-height: 1.14;">Quiero hacer email marketing como un fucking pro</div>
+      <a class="js-hotmart" href="#" rel="noopener noreferrer" style="display: block; font-size: clamp(20px, 2.6vw, 32px); font-weight: 900; font-stretch: 82%; letter-spacing: -0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); padding: 34px 40px; text-align: center; line-height: 1.14;">Quiero hacer email marketing como un fucking pro</a>
 
       <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 24px;">
         <div style="width: 7px; height: 7px; background: var(--gold);"></div>
@@ -629,12 +632,25 @@
         <div style="font-size: 30px; font-weight: 900; font-stretch: 78%; letter-spacing: -0.04em; color: var(--gold); line-height: 1;">47 $</div>
         <div style="font-family: var(--mono); font-size: 11px; color: var(--bone-3);">pago único</div>
       </div>
-      <div style="font-size: 14px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); padding: 13px 26px;">Dame acceso ahora</div>
+      <a class="js-hotmart" href="#" rel="noopener noreferrer" style="font-size: 14px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); padding: 13px 26px;">Dame acceso ahora</a>
     </div>
   </div>
 
 </div>
 
-
+<script>
+var HOTMART_CHECKOUT_URL = ''; // PENDIENTE: pegar URL de checkout Hotmart
+(function () {
+  var url = HOTMART_CHECKOUT_URL;
+  document.querySelectorAll('a.js-hotmart').forEach(function (a) {
+    if (url) {
+      a.href = url;
+      a.target = '_blank';
+    } else {
+      a.addEventListener('click', function (e) { e.preventDefault(); });
+    }
+  });
+})();
+</script>
 </body>
 </html>
