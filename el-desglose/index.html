@@ -21,6 +21,7 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.png">
 <link rel="apple-touch-icon" href="/favicon.png">
+<script src="/js/analytics.js" defer></script>
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="El Desglose · 31 emails de lanzamiento, desglosados uno a uno">
 <meta name="twitter:description" content="Construye una secuencia de emails como las que he escrito para decenas de lanzamientos de 5, 6 y 7 cifras. 31 emails, 7 fases, 7 vídeos y 2 calendarios por 47 $.">
@@ -655,6 +656,9 @@ var HOTMART_CHECKOUT_URL = ''; // PENDIENTE: pegar URL de checkout Hotmart
     if (url) {
       a.href = url;
       a.target = '_blank';
+      a.addEventListener('click', function () {
+        if (window.dgcTrack) window.dgcTrack('begin_checkout');
+      });
     } else {
       a.addEventListener('click', function (e) { e.preventDefault(); });
     }

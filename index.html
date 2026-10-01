@@ -21,6 +21,7 @@
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.png">
 <link rel="apple-touch-icon" href="/favicon.png">
+<script src="/js/analytics.js" defer></script>
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Daniel García de Celis · Copywriter de lanzamientos y funnels">
 <meta name="twitter:description" content="Un copy detrás de lanzamientos de 5, 6 y 7 cifras. Escribo los emails, las páginas y los guiones de lanzamientos para infoproductores.">
@@ -551,6 +552,7 @@
       headers: { 'Content-Type': 'text/plain' },
       body: JSON.stringify(payload)
     }).catch(function () {});
+    if (window.dgcTrack) window.dgcTrack('lead', { source: payload.source });
   }
 
   document.querySelectorAll('form.js-lista-form').forEach(function (form) {

@@ -25,6 +25,7 @@
   <meta name="twitter:description" content="Descubre si tu lista está viva, fría o infrautilizada. Resultado al instante." />
   <meta name="twitter:image" content="https://danielgarciadecelis.com/og.png" />
   <meta name="twitter:image:alt" content="Diagnóstico de Lista para Infoproductores" />
+  <script src="/js/analytics.js" defer></script>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -1422,6 +1423,7 @@
           intentado: A.intentado||'', ref,
           emailSubject: sub, emailBody: body};
         fetch(SUBMIT_URL, {method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain'}, body:JSON.stringify(payload)}).catch(()=>{});
+        if (window.dgcTrack) window.dgcTrack('lead', { source: 'lista' });
       }
       showReport(result, name);
     }
