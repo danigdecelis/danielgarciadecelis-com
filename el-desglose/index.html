@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="es">
+<html lang="es" data-theme="venta">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -26,21 +26,24 @@
 <meta name="twitter:title" content="El Desglose · 31 emails de lanzamiento, desglosados uno a uno">
 <meta name="twitter:description" content="Construye una secuencia de emails como las que he escrito para decenas de lanzamientos de 5, 6 y 7 cifras. 31 emails, 7 fases, 7 vídeos y 2 calendarios por 47 $.">
 <link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="stylesheet" href="/css/dgc-tokens.css">
+<link rel="stylesheet" href="/css/dgc-componentes.css">
   <style>
+    /* Colores del design system (tema venta). Los nombres antiguos se mantienen como alias
+       para no tocar el marcado; el valor sale siempre de /css/dgc-tokens.css. */
     :root {
-      --noir: #FFFFFF;
-      --noir-2: #FAFAF8;
-      --noir-3: #F4F3EF;
-      --bone: #0A0A0A;
-      --bone-2: #4A4A4A;
-      --bone-3: #8A8A85;
-      --gold: #0A0A0A;
-      --gold-lo: #6B6B6B;
-      --mark: #FFE24D;
-      --line: rgba(10, 10, 10, 0.13);
-      --line-gold: rgba(10, 10, 10, 0.22);
-      --sans: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
-      --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+      --noir: var(--bg);
+      --noir-2: var(--bg-raised);
+      --noir-3: var(--bg-sunken);
+      --bone: var(--ink);
+      --bone-2: var(--ink-muted);
+      --bone-3: var(--ink-subtle);
+      --gold: var(--ink);
+      --gold-lo: var(--ink-subtle);
+      --mark: var(--accent);
+      --line-gold: var(--line-strong);
+      --sans: var(--font-sans);
+      --mono: var(--font-mono);
     }
     * { box-sizing: border-box; }
     body { margin: 0; background: var(--noir); color: var(--bone); }
@@ -68,6 +71,9 @@
     .h-golpe { font-size: clamp(30px, 4.4vw, 58px); }
     .cifra-xl { font-size: clamp(64px, 9vw, 128px); }
     .js-hotmart { cursor: pointer; }
+    /* Botón de compra = botón primario del sistema: fondo amarillo, texto en tinta */
+    a.js-hotmart { background: var(--accent) !important; color: var(--on-accent) !important; transition: background .16s ease, color .16s ease; }
+    a.js-hotmart:hover { background: var(--ink) !important; color: var(--bg) !important; }
     .cta-hit { min-width: 0; }
     @media (max-width: 760px) {
       .wrap { padding-left: 22px; padding-right: 22px; }
