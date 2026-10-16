@@ -1,0 +1,69 @@
+/* Daniel García de Celis · design system · tokens (copia del sistema en Claude Design; no editar a mano: se regenera desde tokens.json). Las fuentes las declara /fonts/fonts.css */
+:root, [data-theme="marca"] {
+  --bg: #0a0b0d;
+  --bg-raised: #121418;
+  --bg-sunken: #1a1d22;
+  --ink: #edece8;
+  --ink-muted: #9b9ea6;
+  --ink-subtle: #80848c;
+  --accent: #ffd23f;
+  --on-accent: #0a0b0d;
+  --ink-accent: #ffd23f;
+  --line: rgba(237,236,232,0.12);
+  --line-strong: #63666d;
+  --focus-ring: #ffd23f;
+  --danger: #ff8a7a;
+  --success: #7fd8a6;
+}
+[data-theme="venta"] {
+  --bg: #ffffff;
+  --bg-raised: #f6f5f1;
+  --bg-sunken: #eeece6;
+  --ink: #0a0a0a;
+  --ink-muted: #4a4a4a;
+  --ink-subtle: #6b6b66;
+  --accent: #ffd23f;
+  --on-accent: #0a0b0d;
+  --ink-accent: #0a0a0a;
+  --line: rgba(10,10,10,0.13);
+  --line-strong: #86867f;
+  --focus-ring: #0a0a0a;
+  --danger: #b3261e;
+  --success: #1d6b45;
+}
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 128px;
+  --radius-0: 0px;
+  --radius-1: 2px;
+  --radius-full: 999px;
+  --content-max: 1120px;
+  --rail: 152px;
+  --gutter: 44px;
+  --gutter-mobile: 20px;
+  --measure: 64ch;
+  --font-display: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-sans: "Archivo", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+.display-xl { font-family: var(--font-display); font-size: 112px; line-height: 0.88; font-weight: 900; letter-spacing: -0.04em; }
+.display-l { font-family: var(--font-display); font-size: 76px; line-height: 0.92; font-weight: 900; letter-spacing: -0.035em; }
+.display-m { font-family: var(--font-display); font-size: 52px; line-height: 0.96; font-weight: 900; letter-spacing: -0.03em; }
+.heading-1 { font-family: var(--font-display); font-size: 38px; line-height: 1.05; font-weight: 800; letter-spacing: -0.02em; }
+.heading-2 { font-family: var(--font-display); font-size: 27px; line-height: 1.15; font-weight: 700; letter-spacing: -0.015em; }
+.heading-3 { font-family: var(--font-display); font-size: 21px; line-height: 1.3; font-weight: 700; letter-spacing: -0.01em; }
+.lead { font-family: var(--font-sans); font-size: 20px; line-height: 1.55; font-weight: 400; }
+.body { font-family: var(--font-sans); font-size: 17px; line-height: 1.65; font-weight: 400; }
+.body-s { font-family: var(--font-sans); font-size: 15px; line-height: 1.55; font-weight: 400; }
+.quote { font-family: var(--font-sans); font-size: 21px; line-height: 1.4; font-weight: 600; letter-spacing: -0.015em; }
+.data { font-family: var(--font-mono); font-size: 28px; line-height: 1.05; font-weight: 600; letter-spacing: -0.02em; }
+.label { font-family: var(--font-mono); font-size: 12px; line-height: 1.4; font-weight: 500; letter-spacing: 0.04em; }
+.label-s { font-family: var(--font-mono); font-size: 11px; line-height: 1.4; font-weight: 500; letter-spacing: 0.04em; }

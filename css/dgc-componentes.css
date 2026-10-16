@@ -1,0 +1,87 @@
+/* Daniel García de Celis · componentes (CSS puro, prefijo dg-) */
+
+
+/* anchura de los estilos display (tokens.json no admite font-stretch) */
+.display-xl { font-stretch: 78%; }
+.display-l { font-stretch: 80%; }
+.display-m { font-stretch: 82%; }
+.heading-1 { font-stretch: 88%; }
+.heading-2, .heading-3 { font-stretch: 92%; }
+.quote { font-stretch: 92%; }
+
+body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+[data-theme] { background: var(--bg); color: var(--ink); }
+
+
+/* Botón */
+.dg-btn { display: inline-flex; align-items: center; gap: var(--space-3); font-family: var(--font-mono); font-size: 13px; font-weight: 500; letter-spacing: .02em; text-decoration: none; padding: 15px 24px; border: 1px solid transparent; border-radius: var(--radius-0); cursor: pointer; line-height: 1; transition: background .16s ease, color .16s ease, border-color .16s ease; }
+.dg-btn--primario { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.dg-btn--primario:hover { background: var(--ink); border-color: var(--ink); color: var(--bg); }
+.dg-btn--secundario { background: transparent; color: var(--ink); border-color: var(--line-strong); }
+.dg-btn--secundario:hover { border-color: var(--ink); }
+.dg-btn--texto { padding: 6px 0; background: none; color: var(--ink); border-bottom: 1px solid var(--line-strong); }
+.dg-btn--texto:hover { border-bottom-color: var(--ink-accent); }
+.dg-btn:focus-visible, .dg-input:focus-visible, a:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+.dg-btn .dg-arrow { font-family: var(--font-sans); font-size: 15px; }
+.dg-btn--grande { font-size: 14px; padding: 19px 30px; }
+
+/* Etiqueta de sección */
+.dg-label { display: inline-flex; align-items: baseline; gap: 10px; white-space: nowrap; font-family: var(--font-mono); font-size: 12px; font-weight: 500; letter-spacing: .04em; color: var(--ink-subtle); }
+.dg-label b { font-weight: 500; color: var(--ink-accent); }
+.dg-label::before { content: ""; width: 7px; height: 7px; background: var(--accent); align-self: center; }
+
+/* Marcador */
+/* marca: el texto se vuelve amarillo. venta: tinta con rotulador amarillo detrás. */
+.dg-mark { color: var(--ink-accent); background: none; }
+[data-theme="venta"] .dg-mark { color: var(--ink); background: linear-gradient(transparent 58%, var(--accent) 58%, var(--accent) 92%, transparent 92%); padding: 0 .06em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
+.dg-subrayado { color: var(--ink-accent); box-shadow: inset 0 -0.09em 0 var(--accent); }
+[data-theme="venta"] .dg-subrayado { color: var(--ink); }
+
+/* Cifra */
+.dg-stat { display: flex; flex-direction: column; gap: 6px; padding-top: var(--space-3); border-top: 1px solid var(--line); min-width: 0; }
+.dg-stat__num { font-family: var(--font-mono); font-size: 28px; font-weight: 600; letter-spacing: -.02em; line-height: 1.05; color: var(--ink-accent); }
+.dg-stat__txt { font-size: 15px; line-height: 1.45; color: var(--ink-muted); }
+.dg-stat--grande .dg-stat__num { font-family: var(--font-display); font-weight: 900; font-stretch: 80%; font-size: 72px; letter-spacing: -.04em; line-height: .9; }
+
+/* Tarjeta de cliente */
+.dg-cliente { display: grid; grid-template-columns: 48px 1fr; gap: 14px; align-items: center; padding: var(--space-4); background: var(--bg-raised); border: 1px solid var(--line); }
+.dg-cliente__logo { width: 48px; height: 48px; object-fit: cover; background: var(--bg-sunken); filter: grayscale(1); transition: filter .2s ease; }
+.dg-cliente:hover .dg-cliente__logo { filter: none; }
+div.dg-cliente__logo { display: grid; place-items: center; font-family: var(--font-mono); font-size: 13px; font-weight: 600; color: var(--ink-muted); border: 1px solid var(--line); box-sizing: border-box; }
+.dg-cliente__nombre { font-family: var(--font-display); font-size: 17px; font-weight: 700; font-stretch: 92%; line-height: 1.2; color: var(--ink); }
+.dg-cliente__nicho { font-family: var(--font-mono); font-size: 11px; letter-spacing: .04em; color: var(--ink-subtle); margin-top: 3px; }
+
+/* Testimonio */
+.dg-testimonio { margin: 0; padding: var(--space-5) 0 0; border-top: 1px solid var(--line-strong); max-width: 640px; }
+.dg-testimonio blockquote { margin: 0 0 var(--space-4); font-family: var(--font-display); font-size: 21px; font-weight: 600; font-stretch: 92%; line-height: 1.4; letter-spacing: -.015em; color: var(--ink); }
+.dg-testimonio figcaption { display: flex; align-items: center; gap: 12px; }
+.dg-testimonio img { width: 40px; height: 40px; border-radius: var(--radius-full); object-fit: cover; filter: grayscale(1); }
+.dg-testimonio .dg-quien { font-size: 14px; font-weight: 700; color: var(--ink); }
+.dg-testimonio .dg-donde { font-family: var(--font-mono); font-size: 11px; letter-spacing: .04em; color: var(--ink-subtle); }
+
+/* Formulario de la lista */
+.dg-form { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 520px; }
+.dg-form__fila { display: flex; gap: 0; }
+.dg-input { flex: 1 1 auto; min-width: 0; box-sizing: border-box; font-family: var(--font-sans); font-size: 16px; color: var(--ink); background: var(--bg-sunken); border: 1px solid var(--line-strong); border-right: 0; border-radius: var(--radius-1) 0 0 var(--radius-1); padding: 0 16px; height: 52px; }
+.dg-input::placeholder { color: var(--ink-subtle); }
+.dg-form .dg-btn { height: 52px; padding: 0 22px; white-space: nowrap; }
+.dg-form__nota { font-family: var(--font-mono); font-size: 11px; letter-spacing: .04em; color: var(--ink-subtle); }
+.dg-form__error { font-family: var(--font-mono); font-size: 12px; color: var(--danger); }
+.dg-form__ok { font-family: var(--font-mono); font-size: 12px; color: var(--success); }
+@media (max-width: 520px) { .dg-form__fila { flex-direction: column; gap: 8px; } .dg-input { flex: none; width: 100%; border-right: 1px solid var(--line-strong); border-radius: var(--radius-1); } .dg-form .dg-btn { justify-content: center; } }
+
+/* Cabecera */
+.dg-nav { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); padding: 16px var(--gutter); border-bottom: 1px solid var(--line); width: 100%; box-sizing: border-box; }
+.dg-nav__marca { display: flex; align-items: center; gap: 10px; text-decoration: none; color: var(--ink); }
+.dg-nav__marca img { width: 26px; height: 26px; display: block; }
+.dg-nav__nombre { font-family: var(--font-display); font-size: 14px; font-weight: 800; font-stretch: 85%; letter-spacing: .01em; text-transform: uppercase; }
+.dg-nav .dg-btn { padding: 10px 16px; font-size: 12px; }
+
+/* Marco de foto */
+.dg-foto { position: relative; display: inline-block; isolation: isolate; }
+.dg-foto::before { content: ""; position: absolute; z-index: 0; left: -14px; bottom: -14px; width: 62%; height: 46%; background: var(--accent); }
+.dg-foto img { position: relative; z-index: 1; display: block; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.06); }
+.dg-foto__pie { position: absolute; z-index: 1; right: 0; bottom: 0; transform: translateY(100%); padding-top: 8px; font-family: var(--font-mono); font-size: 11px; letter-spacing: .04em; color: var(--ink-subtle); }
+.dg-foto--hueco { display: inline-grid; place-items: center; }
+.dg-foto--hueco::after { content: ""; position: absolute; z-index: 0; inset: 0; background: var(--bg-sunken); border: 1px dashed var(--line-strong); }
+.dg-foto--hueco span { position: relative; z-index: 1; font-family: var(--font-mono); font-size: 11px; letter-spacing: .04em; color: var(--ink-subtle); text-align: center; padding: 8px; }
