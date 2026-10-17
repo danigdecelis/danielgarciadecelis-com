@@ -1,15 +1,19 @@
 /* Home danielgarciadecelis.com · maquetación (usa tokens.css y bundle.css del sistema) */
 a{color:var(--ink)}a:hover{color:var(--ink-accent)}
 .pg{background:var(--bg);color:var(--ink);font-family:var(--font-sans);-webkit-font-smoothing:antialiased}
-.wrap{max-width:1208px;margin:0 auto;padding:0 44px;box-sizing:border-box}
+.wrap{max-width:1560px;margin:0 auto;padding:0 56px;box-sizing:border-box}
 .row{display:grid;grid-template-columns:152px minmax(0,1fr)}
 .rail{border-right:1px solid var(--line);padding-top:96px;white-space:nowrap}
 .cnt{padding:96px 0 96px 48px;min-width:0}
 .sec{border-top:1px solid var(--line)}
-.cnt-hero{padding-top:88px}
-.h-hero{margin:0;font-family:var(--font-display);font-weight:900;font-stretch:80%;font-size:clamp(40px,4.6vw,66px);line-height:.92;letter-spacing:-.035em;text-wrap:balance}
+.cnt-hero{padding-top:72px;padding-bottom:80px}
+.h-hero{margin:0;font-family:var(--font-display);font-weight:900;font-stretch:80%;font-size:clamp(44px,5vw,96px);line-height:.9;letter-spacing:-.04em;text-wrap:balance}
 .h-sec{margin:0 0 40px;font-family:var(--font-display);font-weight:800;font-stretch:88%;font-size:clamp(30px,3vw,40px);line-height:1.05;letter-spacing:-.02em;max-width:22ch}
-.hero-grid{display:grid;grid-template-columns:minmax(0,1.75fr) minmax(0,1fr);gap:56px;align-items:end}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-areas:'head head' 'txt photo';column-gap:64px;row-gap:44px;align-items:start}
+.hero-head{grid-area:head}
+.hero-txt{grid-area:txt;display:flex;flex-direction:column;gap:32px;align-items:flex-start}
+.hero-photo{grid-area:photo;width:clamp(300px,24vw,420px);padding:6px 0 14px 14px}
+.hero-photo img{object-position:50% 22%}
 .clients{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
 .videos{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px 20px}
 .videos > a:first-child{grid-column:span 2;grid-row:span 2}
@@ -33,8 +37,8 @@ a{color:var(--ink)}a:hover{color:var(--ink-accent)}
 .cnt{padding:20px 0 56px}
 .cnt-hero{padding-top:24px}
 .clients .dg-cliente{grid-template-columns:minmax(0,1fr);gap:10px}
-.hero-photo{justify-content:flex-start !important}
-.hero-grid{grid-template-columns:minmax(0,1fr);gap:48px}
+.hero-photo{width:auto;max-width:340px;padding:0 0 14px 14px}
+.hero-grid{grid-template-columns:minmax(0,1fr);grid-template-areas:'head' 'txt' 'photo';row-gap:32px}
 .clients{grid-template-columns:repeat(2,minmax(0,1fr))}
 .videos{grid-template-columns:minmax(0,1fr)}
 .videos > a:first-child{grid-column:auto;grid-row:auto}
