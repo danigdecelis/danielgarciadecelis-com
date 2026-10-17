@@ -7,7 +7,7 @@ a{color:var(--ink)}a:hover{color:var(--ink-accent)}
 .cnt{padding:96px 0 96px 48px;min-width:0}
 .sec{border-top:1px solid var(--line)}
 .cnt-hero{padding-top:88px}
-.h-hero{margin:0;font-family:var(--font-display);font-weight:900;font-stretch:80%;font-size:clamp(46px,5.4vw,80px);line-height:.92;letter-spacing:-.035em;text-wrap:balance}
+.h-hero{margin:0;font-family:var(--font-display);font-weight:900;font-stretch:80%;font-size:clamp(40px,4.6vw,66px);line-height:.92;letter-spacing:-.035em;text-wrap:balance}
 .h-sec{margin:0 0 40px;font-family:var(--font-display);font-weight:800;font-stretch:88%;font-size:clamp(30px,3vw,40px);line-height:1.05;letter-spacing:-.02em;max-width:22ch}
 .hero-grid{display:grid;grid-template-columns:minmax(0,1.75fr) minmax(0,1fr);gap:56px;align-items:end}
 .clients{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
