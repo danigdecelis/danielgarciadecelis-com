@@ -202,3 +202,9 @@ a{color:var(--ink)}a:hover{color:var(--ink-accent)}
 .hcom{grid-template-columns:52px minmax(0,1fr);gap:16px;padding:22px 20px}
 .hcom img,.hcom .ini{width:52px;height:52px}
 }
+
+/* Foto de la cabecera: color al pasar el cursor, como los vídeos */
+.hero-photo .dg-foto img{transition:filter .2s ease}
+.hero-photo:hover .dg-foto img{filter:none}
+.hero-sub{margin:0;font-size:clamp(20px,1.9vw,25px);line-height:1.5;color:var(--ink-muted);max-width:60ch}
+.hero-sin{margin:0;font-size:clamp(20px,1.9vw,25px);line-height:1.35;font-weight:800;font-stretch:92%;letter-spacing:-.01em;color:var(--ink);max-width:60ch}
