@@ -82,6 +82,7 @@
       .fases > details > summary { grid-template-columns: 40px minmax(0, 1fr) 28px; gap: 10px; }
       .fase-cuerpo { padding-left: 0; padding-right: 0; }
     }
+    .h-hero.largo{font-size:clamp(36px,5.6vw,76px)}
   </style>
 
 </head>
@@ -105,12 +106,26 @@
 
   <!-- ============ 1 · CABECERA ============ -->
   <div class="wrap" style="padding-top: 86px; padding-bottom: 76px;">
-    <h1 class="h-hero" style="font-weight: 900; font-stretch: 80%; line-height: 0.9; letter-spacing: -0.042em; margin: 0 0 34px; color: var(--bone); text-wrap: pretty;">Construye una secuencia de emails como las que he escrito para decenas de lanzamientos de <span class="mark">5, 6 y 7 cifras.</span></h1>
-    <p style="font-size: clamp(18px, 2vw, 23px); font-weight: 400; line-height: 1.5; color: var(--bone-2); margin: 0; max-width: 46ch;">Descubre qué tiene que pasar por la cabeza del lector en cada momento del lanzamiento, y cómo cada pieza interactúa con las demás para preparar el terreno hacia la venta.</p>
+    <div><div style="font-family: var(--mono); font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--bone-2); margin-bottom: 22px;">Arsenal completo de email marketing para tu lanzamiento</div><h1 class="h-hero largo" style="font-weight: 900; font-stretch: 80%; line-height: 0.9; letter-spacing: -0.042em; margin: 0 0 34px; color: var(--bone); text-wrap: pretty;">31 piezas para montar una secuencia ganadora como las que he escrito para decenas de lanzamientos de <span class="mark">5, 6 y 7 cifras.</span></h1>
+    <p style="font-size: clamp(18px, 2vw, 23px); font-weight: 400; line-height: 1.5; color: var(--bone-2); margin: 0; max-width: 46ch;">Descubre qué tiene que pasar por la cabeza del lector en cada momento del lanzamiento, y cómo cada pieza interactúa con las demás para preparar el terreno hacia la venta.<br><br><span style="color: var(--bone);">Sin empezar de cero, sin copiar a ciegas y sin adivinar en qué orden va cada email.</span></p></div>
+  </div>
+
+  <!-- ============ 4 · PRECIO Y PRIMER CTA ============ -->
+  <div style="border-top: 1px solid var(--line-gold); border-bottom: 1px solid var(--line-gold); background: var(--noir-2);">
+    <div class="wrap cta-caja" style="display: grid; gap: 40px; align-items: center; padding-top: 52px; padding-bottom: 52px;">
+      <div>
+        <div class="cifra-xl" style="font-weight: 900; font-stretch: 78%; line-height: 0.8; letter-spacing: -0.055em; color: var(--gold);">47 $</div>
+        <div style="font-family: var(--mono); font-size: 14px; color: var(--bone-2); margin-top: 18px;">pago único. lo tienes entero en cuanto pagas.</div>
+      </div>
+      <div class="cta-hit">
+        <a class="js-hotmart" href="#" rel="noopener noreferrer" style="display: block; font-size: clamp(17px, 1.9vw, 21px); font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); padding: 26px 40px; text-align: center; line-height: 1.2;">Quiero verlo por dentro</a><div class="garantia" style="font-family: var(--mono); font-size: 12px; line-height: 1.6; color: var(--bone-2); text-align: center; margin-top: 12px;"><span style="display:inline-block;width:7px;height:7px;background:var(--gold);margin-right:8px;vertical-align:1px;"></span>15 días de garantía. si no te convence, pides el reembolso en hotmart.</div>
+        <div style="font-family: var(--mono); font-size: 12px; line-height: 1.7; color: var(--bone-2); text-align: center; margin-top: 14px;">acceso inmediato. sin suscripción<br>y sin nada que se renueve solo.</div>
+      </div>
+    </div>
   </div>
 
   <!-- ============ 2 · CLIENTES ============ -->
-  <div class="wrap" style="padding-bottom: 76px;">
+  <div class="wrap" style="padding-top: 76px; padding-bottom: 76px;">
     <div style="font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.04em; color: var(--bone-3); margin-bottom: 26px;">he escrito para</div>
 
     <div class="col-3" style="display: grid; gap: 1px; background: var(--line);">
@@ -191,6 +206,13 @@
         <div style="font-size: 14px; color: var(--bone-2); margin-top: 4px;">IA y desarrollo web3</div>
         <div style="font-family: var(--mono); font-size: 10px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">racks.academy · 91 publicaciones · 3.753 seguidores</div>
       </div>
+
+      <div style="background: var(--noir); padding: 22px 20px 24px;">
+        <img src="/vanessa.png" alt="Vanessa Marrero" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; display: block; margin-bottom: 16px;">
+        <div style="font-size: 19px; font-weight: 700; font-stretch: 90%; letter-spacing: -0.015em; color: var(--bone); line-height: 1.2;">Vanessa Marrero</div>
+        <div style="font-size: 14px; color: var(--bone-2); margin-top: 4px;">Finanzas para negocios</div>
+        <div style="font-family: var(--mono); font-size: 10px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">vanessa__marrero · 1.106 publicaciones · 21,3 mil seguidores</div>
+      </div>
     </div>
   </div>
 
@@ -206,18 +228,81 @@
   ============================================================
   -->
 
-  <!-- ============ 4 · PRECIO Y PRIMER CTA ============ -->
-  <div style="border-top: 1px solid var(--line-gold); border-bottom: 1px solid var(--line-gold); background: var(--noir-2);">
-    <div class="wrap cta-caja" style="display: grid; gap: 40px; align-items: center; padding-top: 52px; padding-bottom: 52px;">
-      <div>
-        <div class="cifra-xl" style="font-weight: 900; font-stretch: 78%; line-height: 0.8; letter-spacing: -0.055em; color: var(--gold);">47 $</div>
-        <div style="font-family: var(--mono); font-size: 14px; color: var(--bone-2); margin-top: 18px;">pago único. lo tienes entero en cuanto pagas.</div>
+  <!-- testimonio repartido 1 -->
+  <div class="wrap" style="padding-top: 72px;">
+    <figure style="margin: 0; display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 22px; align-items: start; max-width: 820px; padding: 30px 32px; background: var(--noir-2); border-left: 4px solid var(--gold);">
+      <img src="/li-carbonel.png" alt="" style="width: 64px; height: 64px; border-radius: 50%; object-fit: cover; display: block; filter: grayscale(1);">
+      <div><blockquote style="margin: 0 0 16px; font-size: clamp(19px, 2vw, 23px); font-weight: 600; font-stretch: 94%; line-height: 1.45; letter-spacing: -0.01em; color: var(--bone);">«Hicimos un match increíblemente potente para levantar un proyecto literalmente de cero y ponerlo en órbita en 2 años llegando a los +2M de facturación.»</blockquote>
+      <figcaption style="font-size: 15px; font-weight: 700; color: var(--bone);">David Carbonel <span style="font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--bone-3); margin-left: 8px;">founder de0a100 agency · sobre el proyecto de José Muñoz</span></figcaption></div>
+    </figure>
+  </div>
+
+  <!-- ============ MUESTRA GRATIS: EMAIL 26 ABIERTO ============ -->
+  <style>
+    .muestra-mail p { font-size: 17px; line-height: 1.65; color: var(--bone); margin: 0 0 14px; }
+    .muestra-mail p.ps { font-style: italic; color: var(--bone-2); }
+    .muestra-tripas summary { cursor: pointer; list-style: none; font-family: var(--mono); font-size: 14px; font-weight: 600; color: var(--bone); padding: 18px 26px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+    .muestra-tripas summary::-webkit-details-marker { display: none; }
+    .muestra-tripas ol { margin: 0; padding: 0 26px 26px 50px; color: var(--bone-2); font-size: 16px; line-height: 1.6; }
+    .muestra-tripas li { margin-bottom: 10px; }
+    .muestra-tripas li b { color: var(--bone); }
+  </style>
+  <div class="wrap" style="padding-top: 82px;">
+   <div>
+    <div style="font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.04em; color: var(--bone-3); margin-bottom: 18px;">antes de pagar</div>
+    <h2 class="h-sec" style="font-weight: 900; font-stretch: 82%; line-height: 0.96; letter-spacing: -0.038em; margin: 0 0 24px; color: var(--bone); max-width: 18ch;">Lee uno entero, <span class="mark">gratis</span></h2>
+    <p style="font-size: 19px; line-height: 1.7; color: var(--bone-2); margin: 0 0 36px; max-width: 58ch;">Es el email 26, de la fase del remate. Tal cual viene en el curso: el email completo y, debajo, sus tripas, parte por parte.</p>
+    <div style="border: 1px solid var(--line); background: var(--noir-2); max-width: 760px;">
+      <div style="padding: 20px 26px; border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: 13px; line-height: 1.8; color: var(--bone-2);"><b style="color: var(--bone); font-weight: 600;">asunto:</b> Tres cosas malas del programa<br><b style="color: var(--bone); font-weight: 600;">preheader:</b> Mañana es el último día, así que toca contarlas.</div>
+      <div class="muestra-mail" style="padding: 26px 26px 12px;">
+        <p>Ey.</p>
+        <p>Queda un día para que se cierre esto y me apetece hacer algo poco habitual para la recta final: contarte lo que el programa hace mal.</p>
+        <p>No por deportividad. Es que prefiero que no entres a que entres y te arrepientas.</p>
+        <p>Lo primero, es que sepas que esto te va a dar más trabajo del que crees.</p>
+        <p>Esto no es una aplicación que ordena tus cuentas mientras duermes. La primera semana te toca sentarte con tus facturas, tus cobros y tus gastos, y meterlos donde toca. Son tres o cuatro horas, y no son horas bonitas.</p>
+        <p>Lo que sí te digo es que esas horas se pagan solas la primera vez que pones un precio con los números delante en vez de a ojo.</p>
+        <p>Además, no te voy a llevar de la mano.</p>
+        <p>Hay sesiones en vivo, hay un sitio donde dejas tus dudas y las respondo, y hay una comunidad que se responde entre ella. Lo que no hay es alguien detrás de ti comprobando si hiciste la tarea.</p>
+        <p>Si necesitas que te persigan para avanzar, ahórrate el dinero. Aquí el que empuja eres tú.</p>
+        <p>Y por supuesto, los primeros números te van a sentar mal.</p>
+        <p>Suele pasar que descubres que ganas menos de lo que pensabas. Que el cliente que parecía el bueno es el que menos margen te deja. Que llevas dos años pagando algo que no usas.</p>
+        <p>Es incómodo, sí. También es exactamente el motivo por el que estás leyendo esto.</p>
+        <p>Ahora la otra cara.</p>
+        <p>Si te sientas esas tres o cuatro horas, en un mes sabes cuánto entra, cuánto sale y cuánto es tuyo de verdad. Y a partir de ahí decides con eso delante, no con la sensación.</p>
+        <p>Nosotros ponemos el método, las plantillas y las sesiones. Tú pones el rato.</p>
+        <p>Y si aun así te equivocas, tienes treinta días para pedir la devolución. Sin explicaciones y sin condiciones. El riesgo de equivocarte lo asumo yo.</p>
+        <p>Cierra mañana a las 23:59: [ENLACE]</p>
+        <p>Un abrazo,</p>
+        <p class="ps">P.D. Si has leído los tres defectos y has pensado «bueno, tampoco es para tanto», entra tranquilo. Si has pensado «uf, pues entonces no», acabo de ahorrarte el dinero y de ahorrarme a mí un cliente descontento. Las dos son buenas noticias. [ENLACE]</p>
       </div>
-      <div class="cta-hit">
-        <a class="js-hotmart" href="#" rel="noopener noreferrer" style="display: block; font-size: clamp(17px, 1.9vw, 21px); font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); padding: 26px 40px; text-align: center; line-height: 1.2;">Quiero verlo por dentro</a>
-        <div style="font-family: var(--mono); font-size: 12px; line-height: 1.7; color: var(--bone-2); text-align: center; margin-top: 14px;">acceso inmediato. sin suscripción<br>y sin nada que se renueve solo.</div>
-      </div>
+      <details class="muestra-tripas">
+        <summary><span>Las tripas del email: qué hace cada parte y por qué está ahí</span><span class="mas" style="font-size: 22px; color: var(--gold);">+</span></summary>
+        <ol>
+          <li><b>El asunto:</b> anuncia el contenido tal cual, sin gancho. En la recta final del carrito, la rareza de lo que vas a hacer ya es gancho suficiente.</li>
+          <li><b>El aviso de que vas a hacer algo raro:</b> prepara al lector para un email que no encaja con el día. Sin esta línea, los tres defectos se leen como una queja.</li>
+          <li><b>El motivo egoísta:</b> «prefiero que no entres a que entres y te arrepientas». Es lo que convierte la honestidad en criterio y no en humildad.</li>
+          <li><b>Defecto de esfuerzo:</b> descarta al que buscaba un atajo, que es el que peor encaja en cualquier producto que exija trabajo.</li>
+          <li><b>La compensación pegada:</b> cada defecto lleva su contrapartida en la frase siguiente, nunca al final del email. Separadas, el lector se queda solo con lo malo.</li>
+          <li><b>Defecto de acompañamiento:</b> descarta al que necesita que le persigan. Es el defecto que más devoluciones te ahorra.</li>
+          <li><b>Defecto incómodo:</b> no descarta a nadie. Su trabajo es validar el dolor del que sí es tu cliente, que se ve retratado y sigue leyendo.</li>
+          <li><b>La otra cara:</b> recoges lo bueno en dos frases y ya con la credibilidad comprada. Aquí no hace falta insistir, porque lo anterior hizo el trabajo.</li>
+          <li><b>El reparto de responsabilidad:</b> qué pones tú y qué pone él. Prepara el terreno de la garantía sin nombrarla todavía.</li>
+          <li><b>La garantía:</b> aquí no es letra pequeña, es el remate del argumento. Después de tres defectos, es lo que devuelve la balanza a su sitio.</li>
+          <li><b>La P.D. bifurcada:</b> le da permiso al que entra y salida honrosa al que se va. Nadie se queda en el email sintiéndose señalado.</li>
+        </ol>
+      </details>
     </div>
+    <p style="font-family: var(--mono); font-size: 13px; color: var(--bone-2); margin: 20px 0 0;">En el curso hay 30 más como este, cada uno con lo que he aprendido usándolo y el momento exacto en que se manda.</p>
+   </div>
+  </div>
+
+  <!-- testimonio repartido 2 -->
+  <div class="wrap" style="padding-top: 72px;">
+    <figure style="margin: 0; display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 22px; align-items: start; max-width: 820px; padding: 30px 32px; background: var(--noir-2); border-left: 4px solid var(--gold);">
+      <img src="/li-monleon.png" alt="" style="width: 64px; height: 64px; border-radius: 50%; object-fit: cover; display: block; filter: grayscale(1);">
+      <div><blockquote style="margin: 0 0 16px; font-size: clamp(19px, 2vw, 23px); font-weight: 600; font-stretch: 94%; line-height: 1.45; letter-spacing: -0.01em; color: var(--bone);">«Los textos parecen que hayan sido escritos por el propio cliente, sabe detectar el tono de comunicación de cada marca y adaptarse a su estilo.»</blockquote>
+      <figcaption style="font-size: 15px; font-weight: 700; color: var(--bone);">David Monleón <span style="font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--bone-3); margin-left: 8px;">consultor vsl · estratega de publicidad</span></figcaption></div>
+    </figure>
   </div>
 
   <!-- ============ 5 · LA ARITMÉTICA ============ -->
@@ -226,8 +311,7 @@
 
     <div class="lectura">
       <p style="font-size: 19px; line-height: 1.7; color: var(--bone); margin: 0 0 20px;">Te cuento sin adornos, que como tú también vendes por internet lo vas a entender rápido:</p>
-      <p style="font-size: 19px; line-height: 1.7; color: var(--bone); margin: 0 0 20px;">He escrito los emails de decenas de lanzamientos de infoproductos para expertos en España, como los que viste un poco más arriba.</p>
-      <p style="font-size: 19px; line-height: 1.7; color: var(--bone); margin: 0 0 44px;">En los lanzamientos de los que yo he formado parte se han facturado más de 5 millones de euros.</p>
+      <div><p style="font-size: 19px; line-height: 1.7; color: var(--bone); margin: 0 0 44px;">He escrito los emails de decenas de lanzamientos de infoproductos, como los que viste un poco más arriba.</p></div>
     </div>
   </div>
 
@@ -250,18 +334,13 @@
 
   <div class="wrap" style="padding-top: 52px;">
     <div class="lectura">
-      <p style="font-size: 19px; line-height: 1.7; color: var(--bone); margin: 0 0 20px;">Soy de Gran Canaria, abogado de formación, copywriter desde 2020 y aunque vivo en Sudamérica desde hace dos años, aquí todavía no me conoce casi nadie.</p>
-      <p style="font-size: 19px; line-height: 1.7; color: var(--bone); margin: 0 0 20px;">He creado cientos de anuncios para otros, pero es la primera vez que hago los míos.</p>
-      <p style="font-size: 19px; line-height: 1.7; color: var(--bone); margin: 0 0 20px;">Por este motivo he querido crear algo especial que te aporte un valor muy alto por un precio muy bajo.</p>
-      <p style="font-size: 19px; line-height: 1.7; color: var(--bone); margin: 0 0 48px;">Así que he creado mi primer infoproducto sobre algo que se me ha dado muy bien trabajando con expertos españoles durante los últimos 6 años… y le he puesto el precio más bajo que me permite seguir tomándomelo en serio.</p>
+      <div><p style="font-size: 19px; line-height: 1.7; color: var(--bone); margin: 0 0 48px;">Es mi primer infoproducto, y le he puesto el precio más bajo que me permite seguir tomándomelo en serio.</p></div>
     </div>
 
     <p class="h-golpe" style="font-weight: 700; font-stretch: 88%; line-height: 1.16; letter-spacing: -0.028em; color: var(--bone); margin: 0 0 48px; max-width: 26ch;">Cuarenta y siete dólares para meterte en la cabeza de un copywriter senior con seis años de experiencia, en un recorrido a través de las secuencias usadas en lanzamientos reales de cinco, seis y siete cifras.</p>
 
     <div class="lectura">
-      <p style="font-size: 19px; line-height: 1.7; color: var(--bone); margin: 0 0 20px;">Lo compras y en media hora sabes si va a ser un game changer para tu email marketing o no.</p>
-      <p style="font-size: 19px; line-height: 1.7; color: var(--bone); margin: 0 0 20px;">Si es así, ya no tendré que convencerte de nada más.</p>
-      <p style="font-size: 19px; line-height: 1.7; color: var(--bone); margin: 0 0 76px;">Sabrás cómo es la calidad de mi trabajo y dónde encontrarme.</p>
+      <div style="height: 28px;"></div>
     </div>
   </div>
 
@@ -280,9 +359,18 @@
         <div style="font-family: var(--mono); font-size: 13px; color: var(--bone-2); margin-top: 16px;">pago único. acceso inmediato.</div>
       </div>
       <div class="cta-hit">
-        <a class="js-hotmart" href="#" rel="noopener noreferrer" style="display: block; font-size: clamp(17px, 1.9vw, 21px); font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); padding: 26px 40px; text-align: center;">Dame acceso ahora</a>
+        <a class="js-hotmart" href="#" rel="noopener noreferrer" style="display: block; font-size: clamp(17px, 1.9vw, 21px); font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); padding: 26px 40px; text-align: center;">Dame acceso ahora</a><div class="garantia" style="font-family: var(--mono); font-size: 12px; line-height: 1.6; color: var(--bone-2); text-align: center; margin-top: 12px;"><span style="display:inline-block;width:7px;height:7px;background:var(--gold);margin-right:8px;vertical-align:1px;"></span>15 días de garantía. si no te convence, pides el reembolso en hotmart.</div>
       </div>
     </div>
+  </div>
+
+  <!-- testimonio repartido 3 -->
+  <div class="wrap" style="padding-top: 72px;">
+    <figure style="margin: 0; display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 22px; align-items: start; max-width: 820px; padding: 30px 32px; background: var(--noir-2); border-left: 4px solid var(--gold);">
+      <div style="width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; background: var(--noir-3); border: 1px solid var(--line); font-family: var(--mono); font-weight: 600; font-size: 18px; color: var(--bone);">YV</div>
+      <div><blockquote style="margin: 0 0 16px; font-size: clamp(19px, 2vw, 23px); font-weight: 600; font-stretch: 94%; line-height: 1.45; letter-spacing: -0.01em; color: var(--bone);">«Dani nos ayudó a conseguir nuestro objetivo con un copy que representa 100% quienes somos a día de hoy.»</blockquote>
+      <figcaption style="font-size: 15px; font-weight: 700; color: var(--bone);">Yan Vispo <span style="font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--bone-3); margin-left: 8px;">fundador de rumbo eficiente</span></figcaption></div>
+    </figure>
   </div>
 
   <!-- ============ 6 · EL MAPA ============ -->
@@ -294,107 +382,31 @@
       <p style="font-size: 20px; font-style: italic; line-height: 1.6; color: var(--bone); margin: 0;">Con este curso entrenarás tu criterio estratégico para evitar esos errores y para crear exactamente la secuencia que tu lanzamiento necesita.</p>
     </div>
 
-    <div class="fases" style="border-top: 1px solid var(--line);">
-
-      <details style="border-bottom: 1px solid var(--line);">
-        <summary style="display: grid; grid-template-columns: 76px minmax(0, 1fr) 34px; gap: 20px; align-items: center; padding: 28px 0;">
-          <div style="font-family: var(--mono); font-size: 26px; font-weight: 600; color: var(--gold); line-height: 1;">01</div>
-          <div>
-            <div style="font-size: clamp(22px, 2.6vw, 30px); font-weight: 900; font-stretch: 84%; letter-spacing: -0.028em; text-transform: uppercase; color: var(--bone); line-height: 1.05;">La convocatoria</div>
-            <div style="font-size: 16px; color: var(--bone-2); margin-top: 7px;">Los emails que invitan a tu propia lista antes de encender un solo anuncio.</div>
-          </div>
-          <div class="mas" style="font-family: var(--mono); font-size: 26px; color: var(--gold); text-align: right; line-height: 1;">+</div>
-        </summary>
-        <div class="fase-cuerpo" style="padding: 0 34px 30px 96px;">
-          <p style="font-size: 18px; line-height: 1.7; color: var(--bone); margin: 0; max-width: 58ch;">Porque el evento, aunque sea gratis, también hay que venderlo. Y muy bien.</p>
-        </div>
-      </details>
-
-      <details style="border-bottom: 1px solid var(--line);">
-        <summary style="display: grid; grid-template-columns: 76px minmax(0, 1fr) 34px; gap: 20px; align-items: center; padding: 28px 0;">
-          <div style="font-family: var(--mono); font-size: 26px; font-weight: 600; color: var(--gold); line-height: 1;">02</div>
-          <div>
-            <div style="font-size: clamp(22px, 2.6vw, 30px); font-weight: 900; font-stretch: 84%; letter-spacing: -0.028em; text-transform: uppercase; color: var(--bone); line-height: 1.05;">El cortejo</div>
-            <div style="font-size: 16px; color: var(--bone-2); margin-top: 7px;">No es lo mismo estar registrado que no querer perdérselo por nada del mundo.</div>
-          </div>
-          <div class="mas" style="font-family: var(--mono); font-size: 26px; color: var(--gold); text-align: right; line-height: 1;">+</div>
-        </summary>
-        <div class="fase-cuerpo" style="padding: 0 34px 30px 96px;">
-          <p style="font-size: 18px; line-height: 1.7; color: var(--bone); margin: 0; max-width: 58ch;">Hay que provocar esas ganas de estar. Aquí se siembra cuánta gente aparece el día del directo, y eso es un elemento muy diferencial en cualquier lanzamiento, además de un buen termómetro del interés que has sabido generar.</p>
-        </div>
-      </details>
-
-      <details style="border-bottom: 1px solid var(--line);">
-        <summary style="display: grid; grid-template-columns: 76px minmax(0, 1fr) 34px; gap: 20px; align-items: center; padding: 28px 0;">
-          <div style="font-family: var(--mono); font-size: 26px; font-weight: 600; color: var(--gold); line-height: 1;">03</div>
-          <div>
-            <div style="font-size: clamp(22px, 2.6vw, 30px); font-weight: 900; font-stretch: 84%; letter-spacing: -0.028em; text-transform: uppercase; color: var(--bone); line-height: 1.05;">La cita</div>
-            <div style="font-size: 16px; color: var(--bone-2); margin-top: 7px;">El día del directo.</div>
-          </div>
-          <div class="mas" style="font-family: var(--mono); font-size: 26px; color: var(--gold); text-align: right; line-height: 1;">+</div>
-        </summary>
-        <div class="fase-cuerpo" style="padding: 0 34px 30px 96px;">
-          <p style="font-size: 18px; line-height: 1.7; color: var(--bone); margin: 0; max-width: 58ch;">Seis toques en esa jornada, con un patrón detrás que no se ve a simple vista.</p>
-        </div>
-      </details>
-
-      <details style="border-bottom: 1px solid var(--line);">
-        <summary style="display: grid; grid-template-columns: 76px minmax(0, 1fr) 34px; gap: 20px; align-items: center; padding: 28px 0;">
-          <div style="font-family: var(--mono); font-size: 26px; font-weight: 600; color: var(--gold); line-height: 1;">04</div>
-          <div>
-            <div style="font-size: clamp(22px, 2.6vw, 30px); font-weight: 900; font-stretch: 84%; letter-spacing: -0.028em; text-transform: uppercase; color: var(--bone); line-height: 1.05;">La acción</div>
-            <div style="font-size: 16px; color: var(--bone-2); margin-top: 7px;">Luces, cámaras… Abre el carrito.</div>
-          </div>
-          <div class="mas" style="font-family: var(--mono); font-size: 26px; color: var(--gold); text-align: right; line-height: 1;">+</div>
-        </summary>
-        <div class="fase-cuerpo" style="padding: 0 34px 30px 96px;">
-          <p style="font-size: 18px; line-height: 1.7; color: var(--bone); margin: 0; max-width: 58ch;">Presentamos la oferta, pero no solo eso. Presentamos una versión de la oferta con el valor percibido por las nubes. Aprendemos a hacer esto como un copywriter experto y además a sacarle el máximo partido a recursos como los bonus, las comunidades o las garantías.</p>
-        </div>
-      </details>
-
-      <details style="border-bottom: 1px solid var(--line);">
-        <summary style="display: grid; grid-template-columns: 76px minmax(0, 1fr) 34px; gap: 20px; align-items: center; padding: 28px 0;">
-          <div style="font-family: var(--mono); font-size: 26px; font-weight: 600; color: var(--gold); line-height: 1;">05</div>
-          <div>
-            <div style="font-size: clamp(22px, 2.6vw, 30px); font-weight: 900; font-stretch: 84%; letter-spacing: -0.028em; text-transform: uppercase; color: var(--bone); line-height: 1.05;">El valle de las sombras</div>
-            <div style="font-size: 16px; color: var(--bone-2); margin-top: 7px;">El tramo en el que casi nada se mueve.</div>
-          </div>
-          <div class="mas" style="font-family: var(--mono); font-size: 26px; color: var(--gold); text-align: right; line-height: 1;">+</div>
-        </summary>
-        <div class="fase-cuerpo" style="padding: 0 34px 30px 96px;">
-          <p style="font-size: 18px; line-height: 1.7; color: var(--bone); margin: 0; max-width: 58ch;">La novedad pasó, el bonus de acción rápida murió y todavía faltan días para el cierre. La etapa más descuidada de un lanzamiento, pero aún queda mucho por decidir de cara al cierre. Así que hay que trabajar bien cómo vamos a barrer todas las excusas que quedan.</p>
-        </div>
-      </details>
-
-      <details style="border-bottom: 1px solid var(--line);">
-        <summary style="display: grid; grid-template-columns: 76px minmax(0, 1fr) 34px; gap: 20px; align-items: center; padding: 28px 0;">
-          <div style="font-family: var(--mono); font-size: 26px; font-weight: 600; color: var(--gold); line-height: 1;">06</div>
-          <div>
-            <div style="font-size: clamp(22px, 2.6vw, 30px); font-weight: 900; font-stretch: 84%; letter-spacing: -0.028em; text-transform: uppercase; color: var(--bone); line-height: 1.05;">El remate</div>
-            <div style="font-size: 16px; color: var(--bone-2); margin-top: 7px;">El cierre. Donde se factura buena parte de todo el lanzamiento.</div>
-          </div>
-          <div class="mas" style="font-family: var(--mono); font-size: 26px; color: var(--gold); text-align: right; line-height: 1;">+</div>
-        </summary>
-        <div class="fase-cuerpo" style="padding: 0 34px 30px 96px;">
-          <p style="font-size: 18px; line-height: 1.7; color: var(--bone); margin: 0; max-width: 58ch;">Incluido el penúltimo email de toda la secuencia, que casi nadie manda, y que es una bomba.</p>
-        </div>
-      </details>
-
-      <details style="border-bottom: 1px solid var(--line);">
-        <summary style="display: grid; grid-template-columns: 76px minmax(0, 1fr) 34px; gap: 20px; align-items: center; padding: 28px 0;">
-          <div style="font-family: var(--mono); font-size: 26px; font-weight: 600; color: var(--gold); line-height: 1;">07</div>
-          <div>
-            <div style="font-size: clamp(22px, 2.6vw, 30px); font-weight: 900; font-stretch: 84%; letter-spacing: -0.028em; text-transform: uppercase; color: var(--bone); line-height: 1.05;">La resaca</div>
-            <div style="font-size: 16px; color: var(--bone-2); margin-top: 7px;">Lo que mandas después, para alimentar tu embudo y los siguientes lanzamientos.</div>
-          </div>
-          <div class="mas" style="font-family: var(--mono); font-size: 26px; color: var(--gold); text-align: right; line-height: 1;">+</div>
-        </summary>
-        <div class="fase-cuerpo" style="padding: 0 34px 30px 96px;">
-          <p style="font-size: 18px; line-height: 1.7; color: var(--bone); margin: 0; max-width: 58ch;">Cómo cierras el lanzamiento y cómo te posicionas de cara a tu audiencia para decidir la mejor manera de continuar junto a ti tiene un impacto tremendo en tus ingresos futuros. He participado en algunos lanzamientos en los que el objetivo de ventas se cumplió solo con una «lista prioritaria» bien trabajada. Descubre las decisiones y acciones que debes tomar en esta fase para que aumentes las oportunidades de cerrar muchas más ventas a medio y largo plazo.</p>
-        </div>
-      </details>
-
-    </div>
+    <style>
+      .ruta{display:flex;gap:0;margin:0 0 44px;overflow-x:auto;border:1px solid var(--line)}
+      .ruta span{flex:1 0 auto;padding:12px 14px;font-family:var(--mono);font-size:12px;color:var(--bone-2);border-right:1px solid var(--line);white-space:nowrap}
+      .ruta span:last-child{border-right:0}
+      .ruta b{color:var(--bone);margin-right:8px}
+      .linea{list-style:none;margin:0;padding:0;position:relative}
+      .linea::before{content:"";position:absolute;left:27px;top:8px;bottom:8px;width:2px;background:var(--accent)}
+      .hito{display:grid;grid-template-columns:56px minmax(0,1fr);gap:24px;padding:0 0 40px;position:relative}
+      .hito:last-child{padding-bottom:0}
+      .hito-n{width:56px;height:56px;border-radius:50%;background:var(--accent);color:#0a0a0a;display:grid;place-items:center;font-family:var(--mono);font-weight:600;font-size:17px;position:relative;z-index:1}
+      .hito-nom{font-size:clamp(22px,2.6vw,30px);font-weight:900;font-stretch:84%;letter-spacing:-0.028em;text-transform:uppercase;color:var(--bone);line-height:1.05;padding-top:8px}
+      .hito-corta{font-size:17px;font-weight:600;color:var(--bone);margin-top:8px}
+      .hito p{font-size:17px;line-height:1.65;color:var(--bone-2);margin:8px 0 0;max-width:60ch}
+      @media (max-width:760px){.hito{grid-template-columns:44px minmax(0,1fr);gap:16px}.hito-n{width:44px;height:44px;font-size:15px}.linea::before{left:21px}}
+    </style>
+    <div class="ruta" aria-hidden="true"><span><b>01</b>La convocatoria</span><span><b>02</b>El cortejo</span><span><b>03</b>La cita</span><span><b>04</b>La acción</span><span><b>05</b>El valle de las sombras</span><span><b>06</b>El remate</span><span><b>07</b>La resaca</span></div>
+    <ol class="linea">
+      <li class="hito"><div class="hito-n">01</div><div class="hito-t"><div class="hito-nom">La convocatoria</div><div class="hito-corta">Los emails que invitan a tu propia lista antes de encender un solo anuncio.</div><p>Porque el evento, aunque sea gratis, también hay que venderlo. Y muy bien.</p></div></li>
+      <li class="hito"><div class="hito-n">02</div><div class="hito-t"><div class="hito-nom">El cortejo</div><div class="hito-corta">No es lo mismo estar registrado que no querer perdérselo por nada del mundo.</div><p>Hay que provocar esas ganas de estar. Aquí se siembra cuánta gente aparece el día del directo, y eso es un elemento muy diferencial en cualquier lanzamiento, además de un buen termómetro del interés que has sabido generar.</p></div></li>
+      <li class="hito"><div class="hito-n">03</div><div class="hito-t"><div class="hito-nom">La cita</div><div class="hito-corta">El día del directo.</div><p>Seis toques en esa jornada, con un patrón detrás que no se ve a simple vista.</p></div></li>
+      <li class="hito"><div class="hito-n">04</div><div class="hito-t"><div class="hito-nom">La acción</div><div class="hito-corta">Luces, cámaras… Abre el carrito.</div><p>Presentamos la oferta, pero no solo eso. Presentamos una versión de la oferta con el valor percibido por las nubes. Aprendemos a hacer esto como un copywriter experto y además a sacarle el máximo partido a recursos como los bonus, las comunidades o las garantías.</p></div></li>
+      <li class="hito"><div class="hito-n">05</div><div class="hito-t"><div class="hito-nom">El valle de las sombras</div><div class="hito-corta">El tramo en el que casi nada se mueve.</div><p>La novedad pasó, el bonus de acción rápida murió y todavía faltan días para el cierre. La etapa más descuidada de un lanzamiento, pero aún queda mucho por decidir de cara al cierre. Así que hay que trabajar bien cómo vamos a barrer todas las excusas que quedan.</p></div></li>
+      <li class="hito"><div class="hito-n">06</div><div class="hito-t"><div class="hito-nom">El remate</div><div class="hito-corta">El cierre. Donde se factura buena parte de todo el lanzamiento.</div><p>Incluido el penúltimo email de toda la secuencia, que casi nadie manda, y que es una bomba.</p></div></li>
+      <li class="hito"><div class="hito-n">07</div><div class="hito-t"><div class="hito-nom">La resaca</div><div class="hito-corta">Lo que mandas después, para alimentar tu embudo y los siguientes lanzamientos.</div><p>Cómo cierras el lanzamiento y cómo te posicionas de cara a tu audiencia para decidir la mejor manera de continuar junto a ti tiene un impacto tremendo en tus ingresos futuros. He participado en algunos lanzamientos en los que el objetivo de ventas se cumplió solo con una «lista prioritaria» bien trabajada. Descubre las decisiones y acciones que debes tomar en esta fase para que aumentes las oportunidades de cerrar muchas más ventas a medio y largo plazo.</p></div></li>
+    </ol>
   </div>
 
   <!-- recuento -->
@@ -435,9 +447,18 @@
         <div style="font-family: var(--mono); font-size: 13px; color: var(--bone-2); margin-top: 16px;">pago único. acceso inmediato.</div>
       </div>
       <div class="cta-hit">
-        <a class="js-hotmart" href="#" rel="noopener noreferrer" style="display: block; font-size: clamp(17px, 1.9vw, 21px); font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); padding: 26px 40px; text-align: center;">Dame acceso ahora</a>
+        <a class="js-hotmart" href="#" rel="noopener noreferrer" style="display: block; font-size: clamp(17px, 1.9vw, 21px); font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); padding: 26px 40px; text-align: center;">Dame acceso ahora</a><div class="garantia" style="font-family: var(--mono); font-size: 12px; line-height: 1.6; color: var(--bone-2); text-align: center; margin-top: 12px;"><span style="display:inline-block;width:7px;height:7px;background:var(--gold);margin-right:8px;vertical-align:1px;"></span>15 días de garantía. si no te convence, pides el reembolso en hotmart.</div>
       </div>
     </div>
+  </div>
+
+  <!-- testimonio repartido 4 -->
+  <div class="wrap" style="padding-top: 72px;">
+    <figure style="margin: 0; display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 22px; align-items: start; max-width: 820px; padding: 30px 32px; background: var(--noir-2); border-left: 4px solid var(--gold);">
+      <img src="/li-minano.png" alt="" style="width: 64px; height: 64px; border-radius: 50%; object-fit: cover; display: block; filter: grayscale(1);">
+      <div><blockquote style="margin: 0 0 16px; font-size: clamp(19px, 2vw, 23px); font-weight: 600; font-stretch: 94%; line-height: 1.45; letter-spacing: -0.01em; color: var(--bone);">«Es un gran profesional, con procesos muy estandarizados que le permiten imbuirse rápido y muy bien de las marcas para las que trabaja.»</blockquote>
+      <figcaption style="font-size: 15px; font-weight: 700; color: var(--bone);">Manuel Miñano <span style="font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--bone-3); margin-left: 8px;">empresario · consultor</span></figcaption></div>
+    </figure>
   </div>
 
   <!-- ============ 7 · QUIÉN LOS ESCRIBIÓ ============ -->
@@ -472,7 +493,7 @@
         <div style="font-family: var(--mono); font-size: 13px; color: var(--bone-2); margin-top: 16px;">pago único. acceso inmediato.</div>
       </div>
       <div class="cta-hit">
-        <a class="js-hotmart" href="#" rel="noopener noreferrer" style="display: block; font-size: clamp(17px, 1.9vw, 21px); font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); padding: 26px 40px; text-align: center;">Dame acceso ahora</a>
+        <a class="js-hotmart" href="#" rel="noopener noreferrer" style="display: block; font-size: clamp(17px, 1.9vw, 21px); font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); padding: 26px 40px; text-align: center;">Dame acceso ahora</a><div class="garantia" style="font-family: var(--mono); font-size: 12px; line-height: 1.6; color: var(--bone-2); text-align: center; margin-top: 12px;"><span style="display:inline-block;width:7px;height:7px;background:var(--gold);margin-right:8px;vertical-align:1px;"></span>15 días de garantía. si no te convence, pides el reembolso en hotmart.</div>
       </div>
     </div>
   </div>
@@ -482,30 +503,8 @@
     <h2 class="h-sec" style="font-weight: 900; font-stretch: 82%; line-height: 0.96; letter-spacing: -0.038em; margin: 0 0 46px; color: var(--bone);">Veamos si esto es para ti</h2>
 
     <div class="col-2" style="display: grid; gap: 1px; background: var(--line);">
-
-      <div style="background: var(--noir); padding: 34px 30px 38px;">
-        <div style="font-family: var(--mono); font-size: 13px; font-weight: 600; letter-spacing: 0.06em; color: var(--bone-3); margin-bottom: 26px; padding-bottom: 16px; border-bottom: 1px solid var(--line);">no lo compres si</div>
-        <div style="display: flex; flex-direction: column; gap: 20px;">
-          <div style="display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 14px; align-items: start;"><div style="width: 10px; height: 10px; border: 1px solid var(--bone-3); margin-top: 7px;"></div><div style="font-size: 17px; line-height: 1.6; color: var(--bone-2);">Quieres los emails y nada más, sin mirar el trabajo que hace cada uno ni por qué está donde está.</div></div>
-          <div style="display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 14px; align-items: start;"><div style="width: 10px; height: 10px; border: 1px solid var(--bone-3); margin-top: 7px;"></div><div style="font-size: 17px; line-height: 1.6; color: var(--bone-2);">No tienes lista, oferta, ni intención de hacer un lanzamiento.</div></div>
-          <div style="display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 14px; align-items: start;"><div style="width: 10px; height: 10px; border: 1px solid var(--bone-3); margin-top: 7px;"></div><div style="font-size: 17px; line-height: 1.6; color: var(--bone-2);">Mejorar la comunicación de tu lanzamiento no es algo que te interese.</div></div>
-          <div style="display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 14px; align-items: start;"><div style="width: 10px; height: 10px; border: 1px solid var(--bone-3); margin-top: 7px;"></div><div style="font-size: 17px; line-height: 1.6; color: var(--bone-2);">Esperas que mi curso de cuarenta y siete dólares salve tu negocio.</div></div>
-          <div style="display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 14px; align-items: start;"><div style="width: 10px; height: 10px; border: 1px solid var(--bone-3); margin-top: 7px;"></div><div style="font-size: 17px; line-height: 1.6; color: var(--bone-2);">Te da igual el porqué mientras algo funcione.</div></div>
-        </div>
-      </div>
-
-      <div style="background: #FFFBEA; padding: 34px 30px 38px;">
-        <div style="font-family: var(--mono); font-size: 13px; font-weight: 600; letter-spacing: 0.06em; color: var(--gold); margin-bottom: 26px; padding-bottom: 16px; border-bottom: 1px solid var(--line-gold);">cómpralo si</div>
-        <div style="display: flex; flex-direction: column; gap: 20px;">
-          <div style="display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 14px; align-items: start;"><div style="width: 10px; height: 10px; background: var(--gold); margin-top: 7px;"></div><div style="font-size: 17px; line-height: 1.6; color: var(--bone);">Ya lanzaste y quieres ir optimizando áreas de tu lanzamiento que crees que tienen margen de mejora.</div></div>
-          <div style="display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 14px; align-items: start;"><div style="width: 10px; height: 10px; background: var(--gold); margin-top: 7px;"></div><div style="font-size: 17px; line-height: 1.6; color: var(--bone);">No has lanzado nunca pero estás preparándote para ello y quieres un email marketing con criterio de copywriter experto.</div></div>
-          <div style="display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 14px; align-items: start;"><div style="width: 10px; height: 10px; background: var(--gold); margin-top: 7px;"></div><div style="font-size: 17px; line-height: 1.6; color: var(--bone);">Crees que tu email marketing es demasiado básico o que le falta personalidad.</div></div>
-          <div style="display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 14px; align-items: start;"><div style="width: 10px; height: 10px; background: var(--gold); margin-top: 7px;"></div><div style="font-size: 17px; line-height: 1.6; color: var(--bone);">Quieres diseñar la mejor estrategia de comunicación posible para tu lanzamiento.</div></div>
-          <div style="display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 14px; align-items: start;"><div style="width: 10px; height: 10px; background: var(--gold); margin-top: 7px;"></div><div style="font-size: 17px; line-height: 1.6; color: var(--bone);">Quieres copiar algo que funciona, pero esforzándote en adaptarlo a tu proyecto porque sabes que eso es lo que te va a dar los resultados y no ir a ciegas.</div></div>
-          <div style="display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 14px; align-items: start;"><div style="width: 10px; height: 10px; background: var(--gold); margin-top: 7px;"></div><div style="font-size: 17px; line-height: 1.6; color: var(--bone);">Te fías más de ver el trabajo bien hecho antes que de una promesa bonita.</div></div>
-        </div>
-      </div>
-
+      <div style="background: #FFFBEA; padding: 34px 30px 38px;"><div style="font-family: var(--mono); font-size: 13px; font-weight: 600; letter-spacing: 0.06em; color: var(--gold); margin-bottom: 26px; padding-bottom: 16px; border-bottom: 1px solid var(--line-gold);">cómpralo si</div><div style="display: flex; flex-direction: column; gap: 20px;"><div style="display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 14px; align-items: start;"><div style="width: 10px; height: 10px; background: var(--gold); margin-top: 7px;"></div><div style="font-size: 17px; line-height: 1.6; color: var(--bone);">Ya lanzaste y quieres ir optimizando áreas de tu lanzamiento que crees que tienen margen de mejora.</div></div><div style="display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 14px; align-items: start;"><div style="width: 10px; height: 10px; background: var(--gold); margin-top: 7px;"></div><div style="font-size: 17px; line-height: 1.6; color: var(--bone);">No has lanzado nunca pero estás preparándote para ello y quieres un email marketing con criterio de copywriter experto.</div></div><div style="display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 14px; align-items: start;"><div style="width: 10px; height: 10px; background: var(--gold); margin-top: 7px;"></div><div style="font-size: 17px; line-height: 1.6; color: var(--bone);">Te fías más de ver el trabajo bien hecho antes que de una promesa bonita.</div></div></div></div>
+      <div style="background: var(--noir); padding: 34px 30px 38px;"><div style="font-family: var(--mono); font-size: 13px; font-weight: 600; letter-spacing: 0.06em; color: var(--bone-3); margin-bottom: 26px; padding-bottom: 16px; border-bottom: 1px solid var(--line);">no lo compres si</div><div style="display: flex; flex-direction: column; gap: 20px;"><div style="display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 14px; align-items: start;"><div style="width: 10px; height: 10px; border: 1px solid var(--bone-3); margin-top: 7px;"></div><div style="font-size: 17px; line-height: 1.6; color: var(--bone-2);">No tienes lista, oferta, ni intención de hacer un lanzamiento.</div></div><div style="display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 14px; align-items: start;"><div style="width: 10px; height: 10px; border: 1px solid var(--bone-3); margin-top: 7px;"></div><div style="font-size: 17px; line-height: 1.6; color: var(--bone-2);">Quieres los emails y nada más, sin mirar el trabajo que hace cada uno ni por qué está donde está.</div></div><div style="display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 14px; align-items: start;"><div style="width: 10px; height: 10px; border: 1px solid var(--bone-3); margin-top: 7px;"></div><div style="font-size: 17px; line-height: 1.6; color: var(--bone-2);">Esperas que mi curso de cuarenta y siete dólares salve tu negocio.</div></div></div></div>
     </div>
   </div>
 
@@ -543,7 +542,7 @@
           <div style="font-family: var(--mono); font-size: 14px; color: var(--bone-2); margin-top: 18px;">pago único. acceso inmediato.</div>
         </div>
         <div class="cta-hit">
-          <a class="js-hotmart" href="#" rel="noopener noreferrer" style="display: block; font-size: clamp(18px, 2vw, 22px); font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); padding: 28px 40px; text-align: center;">Dame acceso ahora</a>
+          <a class="js-hotmart" href="#" rel="noopener noreferrer" style="display: block; font-size: clamp(18px, 2vw, 22px); font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); padding: 28px 40px; text-align: center;">Dame acceso ahora</a><div class="garantia" style="font-family: var(--mono); font-size: 12px; line-height: 1.6; color: var(--bone-2); text-align: center; margin-top: 12px;"><span style="display:inline-block;width:7px;height:7px;background:var(--gold);margin-right:8px;vertical-align:1px;"></span>15 días de garantía. si no te convence, pides el reembolso en hotmart.</div>
         </div>
       </div>
     </div>
@@ -621,7 +620,7 @@
         <p style="font-size: clamp(21px, 2.4vw, 28px); line-height: 1.5; color: var(--bone); margin: 0;">Y si te vale, me alegro mucho, te doy la bienvenida a bordo y espero tu feedback con muchas ganas.</p>
       </div>
 
-      <a class="js-hotmart" href="#" rel="noopener noreferrer" style="display: block; font-size: clamp(20px, 2.6vw, 32px); font-weight: 900; font-stretch: 82%; letter-spacing: -0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); padding: 34px 40px; text-align: center; line-height: 1.14;">Quiero hacer email marketing como un fucking pro</a>
+      <a class="js-hotmart" href="#" rel="noopener noreferrer" style="display: block; font-size: clamp(20px, 2.6vw, 32px); font-weight: 900; font-stretch: 82%; letter-spacing: -0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); padding: 34px 40px; text-align: center; line-height: 1.14;">Quiero hacer email marketing como un fucking pro</a><div class="garantia" style="font-family: var(--mono); font-size: 12px; line-height: 1.6; color: var(--bone-2); text-align: center; margin-top: 12px;"><span style="display:inline-block;width:7px;height:7px;background:var(--gold);margin-right:8px;vertical-align:1px;"></span>15 días de garantía. si no te convence, pides el reembolso en hotmart.</div>
 
       <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 24px;">
         <div style="width: 7px; height: 7px; background: var(--gold);"></div>
@@ -643,7 +642,7 @@
     <div class="wrap" style="padding-top: 12px; padding-bottom: 12px; display: flex; align-items: center; justify-content: space-between; gap: 16px;">
       <div style="display: flex; align-items: baseline; gap: 12px;">
         <div style="font-size: 30px; font-weight: 900; font-stretch: 78%; letter-spacing: -0.04em; color: var(--gold); line-height: 1;">47 $</div>
-        <div style="font-family: var(--mono); font-size: 11px; color: var(--bone-3);">pago único</div>
+        <div style="font-family: var(--mono); font-size: 11px; color: var(--bone-3);">pago único · 15 días de garantía</div>
       </div>
       <a class="js-hotmart" href="#" rel="noopener noreferrer" style="font-size: 14px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); padding: 13px 26px;">Dame acceso ahora</a>
     </div>
