@@ -29,6 +29,7 @@
 <link rel="stylesheet" href="/css/dgc-tokens.css">
 <link rel="stylesheet" href="/css/dgc-componentes.css">
 <link rel="stylesheet" href="/css/home.css">
+<link rel="stylesheet" href="/css/regalos.css">
 </head>
 <body>
 
@@ -51,7 +52,7 @@
           </div>
           <div class="hero-txt">
             <p class="hero-sub">Llevo seis años escribiendo los lanzamientos de otros infoproductores. En mis emails te cuento lo que veo desde dentro:</p><ul class="hero-puntos"><li>Lo que funciona, con sus números.</li><li>Lo que no funcionó, y por qué.</li><li>Las piezas que lo cambian, desmontadas.</li></ul>
-            <div><a class="dg-btn dg-btn--primario dg-btn--grande" href="#lista">quiero estar dentro <span class="dg-arrow">→</span></a></div><div style="font-family: var(--font-mono); font-size: 12px; letter-spacing: .04em; color: var(--ink-subtle);">la lista · gratis · te das de baja cuando quieras</div><div></div>
+            <div><a class="dg-btn dg-btn--primario dg-btn--grande" href="#lista">quiero los números <span class="dg-arrow">→</span></a></div><div style="font-family: var(--font-mono); font-size: 12px; letter-spacing: .04em; color: var(--ink-subtle);">regalo · 17 lanzamientos con sus números · gratis</div><div></div>
           </div>
           <div class="hero-photo">
             <div class="dg-foto" style="width: 100%; max-width: 420px; aspect-ratio: 4 / 3;"><img src="/daniel.jpg" alt="Daniel García de Celis"></div>
@@ -90,7 +91,7 @@
               <div><div class="vid-nombre">Jose Javier Pastor</div><div class="vid-rol">hackaviss · ciberseguridad</div></div>
             </a>
           </div>
-          <div class="cta-fila"><a class="dg-btn dg-btn--primario dg-btn--grande" href="#lista">quiero estar dentro <span class="dg-arrow">→</span></a><span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: .04em; color: var(--ink-subtle);">la lista · gratis</span></div>
+          <div class="cta-fila"><a class="dg-btn dg-btn--primario dg-btn--grande" href="#lista">quiero los números <span class="dg-arrow">→</span></a><span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: .04em; color: var(--ink-subtle);">regalo · gratis</span></div>
         </div>
       </div>
     </div>
@@ -137,15 +138,24 @@
         <div class="cnt">
           <div class="regalo">
             <div style="display: flex; flex-direction: column; gap: 20px;">
-              <h2 style="margin: 0; font-family: var(--font-display); font-weight: 900; font-stretch: 80%; font-size: clamp(40px, 4.6vw, 68px); line-height: .92; letter-spacing: -.035em;">Apúntate a <span class="dg-mark">la lista</span></h2>
-              <p style="margin: 0; font-size: 19px; line-height: 1.6; color: var(--ink-muted); max-width: 48ch;">Emails con lo que aprendo escribiendo lanzamientos de verdad. Lo que funciona, lo que no y por qué. Cuando haya algo que contar, te escribo.</p>
+              <span style="font-family: var(--font-mono); font-size: 12px; letter-spacing: .04em; color: var(--ink-subtle);">regalo · gratis</span>
+              <h2 style="margin: 0; font-family: var(--font-display); font-weight: 900; font-stretch: 80%; font-size: clamp(40px, 4.6vw, 68px); line-height: .92; letter-spacing: -.035em;">Los números reales de <span class="dg-mark">17 lanzamientos</span></h2>
+              <p style="margin: 0; font-size: 19px; line-height: 1.6; color: var(--ink-muted); max-width: 48ch;">Del clic a la compra, etapa a etapa: la mediana, el peor y el mejor de 17 lanzamientos y 4 embudos en los que escribí el copy. Sin nombres y sin redondear a favor.</p>
+              <ul class="rg-lista">
+                <li><span><b>La etapa donde más se miente.</b> Las plantillas cuentan con casi cuatro veces más ventas de las reales.</span></li>
+                <li><span><b>El registro barato que salió caro.</b> Costaba ocho veces menos y cerraba menos de la mitad.</span></li>
+                <li><span><b>Dónde se pierden las ventas en un embudo con llamada.</b> Y no es en la llamada.</span></li>
+              </ul>
             </div>
             <div class="regalo-caja">
-              <form class="dg-form js-lista-form" data-source="home" novalidate style="max-width: none;">
-                <div class="campo"><label for="r-nombre">nombre</label><input class="dg-input" id="r-nombre" type="text" name="nombre" placeholder="Tu nombre"></div>
-                <div class="campo"><label for="r-email">email</label><input class="dg-input" id="r-email" type="email" name="email" placeholder="tu@email.com" required autocomplete="email"></div>
-                <button class="dg-btn dg-btn--primario dg-btn--grande" type="submit" style="width: 100%; justify-content: center;">quiero estar dentro <span class="dg-arrow">→</span></button>
-                <div class="dg-form__nota legal-nota">sin spam. te das de baja cuando quieras. tus datos los trata High Impact Systems LLC para enviarte la lista: <a href="/privacidad/">más info</a>.</div>
+              <form class="dg-form js-regalo-form" data-source="home" data-regalo="numeros" novalidate style="max-width: none;">
+                <div class="rg-campos" style="display: flex; flex-direction: column; gap: 16px;">
+                  <div class="campo"><label for="r-nombre">nombre</label><input class="dg-input" id="r-nombre" type="text" name="nombre" placeholder="Tu nombre" autocomplete="given-name"></div>
+                  <div class="campo"><label for="r-email">email</label><input class="dg-input" id="r-email" type="email" name="email" placeholder="tu@email.com" required autocomplete="email"></div>
+                  <button class="dg-btn dg-btn--primario dg-btn--grande" type="submit" style="width: 100%; justify-content: center;">quiero los números <span class="dg-arrow">→</span></button>
+                  <div class="dg-form__nota legal-nota">te lo mando al email y quedas dentro de la lista. te das de baja cuando quieras. tus datos los trata High Impact Systems LLC: <a href="/privacidad/">más info</a>.</div>
+                </div>
+                <div class="rg-ok"><b>Hecho.</b> Te acabo de mandar el enlace al email. Si en un par de minutos no lo ves, mira en promociones o en spam.</div>
               </form>
             </div>
           </div>
@@ -200,7 +210,7 @@
         <div></div>
         <div class="cnt" style="padding-top: 64px; padding-bottom: 64px; display: flex; flex-wrap: wrap; gap: 28px 48px; align-items: center; justify-content: space-between;">
           <p style="margin: 0; font-family: var(--font-display); font-weight: 900; font-stretch: 82%; font-size: clamp(30px, 3.4vw, 46px); line-height: 1; letter-spacing: -.03em; max-width: 20ch; color: var(--on-accent);">Emails con lo que aprendo escribiendo lanzamientos de verdad.</p>
-          <a class="dg-btn dg-btn--grande btn-invertido" href="#lista">quiero estar dentro <span class="dg-arrow">→</span></a>
+          <a class="dg-btn dg-btn--grande btn-invertido" href="#lista">quiero los números <span class="dg-arrow">→</span></a>
         </div>
       </div>
     </div>
@@ -225,15 +235,18 @@
     <div class="popup-fondo" data-overlay="1">
       <div class="popup-caja">
         <button type="button" class="popup-cerrar" data-cerrar="1" aria-label="Cerrar">×</button>
-        <span class="dg-label" style="margin-bottom: 22px;">antes de irte</span>
-        <h3 style="margin: 0 0 16px; font-family: var(--font-display); font-weight: 900; font-stretch: 80%; font-size: clamp(30px, 4vw, 44px); line-height: .95; letter-spacing: -.035em;">Apúntate a <span class="dg-mark">la lista</span></h3>
-        <p style="margin: 0 0 26px; font-size: 17px; line-height: 1.6; color: var(--ink-muted);">Emails con lo que aprendo escribiendo lanzamientos de verdad. Cuando haya algo que contar, te escribo.</p>
-        <form class="dg-form js-lista-form" data-source="popup" novalidate>
-          <div class="dg-form__fila">
-            <input class="dg-input" type="email" name="email" placeholder="tu@email.com" required autocomplete="email" aria-label="Email">
-            <button class="dg-btn dg-btn--primario" type="submit">quiero estar dentro</button>
+        <span class="dg-label" style="margin-bottom: 22px;">antes de irte · regalo</span>
+        <h3 style="margin: 0 0 16px; font-family: var(--font-display); font-weight: 900; font-stretch: 80%; font-size: clamp(30px, 4vw, 44px); line-height: .95; letter-spacing: -.035em;">Llévate los números de <span class="dg-mark">17 lanzamientos</span></h3>
+        <p style="margin: 0 0 26px; font-size: 17px; line-height: 1.6; color: var(--ink-muted);">Del clic a la compra, etapa a etapa, con la mediana, el peor y el mejor. Gratis, al email.</p>
+        <form class="dg-form js-regalo-form" data-source="popup" data-regalo="numeros" novalidate>
+          <div class="rg-campos">
+            <div class="dg-form__fila">
+              <input class="dg-input" type="email" name="email" placeholder="tu@email.com" required autocomplete="email" aria-label="Email">
+              <button class="dg-btn dg-btn--primario" type="submit">quiero los números</button>
+            </div>
+            <div class="dg-form__nota legal-nota">te lo mando al email y quedas dentro de la lista. te das de baja cuando quieras. tus datos los trata High Impact Systems LLC: <a href="/privacidad/">más info</a>.</div>
           </div>
-          <div class="dg-form__nota legal-nota">sin spam. te das de baja cuando quieras. tus datos los trata High Impact Systems LLC para enviarte la lista: <a href="/privacidad/">más info</a>.</div>
+          <div class="rg-ok"><b>Hecho.</b> Te acabo de mandar el enlace al email.</div>
         </form>
       </div>
     </div>
@@ -327,5 +340,6 @@
   });
 })();
 </script>
+<script src="/js/lista.js" defer></script>
 </body>
 </html>
