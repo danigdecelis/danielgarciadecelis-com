@@ -111,3 +111,21 @@ a { color: var(--ink); }
 .inf, .inf-pie { max-width: 780px; }
 .ups-sec > .ups-compra, .wrap > .ups-compra:not(#compra) { max-width: 620px; }
 .ups-barra .wrap { max-width: none; }
+
+/* 21-oct noche: informe de ejemplo completo (salida del motor real) en ventana */
+.inf-resto p { margin: 0 0 16px; }
+.inf-abrir { display: inline-flex; align-items: center; gap: 10px; background: var(--ink); color: var(--bg); border: 0; font-family: var(--font-sans); font-size: 16px; font-weight: 700; letter-spacing: .02em; text-transform: uppercase; padding: 16px 22px; cursor: pointer; transition: background .16s ease, color .16s ease; }
+.inf-abrir:hover { background: var(--accent); color: var(--on-accent); }
+.inf-abrir:focus-visible, .inf-cerrar:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+.inf-tabla th { text-align: left; font-family: var(--font-mono); font-size: 12px; font-weight: 600; border-bottom: 2px solid var(--ink); padding: 7px 6px; }
+.inf-tabla-txt td:last-child, .inf-tabla-ref td:last-child { text-align: left; font-family: var(--font-sans); font-size: 15px; }
+.inf-tabla-txt td { vertical-align: top; } .inf-tabla-txt td:first-child { white-space: nowrap; padding-right: 16px; }
+.inf-tabla-ref td:nth-child(2) { white-space: nowrap; }
+dialog.inf-dlg { width: min(820px, calc(100vw - 32px)); max-height: calc(100vh - 48px); overflow-y: auto; overscroll-behavior: contain; padding: 0; border: 1px solid var(--line-strong); background: var(--bg); color: var(--ink); }
+dialog.inf-dlg::backdrop { background: rgba(10, 11, 13, .72); }
+.inf-dlg-cab { position: sticky; top: 0; z-index: 1; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 10px 14px 10px 24px; background: var(--ink); color: var(--bg); font-family: var(--font-mono); font-size: 12px; letter-spacing: .04em; }
+.inf-cerrar { width: 40px; height: 40px; border: 1px solid currentColor; background: transparent; color: inherit; font-size: 22px; line-height: 1; cursor: pointer; }
+.inf-dlg .inf-cuerpo { padding-bottom: 20px; }
+.inf-dlg-pie { margin: 0; padding: 0 24px 22px; }
+body.dlg-abierto { overflow: hidden; }
+@media (max-width: 560px) { .inf-tabla-txt td:first-child { white-space: normal; } .inf-dlg-pie { padding: 0 16px 18px; } }
