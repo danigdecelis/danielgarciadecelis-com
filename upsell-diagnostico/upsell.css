@@ -67,3 +67,33 @@ a { color: var(--ink); }
   .ups-compra { padding: 22px 16px 18px; }
   .ups-testi { grid-template-columns: 1fr; padding: 22px 18px; }
 }
+
+/* informe de muestra: reproduce la estructura real del informe (servidor.gs, renderInforme) con datos inventados */
+.inf { border: 1px solid var(--line-strong); background: var(--bg); position: relative; }
+.inf-cinta { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; background: var(--ink); color: var(--bg); font-family: var(--font-mono); font-size: 11px; letter-spacing: .04em; padding: 9px 18px; }
+.inf-cuerpo { padding: 26px 24px 8px; }
+.inf-tag { font-family: var(--font-mono); font-size: 12px; color: var(--ink-subtle); margin: 0 0 6px; }
+.inf-h1 { font-size: clamp(26px, 5vw, 34px); line-height: 1.1; font-weight: 800; font-stretch: 90%; margin: 4px 0 10px; }
+.inf-nivel { font-size: 16px; line-height: 1.5; margin: 0 0 12px; }
+.inf-intro { font-size: 15px; line-height: 1.6; color: var(--ink-muted); margin: 0; }
+.inf-sec { margin: 30px 0 0; }
+.inf-h2 { font-size: 19px; line-height: 1.25; font-weight: 700; margin: 0 0 14px; padding-bottom: 8px; border-bottom: 2px solid var(--ink); }
+.inf-radar { width: 100%; max-width: 400px; display: block; margin: 0 auto 10px; }
+.inf-tabla { width: 100%; border-collapse: collapse; font-size: 15px; font-variant-numeric: tabular-nums; }
+.inf-tabla td { border-bottom: 1px solid var(--line); padding: 7px 6px; }
+.inf-tabla td:last-child { text-align: right; font-family: var(--font-mono); font-size: 14px; }
+.inf-victoria { background: var(--accent); color: var(--on-accent); padding: 14px 16px; font-weight: 600; font-size: 16px; line-height: 1.5; }
+.inf-p { font-size: 15px; line-height: 1.65; margin: 0 0 12px; }
+.inf-fuga { border: 1px solid var(--line-strong); padding: 18px 18px 6px; margin: 0 0 14px; }
+.inf-fuga-n { font-family: var(--font-mono); font-size: 12px; color: var(--ink-subtle); text-transform: uppercase; letter-spacing: .03em; }
+.inf-fuga h3 { font-size: 19px; line-height: 1.3; font-weight: 700; margin: 6px 0 10px; }
+.inf-cifra { background: var(--accent); color: var(--on-accent); padding: 10px 12px; margin: 12px 0 6px; font-weight: 600; font-size: 15px; line-height: 1.5; }
+.inf-ref { font-size: 13px; color: var(--ink-subtle); margin: 0 0 12px; }
+.inf-pasos { margin: 4px 0 12px; padding-left: 22px; font-size: 15px; line-height: 1.6; }
+.inf-pasos li { margin: 0 0 6px; }
+.inf-dest { font-family: var(--font-mono); font-size: 12px; color: var(--ink-muted); margin: 4px 0 12px; }
+.inf-plegada h3 { margin-bottom: 12px; }
+.inf-resto { border-top: 1px dashed var(--line-strong); margin: 22px 0 0; padding: 16px 0 18px; font-size: 14px; line-height: 1.6; color: var(--ink-muted); }
+.inf-resto b { color: var(--ink); }
+.inf-pie { font-family: var(--font-mono); font-size: 12px; color: var(--ink-muted); margin: 14px 0 0; }
+@media (max-width: 560px) { .inf-cuerpo { padding: 22px 16px 6px; } .inf-fuga { padding: 16px 14px 4px; } }
