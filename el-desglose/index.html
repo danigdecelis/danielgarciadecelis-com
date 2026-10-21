@@ -89,12 +89,13 @@
     .hero-compra { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 48px; align-items: start; margin-top: 0; }
     .hero-caja { background: var(--noir-2); border: 1px solid var(--line); border-top: 6px solid var(--accent); padding: 26px 28px 24px; display: flex; flex-direction: column; gap: 10px; }
     .hero-precio { font-size: clamp(60px, 6vw, 84px); font-weight: 900; font-stretch: 78%; line-height: 0.82; letter-spacing: -0.055em; color: var(--bone); }
-    .hero-pago { font-family: var(--mono); font-size: 13px; color: var(--bone-2); margin-bottom: 8px; }
+    .hero-pago { font-family: var(--mono); font-size: 14px; color: var(--bone-2); margin-bottom: 8px; }
     .hero-boton { display: block; font-size: 18px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: #0a0a0a; background: var(--accent); padding: 22px 24px; text-align: center; line-height: 1.2; }
-    .hero-garantia { font-family: var(--mono); font-size: 12px; line-height: 1.6; color: var(--bone-2); text-align: center; }
+    .hero-garantia { font-family: var(--mono); font-size: 13px; line-height: 1.6; color: var(--bone-2); text-align: center; }
     .hero-garantia span { display: inline-block; width: 7px; height: 7px; background: var(--accent); margin-right: 8px; vertical-align: 1px; }
     @media (max-width: 1000px) { .hero-compra { grid-template-columns: minmax(0, 1fr); gap: 28px; } }
   </style>
+  <style>.foto-com{filter:grayscale(1);transition:filter .3s ease}figure:hover .foto-com,figure:focus-within .foto-com{filter:none}</style>
 </head>
 <body>
 
@@ -112,15 +113,15 @@
 
   <!-- ============ 1 · CABECERA ============ -->
   <div class="wrap" style="padding-top: 56px; padding-bottom: 72px;">
-    <div><div style="font-family: var(--mono); font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--bone-2); margin-bottom: 22px;">Arsenal completo de email marketing para tu lanzamiento</div><h1 class="h-hero largo" style="font-weight: 900; font-stretch: 80%; line-height: 0.9; letter-spacing: -0.042em; margin: 0 0 34px; color: var(--bone); text-wrap: pretty;">31 piezas para montar una secuencia ganadora como las que he escrito para decenas de lanzamientos de <span class="mark">5, 6 y 7 cifras.</span></h1>
-    <div class="hero-compra"><div><p style="font-size: clamp(20px, 2.3vw, 27px); font-weight: 400; line-height: 1.5; color: var(--bone-2); margin: 0; max-width: 64ch;">Descubre qué tiene que pasar por la cabeza del lector en cada momento del lanzamiento, y cómo cada pieza interactúa con las demás para preparar el terreno hacia la venta.</p><ul style="list-style: none; margin: 28px 0 0; padding: 0; display: flex; flex-direction: column; gap: 12px;"><li style="display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 12px; align-items: baseline; font-size: clamp(20px, 2.3vw, 27px); font-weight: 800; font-stretch: 92%; line-height: 1.3; letter-spacing: -0.01em; color: var(--bone);"><span style="width: 12px; height: 12px; background: var(--accent); display: inline-block;"></span><span>Aunque nunca hayas hecho email marketing.</span></li><li style="display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 12px; align-items: baseline; font-size: clamp(20px, 2.3vw, 27px); font-weight: 800; font-stretch: 92%; line-height: 1.3; letter-spacing: -0.01em; color: var(--bone);"><span style="width: 12px; height: 12px; background: var(--accent); display: inline-block;"></span><span>Aunque tu nicho no se parezca a ninguno de los del curso.</span></li><li style="display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 12px; align-items: baseline; font-size: clamp(20px, 2.3vw, 27px); font-weight: 800; font-stretch: 92%; line-height: 1.3; letter-spacing: -0.01em; color: var(--bone);"><span style="width: 12px; height: 12px; background: var(--accent); display: inline-block;"></span><span>Sin usar la IA a lo loco, como hace todo el mundo.</span></li></ul></div><div class="hero-caja"><div class="hero-precio">47 $</div><div class="hero-pago">pago único. lo tienes entero en cuanto pagas.</div><a class="js-hotmart hero-boton" href="#" rel="noopener noreferrer">Quiero verlo por dentro</a><div class="hero-garantia"><span></span>15 días de garantía. si no te convence, pides el reembolso en hotmart.</div></div></div></div>
+    <div><div style="font-family: var(--mono); font-size: 14px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--bone-2); margin-bottom: 22px;">Arsenal completo de email marketing para tu lanzamiento</div><h1 class="h-hero largo" style="font-weight: 900; font-stretch: 80%; line-height: 0.9; letter-spacing: -0.042em; margin: 0 0 34px; color: var(--bone); text-wrap: pretty;">31 piezas para montar una secuencia ganadora como las que he escrito para decenas de lanzamientos de <span class="mark">5, 6 y 7 cifras.</span></h1>
+    <div class="hero-compra"><div><p style="font-size: clamp(20px, 2.3vw, 27px); font-weight: 400; line-height: 1.5; color: var(--bone-2); margin: 0; max-width: 64ch;">Descubre qué tiene que pasar por la cabeza del lector en cada momento del lanzamiento, y cómo cada pieza interactúa con las demás para preparar el terreno hacia la venta.</p><ul style="list-style: none; margin: 28px 0 0; padding: 0; display: flex; flex-direction: column; gap: 12px;"><li style="display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 12px; align-items: baseline; font-size: clamp(20px, 2.3vw, 27px); font-weight: 800; font-stretch: 92%; line-height: 1.3; letter-spacing: -0.01em; color: var(--bone);"><span style="width: 12px; height: 12px; background: var(--accent); display: inline-block;"></span><span>Aunque nunca hayas hecho email marketing.</span></li><li style="display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 12px; align-items: baseline; font-size: clamp(20px, 2.3vw, 27px); font-weight: 800; font-stretch: 92%; line-height: 1.3; letter-spacing: -0.01em; color: var(--bone);"><span style="width: 12px; height: 12px; background: var(--accent); display: inline-block;"></span><span>Aunque tu nicho sea «especial».</span></li><li style="display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 12px; align-items: baseline; font-size: clamp(20px, 2.3vw, 27px); font-weight: 800; font-stretch: 92%; line-height: 1.3; letter-spacing: -0.01em; color: var(--bone);"><span style="width: 12px; height: 12px; background: var(--accent); display: inline-block;"></span><span>Sin usar la IA a ciegas: con el criterio de lanzamientos que ya han facturado 5, 6 y 7 cifras.</span></li></ul></div><div class="hero-caja"><div class="hero-precio">47 $</div><div class="hero-pago">pago único. lo tienes entero en cuanto pagas.</div><a class="js-hotmart hero-boton" href="#" rel="noopener noreferrer">Quiero verlo por dentro</a><div class="hero-garantia"><span></span>15 días de garantía. si no te convence, pides el reembolso en hotmart.</div></div></div></div>
   </div>
 
   <!-- comentarios -->
   <div class="wrap" style="padding-top: 72px; padding-bottom: 72px;">
     <div class="col-2" style="display: grid; gap: 20px;">
-      <figure style="margin: 0; display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 18px; align-items: start; padding: 28px 28px; background: var(--noir-2); border-left: 4px solid var(--accent);"><img src="/li-carbonel.png" alt="" style="width: 56px; height: 56px; border-radius: 50%; object-fit: cover; display: block; filter: grayscale(1);"><div><blockquote style="margin: 0 0 14px; font-size: clamp(18px, 1.7vw, 21px); font-weight: 600; font-stretch: 94%; line-height: 1.45; letter-spacing: -0.01em; color: var(--bone);">«Hicimos un match increíblemente potente para levantar un proyecto literalmente de cero y ponerlo en órbita en 2 años llegando a los +2M de facturación.»</blockquote><figcaption style="font-size: 15px; font-weight: 700; color: var(--bone);">David Carbonel <span style="display: block; font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--bone-3); margin-top: 4px;">founder de0a100 agency · sobre el proyecto de José Muñoz</span></figcaption></div></figure>
-      <figure style="margin: 0; display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 18px; align-items: start; padding: 28px 28px; background: var(--noir-2); border-left: 4px solid var(--accent);"><img src="/li-monleon.png" alt="" style="width: 56px; height: 56px; border-radius: 50%; object-fit: cover; display: block; filter: grayscale(1);"><div><blockquote style="margin: 0 0 14px; font-size: clamp(18px, 1.7vw, 21px); font-weight: 600; font-stretch: 94%; line-height: 1.45; letter-spacing: -0.01em; color: var(--bone);">«Los textos parecen que hayan sido escritos por el propio cliente, sabe detectar el tono de comunicación de cada marca y adaptarse a su estilo.»</blockquote><figcaption style="font-size: 15px; font-weight: 700; color: var(--bone);">David Monleón <span style="display: block; font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--bone-3); margin-top: 4px;">consultor vsl · estratega de publicidad</span></figcaption></div></figure>
+      <figure style="margin: 0; display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 18px; align-items: start; padding: 28px 28px; background: var(--noir-2); border-left: 4px solid var(--accent);"><img class="foto-com" src="/li-carbonel.png" alt="" style="width: 56px; height: 56px; border-radius: 50%; object-fit: cover; display: block;"><div><blockquote style="margin: 0 0 14px; font-size: clamp(18px, 1.7vw, 21px); font-weight: 600; font-stretch: 94%; line-height: 1.45; letter-spacing: -0.01em; color: var(--bone);">«Hicimos un match increíblemente potente para levantar un proyecto literalmente de cero y ponerlo en órbita en 2 años llegando a los +2M de facturación.»</blockquote><figcaption style="font-size: 15px; font-weight: 700; color: var(--bone);">David Carbonel <span style="display: block; font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--bone-3); margin-top: 4px;">founder de0a100 agency · sobre el proyecto de José Muñoz</span></figcaption></div></figure>
+      <figure style="margin: 0; display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 18px; align-items: start; padding: 28px 28px; background: var(--noir-2); border-left: 4px solid var(--accent);"><img class="foto-com" src="/li-monleon.png" alt="" style="width: 56px; height: 56px; border-radius: 50%; object-fit: cover; display: block;"><div><blockquote style="margin: 0 0 14px; font-size: clamp(18px, 1.7vw, 21px); font-weight: 600; font-stretch: 94%; line-height: 1.45; letter-spacing: -0.01em; color: var(--bone);">«Los textos parecen que hayan sido escritos por el propio cliente, sabe detectar el tono de comunicación de cada marca y adaptarse a su estilo.»</blockquote><figcaption style="font-size: 15px; font-weight: 700; color: var(--bone);">David Monleón <span style="display: block; font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--bone-3); margin-top: 4px;">consultor vsl · estratega de publicidad</span></figcaption></div></figure>
     </div>
   </div>
 
@@ -138,7 +139,7 @@
   <div class="dentro-sec">
     <div class="wrap" style="padding-top: 84px; padding-bottom: 88px;">
       <h2 class="h-sec" style="font-weight: 900; font-stretch: 82%; line-height: 0.96; letter-spacing: -0.038em; margin: 0 0 22px; color: var(--bone);">Qué hay dentro de <span class="mark">El Desglose</span></h2>
-      <p style="font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em; color: var(--bone-3); margin: 0 0 18px;">el lanzamiento entero, en siete fases</p>
+      <p style="font-family: var(--mono); font-size: 13px; letter-spacing: 0.04em; color: var(--bone-3); margin: 0 0 18px;">el lanzamiento entero, en siete fases</p>
       <style>.fases-linea{display:grid;grid-template-columns:repeat(7,minmax(104px,1fr));overflow-x:auto;margin:0 0 48px;position:relative}.fases-linea::before{content:"";position:absolute;left:0;right:0;top:19px;height:2px;background:var(--accent)}.fases-linea div{position:relative;padding-right:10px}.fases-linea b{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--accent);color:#0a0a0a;font-family:var(--mono);font-size:13px;position:relative}.fases-linea span{display:block;margin-top:12px;font-size:15px;font-weight:800;font-stretch:88%;text-transform:uppercase;letter-spacing:-0.01em;color:var(--bone);line-height:1.15}</style><div class="fases-linea" aria-label="Las siete fases de un lanzamiento"><div><b>01</b><span>La convocatoria</span></div><div><b>02</b><span>El cortejo</span></div><div><b>03</b><span>La cita</span></div><div><b>04</b><span>La acción</span></div><div><b>05</b><span>El valle de las sombras</span></div><div><b>06</b><span>El remate</span></div><div><b>07</b><span>La resaca</span></div></div>
       <ul class="dentro-grid"><li class="dentro-card"><span class="dentro-n">01</span><h3>Ni un email improvisado.</h3><p>Los 31 que necesita tu lanzamiento, reales y completos. Sin recortar.</p></li><li class="dentro-card"><span class="dentro-n">02</span><h3>Por qué funciona cada uno.</h3><p>Las tripas de cada pieza, abiertas punto por punto. Sin eso tienes una plantilla; con eso, criterio.</p></li><li class="dentro-card"><span class="dentro-n">03</span><h3>Lo que no cabe en un email.</h3><p>Siete vídeos, uno por fase, con las decisiones que no se explican por escrito.</p></li><li class="dentro-card"><span class="dentro-n">04</span><h3>Cada email, en su día y a su hora.</h3><p>Dos calendarios completos: webinar de un día o evento de varias jornadas.</p></li><li class="dentro-card"><span class="dentro-n">05</span><h3>El mapa antes de la primera línea.</h3><p>El capítulo de apertura: el lanzamiento entero en la cabeza y la regla de oro que lo resume todo.</p></li><li class="dentro-card"><span class="dentro-n">06</span><h3>IA con criterio, no a lo loco.</h3><p>Cómo la uso para diseñar y escribir las secuencias sin que suenen a IA.</p></li></ul>
     </div>
@@ -149,7 +150,7 @@
     .muestra-mail p { font-size: 17px; line-height: 1.65; color: var(--bone); margin: 0 0 14px; }
     .muestra-mail p.ps { font-style: italic; color: var(--bone-2); }
     .tripa { margin: -6px 0 16px; }
-    .tripa summary { cursor: pointer; list-style: none; display: inline-flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 13px; font-weight: 600; color: var(--bone); padding: 6px 12px 6px 6px; background: rgba(255, 210, 63, 0.28); border: 1px solid var(--accent); }
+    .tripa summary { cursor: pointer; list-style: none; display: inline-flex; align-items: center; gap: 10px; font-family: var(--mono); font-size: 14px; font-weight: 600; color: var(--bone); padding: 6px 12px 6px 6px; background: rgba(255, 210, 63, 0.28); border: 1px solid var(--accent); }
     .tripa summary::-webkit-details-marker { display: none; }
     .tripa .tn { width: 22px; height: 22px; border-radius: 50%; background: var(--accent); color: #0a0a0a; display: grid; place-items: center; font-size: 12px; }
     .tripa[open] summary { background: var(--accent); color: #0a0a0a; }
@@ -160,16 +161,16 @@
     .btn-muestra:focus-visible, .muestra-cerrar:focus-visible { outline: 3px solid var(--bone); outline-offset: 3px; }
     dialog.muestra-dlg { width: min(820px, calc(100vw - 32px)); max-height: calc(100vh - 48px); overflow-y: auto; overscroll-behavior: contain; padding: 0; border: 1px solid var(--line); background: var(--noir-2); color: var(--bone); }
     dialog.muestra-dlg::backdrop { background: rgba(10, 11, 13, 0.72); }
-    .muestra-dlg-cab { position: sticky; top: 0; z-index: 1; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 14px 18px 14px 26px; background: var(--noir-2); border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em; color: var(--bone-3); }
+    .muestra-dlg-cab { position: sticky; top: 0; z-index: 1; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 14px 18px 14px 26px; background: var(--noir-2); border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: 13px; letter-spacing: 0.04em; color: var(--bone-3); }
     .muestra-cerrar { width: 40px; height: 40px; border: 1px solid var(--line); background: transparent; color: var(--bone); font-size: 22px; line-height: 1; cursor: pointer; }
     body.dlg-abierto { overflow: hidden; }
   </style>
   <div class="wrap" style="padding-top: 82px;">
-    <div style="font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.04em; color: var(--bone-3); margin-bottom: 18px;">antes de pagar</div>
+    <div style="font-family: var(--mono); font-size: 13px; font-weight: 500; letter-spacing: 0.04em; color: var(--bone-3); margin-bottom: 18px;">antes de pagar</div>
     <h2 class="h-sec" style="font-weight: 900; font-stretch: 82%; line-height: 0.96; letter-spacing: -0.038em; margin: 0 0 24px; color: var(--bone); max-width: 18ch;">Lee uno entero, <span class="mark">gratis</span></h2>
     <p style="font-size: 19px; line-height: 1.7; color: var(--bone-2); margin: 0 0 36px; max-width: 58ch;">Es el email 26, de la fase del remate. Tal cual viene en el curso. Ábrelo y pulsa cada número para ver qué hace esa parte del email y por qué está ahí.</p>
     <div style="border: 1px solid var(--line); background: var(--noir-2); max-width: 760px;">
-      <div style="padding: 20px 26px; border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: 13px; line-height: 1.8; color: var(--bone-2);"><b style="color: var(--bone); font-weight: 600;">asunto:</b> Tres cosas malas del programa<br><b style="color: var(--bone); font-weight: 600;">preheader:</b> Mañana es el último día, así que toca contarlas.</div>
+      <div style="padding: 20px 26px; border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: 14px; line-height: 1.8; color: var(--bone-2);"><b style="color: var(--bone); font-weight: 600;">asunto:</b> Tres cosas malas del programa<br><b style="color: var(--bone); font-weight: 600;">preheader:</b> Mañana es el último día, así que toca contarlas.</div>
       <div class="muestra-mail muestra-teaser" style="padding: 26px 26px 0;">
         <p>Ey.</p>
         <p>Queda un día para que se cierre esto y me apetece hacer algo poco habitual para la recta final: contarte lo que el programa hace mal.</p>
@@ -178,11 +179,11 @@
       </div>
       <div style="padding: 8px 26px 28px;"><button type="button" class="btn-muestra js-abrir-muestra">Leer el email entero <span aria-hidden="true">→</span></button></div>
     </div>
-    <p style="font-family: var(--mono); font-size: 13px; color: var(--bone-2); margin: 20px 0 0;">En el curso hay 30 más como este, cada uno con lo que he aprendido usándolo y el momento exacto en que se manda.</p>
+    <p style="font-family: var(--mono); font-size: 14px; color: var(--bone-2); margin: 20px 0 0;">En el curso hay 30 más como este, cada uno con lo que he aprendido usándolo y el momento exacto en que se manda.</p>
   </div>
   <dialog class="muestra-dlg" id="muestra-dlg" aria-labelledby="muestra-dlg-titulo">
     <div class="muestra-dlg-cab"><span id="muestra-dlg-titulo">email 26 · el remate · pulsa cada número</span><button type="button" class="muestra-cerrar js-cerrar-muestra" aria-label="Cerrar">×</button></div>
-    <div style="padding: 20px 26px; border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: 13px; line-height: 1.8; color: var(--bone-2);"><b style="color: var(--bone); font-weight: 600;">asunto:</b> Tres cosas malas del programa<br><b style="color: var(--bone); font-weight: 600;">preheader:</b> Mañana es el último día, así que toca contarlas.
+    <div style="padding: 20px 26px; border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: 14px; line-height: 1.8; color: var(--bone-2);"><b style="color: var(--bone); font-weight: 600;">asunto:</b> Tres cosas malas del programa<br><b style="color: var(--bone); font-weight: 600;">preheader:</b> Mañana es el último día, así que toca contarlas.
       <div style="margin-top: 12px;"><details class="tripa"><summary><span class="tn">1</span>El asunto</summary><p>Anuncia el contenido tal cual, sin gancho. En la recta final del carrito, la rareza de lo que vas a hacer ya es gancho suficiente.</p></details></div></div>
     <div class="muestra-mail" style="padding: 26px 26px 12px;">
         <p>Ey.</p>
@@ -238,17 +239,17 @@
     <div class="wrap cta-caja" style="display: grid; gap: 40px; align-items: center; padding-top: 46px; padding-bottom: 46px;">
       <div>
         <div style="font-size: clamp(52px, 7vw, 92px); font-weight: 900; font-stretch: 78%; line-height: 0.8; letter-spacing: -0.055em; color: var(--gold);">47 $</div>
-        <div style="font-family: var(--mono); font-size: 13px; color: var(--bone-2); margin-top: 16px;">pago único. acceso inmediato.</div>
+        <div style="font-family: var(--mono); font-size: 14px; color: var(--bone-2); margin-top: 16px;">pago único. acceso inmediato.</div>
       </div>
       <div class="cta-hit">
-        <a class="js-hotmart" href="#" rel="noopener noreferrer" style="display: block; font-size: clamp(17px, 1.9vw, 21px); font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); padding: 26px 40px; text-align: center;">Dame acceso ahora</a><div class="garantia" style="font-family: var(--mono); font-size: 12px; line-height: 1.6; color: var(--bone-2); text-align: center; margin-top: 12px;"><span style="display:inline-block;width:7px;height:7px;background:var(--gold);margin-right:8px;vertical-align:1px;"></span>15 días de garantía. si no te convence, pides el reembolso en hotmart.</div>
+        <a class="js-hotmart" href="#" rel="noopener noreferrer" style="display: block; font-size: clamp(17px, 1.9vw, 21px); font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); padding: 26px 40px; text-align: center;">Dame acceso ahora</a><div class="garantia" style="font-family: var(--mono); font-size: 13px; line-height: 1.6; color: var(--bone-2); text-align: center; margin-top: 12px;"><span style="display:inline-block;width:7px;height:7px;background:var(--gold);margin-right:8px;vertical-align:1px;"></span>15 días de garantía. si no te convence, pides el reembolso en hotmart.</div>
       </div>
     </div>
   </div>
 
   <!-- ============ 2 · CLIENTES ============ -->
   <div class="wrap" style="padding-top: 76px; padding-bottom: 76px;">
-    <div style="font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.04em; color: var(--bone-3); margin-bottom: 26px;">he escrito para</div>
+    <h2 class="h-sec" style="font-weight: 900; font-stretch: 82%; line-height: 0.96; letter-spacing: -0.038em; margin: 0 0 36px; color: var(--bone);">He escrito para</h2>
 
     <div class="col-3" style="display: grid; gap: 1px; background: var(--line);">
 
@@ -256,84 +257,84 @@
         <img src="/josemunoz.png" alt="José Muñoz" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; display: block; margin-bottom: 16px;">
         <div style="font-size: 19px; font-weight: 700; font-stretch: 90%; letter-spacing: -0.015em; color: var(--bone); line-height: 1.2;">José Muñoz</div>
         <div style="font-size: 14px; color: var(--bone-2); margin-top: 4px;">Inversor inmobiliario</div>
-        <div style="font-family: var(--mono); font-size: 10px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">josemunoz.pro · 1.099 publicaciones · 105 mil seguidores</div>
+        <div style="font-family: var(--mono); font-size: 12px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">josemunoz.pro · 1.099 publicaciones · 105 mil seguidores</div>
       </div>
 
       <div style="background: var(--noir); padding: 22px 20px 24px;">
         <img src="/crece.png" alt="Crece Sin Límite" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; display: block; margin-bottom: 16px;">
         <div style="font-size: 19px; font-weight: 700; font-stretch: 90%; letter-spacing: -0.015em; color: var(--bone); line-height: 1.2;">Crece Sin Límite</div>
         <div style="font-size: 14px; color: var(--bone-2); margin-top: 4px;">Publicidad y marketing</div>
-        <div style="font-family: var(--mono); font-size: 10px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">crecesinlimite_ · 12 publicaciones · 29,5 mil seguidores</div>
+        <div style="font-family: var(--mono); font-size: 12px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">crecesinlimite_ · 12 publicaciones · 29,5 mil seguidores</div>
       </div>
 
       <div style="background: var(--noir); padding: 22px 20px 24px;">
         <img src="/riders.png" alt="Digital Riders" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; display: block; margin-bottom: 16px;">
         <div style="font-size: 19px; font-weight: 700; font-stretch: 90%; letter-spacing: -0.015em; color: var(--bone); line-height: 1.2;">Digital Riders</div>
         <div style="font-size: 14px; color: var(--bone-2); margin-top: 4px;">Lanzamientos y embudos</div>
-        <div style="font-family: var(--mono); font-size: 10px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">digitalriders_ · 484 publicaciones · 7.899 seguidores</div>
+        <div style="font-family: var(--mono); font-size: 12px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">digitalriders_ · 484 publicaciones · 7.899 seguidores</div>
       </div>
 
       <div style="background: var(--noir); padding: 22px 20px 24px;">
         <img src="/talent.png" alt="Talent Network" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; display: block; margin-bottom: 16px;">
         <div style="font-size: 19px; font-weight: 700; font-stretch: 90%; letter-spacing: -0.015em; color: var(--bone); line-height: 1.2;">Talent Network</div>
         <div style="font-size: 14px; color: var(--bone-2); margin-top: 4px;">Ciencia y tecnología</div>
-        <div style="font-family: var(--mono); font-size: 10px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">talent.network · 7.814 publicaciones · 70,9 mil seguidores</div>
+        <div style="font-family: var(--mono); font-size: 12px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">talent.network · 7.814 publicaciones · 70,9 mil seguidores</div>
       </div>
 
       <div style="background: var(--noir); padding: 22px 20px 24px;">
         <img src="/hackaviss.png" alt="Jose Javier Pastor" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; display: block; margin-bottom: 16px;">
         <div style="font-size: 19px; font-weight: 700; font-stretch: 90%; letter-spacing: -0.015em; color: var(--bone); line-height: 1.2;">Jose Javier Pastor</div>
         <div style="font-size: 14px; color: var(--bone-2); margin-top: 4px;">Ciberseguridad</div>
-        <div style="font-family: var(--mono); font-size: 10px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">hackaviss · 116 publicaciones · 166 mil seguidores</div>
+        <div style="font-family: var(--mono); font-size: 12px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">hackaviss · 116 publicaciones · 166 mil seguidores</div>
       </div>
 
       <div style="background: var(--noir); padding: 22px 20px 24px;">
         <img src="/anamoreno.png" alt="Ana Moreno Marín" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; display: block; margin-bottom: 16px;">
         <div style="font-size: 19px; font-weight: 700; font-stretch: 90%; letter-spacing: -0.015em; color: var(--bone); line-height: 1.2;">Ana Moreno Marín</div>
         <div style="font-size: 14px; color: var(--bone-2); margin-top: 4px;">Comunicadora</div>
-        <div style="font-family: var(--mono); font-size: 10px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">ana.moreno.marin · 856 publicaciones · 328 mil seguidores</div>
+        <div style="font-family: var(--mono); font-size: 12px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">ana.moreno.marin · 856 publicaciones · 328 mil seguidores</div>
       </div>
 
       <div style="background: var(--noir); padding: 22px 20px 24px;">
         <img src="/orozco.png" alt="Juan de Dios Orozco" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; display: block; margin-bottom: 16px;">
         <div style="font-size: 19px; font-weight: 700; font-stretch: 90%; letter-spacing: -0.015em; color: var(--bone); line-height: 1.2;">Juan de Dios Orozco</div>
         <div style="font-size: 14px; color: var(--bone-2); margin-top: 4px;">Escuela de Lujo</div>
-        <div style="font-family: var(--mono); font-size: 10px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">orozcolopezjuan · 1.147 publicaciones · 112 mil seguidores</div>
+        <div style="font-family: var(--mono); font-size: 12px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">orozcolopezjuan · 1.147 publicaciones · 112 mil seguidores</div>
       </div>
 
       <div style="background: var(--noir); padding: 22px 20px 24px;">
         <img src="/zeke.png" alt="Zeke Novarino" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; display: block; margin-bottom: 16px;">
         <div style="font-size: 19px; font-weight: 700; font-stretch: 90%; letter-spacing: -0.015em; color: var(--bone); line-height: 1.2;">Zeke Novarino</div>
         <div style="font-size: 14px; color: var(--bone-2); margin-top: 4px;">Contenido Rentable</div>
-        <div style="font-family: var(--mono); font-size: 10px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">zeke.novarino · 504 publicaciones · 72,6 mil seguidores</div>
+        <div style="font-family: var(--mono); font-size: 12px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">zeke.novarino · 504 publicaciones · 72,6 mil seguidores</div>
       </div>
 
       <div style="background: var(--noir); padding: 22px 20px 24px;">
         <img src="/tuto.png" alt="Tuto Marolla" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; display: block; margin-bottom: 16px;">
         <div style="font-size: 19px; font-weight: 700; font-stretch: 90%; letter-spacing: -0.015em; color: var(--bone); line-height: 1.2;">Tuto Marolla</div>
         <div style="font-size: 14px; color: var(--bone-2); margin-top: 4px;">Biohacking</div>
-        <div style="font-family: var(--mono); font-size: 10px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">tutobiohacker · 1.109 publicaciones · 73,5 mil seguidores</div>
+        <div style="font-family: var(--mono); font-size: 12px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">tutobiohacker · 1.109 publicaciones · 73,5 mil seguidores</div>
       </div>
 
       <div style="background: var(--noir); padding: 22px 20px 24px;">
         <img src="/tutellus.png" alt="Tutellus" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; display: block; margin-bottom: 16px;">
         <div style="font-size: 19px; font-weight: 700; font-stretch: 90%; letter-spacing: -0.015em; color: var(--bone); line-height: 1.2;">Tutellus</div>
         <div style="font-size: 14px; color: var(--bone-2); margin-top: 4px;">Crypto y Web3</div>
-        <div style="font-family: var(--mono); font-size: 10px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">tutellus · 919 publicaciones · 15,1 mil seguidores</div>
+        <div style="font-family: var(--mono); font-size: 12px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">tutellus · 919 publicaciones · 15,1 mil seguidores</div>
       </div>
 
       <div style="background: var(--noir); padding: 22px 20px 24px;">
         <img src="/racks.png" alt="Racks Academy" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; display: block; margin-bottom: 16px;">
         <div style="font-size: 19px; font-weight: 700; font-stretch: 90%; letter-spacing: -0.015em; color: var(--bone); line-height: 1.2;">Racks Academy</div>
         <div style="font-size: 14px; color: var(--bone-2); margin-top: 4px;">IA y desarrollo web3</div>
-        <div style="font-family: var(--mono); font-size: 10px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">racks.academy · 91 publicaciones · 3.753 seguidores</div>
+        <div style="font-family: var(--mono); font-size: 12px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">racks.academy · 91 publicaciones · 3.753 seguidores</div>
       </div>
 
       <div style="background: var(--noir); padding: 22px 20px 24px;">
         <img src="/vanessa.png" alt="Vanessa Marrero" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; display: block; margin-bottom: 16px;">
         <div style="font-size: 19px; font-weight: 700; font-stretch: 90%; letter-spacing: -0.015em; color: var(--bone); line-height: 1.2;">Vanessa Marrero</div>
         <div style="font-size: 14px; color: var(--bone-2); margin-top: 4px;">Finanzas para negocios</div>
-        <div style="font-family: var(--mono); font-size: 10px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">vanessa__marrero · 1.106 publicaciones · 21,3 mil seguidores</div>
+        <div style="font-family: var(--mono); font-size: 12px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">vanessa__marrero · 1.106 publicaciones · 21,3 mil seguidores</div>
       </div>
     </div>
   </div>
@@ -345,7 +346,7 @@
 
   <div class="wrap" style="padding-bottom: 76px;">
     <div style="aspect-ratio: 16 / 9; width: 100%; background: var(--noir-2);"></div>
-    <p style="font-family: var(--mono); font-size: 13px; color: var(--bone-2); margin-top: 16px;">Tres minutos para contarte qué hay dentro y qué no prometo.</p>
+    <p style="font-family: var(--mono); font-size: 14px; color: var(--bone-2); margin-top: 16px;">Tres minutos para contarte qué hay dentro y qué no prometo.</p>
   </div>
   ============================================================
   -->
@@ -354,24 +355,24 @@
   <div style="background: var(--noir-3); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
     <div class="wrap col-2" style="display: grid; gap: 0; padding: 0;">
       <div style="padding: 44px 40px 46px; border-right: 1px solid var(--line);">
-        <div style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--bone-3); margin-bottom: 16px;">a mis clientes</div>
-        <div style="font-size: clamp(48px, 6vw, 76px); font-weight: 900; font-stretch: 78%; line-height: 0.84; letter-spacing: -0.05em; color: var(--bone-3);">1.000 $</div><div style="font-family: var(--mono); font-size: 13px; color: var(--bone-3); margin-top: 14px;">por una secuencia</div>
+        <div style="font-family: var(--mono); font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--bone-3); margin-bottom: 16px;">a mis clientes</div>
+        <div style="font-size: clamp(48px, 6vw, 76px); font-weight: 900; font-stretch: 78%; line-height: 0.84; letter-spacing: -0.05em; color: var(--bone-3); text-decoration: line-through; text-decoration-thickness: 0.07em; text-decoration-color: var(--bone);">1.000 $</div><div style="font-family: var(--mono); font-size: 14px; color: var(--bone-3); margin-top: 14px;">por una secuencia</div>
       </div>
       <div style="padding: 44px 40px 46px;">
-        <div style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px;">aquí</div>
-        <div style="font-size: clamp(48px, 6vw, 76px); font-weight: 900; font-stretch: 78%; line-height: 0.84; letter-spacing: -0.05em; color: var(--gold);">47 $</div><div style="font-family: var(--mono); font-size: 13px; color: var(--bone); margin-top: 14px;">todas las secuencias que quieras</div>
+        <div style="font-family: var(--mono); font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px;">aquí</div>
+        <div style="font-size: clamp(48px, 6vw, 76px); font-weight: 900; font-stretch: 78%; line-height: 0.84; letter-spacing: -0.05em; color: var(--gold);">47 $</div><div style="font-family: var(--mono); font-size: 14px; color: var(--bone); margin-top: 14px;">todas las secuencias que quieras</div>
       </div>
     </div>
     <div class="wrap" style="padding-top: 0; padding-bottom: 44px;">
-      <p style="font-size: clamp(19px, 2.2vw, 26px); font-style: italic; font-weight: 400; line-height: 1.45; color: var(--bone); margin: 0; max-width: 44ch;">Los expertos con los que trabajo me pagan unos 1.000 $ por una secuencia completa. Por 47 $ no te llevas una secuencia: te llevas cómo las construyo. Para tu próximo lanzamiento y para todos los que vengan.</p>
+      <p style="font-size: clamp(19px, 2.2vw, 26px); font-style: italic; font-weight: 400; line-height: 1.45; color: var(--bone); margin: 0; max-width: 44ch;">Mis clientes me pagan unos 1.000 $ por una secuencia completa como las que encontrarás en El Desglose. Tú, por 47 $, no te llevas una secuencia: te llevas el criterio estratégico con el que las construyo. Para tu próximo lanzamiento y para todos los que hagas en tu vida.</p>
     </div>
   </div>
 
   <!-- comentarios -->
   <div class="wrap" style="padding-top: 72px; padding-bottom: 72px;">
     <div class="col-2" style="display: grid; gap: 20px;">
-      <figure style="margin: 0; display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 18px; align-items: start; padding: 28px 28px; background: var(--noir-2); border-left: 4px solid var(--accent);"><img src="/li-vispo.png" alt="" style="width: 56px; height: 56px; border-radius: 50%; object-fit: cover; display: block; filter: grayscale(1);"><div><blockquote style="margin: 0 0 14px; font-size: clamp(18px, 1.7vw, 21px); font-weight: 600; font-stretch: 94%; line-height: 1.45; letter-spacing: -0.01em; color: var(--bone);">«Dani nos ayudó a conseguir nuestro objetivo con un copy que representa 100% quienes somos a día de hoy.»</blockquote><figcaption style="font-size: 15px; font-weight: 700; color: var(--bone);">Yan Vispo <span style="display: block; font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--bone-3); margin-top: 4px;">fundador de rumbo eficiente</span></figcaption></div></figure>
-      <figure style="margin: 0; display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 18px; align-items: start; padding: 28px 28px; background: var(--noir-2); border-left: 4px solid var(--accent);"><img src="/li-minano.png" alt="" style="width: 56px; height: 56px; border-radius: 50%; object-fit: cover; display: block; filter: grayscale(1);"><div><blockquote style="margin: 0 0 14px; font-size: clamp(18px, 1.7vw, 21px); font-weight: 600; font-stretch: 94%; line-height: 1.45; letter-spacing: -0.01em; color: var(--bone);">«Es un gran profesional, con procesos muy estandarizados que le permiten imbuirse rápido y muy bien de las marcas para las que trabaja.»</blockquote><figcaption style="font-size: 15px; font-weight: 700; color: var(--bone);">Manuel Miñano <span style="display: block; font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--bone-3); margin-top: 4px;">empresario · consultor</span></figcaption></div></figure>
+      <figure style="margin: 0; display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 18px; align-items: start; padding: 28px 28px; background: var(--noir-2); border-left: 4px solid var(--accent);"><img class="foto-com" src="/li-vispo.png" alt="" style="width: 56px; height: 56px; border-radius: 50%; object-fit: cover; display: block;"><div><blockquote style="margin: 0 0 14px; font-size: clamp(18px, 1.7vw, 21px); font-weight: 600; font-stretch: 94%; line-height: 1.45; letter-spacing: -0.01em; color: var(--bone);">«Dani nos ayudó a conseguir nuestro objetivo con un copy que representa 100% quienes somos a día de hoy.»</blockquote><figcaption style="font-size: 15px; font-weight: 700; color: var(--bone);">Yan Vispo <span style="display: block; font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--bone-3); margin-top: 4px;">fundador de rumbo eficiente</span></figcaption></div></figure>
+      <figure style="margin: 0; display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 18px; align-items: start; padding: 28px 28px; background: var(--noir-2); border-left: 4px solid var(--accent);"><img class="foto-com" src="/li-minano.png" alt="" style="width: 56px; height: 56px; border-radius: 50%; object-fit: cover; display: block;"><div><blockquote style="margin: 0 0 14px; font-size: clamp(18px, 1.7vw, 21px); font-weight: 600; font-stretch: 94%; line-height: 1.45; letter-spacing: -0.01em; color: var(--bone);">«Es un gran profesional, con procesos muy estandarizados que le permiten imbuirse rápido y muy bien de las marcas para las que trabaja.»</blockquote><figcaption style="font-size: 15px; font-weight: 700; color: var(--bone);">Manuel Miñano <span style="display: block; font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--bone-3); margin-top: 4px;">empresario · consultor</span></figcaption></div></figure>
     </div>
   </div>
 
@@ -380,10 +381,10 @@
     <div class="wrap cta-caja" style="display: grid; gap: 40px; align-items: center; padding-top: 46px; padding-bottom: 46px;">
       <div>
         <div style="font-size: clamp(52px, 7vw, 92px); font-weight: 900; font-stretch: 78%; line-height: 0.8; letter-spacing: -0.055em; color: var(--gold);">47 $</div>
-        <div style="font-family: var(--mono); font-size: 13px; color: var(--bone-2); margin-top: 16px;">pago único. acceso inmediato.</div>
+        <div style="font-family: var(--mono); font-size: 14px; color: var(--bone-2); margin-top: 16px;">pago único. acceso inmediato.</div>
       </div>
       <div class="cta-hit">
-        <a class="js-hotmart" href="#" rel="noopener noreferrer" style="display: block; font-size: clamp(17px, 1.9vw, 21px); font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); padding: 26px 40px; text-align: center;">Dame acceso ahora</a><div class="garantia" style="font-family: var(--mono); font-size: 12px; line-height: 1.6; color: var(--bone-2); text-align: center; margin-top: 12px;"><span style="display:inline-block;width:7px;height:7px;background:var(--gold);margin-right:8px;vertical-align:1px;"></span>15 días de garantía. si no te convence, pides el reembolso en hotmart.</div>
+        <a class="js-hotmart" href="#" rel="noopener noreferrer" style="display: block; font-size: clamp(17px, 1.9vw, 21px); font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); padding: 26px 40px; text-align: center;">Dame acceso ahora</a><div class="garantia" style="font-family: var(--mono); font-size: 13px; line-height: 1.6; color: var(--bone-2); text-align: center; margin-top: 12px;"><span style="display:inline-block;width:7px;height:7px;background:var(--gold);margin-right:8px;vertical-align:1px;"></span>15 días de garantía. si no te convence, pides el reembolso en hotmart.</div>
       </div>
     </div>
   </div>
@@ -393,14 +394,14 @@
     <h2 class="h-sec" style="font-weight: 900; font-stretch: 82%; line-height: 0.96; letter-spacing: -0.038em; margin: 0 0 46px; color: var(--bone);">Decide en 10 segundos si esto es para ti</h2>
 
     <div class="col-2" style="display: grid; gap: 1px; background: var(--line);">
-      <div style="background: #FFFBEA; padding: 34px 30px 38px;"><div style="font-family: var(--mono); font-size: 13px; font-weight: 600; letter-spacing: 0.06em; color: var(--gold); margin-bottom: 26px; padding-bottom: 16px; border-bottom: 1px solid var(--line-gold);">cómpralo si</div><div style="display: flex; flex-direction: column; gap: 20px;"><div style="display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 14px; align-items: start;"><div style="width: 10px; height: 10px; background: var(--gold); margin-top: 7px;"></div><div style="font-size: 17px; line-height: 1.6; color: var(--bone);">Ya lanzaste y quieres ir optimizando áreas de tu lanzamiento que crees que tienen margen de mejora.</div></div><div style="display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 14px; align-items: start;"><div style="width: 10px; height: 10px; background: var(--gold); margin-top: 7px;"></div><div style="font-size: 17px; line-height: 1.6; color: var(--bone);">No has lanzado nunca pero estás preparándote para ello y quieres un email marketing con criterio de copywriter experto.</div></div><div style="display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 14px; align-items: start;"><div style="width: 10px; height: 10px; background: var(--gold); margin-top: 7px;"></div><div style="font-size: 17px; line-height: 1.6; color: var(--bone);">Te fías más de ver el trabajo bien hecho antes que de una promesa bonita.</div></div></div></div>
-      <div style="background: var(--noir); padding: 34px 30px 38px;"><div style="font-family: var(--mono); font-size: 13px; font-weight: 600; letter-spacing: 0.06em; color: var(--bone-3); margin-bottom: 26px; padding-bottom: 16px; border-bottom: 1px solid var(--line);">no lo compres si</div><div style="display: flex; flex-direction: column; gap: 20px;"><div style="display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 14px; align-items: start;"><div style="width: 10px; height: 10px; border: 1px solid var(--bone-3); margin-top: 7px;"></div><div style="font-size: 17px; line-height: 1.6; color: var(--bone-2);">No tienes lista, oferta, ni intención de hacer un lanzamiento.</div></div><div style="display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 14px; align-items: start;"><div style="width: 10px; height: 10px; border: 1px solid var(--bone-3); margin-top: 7px;"></div><div style="font-size: 17px; line-height: 1.6; color: var(--bone-2);">Quieres los emails y nada más, sin mirar el trabajo que hace cada uno ni por qué está donde está.</div></div><div style="display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 14px; align-items: start;"><div style="width: 10px; height: 10px; border: 1px solid var(--bone-3); margin-top: 7px;"></div><div style="font-size: 17px; line-height: 1.6; color: var(--bone-2);">Esperas que mi curso de cuarenta y siete dólares salve tu negocio.</div></div></div></div>
+      <div style="background: #FFFBEA; padding: 34px 30px 38px;"><div style="font-family: var(--mono); font-size: 14px; font-weight: 600; letter-spacing: 0.06em; color: var(--gold); margin-bottom: 26px; padding-bottom: 16px; border-bottom: 1px solid var(--line-gold);">cómpralo si</div><div style="display: flex; flex-direction: column; gap: 20px;"><div style="display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 14px; align-items: start;"><div style="width: 10px; height: 10px; background: var(--gold); margin-top: 7px;"></div><div style="font-size: 17px; line-height: 1.6; color: var(--bone);">Ya lanzaste y quieres ir optimizando áreas de tu lanzamiento que crees que tienen margen de mejora.</div></div><div style="display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 14px; align-items: start;"><div style="width: 10px; height: 10px; background: var(--gold); margin-top: 7px;"></div><div style="font-size: 17px; line-height: 1.6; color: var(--bone);">No has lanzado nunca pero estás preparándote para ello y quieres un email marketing con criterio de copywriter experto.</div></div><div style="display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 14px; align-items: start;"><div style="width: 10px; height: 10px; background: var(--gold); margin-top: 7px;"></div><div style="font-size: 17px; line-height: 1.6; color: var(--bone);">Te fías más de ver el trabajo bien hecho antes que de una promesa bonita.</div></div></div></div>
+      <div style="background: var(--noir); padding: 34px 30px 38px;"><div style="font-family: var(--mono); font-size: 14px; font-weight: 600; letter-spacing: 0.06em; color: var(--bone-3); margin-bottom: 26px; padding-bottom: 16px; border-bottom: 1px solid var(--line);">no lo compres si</div><div style="display: flex; flex-direction: column; gap: 20px;"><div style="display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 14px; align-items: start;"><div style="width: 10px; height: 10px; border: 1px solid var(--bone-3); margin-top: 7px;"></div><div style="font-size: 17px; line-height: 1.6; color: var(--bone-2);">No tienes lista, oferta, ni intención de hacer un lanzamiento.</div></div><div style="display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 14px; align-items: start;"><div style="width: 10px; height: 10px; border: 1px solid var(--bone-3); margin-top: 7px;"></div><div style="font-size: 17px; line-height: 1.6; color: var(--bone-2);">Quieres los emails y nada más, sin mirar el trabajo que hace cada uno ni por qué está donde está.</div></div><div style="display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 14px; align-items: start;"><div style="width: 10px; height: 10px; border: 1px solid var(--bone-3); margin-top: 7px;"></div><div style="font-size: 17px; line-height: 1.6; color: var(--bone-2);">Esperas que mi curso de cuarenta y siete dólares salve tu negocio.</div></div></div></div>
     </div>
   </div>
 
   <!-- comentario -->
   <div class="wrap" style="padding-top: 20px; padding-bottom: 20px;">
-    <div style="max-width: 900px;"><figure style="margin: 0; display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 18px; align-items: start; padding: 28px 28px; background: var(--noir-2); border-left: 4px solid var(--accent);"><img src="/vanessa.png" alt="" style="width: 56px; height: 56px; border-radius: 50%; object-fit: cover; display: block; filter: grayscale(1);"><div><blockquote style="margin: 0 0 14px; font-size: clamp(18px, 1.7vw, 21px); font-weight: 600; font-stretch: 94%; line-height: 1.45; letter-spacing: -0.01em; color: var(--bone);">«Alucino cómo en solo 2 reuniones fue capaz de captar mi esencia, mi forma de comunicar y los valores de mi proyecto para trasladarlos a esos copies tan efectivos que han hecho que el lanzamiento haya sido un éxito y hayamos superado las ventas previstas de mi programa high ticket.»</blockquote><figcaption style="font-size: 15px; font-weight: 700; color: var(--bone);">Vanessa Marrero <span style="display: block; font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--bone-3); margin-top: 4px;">finanzas para negocios</span></figcaption></div></figure></div>
+    <div style="max-width: 900px;"><figure style="margin: 0; display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 18px; align-items: start; padding: 28px 28px; background: var(--noir-2); border-left: 4px solid var(--accent);"><img class="foto-com" src="/vanessa.png" alt="" style="width: 56px; height: 56px; border-radius: 50%; object-fit: cover; display: block;"><div><blockquote style="margin: 0 0 14px; font-size: clamp(18px, 1.7vw, 21px); font-weight: 600; font-stretch: 94%; line-height: 1.45; letter-spacing: -0.01em; color: var(--bone);">«Alucino cómo en solo 2 reuniones fue capaz de captar mi esencia, mi forma de comunicar y los valores de mi proyecto para trasladarlos a esos copies tan efectivos que han hecho que el lanzamiento haya sido un éxito y hayamos superado las ventas previstas de mi programa high ticket.»</blockquote><figcaption style="font-size: 15px; font-weight: 700; color: var(--bone);">Vanessa Marrero <span style="display: block; font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--bone-3); margin-top: 4px;">finanzas para negocios</span></figcaption></div></figure></div>
   </div>
 
   <!-- ============ 10 · PREGUNTAS Y CIERRE ============ -->
@@ -483,11 +484,11 @@
         <p style="font-size: clamp(21px, 2.4vw, 28px); line-height: 1.5; color: var(--bone); margin: 0;">Y si te vale, me alegro mucho, te doy la bienvenida a bordo y espero tu feedback con muchas ganas.</p>
       </div>
 
-      <a class="js-hotmart" href="#" rel="noopener noreferrer" style="display: block; font-size: clamp(20px, 2.6vw, 32px); font-weight: 900; font-stretch: 82%; letter-spacing: -0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); padding: 34px 40px; text-align: center; line-height: 1.14;">Quiero hacer email marketing como un fucking pro</a><div class="garantia" style="font-family: var(--mono); font-size: 12px; line-height: 1.6; color: var(--bone-2); text-align: center; margin-top: 12px;"><span style="display:inline-block;width:7px;height:7px;background:var(--gold);margin-right:8px;vertical-align:1px;"></span>15 días de garantía. si no te convence, pides el reembolso en hotmart.</div>
+      <a class="js-hotmart" href="#" rel="noopener noreferrer" style="display: block; font-size: clamp(20px, 2.6vw, 32px); font-weight: 900; font-stretch: 82%; letter-spacing: -0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); padding: 34px 40px; text-align: center; line-height: 1.14;">Quiero hacer email marketing como un fucking pro</a><div class="garantia" style="font-family: var(--mono); font-size: 13px; line-height: 1.6; color: var(--bone-2); text-align: center; margin-top: 12px;"><span style="display:inline-block;width:7px;height:7px;background:var(--gold);margin-right:8px;vertical-align:1px;"></span>15 días de garantía. si no te convence, pides el reembolso en hotmart.</div>
 
       <div style="display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 24px;">
         <div style="width: 7px; height: 7px; background: var(--gold);"></div>
-        <div style="font-family: var(--mono); font-size: 13px; color: var(--bone-2);">EL DESGLOSE · Daniel García de Celis</div>
+        <div style="font-family: var(--mono); font-size: 14px; color: var(--bone-2);">EL DESGLOSE · Daniel García de Celis</div>
       </div>
     </div>
   </div>
@@ -495,8 +496,8 @@
   <!-- pie -->
   <div style="border-top: 1px solid var(--line);">
     <div class="wrap" style="padding-top: 24px; padding-bottom: 28px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap;">
-      <div style="font-family: var(--mono); font-size: 11px; color: var(--bone-3);">el desglose · daniel garcía de celis</div>
-      <div style="font-family: var(--mono); font-size: 11px; display: flex; gap: 16px; flex-wrap: wrap;"><a href="/aviso-legal/" style="color: var(--bone-3);">aviso legal</a> <a href="/privacidad/" style="color: var(--bone-3);">privacidad</a> <a href="/cookies/" style="color: var(--bone-3);">cookies</a> <a href="mailto:daniel@danielgarciadecelis.com" style="color: var(--bone-3);">contacto</a></div>
+      <div style="font-family: var(--mono); font-size: 13px; color: var(--bone-3);">el desglose · daniel garcía de celis</div>
+      <div style="font-family: var(--mono); font-size: 13px; display: flex; gap: 16px; flex-wrap: wrap;"><a href="/aviso-legal/" style="color: var(--bone-3);">aviso legal</a> <a href="/privacidad/" style="color: var(--bone-3);">privacidad</a> <a href="/cookies/" style="color: var(--bone-3);">cookies</a> <a href="mailto:daniel@danielgarciadecelis.com" style="color: var(--bone-3);">contacto</a></div>
     </div>
   </div>
 
@@ -505,7 +506,7 @@
     <div class="wrap" style="padding-top: 12px; padding-bottom: 12px; display: flex; align-items: center; justify-content: space-between; gap: 16px;">
       <div style="display: flex; align-items: baseline; gap: 12px;">
         <div style="font-size: 30px; font-weight: 900; font-stretch: 78%; letter-spacing: -0.04em; color: var(--gold); line-height: 1;">47 $</div>
-        <div style="font-family: var(--mono); font-size: 11px; color: var(--bone-3);">pago único · 15 días de garantía</div>
+        <div style="font-family: var(--mono); font-size: 13px; color: var(--bone-3);">pago único · 15 días de garantía</div>
       </div>
       <a class="js-hotmart" href="#" rel="noopener noreferrer" style="font-size: 14px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); padding: 13px 26px;">Dame acceso ahora</a>
     </div>
