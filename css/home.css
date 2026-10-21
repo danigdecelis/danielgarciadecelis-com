@@ -242,3 +242,7 @@ a{color:var(--ink)}a:hover{color:var(--ink-accent)}
 .ucom-solo{max-width:620px}
 .ucom-solo .ucom{background:var(--bg-sunken)}
 .ucom-extra{margin:-4px 0 0;font-size:16px;font-weight:600;font-stretch:94%;line-height:1.5;color:var(--ink-muted)}
+
+/* 21-oct: sin línea vertical del raíl ni líneas entre secciones; separa el cambio de fondo */
+.rail{border-right:0}
+.sec{border-top:0}
