@@ -345,11 +345,11 @@ body{margin:0;background:var(--bg)}
 
 <script>
 (function () {
-  // Destino de todos los botones de contacto. Provisional: email.
-  // Cuando haya número de WhatsApp: 'https://wa.me/NUMERO?text=' + encodeURIComponent('Hola Daniel, vengo de la página de agencias.')
-  var CONTACTO_URL = 'mailto:daniel@danielgarciadecelis.com?subject=' + encodeURIComponent('Barra libre de copy');
+  // Destino de todos los botones de contacto: WhatsApp de Daniel con el mensaje ya escrito.
+  var CONTACTO_URL = 'https://wa.me/34628347382?text=' + encodeURIComponent('Hola Daniel, vengo de la página de agencias.');
   document.querySelectorAll('a.js-contacto').forEach(function (a) {
     a.href = CONTACTO_URL;
+    a.target = '_blank'; a.rel = 'noopener';
     a.addEventListener('click', function () {
       if (window.dgcTrack) window.dgcTrack('lead', { source: 'agencias' });
     });
