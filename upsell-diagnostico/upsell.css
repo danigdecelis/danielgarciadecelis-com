@@ -4,7 +4,7 @@
 body { margin: 0; background: var(--bg); color: var(--ink); font-family: var(--font-sans); }
 a { color: var(--ink); }
 .mark { background: linear-gradient(transparent 56%, var(--accent) 56%, var(--accent) 94%, transparent 94%); padding: 0 .06em; -webkit-box-decoration-break: clone; box-decoration-break: clone; }
-.wrap { max-width: 760px; margin: 0 auto; padding-left: 22px; padding-right: 22px; }
+.wrap { max-width: 1060px; margin: 0 auto; padding-left: 22px; padding-right: 22px; }
 
 /* barra superior */
 .ups-barra { background: var(--accent); color: var(--on-accent); }
@@ -49,7 +49,8 @@ a { color: var(--ink); }
 
 /* testimonio repartido (patrón de la landing del 20-oct) */
 .ups-testi { margin: 0; display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 18px; align-items: start; padding: 26px 26px; background: var(--bg-raised); border-left: 4px solid var(--ink); }
-.ups-testi img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; filter: grayscale(1); display: block; }
+.ups-testi img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; filter: grayscale(1); display: block; transition: filter .3s ease; }
+.ups-testi:hover img, .ups-testi:focus-within img { filter: none; }
 .ups-testi blockquote { margin: 0 0 12px; font-size: clamp(18px, 2vw, 21px); font-weight: 600; font-stretch: 94%; line-height: 1.45; letter-spacing: -0.01em; }
 .ups-testi figcaption { font-size: 14px; font-weight: 700; }
 .ups-testi figcaption span { font-family: var(--font-mono); font-size: 11px; font-weight: 500; color: var(--ink-subtle); margin-left: 8px; }
@@ -97,3 +98,16 @@ a { color: var(--ink); }
 .inf-resto b { color: var(--ink); }
 .inf-pie { font-family: var(--font-mono); font-size: 12px; color: var(--ink-muted); margin: 14px 0 0; }
 @media (max-width: 560px) { .inf-cuerpo { padding: 22px 16px 6px; } .inf-fuga { padding: 16px 14px 4px; } }
+
+/* 21-oct tarde: compra en la cabecera, testimonios en pareja */
+.ups-cab { padding-top: 52px; display: grid; grid-template-columns: minmax(0, 1fr) 380px; gap: 48px; align-items: start; }
+.ups-cab .ups-h1 { font-size: clamp(34px, 5vw, 64px); }
+#hotmart-sales-funnel { min-height: 20px; }
+.ups-testis { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; }
+.ups-testis .ups-testi { grid-template-columns: 1fr; }
+@media (max-width: 960px) { .ups-cab { grid-template-columns: minmax(0, 1fr); gap: 28px; } }
+@media (max-width: 700px) { .ups-testis { grid-template-columns: minmax(0, 1fr); } }
+.ups-lista { max-width: 860px; }
+.inf, .inf-pie { max-width: 780px; }
+.ups-sec > .ups-compra, .wrap > .ups-compra:not(#compra) { max-width: 620px; }
+.ups-barra .wrap { max-width: none; }

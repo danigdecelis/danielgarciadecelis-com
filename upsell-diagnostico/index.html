@@ -4,59 +4,74 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>El Diagnóstico · upsell · provisional (21-oct)</title>
+<title>El Diagnóstico · Daniel García de Celis</title>
 <link rel="icon" href="/assets/logo/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/assets/logo/favicon-64.png">
 <link rel="stylesheet" href="/fonts/fonts.css">
 <link rel="stylesheet" href="/css/dgc-tokens.css">
 <link rel="stylesheet" href="/css/dgc-componentes.css">
 <link rel="stylesheet" href="/upsell-diagnostico/upsell.css">
+<script src="/js/analytics.js" defer></script>
 </head>
 <body>
-<!-- Versión provisional para valorar (21-oct-2026). Rama de revisión, sin publicar.
-     Parte de la v2 del 16-oct y de la crítica de AskIman (doc 21, bloque R2). -->
+<!-- Página del upsell de El Diagnóstico (paso 2 del embudo de Hotmart «El Desglose + El Diagnóstico»).
+     Los botones de aceptar y rechazar los pinta el widget del embudo (#hotmart-sales-funnel). -->
 
-<div class="ups-barra"><div class="wrap">Tu compra está hecha: El Desglose ya va camino de tu email. Antes de abrirlo, dame un minuto.</div></div>
+<div class="ups-barra"><div class="wrap">Tu compra está hecha. No cierres esta página: esta oferta desaparece en cuanto salgas de aquí.</div></div>
 
-<!-- 1 · CABECERA -->
-<div class="wrap" style="padding-top: 52px;">
-  <p class="ups-eti">un paso opcional · solo en esta página</p>
-  <h1 class="ups-h1">En 15 minutos, descubre por dónde se te escapa el dinero <span class="mark">y qué arreglar primero.</span></h1>
-  <p class="ups-sub">El Desglose te enseña a construir una secuencia. <b>El Diagnóstico mira tu negocio</b>, con tus números, y te dice qué está roto, cuánto te cuesta y por dónde empezar.</p>
-</div>
-
-<!-- 2 · VÍDEO (90 s). Guion en el comparador. -->
-<div class="wrap" style="padding-top: 34px;">
-  <div class="ups-video"><span>vídeo · 90 s · a cámara · pendiente de grabar</span></div>
-</div>
-
-<!-- 3 · PRIMERA COMPRA -->
-<div class="wrap" style="padding-top: 28px;">
-  <div class="ups-compra">
+<!-- 1 · CABECERA CON LA COMPRA (sin vídeo de momento: si se graba, va entre el subtítulo y la caja) -->
+<div class="wrap ups-cab">
+  <div>
+    <p class="ups-eti">un paso opcional · solo en esta página</p>
+    <h1 class="ups-h1">Descubre por dónde se te escapa el dinero <span class="mark">y cómo arreglarlo ya.</span></h1>
+    <p class="ups-sub"><b>El Diagnóstico analiza tu negocio con tus números</b> y te dice qué está roto, cuánto te está costando y cómo arreglarlo ahora mismo.</p>
+  </div>
+  <div class="ups-compra" id="compra">
     <div class="ups-precio"><s>147 $</s><strong>97 $</strong></div>
     <p class="ups-precio-txt">pago único. se añade a tu compra sin volver a meter tus datos.</p>
-    <a class="ups-btn js-upsell" href="#">Sí, añade El Diagnóstico</a>
+    <!-- HOTMART - Sales Funnel Widget -->
+    <div id="hotmart-sales-funnel"></div>
+    <script src="https://checkout.hotmart.com/lib/hotmart-checkout-elements.js"></script>
+    <script>checkoutElements.init('salesFunnel').mount('#hotmart-sales-funnel')</script>
+    <!-- HOTMART - Sales Funnel Widget -->
     <p class="ups-garantia">15 días de garantía. si no te sirve, pides el reembolso en hotmart.</p>
   </div>
-  <a class="ups-no js-no" href="#">No, gracias, llévame a El Desglose.</a>
 </div>
 
-<!-- 4 · LO QUE TE LLEVAS -->
+<!-- 2 · LO QUE TE LLEVAS -->
 <div class="wrap ups-sec">
   <h2 class="ups-h2">Lo que te llevas</h2>
-  <p class="ups-p muted">Contestas un cuestionario sobre tu negocio y, al terminar, tienes tu informe en pantalla y una copia en tu email.</p>
+  <p class="ups-p">Contestas un cuestionario sobre tu negocio, con tus cifras reales, en unos 15 minutos. Al terminar tienes tu informe en pantalla y una copia en tu email.</p>
+  <p class="ups-p muted">No es un test genérico ni una lista de consejos que valen para cualquiera: el informe se arma con tus respuestas, en el mismo orden en el que yo miro un negocio antes de una auditoría.</p>
   <ul class="ups-lista">
-    <li><span class="n">01</span><div><b>Tu radar:</b> las cinco piezas que sostienen un negocio digital, puntuadas con tus respuestas. Ves de un vistazo cuál te está frenando.</div></li>
-    <li><span class="n">02</span><div><b>Todas tus fugas, en orden de ataque:</b> qué tapar primero, qué después y qué no tocar todavía. Y lo que te cuesta cada una, cuando tus cifras permiten calcularlo.</div></li>
-    <li><span class="n">03</span><div><b>Tu primera victoria, esta semana:</b> el primer paso de tu fuga principal. Y para cada fuga, cómo lo haría yo paso a paso y cómo sabrás que está tapada.</div></li>
-    <li><span class="n">04</span><div><b>Si te falta un número, de dónde sacarlo:</b> qué exportar de Hotmart, de tu herramienta de email y de Meta, para dejar de decidir a ojo.</div></li>
-    <li><span class="n">05</span><div><b>Si el arreglo está en tus emails,</b> la fase exacta de El Desglose a la que ir, sin releerlo entero. Y si no está en El Desglose, también te lo digo.</div></li>
+    <li><span class="n">01</span><div><b>Tu radar del negocio.</b> Las cinco piezas que sostienen un negocio digital (captación, lista, conversión, recurrencia y medición), puntuadas con tus respuestas. De un vistazo ves cuál te está frenando y cuál ya te funciona.</div></li>
+    <li><span class="n">02</span><div><b>Tus fugas, en orden de ataque.</b> Qué tapar primero, qué después y qué no tocar todavía. Con lo que te cuesta cada una cuando tus cifras permiten calcularlo, y tus números frente a lo normal del sector.</div></li>
+    <li><span class="n">03</span><div><b>Tu primera victoria, esta semana.</b> Un primer paso concreto sobre tu fuga principal, para que el informe no se quede en algo que se lee y se archiva. Y para cada fuga, cómo lo haría yo paso a paso y cómo sabrás que está tapada.</div></li>
+    <li><span class="n">04</span><div><b>Tus próximos 90 días.</b> Qué hacer y en qué orden, qué decisiones te va a pedir cada arreglo y lo que yo no haría ahora, aunque parezca urgente.</div></li>
+    <li><span class="n">05</span><div><b>Tu plan de medición.</b> Si te falta un número, de dónde sacarlo: qué exportar de Hotmart, de tu herramienta de email y de Meta para dejar de decidir a ojo.</div></li>
+    <li><span class="n">06</span><div><b>El puente con El Desglose.</b> Si la fuga está en tus emails, la fase exacta de El Desglose a la que ir, sin releerlo entero. Y si no está en El Desglose, también te lo digo.</div></li>
   </ul>
+</div>
+
+<!-- testimonios: criterio -->
+<div class="wrap" style="padding-top: 52px;">
+  <p class="ups-testi-eti">quien ha trabajado conmigo</p>
+  <div class="ups-testis">
+  <figure class="ups-testi">
+    <img src="/josemunoz.png" alt="">
+    <div><blockquote>«Dani ha sido fundamental. Ha llevado toda la parte de copy y destacaría de él que aporta más que el copy: una parte más analítica, más de visión global.»</blockquote>
+    <figcaption>José Muñoz<span>programa in · inversión inmobiliaria</span></figcaption></div>
+  </figure>
+  <figure class="ups-testi">
+    <img src="/li-carbonel.png" alt="">
+    <div><blockquote>«No simplemente es un copy «ejecutor», sino que es capaz de levantar la vista del papel y entender lo que debe sentir el usuario en cada paso de la estrategia.»</blockquote>
+    <figcaption>David Carbonel<span>founder de0a100 agency · sobre el proyecto de José Muñoz</span></figcaption></div>
+  </figure>
+  </div>
 </div>
 
 <!-- testimonio repartido 1 -->
 <div class="wrap" style="padding-top: 52px;">
-  <p class="ups-testi-eti">quien ha trabajado conmigo</p>
   <figure class="ups-testi">
     <img src="/li-manzano.png" alt="">
     <div><blockquote>«Logré llenar las plazas de mi primer lanzamiento online en menos de un mes, con una facturación de más de 20.000€.»</blockquote>
@@ -142,38 +157,33 @@
   <div class="ups-compra">
     <div class="ups-precio"><s>147 $</s><strong>97 $</strong></div>
     <p class="ups-precio-txt">pago único. te llega a tu email en unos minutos.</p>
-    <a class="ups-btn js-upsell" href="#">Sí, añade El Diagnóstico</a>
+    <a class="ups-btn" href="#compra">Sí, quiero El Diagnóstico</a>
     <p class="ups-garantia">15 días de garantía. si no te sirve, pides el reembolso en hotmart.</p>
     <p class="ups-nota">Si pagaste en efectivo o por transferencia, te llega en cuanto se apruebe el pago.</p>
   </div>
 </div>
 
-<!-- testimonio repartido 2 -->
+<!-- testimonios finales -->
 <div class="wrap" style="padding-top: 52px;">
+  <div class="ups-testis">
   <figure class="ups-testi">
     <img src="/li-umana.png" alt="">
     <div><blockquote>«Estoy impresionado con su habilidad para comprender las necesidades de sus clientes y adaptarse a diversos contextos.»</blockquote>
     <figcaption>Santiago Umaña<span>automatización de ventas</span></figcaption></div>
   </figure>
-  <!-- Hueco para testimonios de compradores de El Diagnóstico cuando los haya: sustituyen a estos dos. -->
+  <figure class="ups-testi">
+    <img src="/li-monleon.png" alt="">
+    <div><blockquote>«Conoce muy bien los negocios digitales y se nota a la hora de tomar decisiones importantes durante el proceso.»</blockquote>
+    <figcaption>David Monleón<span>consultor vsl · estratega de publicidad</span></figcaption></div>
+  </figure>
+  </div>
+  <!-- Hueco para testimonios de compradores de El Diagnóstico cuando los haya. -->
 </div>
 
-<!-- 7 · RECHAZO -->
-<div class="wrap" style="padding-top: 40px;">
-  <a class="ups-no js-no" href="#">No, gracias, llévame a El Desglose.</a>
-</div>
+
 
 <div class="ups-pie"><div class="wrap"><span>el diagnóstico · daniel garcía de celis</span><span><a href="/aviso-legal/">aviso legal</a><a href="/privacidad/">privacidad</a><a href="/cookies/">cookies</a></span></div></div>
 
-<script>
-/* Los enlaces de compra y rechazo los da el embudo de Hotmart (verificación 8 y 12 del 04_FUNNEL).
-   Mientras no estén, los botones no hacen nada. */
-var HOTMART_UPSELL_SI = '';  // PENDIENTE
-var HOTMART_UPSELL_NO = '';  // PENDIENTE
-document.querySelectorAll('a.js-upsell, a.js-no').forEach(function (a) {
-  var url = a.classList.contains('js-upsell') ? HOTMART_UPSELL_SI : HOTMART_UPSELL_NO;
-  if (url) { a.href = url; } else { a.addEventListener('click', function (e) { e.preventDefault(); }); }
-});
-</script>
+
 </body>
 </html>
