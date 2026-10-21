@@ -85,6 +85,16 @@
     .h-hero.largo{font-size:clamp(36px,5.6vw,76px)}
   </style>
 
+  <style>
+    .hero-compra { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 48px; align-items: start; margin-top: 0; }
+    .hero-caja { background: var(--noir-2); border: 1px solid var(--line); border-top: 6px solid var(--accent); padding: 26px 28px 24px; display: flex; flex-direction: column; gap: 10px; }
+    .hero-precio { font-size: clamp(60px, 6vw, 84px); font-weight: 900; font-stretch: 78%; line-height: 0.82; letter-spacing: -0.055em; color: var(--bone); }
+    .hero-pago { font-family: var(--mono); font-size: 13px; color: var(--bone-2); margin-bottom: 8px; }
+    .hero-boton { display: block; font-size: 18px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: #0a0a0a; background: var(--accent); padding: 22px 24px; text-align: center; line-height: 1.2; }
+    .hero-garantia { font-family: var(--mono); font-size: 12px; line-height: 1.6; color: var(--bone-2); text-align: center; }
+    .hero-garantia span { display: inline-block; width: 7px; height: 7px; background: var(--accent); margin-right: 8px; vertical-align: 1px; }
+    @media (max-width: 1000px) { .hero-compra { grid-template-columns: minmax(0, 1fr); gap: 28px; } }
+  </style>
 </head>
 <body>
 
@@ -101,23 +111,9 @@
   </div>
 
   <!-- ============ 1 · CABECERA ============ -->
-  <div class="wrap" style="padding-top: 86px; padding-bottom: 76px;">
+  <div class="wrap" style="padding-top: 56px; padding-bottom: 72px;">
     <div><div style="font-family: var(--mono); font-size: 13px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--bone-2); margin-bottom: 22px;">Arsenal completo de email marketing para tu lanzamiento</div><h1 class="h-hero largo" style="font-weight: 900; font-stretch: 80%; line-height: 0.9; letter-spacing: -0.042em; margin: 0 0 34px; color: var(--bone); text-wrap: pretty;">31 piezas para montar una secuencia ganadora como las que he escrito para decenas de lanzamientos de <span class="mark">5, 6 y 7 cifras.</span></h1>
-    <p style="font-size: clamp(20px, 2.3vw, 27px); font-weight: 400; line-height: 1.5; color: var(--bone-2); margin: 0; max-width: 64ch;">Descubre qué tiene que pasar por la cabeza del lector en cada momento del lanzamiento, y cómo cada pieza interactúa con las demás para preparar el terreno hacia la venta.</p><ul style="list-style: none; margin: 30px 0 0; padding: 0; display: flex; flex-direction: column; gap: 12px;"><li style="display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 12px; align-items: baseline; font-size: clamp(20px, 2.3vw, 27px); font-weight: 800; font-stretch: 92%; line-height: 1.3; letter-spacing: -0.01em; color: var(--bone);"><span style="width: 12px; height: 12px; background: var(--accent); display: inline-block;"></span><span>Aunque nunca hayas hecho email marketing.</span></li><li style="display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 12px; align-items: baseline; font-size: clamp(20px, 2.3vw, 27px); font-weight: 800; font-stretch: 92%; line-height: 1.3; letter-spacing: -0.01em; color: var(--bone);"><span style="width: 12px; height: 12px; background: var(--accent); display: inline-block;"></span><span>Aunque tu nicho no se parezca a ninguno de los del curso.</span></li><li style="display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 12px; align-items: baseline; font-size: clamp(20px, 2.3vw, 27px); font-weight: 800; font-stretch: 92%; line-height: 1.3; letter-spacing: -0.01em; color: var(--bone);"><span style="width: 12px; height: 12px; background: var(--accent); display: inline-block;"></span><span>Sin usar la IA a lo loco, como hace todo el mundo.</span></li></ul></div>
-  </div>
-
-  <!-- ============ 4 · PRECIO Y PRIMER CTA ============ -->
-  <div style="border-top: 1px solid var(--line-gold); border-bottom: 1px solid var(--line-gold); background: var(--noir-2);">
-    <div class="wrap cta-caja" style="display: grid; gap: 40px; align-items: center; padding-top: 52px; padding-bottom: 52px;">
-      <div>
-        <div class="cifra-xl" style="font-weight: 900; font-stretch: 78%; line-height: 0.8; letter-spacing: -0.055em; color: var(--gold);">47 $</div>
-        <div style="font-family: var(--mono); font-size: 14px; color: var(--bone-2); margin-top: 18px;">pago único. lo tienes entero en cuanto pagas.</div>
-      </div>
-      <div class="cta-hit">
-        <a class="js-hotmart" href="#" rel="noopener noreferrer" style="display: block; font-size: clamp(17px, 1.9vw, 21px); font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); padding: 26px 40px; text-align: center; line-height: 1.2;">Quiero verlo por dentro</a><div class="garantia" style="font-family: var(--mono); font-size: 12px; line-height: 1.6; color: var(--bone-2); text-align: center; margin-top: 12px;"><span style="display:inline-block;width:7px;height:7px;background:var(--gold);margin-right:8px;vertical-align:1px;"></span>15 días de garantía. si no te convence, pides el reembolso en hotmart.</div>
-        <div style="font-family: var(--mono); font-size: 12px; line-height: 1.7; color: var(--bone-2); text-align: center; margin-top: 14px;">acceso inmediato. sin suscripción<br>y sin nada que se renueve solo.</div>
-      </div>
-    </div>
+    <div class="hero-compra"><div><p style="font-size: clamp(20px, 2.3vw, 27px); font-weight: 400; line-height: 1.5; color: var(--bone-2); margin: 0; max-width: 64ch;">Descubre qué tiene que pasar por la cabeza del lector en cada momento del lanzamiento, y cómo cada pieza interactúa con las demás para preparar el terreno hacia la venta.</p><ul style="list-style: none; margin: 28px 0 0; padding: 0; display: flex; flex-direction: column; gap: 12px;"><li style="display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 12px; align-items: baseline; font-size: clamp(20px, 2.3vw, 27px); font-weight: 800; font-stretch: 92%; line-height: 1.3; letter-spacing: -0.01em; color: var(--bone);"><span style="width: 12px; height: 12px; background: var(--accent); display: inline-block;"></span><span>Aunque nunca hayas hecho email marketing.</span></li><li style="display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 12px; align-items: baseline; font-size: clamp(20px, 2.3vw, 27px); font-weight: 800; font-stretch: 92%; line-height: 1.3; letter-spacing: -0.01em; color: var(--bone);"><span style="width: 12px; height: 12px; background: var(--accent); display: inline-block;"></span><span>Aunque tu nicho no se parezca a ninguno de los del curso.</span></li><li style="display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 12px; align-items: baseline; font-size: clamp(20px, 2.3vw, 27px); font-weight: 800; font-stretch: 92%; line-height: 1.3; letter-spacing: -0.01em; color: var(--bone);"><span style="width: 12px; height: 12px; background: var(--accent); display: inline-block;"></span><span>Sin usar la IA a lo loco, como hace todo el mundo.</span></li></ul></div><div class="hero-caja"><div class="hero-precio">47 $</div><div class="hero-pago">pago único. lo tienes entero en cuanto pagas.</div><a class="js-hotmart hero-boton" href="#" rel="noopener noreferrer">Quiero verlo por dentro</a><div class="hero-garantia"><span></span>15 días de garantía. si no te convence, pides el reembolso en hotmart.</div></div></div></div>
   </div>
 
   <!-- comentarios -->
@@ -125,6 +121,26 @@
     <div class="col-2" style="display: grid; gap: 20px;">
       <figure style="margin: 0; display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 18px; align-items: start; padding: 28px 28px; background: var(--noir-2); border-left: 4px solid var(--accent);"><img src="/li-carbonel.png" alt="" style="width: 56px; height: 56px; border-radius: 50%; object-fit: cover; display: block; filter: grayscale(1);"><div><blockquote style="margin: 0 0 14px; font-size: clamp(18px, 1.7vw, 21px); font-weight: 600; font-stretch: 94%; line-height: 1.45; letter-spacing: -0.01em; color: var(--bone);">«Hicimos un match increíblemente potente para levantar un proyecto literalmente de cero y ponerlo en órbita en 2 años llegando a los +2M de facturación.»</blockquote><figcaption style="font-size: 15px; font-weight: 700; color: var(--bone);">David Carbonel <span style="display: block; font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--bone-3); margin-top: 4px;">founder de0a100 agency · sobre el proyecto de José Muñoz</span></figcaption></div></figure>
       <figure style="margin: 0; display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 18px; align-items: start; padding: 28px 28px; background: var(--noir-2); border-left: 4px solid var(--accent);"><img src="/li-monleon.png" alt="" style="width: 56px; height: 56px; border-radius: 50%; object-fit: cover; display: block; filter: grayscale(1);"><div><blockquote style="margin: 0 0 14px; font-size: clamp(18px, 1.7vw, 21px); font-weight: 600; font-stretch: 94%; line-height: 1.45; letter-spacing: -0.01em; color: var(--bone);">«Los textos parecen que hayan sido escritos por el propio cliente, sabe detectar el tono de comunicación de cada marca y adaptarse a su estilo.»</blockquote><figcaption style="font-size: 15px; font-weight: 700; color: var(--bone);">David Monleón <span style="display: block; font-family: var(--mono); font-size: 11px; font-weight: 500; color: var(--bone-3); margin-top: 4px;">consultor vsl · estratega de publicidad</span></figcaption></div></figure>
+    </div>
+  </div>
+
+  <!-- ============ QUÉ HAY DENTRO (arriba, 21-oct) ============ -->
+  <style>
+    .dentro-sec { background: var(--noir-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .dentro-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    .dentro-card { background: var(--noir); border: 1px solid var(--line); border-top: 6px solid var(--accent); padding: 30px 28px 32px; display: flex; flex-direction: column; gap: 12px; }
+    .dentro-n { font-size: 64px; font-weight: 900; font-stretch: 78%; line-height: 0.85; letter-spacing: -0.05em; color: var(--bone); }
+    .dentro-card h3 { margin: 6px 0 0; font-size: clamp(22px, 2vw, 27px); font-weight: 800; font-stretch: 86%; line-height: 1.1; letter-spacing: -0.02em; color: var(--bone); }
+    .dentro-card p { margin: 0; font-size: 17px; line-height: 1.6; color: var(--bone-2); }
+    @media (max-width: 1100px) { .dentro-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 700px) { .dentro-grid { grid-template-columns: minmax(0, 1fr); } .dentro-n { font-size: 52px; } }
+  </style>
+  <div class="dentro-sec">
+    <div class="wrap" style="padding-top: 84px; padding-bottom: 88px;">
+      <h2 class="h-sec" style="font-weight: 900; font-stretch: 82%; line-height: 0.96; letter-spacing: -0.038em; margin: 0 0 22px; color: var(--bone);">Qué hay dentro de <span class="mark">El Desglose</span></h2>
+      <p style="font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em; color: var(--bone-3); margin: 0 0 18px;">el lanzamiento entero, en siete fases</p>
+      <style>.fases-linea{display:grid;grid-template-columns:repeat(7,minmax(104px,1fr));overflow-x:auto;margin:0 0 48px;position:relative}.fases-linea::before{content:"";position:absolute;left:0;right:0;top:19px;height:2px;background:var(--accent)}.fases-linea div{position:relative;padding-right:10px}.fases-linea b{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--accent);color:#0a0a0a;font-family:var(--mono);font-size:13px;position:relative}.fases-linea span{display:block;margin-top:12px;font-size:15px;font-weight:800;font-stretch:88%;text-transform:uppercase;letter-spacing:-0.01em;color:var(--bone);line-height:1.15}</style><div class="fases-linea" aria-label="Las siete fases de un lanzamiento"><div><b>01</b><span>La convocatoria</span></div><div><b>02</b><span>El cortejo</span></div><div><b>03</b><span>La cita</span></div><div><b>04</b><span>La acción</span></div><div><b>05</b><span>El valle de las sombras</span></div><div><b>06</b><span>El remate</span></div><div><b>07</b><span>La resaca</span></div></div>
+      <ul class="dentro-grid"><li class="dentro-card"><span class="dentro-n">01</span><h3>Ni un email improvisado.</h3><p>Los 31 que necesita tu lanzamiento, reales y completos. Sin recortar.</p></li><li class="dentro-card"><span class="dentro-n">02</span><h3>Por qué funciona cada uno.</h3><p>Las tripas de cada pieza, abiertas punto por punto. Sin eso tienes una plantilla; con eso, criterio.</p></li><li class="dentro-card"><span class="dentro-n">03</span><h3>Lo que no cabe en un email.</h3><p>Siete vídeos, uno por fase, con las decisiones que no se explican por escrito.</p></li><li class="dentro-card"><span class="dentro-n">04</span><h3>Cada email, en su día y a su hora.</h3><p>Dos calendarios completos: webinar de un día o evento de varias jornadas.</p></li><li class="dentro-card"><span class="dentro-n">05</span><h3>El mapa antes de la primera línea.</h3><p>El capítulo de apertura: el lanzamiento entero en la cabeza y la regla de oro que lo resume todo.</p></li><li class="dentro-card"><span class="dentro-n">06</span><h3>IA con criterio, no a lo loco.</h3><p>Cómo la uso para diseñar y escribir las secuencias sin que suenen a IA.</p></li></ul>
     </div>
   </div>
 
@@ -339,7 +355,7 @@
     <div class="wrap col-2" style="display: grid; gap: 0; padding: 0;">
       <div style="padding: 44px 40px 46px; border-right: 1px solid var(--line);">
         <div style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--bone-3); margin-bottom: 16px;">a mis clientes</div>
-        <div style="font-size: clamp(48px, 6vw, 76px); font-weight: 900; font-stretch: 78%; line-height: 0.84; letter-spacing: -0.05em; color: var(--bone-3);">1.000 $</div><div style="font-family: var(--mono); font-size: 13px; color: var(--bone-3); margin-top: 14px;">por cada secuencia</div>
+        <div style="font-size: clamp(48px, 6vw, 76px); font-weight: 900; font-stretch: 78%; line-height: 0.84; letter-spacing: -0.05em; color: var(--bone-3);">1.000 $</div><div style="font-family: var(--mono); font-size: 13px; color: var(--bone-3); margin-top: 14px;">por una secuencia</div>
       </div>
       <div style="padding: 44px 40px 46px;">
         <div style="font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px;">aquí</div>
@@ -347,7 +363,7 @@
       </div>
     </div>
     <div class="wrap" style="padding-top: 0; padding-bottom: 44px;">
-      <p style="font-size: clamp(19px, 2.2vw, 26px); font-style: italic; font-weight: 400; line-height: 1.45; color: var(--bone); margin: 0; max-width: 44ch;">A mis clientes, por una secuencia completa como las de este curso, no les cobro menos de mil dólares. Aquí, por 47 $, te llevas mi criterio para montar todas las que quieras.</p>
+      <p style="font-size: clamp(19px, 2.2vw, 26px); font-style: italic; font-weight: 400; line-height: 1.45; color: var(--bone); margin: 0; max-width: 44ch;">Los expertos con los que trabajo me pagan unos 1.000 $ por una secuencia completa. Por 47 $ no te llevas una secuencia: te llevas cómo las construyo. Para tu próximo lanzamiento y para todos los que vengan.</p>
     </div>
   </div>
 
@@ -359,55 +375,22 @@
     </div>
   </div>
 
-  <!-- ============ 9 · QUÉ TE LLEVAS ============ -->
-  <div style="background: var(--noir-2); border-top: 1px solid var(--line);">
-    <div class="wrap" style="padding-top: 82px; padding-bottom: 72px;">
-      <h2 class="h-sec" style="font-weight: 900; font-stretch: 82%; line-height: 0.96; letter-spacing: -0.038em; margin: 0 0 46px; color: var(--bone);">Qué hay dentro de <span class="mark">El Desglose</span></h2>
-      <p style="font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em; color: var(--bone-3); margin: 0 0 18px;">el lanzamiento entero, en siete fases</p>
-      <style>.fases-linea{display:grid;grid-template-columns:repeat(7,minmax(104px,1fr));overflow-x:auto;margin:0 0 48px;position:relative}.fases-linea::before{content:"";position:absolute;left:0;right:0;top:19px;height:2px;background:var(--accent)}.fases-linea div{position:relative;padding-right:10px}.fases-linea b{display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:var(--accent);color:#0a0a0a;font-family:var(--mono);font-size:13px;position:relative}.fases-linea span{display:block;margin-top:12px;font-size:15px;font-weight:800;font-stretch:88%;text-transform:uppercase;letter-spacing:-0.01em;color:var(--bone);line-height:1.15}</style><div class="fases-linea" aria-label="Las siete fases de un lanzamiento"><div><b>01</b><span>La convocatoria</span></div><div><b>02</b><span>El cortejo</span></div><div><b>03</b><span>La cita</span></div><div><b>04</b><span>La acción</span></div><div><b>05</b><span>El valle de las sombras</span></div><div><b>06</b><span>El remate</span></div><div><b>07</b><span>La resaca</span></div></div>
-
-      <div style="border-top: 1px solid var(--line);">
-        <div style="display: grid; grid-template-columns: 60px minmax(0, 1fr); gap: 22px; padding: 26px 0; border-bottom: 1px solid var(--line);">
-          <div style="font-family: var(--mono); font-size: 17px; font-weight: 600; color: var(--gold); padding-top: 4px;">01</div>
-          <div style="font-size: 19px; line-height: 1.6; color: var(--bone);">No vas a improvisar ni un email de tu próximo lanzamiento: <span style="color: var(--bone-2);">los 31 que necesitas, reales y completos, sin recortar.</span></div>
-        </div>
-        <div style="display: grid; grid-template-columns: 60px minmax(0, 1fr); gap: 22px; padding: 26px 0; border-bottom: 1px solid var(--line);">
-          <div style="font-family: var(--mono); font-size: 17px; font-weight: 600; color: var(--gold); padding-top: 4px;">02</div>
-          <div style="font-size: 19px; line-height: 1.6; color: var(--bone);">Vas a entender por qué funciona cada uno, no solo a copiarlo: <span style="color: var(--bone-2);">las tripas de cada pieza, abiertas punto por punto.</span></div>
-        </div>
-        <div style="display: grid; grid-template-columns: 60px minmax(0, 1fr); gap: 22px; padding: 26px 0; border-bottom: 1px solid var(--line);">
-          <div style="font-family: var(--mono); font-size: 17px; font-weight: 600; color: var(--gold); padding-top: 4px;">03</div>
-          <div style="font-size: 19px; line-height: 1.6; color: var(--bone);">Te vas a llevar el criterio que no cabe en un email escrito: <span style="color: var(--bone-2);">siete vídeos, uno por fase, con las decisiones que no se explican por texto.</span></div>
-        </div>
-        <div style="display: grid; grid-template-columns: 60px minmax(0, 1fr); gap: 22px; padding: 26px 0; border-bottom: 1px solid var(--line);">
-          <div style="font-family: var(--mono); font-size: 17px; font-weight: 600; color: var(--gold); padding-top: 4px;">04</div>
-          <div style="font-size: 19px; line-height: 1.6; color: var(--bone);">No vas a perder ni un minuto decidiendo cuándo mandar cada cosa: <span style="color: var(--bone-2);">dos calendarios completos, día y hora, para webinar de un día o evento de varias jornadas.</span></div>
-        </div>
-        <div style="display: grid; grid-template-columns: 60px minmax(0, 1fr); gap: 22px; padding: 26px 0; border-bottom: 1px solid var(--line);">
-          <div style="font-family: var(--mono); font-size: 17px; font-weight: 600; color: var(--gold); padding-top: 4px;">05</div>
-          <div style="font-size: 19px; line-height: 1.6; color: var(--bone);">Vas a tener el lanzamiento entero en la cabeza antes de escribir una sola línea: <span style="color: var(--bone-2);">el capítulo de apertura con el mapa y la regla de oro que lo resume todo.</span></div>
-        </div>
-        <div style="display: grid; grid-template-columns: 60px minmax(0, 1fr); gap: 22px; padding: 26px 0; border-bottom: 1px solid var(--line);">
-          <div style="font-family: var(--mono); font-size: 17px; font-weight: 600; color: var(--gold); padding-top: 4px;">06</div>
-          <div style="font-size: 19px; line-height: 1.6; color: var(--bone);">Vas a ver cómo uso la IA para diseñar y escribir las secuencias: <span style="color: var(--bone-2);">con criterio y sin que suenen a IA.</span></div>
-        </div>
+  <!-- CTA -->
+  <div style="border-bottom: 1px solid var(--line-gold); background: var(--noir-2);">
+    <div class="wrap cta-caja" style="display: grid; gap: 40px; align-items: center; padding-top: 46px; padding-bottom: 46px;">
+      <div>
+        <div style="font-size: clamp(52px, 7vw, 92px); font-weight: 900; font-stretch: 78%; line-height: 0.8; letter-spacing: -0.055em; color: var(--gold);">47 $</div>
+        <div style="font-family: var(--mono); font-size: 13px; color: var(--bone-2); margin-top: 16px;">pago único. acceso inmediato.</div>
       </div>
-
-      <div class="cta-caja" style="display: grid; gap: 40px; align-items: center; margin-top: 52px; border: 1px solid var(--line-gold); padding: 44px 36px;">
-        <div>
-          <div class="cifra-xl" style="font-weight: 900; font-stretch: 78%; line-height: 0.8; letter-spacing: -0.055em; color: var(--gold);">47 $</div>
-          <div style="font-family: var(--mono); font-size: 14px; color: var(--bone-2); margin-top: 18px;">pago único. acceso inmediato.</div>
-        </div>
-        <div class="cta-hit">
-          <a class="js-hotmart" href="#" rel="noopener noreferrer" style="display: block; font-size: clamp(18px, 2vw, 22px); font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); padding: 28px 40px; text-align: center;">Dame acceso ahora</a><div class="garantia" style="font-family: var(--mono); font-size: 12px; line-height: 1.6; color: var(--bone-2); text-align: center; margin-top: 12px;"><span style="display:inline-block;width:7px;height:7px;background:var(--gold);margin-right:8px;vertical-align:1px;"></span>15 días de garantía. si no te convence, pides el reembolso en hotmart.</div>
-        </div>
+      <div class="cta-hit">
+        <a class="js-hotmart" href="#" rel="noopener noreferrer" style="display: block; font-size: clamp(17px, 1.9vw, 21px); font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); padding: 26px 40px; text-align: center;">Dame acceso ahora</a><div class="garantia" style="font-family: var(--mono); font-size: 12px; line-height: 1.6; color: var(--bone-2); text-align: center; margin-top: 12px;"><span style="display:inline-block;width:7px;height:7px;background:var(--gold);margin-right:8px;vertical-align:1px;"></span>15 días de garantía. si no te convence, pides el reembolso en hotmart.</div>
       </div>
     </div>
   </div>
 
   <!-- ============ 8 · A VER SI ES PARA TI ============ -->
   <div class="wrap" style="padding-top: 82px; padding-bottom: 62px;">
-    <h2 class="h-sec" style="font-weight: 900; font-stretch: 82%; line-height: 0.96; letter-spacing: -0.038em; margin: 0 0 46px; color: var(--bone);">Veamos si esto es para ti</h2>
+    <h2 class="h-sec" style="font-weight: 900; font-stretch: 82%; line-height: 0.96; letter-spacing: -0.038em; margin: 0 0 46px; color: var(--bone);">Decide en 10 segundos si esto es para ti</h2>
 
     <div class="col-2" style="display: grid; gap: 1px; background: var(--line);">
       <div style="background: #FFFBEA; padding: 34px 30px 38px;"><div style="font-family: var(--mono); font-size: 13px; font-weight: 600; letter-spacing: 0.06em; color: var(--gold); margin-bottom: 26px; padding-bottom: 16px; border-bottom: 1px solid var(--line-gold);">cómpralo si</div><div style="display: flex; flex-direction: column; gap: 20px;"><div style="display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 14px; align-items: start;"><div style="width: 10px; height: 10px; background: var(--gold); margin-top: 7px;"></div><div style="font-size: 17px; line-height: 1.6; color: var(--bone);">Ya lanzaste y quieres ir optimizando áreas de tu lanzamiento que crees que tienen margen de mejora.</div></div><div style="display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 14px; align-items: start;"><div style="width: 10px; height: 10px; background: var(--gold); margin-top: 7px;"></div><div style="font-size: 17px; line-height: 1.6; color: var(--bone);">No has lanzado nunca pero estás preparándote para ello y quieres un email marketing con criterio de copywriter experto.</div></div><div style="display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 14px; align-items: start;"><div style="width: 10px; height: 10px; background: var(--gold); margin-top: 7px;"></div><div style="font-size: 17px; line-height: 1.6; color: var(--bone);">Te fías más de ver el trabajo bien hecho antes que de una promesa bonita.</div></div></div></div>
@@ -518,7 +501,7 @@
   </div>
 
   <!-- barra fija inferior -->
-  <div style="position: fixed; left: 0; right: 0; bottom: 0; background: rgba(255,255,255,0.96); backdrop-filter: blur(10px); border-top: 1px solid var(--line-gold); z-index: 30;">
+  <div id="barra-fija" style="transition: transform .25s ease; position: fixed; left: 0; right: 0; bottom: 0; background: rgba(255,255,255,0.96); backdrop-filter: blur(10px); border-top: 1px solid var(--line-gold); z-index: 30;">
     <div class="wrap" style="padding-top: 12px; padding-bottom: 12px; display: flex; align-items: center; justify-content: space-between; gap: 16px;">
       <div style="display: flex; align-items: baseline; gap: 12px;">
         <div style="font-size: 30px; font-weight: 900; font-stretch: 78%; letter-spacing: -0.04em; color: var(--gold); line-height: 1;">47 $</div>
@@ -545,6 +528,15 @@ var HOTMART_CHECKOUT_URL = ''; // PENDIENTE: pegar URL de checkout Hotmart
       a.addEventListener('click', function (e) { e.preventDefault(); });
     }
   });
+})();
+</script>
+<script>
+(function () {
+  var caja = document.querySelector('.hero-caja'), barra = document.getElementById('barra-fija');
+  if (!caja || !barra || !('IntersectionObserver' in window)) return;
+  new IntersectionObserver(function (e) {
+    barra.style.transform = e[0].isIntersecting ? 'translateY(110%)' : 'none';
+  }).observe(caja);
 })();
 </script>
 </body>
