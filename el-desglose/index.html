@@ -138,15 +138,37 @@
     .tripa .tn { width: 22px; height: 22px; border-radius: 50%; background: var(--accent); color: #0a0a0a; display: grid; place-items: center; font-size: 12px; }
     .tripa[open] summary { background: var(--accent); color: #0a0a0a; }
     .tripa p { margin: 10px 0 4px; padding: 14px 16px; background: var(--noir); border-left: 4px solid var(--accent); font-size: 16px; line-height: 1.6; color: var(--bone); }
+    .muestra-teaser { position: relative; max-height: 290px; overflow: hidden; }
+    .muestra-teaser::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 150px; background: linear-gradient(to bottom, rgba(0,0,0,0), var(--noir-2)); }
+    .btn-muestra { display: inline-flex; align-items: center; gap: 12px; font-family: var(--sans, inherit); font-size: 17px; font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: #0a0a0a; background: var(--accent); border: 0; padding: 20px 30px; cursor: pointer; }
+    .btn-muestra:focus-visible, .muestra-cerrar:focus-visible { outline: 3px solid var(--bone); outline-offset: 3px; }
+    dialog.muestra-dlg { width: min(820px, calc(100vw - 32px)); max-height: calc(100vh - 48px); overflow-y: auto; overscroll-behavior: contain; padding: 0; border: 1px solid var(--line); background: var(--noir-2); color: var(--bone); }
+    dialog.muestra-dlg::backdrop { background: rgba(10, 11, 13, 0.72); }
+    .muestra-dlg-cab { position: sticky; top: 0; z-index: 1; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 14px 18px 14px 26px; background: var(--noir-2); border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: 12px; letter-spacing: 0.04em; color: var(--bone-3); }
+    .muestra-cerrar { width: 40px; height: 40px; border: 1px solid var(--line); background: transparent; color: var(--bone); font-size: 22px; line-height: 1; cursor: pointer; }
+    body.dlg-abierto { overflow: hidden; }
   </style>
   <div class="wrap" style="padding-top: 82px;">
     <div style="font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.04em; color: var(--bone-3); margin-bottom: 18px;">antes de pagar</div>
     <h2 class="h-sec" style="font-weight: 900; font-stretch: 82%; line-height: 0.96; letter-spacing: -0.038em; margin: 0 0 24px; color: var(--bone); max-width: 18ch;">Lee uno entero, <span class="mark">gratis</span></h2>
-    <p style="font-size: 19px; line-height: 1.7; color: var(--bone-2); margin: 0 0 36px; max-width: 58ch;">Es el email 26, de la fase del remate. Tal cual viene en el curso. Pulsa cada número para ver qué hace esa parte del email y por qué está ahí.</p>
+    <p style="font-size: 19px; line-height: 1.7; color: var(--bone-2); margin: 0 0 36px; max-width: 58ch;">Es el email 26, de la fase del remate. Tal cual viene en el curso. Ábrelo y pulsa cada número para ver qué hace esa parte del email y por qué está ahí.</p>
     <div style="border: 1px solid var(--line); background: var(--noir-2); max-width: 760px;">
-      <div style="padding: 20px 26px; border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: 13px; line-height: 1.8; color: var(--bone-2);"><b style="color: var(--bone); font-weight: 600;">asunto:</b> Tres cosas malas del programa<br><b style="color: var(--bone); font-weight: 600;">preheader:</b> Mañana es el último día, así que toca contarlas.
-        <div style="margin-top: 12px;"><details class="tripa"><summary><span class="tn">1</span>El asunto</summary><p>Anuncia el contenido tal cual, sin gancho. En la recta final del carrito, la rareza de lo que vas a hacer ya es gancho suficiente.</p></details></div></div>
-      <div class="muestra-mail" style="padding: 26px 26px 12px;">
+      <div style="padding: 20px 26px; border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: 13px; line-height: 1.8; color: var(--bone-2);"><b style="color: var(--bone); font-weight: 600;">asunto:</b> Tres cosas malas del programa<br><b style="color: var(--bone); font-weight: 600;">preheader:</b> Mañana es el último día, así que toca contarlas.</div>
+      <div class="muestra-mail muestra-teaser" style="padding: 26px 26px 0;">
+        <p>Ey.</p>
+        <p>Queda un día para que se cierre esto y me apetece hacer algo poco habitual para la recta final: contarte lo que el programa hace mal.</p>
+        <p>No por deportividad. Es que prefiero que no entres a que entres y te arrepientas.</p>
+        <p>Lo primero, es que sepas que esto te va a dar más trabajo del que crees.</p>
+      </div>
+      <div style="padding: 8px 26px 28px;"><button type="button" class="btn-muestra js-abrir-muestra">Leer el email entero <span aria-hidden="true">→</span></button></div>
+    </div>
+    <p style="font-family: var(--mono); font-size: 13px; color: var(--bone-2); margin: 20px 0 0;">En el curso hay 30 más como este, cada uno con lo que he aprendido usándolo y el momento exacto en que se manda.</p>
+  </div>
+  <dialog class="muestra-dlg" id="muestra-dlg" aria-labelledby="muestra-dlg-titulo">
+    <div class="muestra-dlg-cab"><span id="muestra-dlg-titulo">email 26 · el remate · pulsa cada número</span><button type="button" class="muestra-cerrar js-cerrar-muestra" aria-label="Cerrar">×</button></div>
+    <div style="padding: 20px 26px; border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: 13px; line-height: 1.8; color: var(--bone-2);"><b style="color: var(--bone); font-weight: 600;">asunto:</b> Tres cosas malas del programa<br><b style="color: var(--bone); font-weight: 600;">preheader:</b> Mañana es el último día, así que toca contarlas.
+      <div style="margin-top: 12px;"><details class="tripa"><summary><span class="tn">1</span>El asunto</summary><p>Anuncia el contenido tal cual, sin gancho. En la recta final del carrito, la rareza de lo que vas a hacer ya es gancho suficiente.</p></details></div></div>
+    <div class="muestra-mail" style="padding: 26px 26px 12px;">
         <p>Ey.</p>
         <p>Queda un día para que se cierre esto y me apetece hacer algo poco habitual para la recta final: contarte lo que el programa hace mal.</p>
         <details class="tripa"><summary><span class="tn">2</span>El aviso de que vas a hacer algo raro</summary><p>Prepara al lector para un email que no encaja con el día. Sin esta línea, los tres defectos se leen como una queja.</p></details>
@@ -176,10 +198,24 @@
         <p>Un abrazo,</p>
         <p class="ps">P.D. Si has leído los tres defectos y has pensado «bueno, tampoco es para tanto», entra tranquilo. Si has pensado «uf, pues entonces no», acabo de ahorrarte el dinero y de ahorrarme a mí un cliente descontento. Las dos son buenas noticias. [ENLACE]</p>
         <details class="tripa"><summary><span class="tn">11</span>La P.D. bifurcada</summary><p>Le da permiso al que entra y salida honrosa al que se va. Nadie se queda en el email sintiéndose señalado.</p></details>
-      </div>
     </div>
-    <p style="font-family: var(--mono); font-size: 13px; color: var(--bone-2); margin: 20px 0 0;">En el curso hay 30 más como este, cada uno con lo que he aprendido usándolo y el momento exacto en que se manda.</p>
-  </div>
+  </dialog>
+  <script>
+  (function () {
+    var dlg = document.getElementById('muestra-dlg');
+    if (!dlg || typeof dlg.showModal !== 'function') return;
+    function cerrar() { dlg.close(); }
+    dlg.addEventListener('close', function () { document.body.classList.remove('dlg-abierto'); });
+    document.querySelectorAll('.js-abrir-muestra').forEach(function (b) {
+      b.addEventListener('click', function () {
+        dlg.showModal(); dlg.scrollTop = 0; document.body.classList.add('dlg-abierto');
+        if (window.dgcTrack) window.dgcTrack('muestra_abierta');
+      });
+    });
+    dlg.querySelector('.js-cerrar-muestra').addEventListener('click', cerrar);
+    dlg.addEventListener('click', function (e) { if (e.target === dlg) cerrar(); });
+  })();
+  </script>
 
   <!-- CTA -->
   <div style="border-bottom: 1px solid var(--line-gold); background: var(--noir-2);">
@@ -298,16 +334,6 @@
   ============================================================
   -->
 
-  <!-- ============ 5 · LA ARITMÉTICA ============ -->
-  <div class="wrap" style="padding-top: 82px; padding-bottom: 20px;">
-    <h2 class="h-sec" style="font-weight: 900; font-stretch: 82%; line-height: 0.96; letter-spacing: -0.038em; margin: 0 0 42px; color: var(--bone); max-width: 20ch;">Si esto es lo que digo que es, <span class="mark">¿por qué solo cuesta 47&nbsp;$?</span></h2>
-
-    <div class="lectura">
-      <p style="font-size: 19px; line-height: 1.7; color: var(--bone); margin: 0 0 20px;">Te cuento sin adornos, que como tú también vendes por internet lo vas a entender rápido:</p>
-      <div><p style="font-size: 19px; line-height: 1.7; color: var(--bone); margin: 0 0 44px;">He escrito los emails de decenas de lanzamientos de infoproductos, como los que viste un poco más arriba.</p></div>
-    </div>
-  </div>
-
   <!-- el contraste -->
   <div style="background: var(--noir-3); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);">
     <div class="wrap col-2" style="display: grid; gap: 0; padding: 0;">
@@ -322,30 +348,6 @@
     </div>
     <div class="wrap" style="padding-top: 0; padding-bottom: 44px;">
       <p style="font-size: clamp(19px, 2.2vw, 26px); font-style: italic; font-weight: 400; line-height: 1.45; color: var(--bone); margin: 0; max-width: 44ch;">A mis clientes, por una secuencia completa como las de este curso, no les cobro menos de mil dólares. Aquí, por 47 $, te llevas mi criterio para montar todas las que quieras.</p>
-    </div>
-  </div>
-
-  <div class="wrap" style="padding-top: 52px;">
-    <p class="h-golpe" style="font-weight: 700; font-stretch: 88%; line-height: 1.16; letter-spacing: -0.028em; color: var(--bone); margin: 0 0 48px; max-width: 26ch;">Cuarenta y siete dólares para meterte en la cabeza de un copywriter senior, en un recorrido a través de secuencias reales usadas en lanzamientos de cinco, seis y siete cifras.</p>
-  </div>
-
-  <!-- scroll stopper -->
-  <div style="background: var(--mark);">
-    <div class="wrap" style="padding-top: 58px; padding-bottom: 58px;">
-      <p class="h-sec" style="font-weight: 900; font-stretch: 80%; line-height: 0.94; letter-spacing: -0.04em; color: #0A0A0A; margin: 0;">Ese es el truco entero. No hay más.</p>
-    </div>
-  </div>
-
-  <!-- CTA -->
-  <div style="border-bottom: 1px solid var(--line-gold); background: var(--noir-2);">
-    <div class="wrap cta-caja" style="display: grid; gap: 40px; align-items: center; padding-top: 46px; padding-bottom: 46px;">
-      <div>
-        <div style="font-size: clamp(52px, 7vw, 92px); font-weight: 900; font-stretch: 78%; line-height: 0.8; letter-spacing: -0.055em; color: var(--gold);">47 $</div>
-        <div style="font-family: var(--mono); font-size: 13px; color: var(--bone-2); margin-top: 16px;">pago único. acceso inmediato.</div>
-      </div>
-      <div class="cta-hit">
-        <a class="js-hotmart" href="#" rel="noopener noreferrer" style="display: block; font-size: clamp(17px, 1.9vw, 21px); font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase; color: var(--noir); background: var(--gold); padding: 26px 40px; text-align: center;">Dame acceso ahora</a><div class="garantia" style="font-family: var(--mono); font-size: 12px; line-height: 1.6; color: var(--bone-2); text-align: center; margin-top: 12px;"><span style="display:inline-block;width:7px;height:7px;background:var(--gold);margin-right:8px;vertical-align:1px;"></span>15 días de garantía. si no te convence, pides el reembolso en hotmart.</div>
-      </div>
     </div>
   </div>
 
