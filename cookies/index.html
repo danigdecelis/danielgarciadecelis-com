@@ -66,6 +66,8 @@
   <table class="tabla">
     <thead><tr><th>Nombre</th><th>Para qué</th><th>Cuánto dura</th></tr></thead>
     <tbody>
+      <tr><td>dgc_cookies</td><td>Recordar si aceptaste o rechazaste las cookies de medición</td><td>Hasta que borres los datos de tu navegador</td></tr>
+      <tr><td>dgc_utm_ultimo · dgc_origen_primero</td><td>Recordar de qué enlace llegaste, para saber qué te trajo si te apuntas a la lista o compras</td><td>Hasta que borres los datos de tu navegador</td></tr>
       <tr><td>dgc_lista_popup</td><td>Recordar que ya viste el aviso para apuntarte a la lista, para no enseñártelo otra vez</td><td>Hasta que borres los datos de tu navegador</td></tr>
       <tr><td>el-diagnostico:…</td><td>Guardar tus respuestas del cuestionario de El Diagnóstico, para que puedas seguir otro rato</td><td>Hasta que lo envíes o borres los datos de tu navegador</td></tr>
       <tr><td>auditoria:… · onboarding:… · onboarding-quien:…</td><td>Lo mismo, en los cuestionarios para clientes</td><td>Hasta que lo envíes o borres los datos de tu navegador</td></tr>
@@ -73,18 +75,18 @@
   </table>
   <p>Son necesarios para que funcione lo que tú pides, así que no requieren tu consentimiento.</p>
 
-  <!-- ACTIVAR AL INSTALAR EL PÍXEL EN LA WEB (y quitar este comentario):
-  <h2>Cookies de publicidad (solo si las aceptas)</h2>
-  <p>Si lo aceptas en el aviso de cookies, esta web carga el píxel de Meta (Facebook e Instagram), que usa estas cookies para medir qué anuncios funcionan:</p>
+  <h2>Cookies de medición y publicidad (solo si las aceptas)</h2>
+  <p>Si lo aceptas en el aviso de cookies, esta web carga Google Analytics, para saber qué páginas funcionan, y el píxel de Meta (Facebook e Instagram), para medir qué anuncios funcionan. Usan estas cookies:</p>
   <table class="tabla">
     <thead><tr><th>Nombre</th><th>De quién</th><th>Para qué</th><th>Cuánto dura</th></tr></thead>
     <tbody>
+      <tr><td>_ga</td><td>Google</td><td>Distinguir visitas para contar cuántas personas entran</td><td>2 años</td></tr>
+      <tr><td>_ga_…</td><td>Google</td><td>Mantener el estado de la visita</td><td>2 años</td></tr>
       <tr><td>_fbp</td><td>Meta</td><td>Reconocer tu navegador para medir los anuncios</td><td>90 días</td></tr>
       <tr><td>_fbc</td><td>Meta</td><td>Guardar el identificador del clic cuando llegas desde un anuncio</td><td>90 días</td></tr>
     </tbody>
   </table>
-  <p>Si no las aceptas, el píxel no se carga. Puedes cambiar tu decisión cuando quieras desde el enlace «cookies» del pie de cada página.</p>
-  -->
+  <p>Si no las aceptas, no se carga ninguno de los dos. Puedes cambiar tu decisión cuando quieras desde «configurar cookies», en el pie de cada página.</p>
 
   <h2>Al comprar</h2>
   <p>Cuando pulsas el botón de compra, el pago se hace en Hotmart, que usa sus propias cookies según su política.</p>
@@ -102,5 +104,6 @@
       <a href="/cookies/">cookies</a>
       <a href="mailto:daniel@danielgarciadecelis.com">contacto</a>
 </div>
+<script src="/js/analytics.js" defer></script>
 </body>
 </html>
