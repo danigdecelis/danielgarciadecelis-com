@@ -1,0 +1,363 @@
+<!doctype html>
+<html lang="es" data-theme="venta">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, follow">
+<title>Barra libre de copy · Guiones y emails para agencias en 48 horas</title>
+<meta name="description" content="Tu propio departamento de copy, sin tenerlo en nómina. Guiones de anuncios y emails para los clientes de tu agencia, en 48 horas y por una cuota fija al mes.">
+<link rel="canonical" href="https://danielgarciadecelis.com/agencias/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:title" content="Barra libre de copy · Guiones y emails para agencias en 48 horas">
+<meta property="og:description" content="Tu propio departamento de copy, sin tenerlo en nómina. Guiones de anuncios y emails para los clientes de tu agencia, en 48 horas y por una cuota fija al mes.">
+<meta property="og:url" content="https://danielgarciadecelis.com/agencias/">
+<meta property="og:site_name" content="Daniel García de Celis">
+<meta property="og:image" content="https://danielgarciadecelis.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Barra libre de copy · Guiones y emails para agencias en 48 horas">
+<meta name="twitter:description" content="Tu propio departamento de copy, sin tenerlo en nómina. Guiones de anuncios y emails para los clientes de tu agencia, en 48 horas y por una cuota fija al mes.">
+<meta name="twitter:image" content="https://danielgarciadecelis.com/og.png">
+<link rel="icon" href="/assets/logo/favicon.svg" type="image/svg+xml">
+<link rel="alternate icon" href="/assets/logo/favicon-64.png">
+<link rel="apple-touch-icon" href="/assets/logo/favicon-64.png">
+<script src="/js/analytics.js" defer></script>
+<link rel="stylesheet" href="/fonts/fonts.css">
+<link rel="stylesheet" href="/css/dgc-tokens.css">
+<link rel="stylesheet" href="/css/dgc-componentes.css">
+<link rel="stylesheet" href="/css/home.css">
+<style>
+/* Landing de agencias · añadidos sobre home.css (tema venta) */
+/* 21-oct: sin línea vertical del raíl ni líneas entre secciones; el cambio de fondo ya separa */
+.rail{border-right:0}
+.sec{border-top:0}
+body{margin:0;background:var(--bg)}
+.ag-hero{display:flex;flex-direction:column;align-items:flex-start;gap:28px}
+.ag-ante{font-family:var(--font-mono);font-size:12px;letter-spacing:.04em;color:var(--ink-subtle)}
+.ag-sub{margin:0;display:flex;flex-direction:column;gap:6px;font-size:clamp(19px,1.8vw,24px);line-height:1.45;color:var(--ink-muted);max-width:52ch}
+.ag-sub strong{color:var(--ink);font-weight:800;font-stretch:92%}
+.ag-micro{font-family:var(--font-mono);font-size:12px;letter-spacing:.04em;color:var(--ink-subtle);max-width:56ch;line-height:1.6}
+.ag-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:40px;margin-top:56px;max-width:760px}
+.ag-txt{display:flex;flex-direction:column;gap:20px;max-width:64ch}
+.ag-txt p{margin:0;font-size:18px;line-height:1.65;color:var(--ink)}
+.ag-txt .golpe{font-family:var(--font-display);font-weight:900;font-stretch:82%;font-size:clamp(30px,3vw,40px);line-height:1;letter-spacing:-.03em}
+.ag-videos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.ag-precios{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.ag-caja{display:flex;flex-direction:column;gap:20px;padding:32px;background:var(--bg-raised);border:1px solid var(--line)}
+.ag-caja.destacada{background:var(--bg);border:2px solid var(--ink)}
+.ag-caja h3{margin:0;font-family:var(--font-display);font-weight:900;font-stretch:82%;font-size:34px;line-height:1;letter-spacing:-.03em}
+.ag-caja .k{font-family:var(--font-mono);font-size:12px;letter-spacing:.04em;color:var(--ink-subtle)}
+.ag-linea{display:flex;justify-content:space-between;gap:16px;padding-bottom:12px;border-bottom:1px solid var(--line);font-size:16px}
+.ag-linea:last-child{border-bottom:0;padding-bottom:0}
+.ag-linea b{font-family:var(--font-mono);font-weight:600;white-space:nowrap}
+.ag-cuota{display:flex;flex-direction:column;gap:6px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.ag-cuota:last-child{border-bottom:0;padding-bottom:0}
+.ag-cuota .cifra{font-family:var(--font-display);font-weight:900;font-stretch:80%;font-size:48px;line-height:1;letter-spacing:-.03em}
+.ag-cuota .cifra small{font-family:var(--font-mono);font-size:13px;font-weight:500;letter-spacing:.04em;color:var(--ink-subtle);margin-left:8px;font-stretch:100%}
+.ag-cuota p{margin:0;font-size:15px;line-height:1.55;color:var(--ink-muted)}
+.ag-faq{display:flex;flex-direction:column;max-width:72ch;border-top:1px solid var(--line)}
+.ag-faq details{border-bottom:1px solid var(--line);padding:22px 0}
+.ag-faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:24px;font-family:var(--font-display);font-size:21px;font-weight:700;font-stretch:92%;letter-spacing:-.01em;color:var(--ink)}
+.ag-faq summary::-webkit-details-marker{display:none}
+.ag-faq summary::after{content:"+";font-family:var(--font-mono);font-weight:500;color:var(--ink-subtle)}
+.ag-faq details[open] summary::after{content:"−"}
+.ag-faq p{margin:12px 0 0;font-size:17px;line-height:1.6;color:var(--ink-muted)}
+.ag-cierre-mail{margin:0;font-size:15px;color:var(--on-accent)}
+.ag-cierre-mail a{color:var(--on-accent);text-decoration:underline;text-underline-offset:3px}
+.clients-flex .dg-cliente{flex:0 0 calc(33.333% - 7px)}
+@media (max-width:820px){.ag-videos{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:820px){
+.ag-stats{grid-template-columns:minmax(0,1fr);gap:28px;margin-top:40px}
+.ag-precios{grid-template-columns:minmax(0,1fr)}
+.ag-caja{padding:24px 20px}
+.ag-cuota .cifra{font-size:40px}
+.ag-txt p{font-size:17px}
+.ag-faq summary{font-size:19px}
+.clients-flex .dg-cliente{flex:0 0 calc(50% - 5px)}
+}
+</style>
+</head>
+<body>
+
+<div class="pg">
+
+  <nav class="dg-nav navp" style="position: sticky; top: 0; z-index: 10; background: var(--bg);">
+    <a class="dg-nav__marca nav-logo" href="#top"><img src="/assets/logo/dgdc-horizontal-claro.svg" alt="Daniel García de Celis" width="200" height="30" style="height: 30px; width: auto; display: block;"></a>
+    <a class="dg-btn dg-btn--secundario js-contacto" href="#contacto">escríbeme</a>
+  </nav>
+
+  <!-- ============ HERO ============ -->
+  <section id="top" class="wrap">
+    <div class="row">
+      <div class="rail"></div>
+      <div class="cnt cnt-hero">
+        <div class="ag-hero">
+          <div class="ag-ante">barra libre de copy para agencias con volumen alto de emails y anuncios</div>
+          <h1 class="h-hero" style="max-width: 16ch;">Todos los guiones y emails que necesitas, en <span class="dg-mark">48 horas</span></h1>
+          <div class="ag-sub">
+            <strong>Tu propio departamento de copy, pero sin tenerlo en nómina.</strong>
+            <span>Me haces un pedido y lo tienes en 48 horas laborables seguro, aunque normalmente entrego mucho antes. Sin contar piezas y sin permanencia.</span>
+          </div>
+          <a class="dg-btn dg-btn--primario dg-btn--grande js-contacto" href="#contacto">cuéntame cómo puedo ayudarte <span class="dg-arrow">→</span></a>
+          <div class="ag-micro">dime qué volumen mueve tu agencia al mes y te digo si la barra libre te sale a cuenta.</div>
+          <p class="cred" style="margin: 8px 0 0;"><span>Sí, escribo con IA, como tú. Pero con mi propio sistema operativo y el criterio de decenas de funnels y lanzamientos de 5, 6 y 7 cifras encima: copy con el estilo de tu agencia, no copy genérico. <a href="#ia" style="color: var(--ink); text-decoration: underline; text-underline-offset: 3px;">Te cuento cómo</a>.</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 01 · LO QUE DICEN ============ -->
+  <section class="sec" style="background: var(--bg-raised);">
+    <div class="wrap">
+      <div class="row">
+        <div class="rail"></div>
+        <div class="cnt">
+          <h2 class="h-sec">Lo que dicen quienes ya trabajan conmigo</h2>
+          <div class="ag-videos">
+            <a class="vid" href="https://www.youtube.com/watch?v=wxXWydbZA6U" target="_blank" rel="noopener">
+              <div class="th"><img src="/yt-victoralcazar.jpg" alt="Testimonio de Víctor Alcázar" loading="lazy"><span class="play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="#0a0b0d"></path></svg></span></div>
+              <div><div class="vid-nombre">Víctor Alcázar</div><div class="vid-rol">agencia riders · agencia de lanzamientos</div></div>
+            </a>
+            <a class="vid" href="https://www.youtube.com/watch?v=MvuuZ2ZtaGo" target="_blank" rel="noopener">
+              <div class="th"><img src="https://i.ytimg.com/vi/MvuuZ2ZtaGo/hqdefault.jpg" alt="Testimonio de Yan Vispo" loading="lazy"><span class="play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="#0a0b0d"></path></svg></span></div>
+              <div><div class="vid-nombre">Yan Vispo</div><div class="vid-rol">fundador de rumbo eficiente</div></div>
+            </a>
+          </div>
+          <div class="ucoms cuatro" style="margin-top: 20px;">
+            <figure class="ucom" style="background: var(--bg);"><blockquote>«Las fechas las cumple a raja tabla. El flujo de trabajo es rápido y profesional.»</blockquote><details><summary>leer completo +</summary><p>Colaboro con Dani en diferentes proyectos y estoy muy contento con su trabajo. Es una persona profesional y seria. Las fechas las cumple a raja tabla. El flujo de trabajo es rápido y profesional.</p><p>No solo es copywritter, sino que conoce muy bien los negocios digitales y se nota a la hora de tomar decisiones importantes durante el proceso. Es un extra muy importante.</p><p>Los textos parecen que hayan sido escritos por el propio cliente, sabe detectar el tono de comunicación de cada marca y adaptarse a su estilo sin importar racionalidad o emoción. Siempre manteniendo la persuasión y conversión en mente...</p><p>Todo esto hace que sea muy completo dentro del mundo copy. Es muy bueno en una cosa y conoce muy bien el sector digital. Esa combinación es tremenda.</p></details><figcaption><img src="/li-monleon.png" alt=""><div><div class="q">David Monleón</div><div class="d">consultor vsl · estratega de publicidad</div></div></figcaption></figure>
+            <figure class="ucom" style="background: var(--bg);"><blockquote>«[…] con procesos muy estandarizados que le permiten imbuirse rápido y muy bien de las marcas para las que trabaja.»</blockquote><details><summary>leer completo +</summary><p>Daniel tiene un don especial para conectar con sus clientes, hablar como si fueran ellos pero adecuando el mensaje para que funcione infinítamente mejor de cara a conseguir su objetivo, normalmente más ventas.</p><p>Es un gran profesional, con procesos muy estandarizados que le permiten imbuirse rápido y muy bien de las marcas para las que trabaja. Esto le permite crear mensajes que conectan con las audiencias de sus clientes y conseguir ventas.</p><p>Si quieres mejorar tu negocio en esta vertical, no dudes en contactar con Dani.</p><p>Además es un tío muy majo y eso, en los negocios, siempre es un plus ;)</p></details><figcaption><img src="/li-minano.png" alt=""><div><div class="q">Manuel Miñano</div><div class="d">empresario · consultor</div></div></figcaption></figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 02 · EL PROBLEMA ============ -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="row">
+        <div class="rail"></div>
+        <div class="cnt">
+          <h2 class="h-sec">El cuello de botella de tu agencia no son las campañas</h2>
+          <div class="ag-txt">
+            <p class="golpe">Es el copy.</p>
+            <p>Cada cliente nuevo pide su tanda de guiones. Cada anuncio que se quema pide otro.</p>
+            <p>Y la lista de emails es el gran activo desaprovechado de la mayoría de negocios con los que he trabajado. Reactivarla es una de las victorias más rápidas y sencillas que le puedes dar a tu cliente: un canal de venta que daba por perdido.</p>
+            <p>Tu agencia es una cocina con diez fogones y un solo cocinero. Los fogones están encendidos, pero los platos salen al ritmo del cocinero.</p>
+            <p>Las salidas habituales son tres, y las tres tienen trampa.</p>
+            <p><strong>Contratar a alguien en casa.</strong> Cuesta un sueldo todos los meses, también los flojos. Y antes de rendir hay que formarlo.</p>
+            <p><strong>Tirar de freelances.</strong> Van bien hasta la semana en que más los necesitas. Esa semana tardan, desaparecen o te entregan algo que hay que rehacer.</p>
+            <p><strong>Tirarlo todo a la IA.</strong> Te saca diez guiones en un minuto. El problema es que le saca los mismos diez a tu competencia, y el cliente lo nota antes que tú: anuncios que se parecen a todos los demás.</p>
+            <p>O sea que, o pagas de más cuando sobra gente, o te quedas corto cuando hace falta, o sacas volumen que no vende.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 03 · LA IA ============ -->
+  <section id="ia" class="sec" style="background: var(--bg-raised);">
+    <div class="wrap">
+      <div class="row">
+        <div class="rail"></div>
+        <div class="cnt">
+          <h2 class="h-sec">Yo también escribo con IA. La diferencia es lo que le doy de comer</h2>
+          <div class="ag-txt">
+            <p>Si en tu agencia ya lo hacéis todo con IA, bien hecho. Yo también.</p>
+            <p>Y por eso sabes lo que sale cuando le pides un guion a pelo: un texto correcto que podría ser de cualquier marca. Hoy hay copy genérico a patadas, y no es culpa de la IA. Es culpa de lo mal que la utilizan.</p>
+            <p>Vuelve a la cocina: cualquiera puede encender los fogones. Lo que cambia el plato es lo que metes en la olla y quién lo prueba antes de servirlo.</p>
+            <p>Por eso trabajo con mi propio sistema operativo: los archivos que la IA lee antes de escribir una sola línea. Tiene tres capas.</p>
+          </div>
+          <div class="entrega" style="margin-top: 40px; background: var(--bg);">
+            <div><span class="n">01</span><h3>Tu forma de trabajar</h3><p>Antes del primer pedido, recojo el framework de tu agencia: tu estructura de anuncio, tu estilo y lo que tus clientes aprueban y lo que no. Lo que te entrego sale con vuestro estilo, no con el mío.</p></div>
+            <div><span class="n">02</span><h3>La investigación a fondo de cada cliente</h3><p>Su mercado, su competencia y el avatar de su cliente: lo que le duele, cómo lo cuenta con sus propias palabras y lo que ya ha probado. Es lo que yo llamo el deep layer, la capa que nadie mira porque no sale en el primer prompt. De ahí salen los ángulos, y cada uno se valida antes de convertirse en guion.</p></div>
+            <div><span class="n">03</span><h3>Los archivos rectores</h3><p>Es mi oficio puesto por escrito: lo que tiene que cumplir cada pieza antes de salir.</p><p style="margin-top: 10px;"><strong style="color: var(--ink);">En email:</strong> qué tipo de asunto encaja con ese cliente y con el objetivo del envío, cómo se cocinan las cuatro primeras frases, cómo se construye cada llamada a la acción, el formato y la longitud.</p><p style="margin-top: 10px;"><strong style="color: var(--ink);">En anuncios, lo mismo:</strong> el gancho, el ángulo y la estructura de cada formato.</p></div>
+          </div>
+          <div class="ag-txt" style="margin-top: 40px;">
+            <p>Y al final, lo reviso yo. Ningún pedido sale sin pasar por mis manos, con el criterio de decenas de lanzamientos y embudos de 5, 6 y 7 cifras y con un filtro que caza las muletillas que delatan un texto hecho con IA.</p>
+            <p class="golpe" style="font-size: clamp(24px, 2.4vw, 32px); line-height: 1.1;">La IA pone la velocidad. Tu agencia pone el estilo. Yo pongo el oficio, que es lo que la IA no trae de serie.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 04 · LA SALIDA ============ -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="row">
+        <div class="rail"></div>
+        <div class="cnt">
+          <h2 class="h-sec">Qué es la barra libre de copy</h2>
+          <div class="ag-txt">
+            <p>Me pides todos los guiones y emails que necesiten tus clientes. Te los sirvo de uno en uno, en 48 horas laborables cada pedido.</p>
+            <p>Y pagas una cuota fija al mes, pidas lo que pidas.</p>
+            <p>Funciona como la barra libre de una boda: bebes toda la noche, pero el camarero te sirve una copa cada vez.</p>
+            <p>Esa copa cada vez es lo que me permite prometerte las 48 horas. Si aceptara diez pedidos a la vez, no podría prometerte ninguna fecha.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 04 · CÓMO FUNCIONA ============ -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="row">
+        <div class="rail"></div>
+        <div class="cnt">
+          <h2 class="h-sec">Un pedido, 48 horas, el siguiente</h2>
+          <div class="entrega">
+            <div><span class="n">01</span><h3>Me haces un pedido</h3><p>Un pack de guiones o de emails para uno de tus clientes. Me pasas el cliente y el objetivo, y la investigación la hago yo.</p></div>
+            <div><span class="n">02</span><h3>Lo tienes en 48 horas laborables</h3><p>Normalmente entrego mucho antes. También los packs de 12 guiones. Con su ronda de revisión incluida.</p></div>
+            <div><span class="n">03</span><h3>Entra el siguiente</h3><p>En cuanto el pedido está entregado y revisado, me pides otro. Y así todo el mes.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 05 · QUÉ ENTRA ============ -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="row">
+        <div class="rail"></div>
+        <div class="cnt">
+          <h2 class="h-sec">Anuncios y email, lo que tus clientes piden cada semana</h2>
+          <div class="ag-txt">
+            <p><strong>Anuncios:</strong> guiones, en packs de 6 o de 12.</p>
+            <p><strong>Email:</strong> gestión integral del canal, con frecuencia de envío de 1 o 2 por semana (packs de 4 y 8).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 06 · PRECIOS ============ -->
+  <section id="precios" class="sec" style="background: var(--bg-raised);">
+    <div class="wrap">
+      <div class="row">
+        <div class="rail"></div>
+        <div class="cnt">
+          <h2 class="h-sec">Pide de vez en cuando o pide cada semana</h2>
+          <div class="ag-precios">
+            <div class="ag-caja">
+              <span class="k">si pides de vez en cuando</span>
+              <h3>Packs</h3>
+              <div style="display: flex; flex-direction: column; gap: 12px;">
+                <div class="ag-linea"><span>Anuncios · 6 guiones</span><b>400 €</b></div>
+                <div class="ag-linea"><span>Anuncios · 12 guiones</span><b>700 €</b></div>
+                <div class="ag-linea"><span>Email · 4 envíos (uno por semana)</span><b>500 €</b></div>
+                <div class="ag-linea"><span>Email · 8 envíos</span><b>800 €</b></div>
+              </div>
+            </div>
+            <div class="ag-caja destacada">
+              <span class="k">si pides cada semana · mes a mes, sin permanencia</span>
+              <h3>Barra libre de copy</h3>
+              <div class="ag-cuota"><span class="cifra">3.000 €<small>/mes</small></span><p>Un canal, anuncios o email. Un pedido abierto a la vez.</p></div>
+              <div class="ag-cuota"><span class="cifra">4.000 €<small>/mes</small></span><p>Los dos canales. Dos pedidos abiertos a la vez.</p></div>
+            </div>
+          </div>
+          <div class="ag-txt" style="margin-top: 40px;">
+            <p>Si este mes ibas a pedirme 8 packs de 6 guiones, sueltos son 3.200 €. En la barra libre son 3.000 €, y todo lo que pidas a partir de ahí ya está pagado.</p>
+            <p>Con los dos canales, por 1.000 € más sumas el email y un segundo pedido en paralelo.</p>
+            <p>¿Viene un mes flojo? La pausas cuando quieras: solo te pido que me avises con una semana de antelación.</p>
+          </div>
+          <div class="cta-fila"><a class="dg-btn dg-btn--primario dg-btn--grande js-contacto" href="#contacto">cuéntame tu agencia <span class="dg-arrow">→</span></a></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 07 · QUIÉN ESCRIBE ============ -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="row">
+        <div class="rail"></div>
+        <div class="cnt">
+          <h2 class="h-sec">Quién escribe</h2>
+          <div class="trabaja">
+            <div class="ag-txt">
+              <p>Soy Daniel García de Celis, copywriter. Desde 2020 he escrito los activos de decenas de lanzamientos y embudos de 5, 6 y 7 cifras.</p>
+              <p>Trabajo en marca blanca: tus clientes son tuyos, y nadie tiene por qué saber quién escribe su copy.</p>
+            </div>
+            <div class="quien-foto"><div class="dg-foto" style="width: 100%; aspect-ratio: 4 / 3;"><img src="/daniel.jpg" alt="Daniel García de Celis"></div></div>
+          </div>
+          <p class="clients-h">agencias con las que he trabajado</p>
+          <div class="clients-flex" style="justify-content: flex-start;">
+            <div class="dg-cliente"><img class="dg-cliente__logo" src="/crece.png" alt="" loading="lazy"><div style="min-width: 0;"><div class="dg-cliente__nombre">Crece Sin Límite</div><div class="dg-cliente__nicho">publicidad y marketing</div></div></div>
+            <div class="dg-cliente"><img class="dg-cliente__logo" src="/riders.png" alt="" loading="lazy"><div style="min-width: 0;"><div class="dg-cliente__nombre">Digital Riders</div><div class="dg-cliente__nicho">agencia de lanzamientos</div></div></div>
+            <div class="dg-cliente"><img class="dg-cliente__logo" src="/logos/proelia.svg" alt="" loading="lazy" style="object-fit: contain; padding: 8px; box-sizing: border-box; background: #fff;"><div style="min-width: 0;"><div class="dg-cliente__nombre">Proelia Digital</div><div class="dg-cliente__nicho">agencia</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 08 · PREGUNTAS ============ -->
+  <section class="sec" style="background: var(--bg-raised);">
+    <div class="wrap">
+      <div class="row">
+        <div class="rail"></div>
+        <div class="cnt">
+          <h2 class="h-sec">Lo que suelen preguntar</h2>
+          <div class="ag-faq">
+            <details><summary>¿Tengo que darte mucho contexto de cada cliente?</summary><p>No. Me pasas un briefing breve del cliente con el objetivo del pedido, y la investigación la hago yo.</p></details>
+            <details><summary>¿Y si te pido dos cosas a la vez?</summary><p>Entra la primera, y la segunda en cuanto la primera está entregada y revisada. Con los dos canales tienes dos pedidos abiertos a la vez.</p></details>
+            <details><summary>¿Cuántas revisiones entran?</summary><p>Una ronda por pedido.</p></details>
+            <details><summary>¿Hay permanencia?</summary><p>No. Pagas mes a mes y puedes pausar cuando quieras, solo te pido que me avises con una semana de antelación.</p></details>
+            <details><summary>¿Puedo empezar con un pack?</summary><p>Claro, esa es la idea.</p></details>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CIERRE ============ -->
+  <section id="contacto" class="sec banda-final" style="border-top: 0;">
+    <div class="wrap">
+      <div class="row">
+        <div></div>
+        <div class="cnt" style="padding-top: 64px; padding-bottom: 64px; display: flex; flex-wrap: wrap; gap: 28px 48px; align-items: center; justify-content: space-between;">
+          <p style="margin: 0; font-family: var(--font-display); font-weight: 900; font-stretch: 82%; font-size: clamp(30px, 3.4vw, 46px); line-height: 1; letter-spacing: -.03em; max-width: 22ch; color: var(--on-accent);">Si tu agencia vive de sacar anuncios y emails cada semana, hablemos.</p>
+          <div style="display: flex; flex-direction: column; gap: 14px; align-items: flex-start;">
+            <a class="dg-btn dg-btn--grande btn-invertido js-contacto" href="#contacto">cuéntame tu agencia <span class="dg-arrow">→</span></a>
+            <p class="ag-cierre-mail">o escríbeme a <a class="js-contacto-texto" href="mailto:daniel@danielgarciadecelis.com?subject=Barra%20libre%20de%20copy">daniel@danielgarciadecelis.com</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PIE ============ -->
+  <footer class="sec foot">
+    <div class="wrap" style="padding-top: 28px; padding-bottom: 40px; display: flex; flex-wrap: wrap; gap: 16px 32px; align-items: center; justify-content: space-between;">
+      <div style="display: flex; align-items: center; gap: 10px;"><img src="/assets/logo/dgdc-simbolo-claro.svg" alt="" style="width: auto; height: 22px;"><span style="font-family: var(--font-mono); font-size: 11px; letter-spacing: .04em; color: var(--ink-subtle);">daniel garcía de celis</span></div>
+      <div style="display: flex; flex-wrap: wrap; gap: 16px 24px; font-family: var(--font-mono); font-size: 11px; letter-spacing: .04em;">
+        <a href="/aviso-legal/">aviso legal</a>
+        <a href="/privacidad/">política de privacidad</a>
+        <a href="/cookies/">cookies</a>
+        <a href="mailto:daniel@danielgarciadecelis.com?subject=Barra%20libre%20de%20copy">contacto</a>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+(function () {
+  // Destino de todos los botones de contacto: WhatsApp de Daniel con el mensaje ya escrito.
+  var CONTACTO_URL = 'https://wa.me/34628347382?text=' + encodeURIComponent('Hola Daniel, vengo de la página de agencias.');
+  document.querySelectorAll('a.js-contacto').forEach(function (a) {
+    a.href = CONTACTO_URL;
+    a.target = '_blank'; a.rel = 'noopener';
+    a.addEventListener('click', function () {
+      if (window.dgcTrack) window.dgcTrack('lead', { source: 'agencias' });
+    });
+  });
+})();
+</script>
+</body>
+</html>

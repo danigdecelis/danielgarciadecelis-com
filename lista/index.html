@@ -7,9 +7,9 @@
   <meta name="description" content="Diagnóstico de Lista gratuito para infoproductores: descubre si tu base de datos está viva, fría o infrautilizada y qué campaña activar primero para que vuelva a generar ventas." />
   <title>Diagnóstico de Lista para Infoproductores · Daniel García de Celis</title>
   <link rel="canonical" href="https://danielgarciadecelis.com/lista/">
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="alternate icon" href="/favicon.png">
-  <link rel="apple-touch-icon" href="/favicon.png">
+  <link rel="icon" href="/assets/logo/favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="/assets/logo/favicon-64.png">
+  <link rel="apple-touch-icon" href="/assets/logo/favicon-64.png">
 
   <meta property="og:title" content="Diagnóstico de Lista" />
   <meta property="og:description" content="¿Tu lista te vende o solo acumula contactos? Diagnóstico interactivo, resultado al instante." />
@@ -33,17 +33,17 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --black:     #060606;
-      --black-2:   #0c0b0a;
-      --ink:       #f3ede4;
-      --ink-dim:   #b6ada1;
-      --muted:     #6e655b;
-      --line:      rgba(201, 168, 76, 0.16);
-      --line-soft: rgba(243, 237, 228, 0.08);
-      --gold:      #c9a84c;
-      --gold-hi:   #e6c97a;
-      --gold-lo:   #8a7129;
-      --warn:      #d98a6e;
+      --black:     #0a0b0d;
+      --black-2:   #121418;
+      --ink:       #edece8;
+      --ink-dim:   #9b9ea6;
+      --muted:     #80848c;
+      --line:      rgba(237, 236, 232, 0.16);
+      --line-soft: rgba(237, 236, 232, 0.10);
+      --gold:      #ffd23f;
+      --gold-hi:   #ffd23f;
+      --gold-lo:   #ffd23f;
+      --warn:      #ff8a7a;
     }
 
     html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
@@ -51,7 +51,7 @@
     body {
       background: var(--black);
       color: var(--ink);
-      font-family: 'DM Sans', system-ui, sans-serif;
+      font-family: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-weight: 300;
       font-size: 16px;
       line-height: 1.65;
@@ -77,7 +77,7 @@
       transform: translateX(-50%);
       width: 720px;
       height: 720px;
-      background: radial-gradient(circle at center, rgba(201,168,76,0.10) 0%, rgba(201,168,76,0.03) 35%, transparent 65%);
+      background: radial-gradient(circle at center, rgba(255, 210, 63,0.10) 0%, rgba(255, 210, 63,0.03) 35%, transparent 65%);
       pointer-events: none;
       z-index: 0;
     }
@@ -94,7 +94,7 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      background: rgba(6, 6, 6, 0.78);
+      background: rgba(10, 11, 13, 0.78);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--line-soft);
@@ -109,7 +109,7 @@
       gap: 16px;
     }
     .logo {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-size: 1rem;
       font-weight: 700;
       letter-spacing: 0.04em;
@@ -127,7 +127,7 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-family: 'Playfair Display', serif;
+      font-family: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-style: italic;
       font-size: 0.7rem;
       color: var(--gold);
@@ -136,7 +136,7 @@
     .logo em { font-style: italic; color: var(--gold); font-weight: 400; margin-left: 2px; }
 
     .nav-cta {
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-size: 0.78rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
@@ -161,7 +161,7 @@
     }
 
     .chapter-mark {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-style: italic;
       font-weight: 400;
       font-size: 0.85rem;
@@ -184,7 +184,7 @@
     }
 
     h1 {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-weight: 900;
       font-size: clamp(2.35rem, 5.8vw, 3.75rem);
       line-height: 1.06;
@@ -205,7 +205,7 @@
     }
 
     .subhead {
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-weight: 300;
       font-size: 1.08rem;
       line-height: 1.65;
@@ -223,7 +223,7 @@
     .section + .section { border-top: 1px solid var(--line-soft); }
 
     .eyebrow {
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-weight: 500;
       font-size: 0.72rem;
       letter-spacing: 0.22em;
@@ -242,7 +242,7 @@
     }
 
     h2 {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-weight: 700;
       font-size: clamp(1.65rem, 3.2vw, 2.15rem);
       line-height: 1.18;
@@ -275,10 +275,10 @@
       transition: background 0.3s;
     }
     .bullets li:last-child { border-bottom: 1px solid var(--line-soft); }
-    .bullets li:hover { background: rgba(201, 168, 76, 0.02); }
+    .bullets li:hover { background: rgba(255, 210, 63, 0.02); }
 
     .b-num {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-style: italic;
       font-weight: 400;
       font-size: 1.35rem;
@@ -288,7 +288,7 @@
     }
     .b-body strong {
       display: block;
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-weight: 500;
       font-size: 1.05rem;
       color: var(--ink);
@@ -319,14 +319,14 @@
       position: absolute;
       left: 0;
       top: 2px;
-      font-family: 'Playfair Display', serif;
+      font-family: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-style: italic;
       font-weight: 400;
       font-size: 0.95rem;
       color: var(--gold);
     }
     .step h3 {
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-weight: 500;
       font-size: 1rem;
       color: var(--ink);
@@ -345,7 +345,7 @@
       border-bottom: 1px solid var(--line-soft);
     }
     .quote-mark {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-style: italic;
       font-weight: 400;
       color: var(--gold);
@@ -355,7 +355,7 @@
       margin-bottom: 8px;
     }
     .quote blockquote {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-style: italic;
       font-weight: 400;
       font-size: clamp(1.25rem, 2.4vw, 1.55rem);
@@ -367,7 +367,7 @@
     }
 
     .logos-label {
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-weight: 500;
       font-size: 0.72rem;
       letter-spacing: 0.22em;
@@ -407,7 +407,7 @@
       gap: 10px;
       min-height: 150px;
     }
-    .clients-grid .client:hover { background: rgba(201, 168, 76, 0.04); }
+    .clients-grid .client:hover { background: rgba(255, 210, 63, 0.04); }
     .clients-grid .avatar {
       width: 64px;
       height: 64px;
@@ -416,7 +416,7 @@
       filter: grayscale(100%) brightness(0.92) contrast(1.05);
       opacity: 0.72;
       transition: filter 0.35s, opacity 0.35s;
-      border: 1px solid rgba(201, 168, 76, 0.18);
+      border: 1px solid rgba(255, 210, 63, 0.18);
     }
     .clients-grid .client:hover .avatar { filter: grayscale(0%) brightness(1) contrast(1); opacity: 1; }
     .clients-grid .logo {
@@ -434,7 +434,7 @@
     .clients-grid .client:hover .logo[data-whiten] { filter: brightness(0) invert(1); opacity: 1; }
     .clients-grid .client:hover .logo[data-color] { filter: none; opacity: 1; }
     .clients-grid .name {
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-weight: 400;
       font-size: 0.74rem;
       letter-spacing: 0.06em;
@@ -490,7 +490,7 @@
       gap: 12px;
       background: var(--gold);
       color: var(--black);
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-weight: 500;
       font-size: 0.98rem;
       letter-spacing: 0.01em;
@@ -500,19 +500,19 @@
       border-radius: 2px;
       cursor: pointer;
       transition: background 0.25s, color 0.25s, transform 0.15s, box-shadow 0.25s;
-      box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.4);
+      box-shadow: 0 0 0 0 rgba(255, 210, 63, 0.4);
     }
     .btn-wa:hover {
       background: transparent;
       color: var(--gold);
-      box-shadow: 0 8px 32px -8px rgba(201, 168, 76, 0.45);
+      box-shadow: 0 8px 32px -8px rgba(255, 210, 63, 0.45);
       transform: translateY(-2px);
     }
     .btn-wa svg { flex-shrink: 0; }
 
     .cta-note {
       margin-top: 18px;
-      font-family: 'Playfair Display', serif;
+      font-family: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-style: italic;
       font-weight: 400;
       font-size: 0.95rem;
@@ -535,7 +535,7 @@
     }
     footer a { color: var(--ink-dim); text-decoration: none; transition: color 0.2s; }
     footer a:hover { color: var(--gold); }
-    .foot-brand { font-family: 'Playfair Display', serif; font-style: italic; color: var(--ink-dim); }
+    .foot-brand { font-family: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-style: italic; color: var(--ink-dim); }
 
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(20px); }
@@ -557,7 +557,7 @@
     .progress { height: 2px; background: var(--line-soft); margin-bottom: 10px; overflow: hidden; }
     .progress i { display: block; height: 100%; background: var(--gold); width: 0; transition: width 0.35s ease; }
     .pcount {
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-size: 0.72rem;
       letter-spacing: 0.18em;
       text-transform: uppercase;
@@ -565,7 +565,7 @@
       margin-bottom: 44px;
     }
     .qblock {
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-weight: 500;
       font-size: 0.72rem;
       letter-spacing: 0.22em;
@@ -578,7 +578,7 @@
     }
     .qblock::before { content: ''; width: 22px; height: 1px; background: var(--gold); }
     .qtext {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-weight: 700;
       font-size: clamp(1.45rem, 4vw, 1.95rem);
       line-height: 1.22;
@@ -589,10 +589,10 @@
     .qsub { font-size: 0.92rem; color: var(--muted); margin-bottom: 30px; }
     .opts { display: flex; flex-direction: column; gap: 10px; margin-top: 30px; }
     .opt {
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-weight: 300;
       border: 1px solid var(--line-soft);
-      background: rgba(243, 237, 228, 0.02);
+      background: rgba(237, 236, 232, 0.02);
       padding: 17px 20px;
       font-size: 0.97rem;
       color: var(--ink-dim);
@@ -602,20 +602,20 @@
       line-height: 1.5;
       border-radius: 2px;
     }
-    .opt:hover { border-color: var(--line); background: rgba(201, 168, 76, 0.04); color: var(--ink); }
-    .opt.sel { border-color: var(--gold); background: rgba(201, 168, 76, 0.08); color: var(--ink); }
+    .opt:hover { border-color: var(--line); background: rgba(255, 210, 63, 0.04); color: var(--ink); }
+    .opt.sel { border-color: var(--gold); background: rgba(255, 210, 63, 0.08); color: var(--ink); }
     .qnav { display: flex; justify-content: space-between; align-items: center; margin-top: 36px; }
     .qback {
       background: none; border: none; cursor: pointer;
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase;
       color: var(--muted); padding: 8px 0; transition: color 0.2s;
     }
     .qback:hover { color: var(--ink-dim); }
     textarea {
-      width: 100%; background: rgba(243, 237, 228, 0.03);
+      width: 100%; background: rgba(237, 236, 232, 0.03);
       border: 1px solid var(--line-soft); border-radius: 2px;
-      color: var(--ink); font-family: 'DM Sans', sans-serif; font-weight: 300;
+      color: var(--ink); font-family: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 300;
       font-size: 0.97rem; padding: 16px; min-height: 110px; resize: vertical; line-height: 1.6;
       margin-top: 30px;
     }
@@ -623,7 +623,7 @@
     .curr { display: inline-flex; border: 1px solid var(--line-soft); border-radius: 2px; overflow: hidden; margin-top: 22px; }
     .curr button {
       background: none; border: none; color: var(--muted);
-      font-family: 'DM Sans', sans-serif; font-size: 0.78rem; font-weight: 500;
+      font-family: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 0.78rem; font-weight: 500;
       letter-spacing: 0.1em; padding: 9px 20px; cursor: pointer; transition: 0.2s;
     }
     .curr button.sel { background: var(--gold); color: var(--black); }
@@ -632,15 +632,15 @@
     .field { margin-bottom: 16px; }
     .field label {
       display: block;
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-size: 0.72rem; font-weight: 500;
       letter-spacing: 0.18em; text-transform: uppercase;
       color: var(--muted); margin-bottom: 8px;
     }
     .field input {
-      width: 100%; background: rgba(243, 237, 228, 0.03);
+      width: 100%; background: rgba(237, 236, 232, 0.03);
       border: 1px solid var(--line-soft); border-radius: 2px;
-      color: var(--ink); font-family: 'DM Sans', sans-serif; font-weight: 300;
+      color: var(--ink); font-family: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 300;
       font-size: 1rem; padding: 15px 16px;
     }
     .err { color: var(--warn); font-size: 0.82rem; margin-top: 6px; display: none; }
@@ -648,7 +648,7 @@
 
     .report-wrap { padding: 56px 0 90px; }
     .rcard {
-      background: rgba(243, 237, 228, 0.025);
+      background: rgba(237, 236, 232, 0.025);
       border: 1px solid var(--line-soft);
       border-radius: 2px;
       padding: 36px 32px;
@@ -657,7 +657,7 @@
     .rcard.gold { border-color: var(--line); }
     .levelhead { text-align: center; padding: 48px 32px; }
     .levelhead .ln {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-weight: 900;
       font-size: clamp(2.1rem, 6.5vw, 3.1rem);
       line-height: 1.1;
@@ -666,7 +666,7 @@
       letter-spacing: -0.02em;
     }
     .levelhead .lt {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-style: italic;
       font-size: 1.05rem;
       color: var(--gold);
@@ -687,7 +687,7 @@
 
     .f-main { border-left: 2px solid var(--gold); }
     .ftag {
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-weight: 500;
       font-size: 0.72rem;
       letter-spacing: 0.22em;
@@ -701,7 +701,7 @@
     .ftag::before { content: ''; width: 22px; height: 1px; background: currentColor; }
     .ftag.warn { color: var(--warn); }
     .rcard h3 {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-weight: 700;
       font-size: 1.3rem;
       color: var(--ink);
@@ -713,7 +713,7 @@
     .rcard p:last-child { margin-bottom: 0; }
 
     .factline {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-style: italic;
       font-size: 1.05rem;
       color: var(--ink);
@@ -723,7 +723,7 @@
     .factline b { font-style: normal; color: var(--gold); font-weight: 700; }
 
     .mathnum {
-      font-family: 'Playfair Display', serif;
+      font-family: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif;
       font-weight: 900;
       font-size: clamp(1.9rem, 5.5vw, 2.7rem);
       color: var(--gold);
@@ -773,13 +773,42 @@
       .rcard { padding: 28px 22px; }
       .levelhead { padding: 40px 22px; }
     }
-  </style>
+  
+    /* ═══ Design system actual (21-oct-2026): tema «marca» de danielgarciadecelis.com ═══ */
+    body { font-family: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-weight: 400; }
+    body::before, .hero-glow { display: none; }
+    h1, h2, .qtext, .levelhead .ln, .mathnum, .rcard h3 { font-family: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-style: normal; font-weight: 900; font-stretch: 82%; letter-spacing: -0.03em; }
+    h1 { line-height: 0.98; }
+    h2, .qtext, .rcard h3 { font-weight: 800; font-stretch: 88%; letter-spacing: -0.02em; }
+    h1 em, h2 em { font-style: normal; font-weight: inherit; background: none; -webkit-text-fill-color: currentColor; color: var(--gold); }
+    .quote blockquote { font-family: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-style: normal; font-weight: 600; letter-spacing: -0.015em; }
+    .quote-mark { font-family: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-style: normal; font-weight: 900; }
+    .factline, .levelhead .lt { font-family: 'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-style: normal; }
+    .levelhead .lt { font-weight: 600; }
+    .chapter-mark, .eyebrow, .qblock, .ftag, .pcount, .logos-label, .field label, .nav-cta, .qback, .cta-note, .foot-brand, .curr button, .lscore, .b-num, .step::before, .clients-grid .name {
+      font-family: 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace; font-style: normal; font-weight: 500; letter-spacing: 0.04em; text-transform: lowercase; }
+    .b-num { font-size: 0.95rem; padding-top: 6px; }
+    .chapter-mark::before, .chapter-mark::after, .cta::before, .logos-label::before, .logos-label::after { display: none; }
+    .eyebrow::before, .qblock::before, .ftag::before { width: 7px; height: 7px; background: currentColor; }
+    .section + .section, .quote { border-top: 0; border-bottom: 0; }
+    .btn-wa { font-family: 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace; font-weight: 500; font-size: 14px; letter-spacing: 0.02em; background: var(--gold); color: #0a0b0d; border-color: var(--gold); border-radius: 0; box-shadow: none; }
+    .btn-wa:hover { background: var(--ink); border-color: var(--ink); color: var(--black); box-shadow: none; transform: none; }
+    .opt, .rcard, textarea, .field input, .curr, .curr button { border-radius: 0; }
+    .opt { font-weight: 400; }
+    .opt.sel { border-color: var(--gold); }
+    .nav-logo { display: inline-flex; align-items: center; }
+    .nav-logo img { height: 30px; width: auto; display: block; }
+    .nav-cta { white-space: nowrap; }
+    @media (max-width: 480px) { .nav-logo img { height: 24px; } .nav-cta { font-size: 0.7rem; } }
+    .privacy a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
+    a:focus-visible, button:focus-visible, .opt:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+</style>
 </head>
 <body>
 
   <nav>
     <div class="nav-inner">
-      <a class="logo" href="/">Daniel <em>García de Celis</em></a>
+      <a class="nav-logo" href="/"><img src="/assets/logo/dgdc-horizontal-oscuro.svg" alt="Daniel García de Celis" width="200" height="30"></a>
       <button class="nav-cta" onclick="startQuiz()">
         Diagnóstico gratuito
         <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -885,7 +914,7 @@
         <blockquote>
           La fuga no suele estar en captar más. Está en activar lo que ya tienes. Esa lista te costó reunirla. Que no venda también te cuesta.
         </blockquote>
-        <cite style="font-family:'DM Sans',sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);display:block;">Daniel García de Celis</cite>
+        <cite style="font-family:'Archivo', 'Helvetica Neue', Helvetica, Arial, sans-serif;font-style:normal;font-size:0.78rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--muted);display:block;">Daniel García de Celis</cite>
       </div>
     </section>
 
@@ -939,7 +968,7 @@
       <p class="section-lead" style="margin-bottom:34px;">Dime a quién se lo entrego. Lo ves en pantalla ahora mismo, completo. Si dejas tu WhatsApp, te paso además mi lectura personal de tu caso.</p>
       <div class="field"><label>Nombre</label><input type="text" id="f-name" placeholder="Tu nombre"></div>
       <div class="field"><label>Email</label><input type="text" id="f-email" placeholder="tu@email.com"><div class="err" id="e-email">Revisa el email, no parece válido.</div></div>
-      <div style="margin-top:20px;padding:22px;border:1px solid var(--gold);border-radius:14px;background:rgba(201,168,76,0.06);">
+      <div style="margin-top:20px;padding:22px;border:1px solid var(--gold);border-radius:0;background:rgba(255, 210, 63,0.06);">
         <p style="font-weight:700;color:var(--ink);margin:0 0 4px;font-size:1rem;">Para mi lectura personal de tu caso</p>
         <p style="font-size:0.88rem;color:var(--ink-dim);margin:0 0 18px;line-height:1.55;">Tu diagnóstico lo ves en pantalla igual. Esto es lo que necesito para revisar tu caso a mano y decirte qué cambiar, en vez de darte consejos genéricos.</p>
         <div class="field"><label>Tu web y tus redes</label><textarea id="f-online" placeholder="Pega aquí tu web, Instagram, YouTube o LinkedIn. Es justo lo que miro para que la lectura sea de TU negocio y no de uno cualquiera." style="min-height:80px;"></textarea></div>
