@@ -143,7 +143,7 @@
   function enlacePie() {
     if (!hayMedicion) return;
     document.querySelectorAll('a[href="/cookies/"]').forEach(function (a) {
-      if (!a.closest('footer, .pie, .foot') || a.parentNode.querySelector('.dgc-configurar')) return;
+      if (a.closest('#dgc-cookies') || a.textContent.trim().toLowerCase() !== 'cookies' || a.parentNode.querySelector('.dgc-configurar')) return;
       var b = document.createElement('a');
       b.href = '#'; b.className = 'dgc-configurar'; b.textContent = 'configurar cookies';
       b.addEventListener('click', function (e) { e.preventDefault(); mostrarAviso(); });
