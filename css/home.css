@@ -246,3 +246,6 @@ a{color:var(--ink)}a:hover{color:var(--ink-accent)}
 /* 21-oct: sin línea vertical del raíl ni líneas entre secciones; separa el cambio de fondo */
 .rail{border-right:0}
 .sec{border-top:0}
+
+/* 21-oct: cifras de «Quién soy» sin línea encima, como el resto de la página */
+.stats .dg-stat{border-top:0;padding-top:0}
