@@ -46,7 +46,7 @@ body{margin:0;background:var(--bg)}
 .ag-txt .golpe{font-family:var(--font-display);font-weight:900;font-stretch:82%;font-size:clamp(30px,3vw,40px);line-height:1;letter-spacing:-.03em}
 .ag-videos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:32px 20px}
 .ag-videos .vid-q{margin:0;font-size:16px;font-weight:600;font-stretch:94%;line-height:1.45;color:var(--ink)}
-.ag-video-top{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:32px;align-items:center;margin-bottom:48px}
+.ag-video-top{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:32px;align-items:center;margin-bottom:0}
 .ag-video-top .vid-q{margin:0;font-family:var(--font-display);font-weight:800;font-stretch:88%;font-size:clamp(24px,2.4vw,32px);line-height:1.15;letter-spacing:-.02em;color:var(--ink)}
 .ag-casos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
 .ag-caso{display:flex;flex-direction:column;gap:16px;padding:28px;background:var(--bg);border-top:4px solid var(--accent)}
@@ -74,7 +74,45 @@ body{margin:0;background:var(--bg)}
 .ag-faq p{margin:12px 0 0;font-size:17px;line-height:1.6;color:var(--ink-muted)}
 .ag-cierre-nota{margin:0;font-size:15px;color:var(--on-accent)}
 .clients-flex .dg-cliente{flex:0 0 calc(33.333% - 7px)}
-@media (max-width:1100px){.ag-videos,.ag-casos{grid-template-columns:repeat(2,minmax(0,1fr))}}
+/* Rediseño 23-oct-2026 */
+.ag-logos{width:100%;max-width:760px}
+.ag-logos .clients-h{margin:8px 0 14px}
+.entrega.cuatro{grid-template-columns:repeat(4,minmax(0,1fr))}
+.ag-aparte{margin:0;font-size:16px;line-height:1.6;color:var(--ink-muted)}
+.ag-flujo{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr);align-items:stretch;gap:0 12px;margin-top:40px}
+.ag-flujo .paso{display:flex;flex-direction:column;gap:8px;padding:22px 20px;background:var(--bg);border:1px solid var(--line)}
+.ag-flujo .paso.yo{border:2px solid var(--ink)}
+.ag-flujo .paso .k{font-family:var(--font-mono);font-size:11px;letter-spacing:.04em;color:var(--ink-subtle)}
+.ag-flujo .paso b{font-family:var(--font-display);font-size:19px;font-weight:700;font-stretch:92%;line-height:1.2;color:var(--ink)}
+.ag-flujo .paso span.t{font-size:14px;line-height:1.5;color:var(--ink-muted)}
+.ag-flujo .fl{display:grid;place-items:center;font-family:var(--font-mono);font-size:20px;color:var(--ink-subtle)}
+.ag-gana{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:40px}
+.ag-gana > div{padding:24px 26px;background:var(--bg);border-top:4px solid var(--accent)}
+.ag-gana h3{margin:0 0 8px;font-family:var(--font-display);font-size:21px;font-weight:700;font-stretch:92%;line-height:1.25}
+.ag-gana p{margin:0;font-size:16px;line-height:1.6;color:var(--ink-muted)}
+.ag-videos2{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:36px 20px}
+.ag-videos2 > a{grid-column:span 2}
+.ag-videos2 > a:nth-child(-n+2){grid-column:span 3}
+.ag-videos2 .vid-q{margin:0;font-size:16px;font-weight:600;font-stretch:94%;line-height:1.45;color:var(--ink)}
+.ag-videos2 > a:nth-child(-n+2) .vid-q{font-size:19px}
+.ag-escrito-h{margin:64px 0 18px;font-family:var(--font-mono);font-size:12px;letter-spacing:.04em;color:var(--ink-subtle)}
+.ag-cita{margin:32px 0 0;max-width:620px}
+.ag-cita .ucom{background:var(--bg-raised)}
+.ag-encaja2{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.ag-encaja2 > div{display:flex;flex-direction:column;gap:14px;padding:30px 28px;background:var(--bg);border:1px solid var(--line)}
+.ag-encaja2 > div.si{border-top:4px solid var(--accent)}
+.ag-encaja2 > div.no{background:transparent;border:1px dashed var(--line-strong)}
+.ag-encaja2 .ic{width:40px;height:40px;display:grid;place-items:center;font-family:var(--font-mono);font-size:18px;font-weight:700;background:var(--accent);color:var(--on-accent)}
+.ag-encaja2 .no .ic{background:transparent;border:1px solid var(--line-strong);color:var(--ink-subtle)}
+.ag-encaja2 h3{margin:0;font-family:var(--font-display);font-size:24px;font-weight:800;font-stretch:88%;line-height:1.15;letter-spacing:-.01em}
+.ag-encaja2 p{margin:0;font-size:17px;line-height:1.6;color:var(--ink)}
+.ag-encaja2 .no p{color:var(--ink-muted)}
+@media (max-width:1100px){.ag-videos,.ag-casos{grid-template-columns:repeat(2,minmax(0,1fr))}
+.entrega.cuatro{grid-template-columns:repeat(2,minmax(0,1fr))}
+.ag-flujo{grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)}
+.ag-flujo .fl:nth-child(4){display:none}
+.ag-flujo{row-gap:12px}
+.ag-encaja2{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:820px){
 .ag-videos,.ag-casos,.ag-precios,.ag-encaja,.ag-video-top{grid-template-columns:minmax(0,1fr)}
 .ag-video-top{gap:20px}
@@ -84,6 +122,14 @@ body{margin:0;background:var(--bg)}
 .ag-txt p{font-size:17px}
 .ag-faq summary{font-size:19px}
 .clients-flex .dg-cliente{flex:0 0 calc(50% - 5px)}
+.entrega.cuatro,.ag-gana,.ag-videos2{grid-template-columns:minmax(0,1fr)}
+.ag-videos2 > a,.ag-videos2 > a:nth-child(-n+2){grid-column:auto}
+.ag-videos2 > a:nth-child(-n+2) .vid-q{font-size:16px}
+.ag-flujo{grid-template-columns:minmax(0,1fr);row-gap:6px}
+.ag-flujo .fl{transform:rotate(90deg);padding:2px 0}
+.ag-flujo .fl:nth-child(4){display:grid}
+.ag-encaja2 > div{padding:24px 20px}
+.ag-escrito-h{margin-top:48px}
 }
 </style>
 </head>
@@ -102,14 +148,22 @@ body{margin:0;background:var(--bg)}
       <div class="cnt cnt-hero">
         <div class="ag-hero">
           <div class="ag-ante">para agencias de lanzamientos de infoproductos</div>
-          <h1 class="h-hero" style="max-width: 18ch;">«No solo escribe copy que vende: <span class="dg-mark">entiende la estrategia</span> detrás de cada palabra.»</h1>
-          <div class="ag-firma"><img src="/li-alcazar.png" alt=""><div><div class="q">Víctor Alcázar</div><div class="d">lanzamientos en digital riders</div></div></div>
+          <h1 class="h-hero" style="max-width: 19ch;">Todo el copy de tu lanzamiento, <span class="dg-mark">de una sola mano</span>. Y lo que viene cuando cierra el carrito.</h1>
           <p class="ag-sub">Estrategia, copy y lógica de los flujos de tu próximo lanzamiento, de la captación al último email del carrito. Más de 70 lanzamientos desde 2020.</p>
+          <p class="cred" style="margin: 0;"><span>Sí, escribo con IA, como tu equipo. Lo que cambia es lo que lee antes de escribir. <a href="#ia" style="color: var(--ink); text-decoration: underline; text-underline-offset: 3px;">Te cuento cómo</a>.</span></p>
           <a class="dg-btn dg-btn--primario dg-btn--grande js-contacto" href="#contacto">cuéntame tu próximo lanzamiento <span class="dg-arrow">→</span></a>
           <div class="ag-micro">te contesto con un vídeo corto sobre tu caso antes de proponerte ninguna llamada.</div>
           <div class="stats" style="margin-top: 24px; max-width: 760px;">
             <div class="dg-stat dg-stat--grande"><span class="dg-stat__num">+70</span><span class="dg-stat__txt">lanzamientos desde 2020</span></div>
             <div class="dg-stat dg-stat--grande"><span class="dg-stat__num">+5M€</span><span class="dg-stat__txt">facturados en los lanzamientos en los que he participado desde 2020</span></div>
+          </div>
+          <div class="ag-logos">
+            <p class="clients-h">agencias con las que he trabajado</p>
+            <div class="clients-flex" style="justify-content: flex-start;">
+            <div class="dg-cliente"><img class="dg-cliente__logo" src="/riders.png" alt="" loading="lazy"><div style="min-width: 0;"><div class="dg-cliente__nombre">Digital Riders</div><div class="dg-cliente__nicho">agencia de lanzamientos</div></div></div>
+            <div class="dg-cliente"><img class="dg-cliente__logo" src="/crece.png" alt="" loading="lazy"><div style="min-width: 0;"><div class="dg-cliente__nombre">Crece Sin Límite</div><div class="dg-cliente__nicho">publicidad y marketing</div></div></div>
+            <div class="dg-cliente"><img class="dg-cliente__logo" src="/logos/proelia.svg" alt="" loading="lazy" style="object-fit: contain; padding: 8px; box-sizing: border-box; background: #fff;"><div style="min-width: 0;"><div class="dg-cliente__nombre">Proelia Digital</div><div class="dg-cliente__nicho">agencia</div></div></div>
+            </div>
           </div>
         </div>
       </div>
@@ -132,21 +186,97 @@ body{margin:0;background:var(--bg)}
               <div><div class="vid-nombre">José Muñoz</div><div class="vid-rol">programa in · de 75 a 1.800 personas en la comunidad</div></div>
             </div>
           </div>
-          <div class="ag-videos">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ALCANCE ============ -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="row">
+        <div class="rail"></div>
+        <div class="cnt">
+          <h2 class="h-sec" style="max-width: 26ch;">Una persona para todo el lanzamiento. Y para lo que viene después</h2>
+          <div class="ag-txt" style="margin-bottom: 40px;">
+            <p>Te escribo todas las piezas que pida el lanzamiento, de principio a fin, con una sola voz: la de tu cliente.</p>
+          </div>
+          <div class="entrega cuatro" style="background: var(--bg-raised);">
+            <div><span class="n">01</span><h3>Captación</h3><p>Guiones de anuncios, copys de estáticos, captions, landing de registro y los emails y WhatsApp que llevan a la gente al directo.</p></div>
+            <div><span class="n">02</span><h3>Directo</h3><p>El guion del webinar y su presentación, y los emails y WhatsApp de asistencia.</p></div>
+            <div><span class="n">03</span><h3>Venta</h3><p>La página de venta y la secuencia de carrito por email y por WhatsApp.</p></div>
+            <div><span class="n">04</span><h3>Después del carrito</h3><p>El upsell y el reopen, si hacen falta, y el cierre con lista prioritaria.</p></div>
+          </div>
+          <div class="ag-txt" style="margin-top: 40px;">
+            <p><strong>La lógica de los flujos:</strong> qué mensaje sale, cuándo y con qué condición. La escribo para quien monte las automatizaciones y la cierro con esa persona.</p>
+            <p>No cuento piezas. Si el lanzamiento pide un email más el martes, se escribe. Es barra libre de piezas dentro de ese lanzamiento.</p>
+            <p class="ag-aparte">Aparte, con su propio precio: la gestión de esa lista prioritaria y la creación de un infoproducto nuevo.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CÓMO TRABAJO ============ -->
+  <section id="ia" class="sec" style="background: var(--bg-raised);">
+    <div class="wrap">
+      <div class="row">
+        <div class="rail"></div>
+        <div class="cnt">
+          <h2 class="h-sec">Escribo con IA, como tu equipo. Lo que cambia es lo que lee antes de escribir</h2>
+          <div class="ag-txt">
+            <p>La IA a pelo te saca la secuencia de un lanzamiento en una tarde. Y se lee como la de todos los lanzamientos que tu cliente ha visto este año.</p>
+            <p class="golpe" style="font-size: clamp(24px, 2.4vw, 32px); line-height: 1.1;">El problema no es la herramienta. Es lo que le das de comer.</p>
+            <p>Por eso trabajo con mi propio sistema operativo: los archivos que la IA lee antes de escribir una sola línea. Tiene tres capas.</p>
+          </div>
+          <div class="entrega" style="margin-top: 40px; background: var(--bg);">
+            <div><span class="n">01</span><h3>Tu forma de lanzar</h3><p>Tu estructura, tu calendario de piezas y lo que tus clientes aprueban y lo que no. Lo que te entrego encaja en vuestro proceso, no al revés.</p></div>
+            <div><span class="n">02</span><h3>La investigación del cliente final</h3><p>Su mercado, su competencia y el avatar de su comprador: lo que le duele, cómo lo cuenta con sus palabras y lo que ya ha probado. Es la capa que nadie mira, porque no sale en el primer prompt. De ahí salen la narrativa del lanzamiento y los ángulos, y cada ángulo se valida antes de convertirse en pieza.</p></div>
+            <div><span class="n">03</span><h3>Los archivos rectores</h3><p>Mi oficio puesto por escrito.</p><p style="margin-top: 10px;"><strong style="color: var(--ink);">En email:</strong> qué asunto encaja con ese cliente y con ese envío, cómo se cocinan las cuatro primeras frases y cómo se construye cada llamada a la acción.</p><p style="margin-top: 10px;"><strong style="color: var(--ink);">En anuncios:</strong> el gancho, el ángulo y la estructura de cada formato.</p><p style="margin-top: 10px;"><strong style="color: var(--ink);">En el webinar:</strong> de la promesa del principio a la oferta del final.</p></div>
+          </div>
+          <div class="ag-flujo" aria-label="Cómo sale cada pieza">
+            <div class="paso"><span class="k">01 · 02 · 03</span><b>Las tres capas</b><span class="t">Lo que la IA lee antes de empezar.</span></div>
+            <span class="fl" aria-hidden="true">→</span>
+            <div class="paso"><span class="k">la ia</span><b>Escribe el borrador</b><span class="t">Con tu proceso, tu cliente y mi oficio delante.</span></div>
+            <span class="fl" aria-hidden="true">→</span>
+            <div class="paso yo"><span class="k">yo</span><b>Lo reviso</b><span class="t">Ninguna pieza sale sin pasar por mis manos y por un filtro que caza las muletillas que delatan un texto hecho con IA.</span></div>
+            <span class="fl" aria-hidden="true">→</span>
+            <div class="paso"><span class="k">tu equipo</span><b>Lo recibe en Google Docs</b><span class="t">Listo para montar.</span></div>
+          </div>
+          <div class="ag-gana">
+            <div><h3>Una sola voz</h3><p>Todas las piezas salen del mismo sistema. El anuncio, el webinar y el último email del carrito suenan al mismo cliente.</p></div>
+            <div><h3>El siguiente lanzamiento no empieza de cero</h3><p>La investigación y la voz de ese cliente ya están dentro del sistema. El reopen o la siguiente edición arrancan con contexto.</p></div>
+          </div>
+          <div class="ag-txt" style="margin-top: 40px;">
+            <p class="golpe" style="font-size: clamp(24px, 2.4vw, 32px); line-height: 1.1;">La IA pone la velocidad. Tu agencia pone la estrategia, o me la pide. Yo pongo el oficio, que es lo que la IA no trae de serie.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIOS ============ -->
+  <section class="sec">
+    <div class="wrap">
+      <div class="row">
+        <div class="rail"></div>
+        <div class="cnt">
+          <h2 class="h-sec">Más gente que ha lanzado conmigo</h2>
+          <div class="ag-videos2">
             <a class="vid" href="https://www.youtube.com/watch?v=wxXWydbZA6U" target="_blank" rel="noopener">
               <div class="th"><img src="/yt-victoralcazar.jpg" alt="Testimonio de Víctor Alcázar" loading="lazy"><span class="play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="#0a0b0d"></path></svg></span></div>
               <p class="vid-q">«Hemos probado todo tipo de […] profesionales en cuanto al copy para hacer nuestros lanzamientos y no conseguíamos ni la experiencia ni los resultados que buscábamos.»</p>
               <div><div class="vid-nombre">Víctor Alcázar</div><div class="vid-rol">coo de digital riders · agencia de lanzamientos</div></div>
             </a>
-            <a class="vid" href="https://www.youtube.com/watch?v=wuKKOqv-3EY" target="_blank" rel="noopener">
-              <div class="th"><img src="/yt-vanessa.jpg" alt="Testimonio de Vanessa Marrero" loading="lazy"><span class="play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="#0a0b0d"></path></svg></span></div>
-              <p class="vid-q">«Aluciné cómo en tan solo dos reuniones fue capaz de captar mi esencia.»</p>
-              <div><div class="vid-nombre">Vanessa Marrero</div><div class="vid-rol">finanzas para negocios · lanzamiento 2026</div></div>
-            </a>
             <a class="vid" href="https://www.youtube.com/watch?v=gOsJxN-l9Ac" target="_blank" rel="noopener">
               <div class="th"><img src="/yt-pepe.jpg" alt="Testimonio de Jose Javier Pastor" loading="lazy"><span class="play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="#0a0b0d"></path></svg></span></div>
               <p class="vid-q">«Más de 100 plazas vendidas […] Dani, que ha sido uno de los pilares fundamentales que hemos tenido.»</p>
               <div><div class="vid-nombre">Jose Javier Pastor</div><div class="vid-rol">hackaviss · ciberseguridad</div></div>
+            </a>
+            <a class="vid" href="https://www.youtube.com/watch?v=wuKKOqv-3EY" target="_blank" rel="noopener">
+              <div class="th"><img src="/yt-vanessa.jpg" alt="Testimonio de Vanessa Marrero" loading="lazy"><span class="play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="#0a0b0d"></path></svg></span></div>
+              <p class="vid-q">«Aluciné cómo en tan solo dos reuniones fue capaz de captar mi esencia.»</p>
+              <div><div class="vid-nombre">Vanessa Marrero</div><div class="vid-rol">finanzas para negocios · lanzamiento 2026</div></div>
             </a>
             <a class="vid" href="https://www.youtube.com/watch?v=MvuuZ2ZtaGo" target="_blank" rel="noopener">
               <div class="th"><img src="https://i.ytimg.com/vi/MvuuZ2ZtaGo/hqdefault.jpg" alt="Testimonio de Yan Vispo" loading="lazy"><span class="play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="#0a0b0d"></path></svg></span></div>
@@ -159,25 +289,11 @@ body{margin:0;background:var(--bg)}
               <div><div class="vid-nombre">Zeke Novarino</div><div class="vid-rol">marca personal · speaker internacional</div></div>
             </a>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ LO QUE DICEN ============ -->
-  <section class="sec">
-    <div class="wrap">
-      <div class="row">
-        <div class="rail"></div>
-        <div class="cnt">
-          <h2 class="h-sec">Lo que dicen por escrito</h2>
+          <p class="ag-escrito-h">y por escrito</p>
           <div class="ucoms">
-            <figure class="ucom"><blockquote>«No simplemente es un copy "ejecutor", sino que es capaz de levantar la vista del papel y entender lo que debe sentir el usuario en cada paso de la estrategia.»</blockquote><details><summary>leer completo +</summary><p>Colaboré con Daniel algo más de 2 años en un mismo proyecto de Infoproducción. Dani se encargaba de todo el área de copywriting y yo de la parte estratégica, por lo que hicimos un match increíblemente potente para levantar un proyecto literalmente de cero y ponerlo en órbita en 2 años llegando a los +2M de facturación.</p><p>Sin duda, destacaría su habilidad en la persuasión, capacidad narrativa, ingenio y contundencia en sus palabras. Y no simplemente es un copy &quot;ejecutor&quot; sino que es capaz de levantar la vista del papel y entender lo que debe sentir el usuario en cada paso de la estrategia (algo que suena fácil decirlo pero no tanto hacerlo).</p></details><figcaption><img src="/li-carbonel.png" alt=""><div><div class="q">David Carbonel</div><div class="d">founder de0a100 agency</div></div></figcaption></figure>
             <figure class="ucom"><blockquote>«No solo es copywriter, sino que conoce muy bien los negocios digitales y se nota a la hora de tomar decisiones importantes durante el proceso.»</blockquote><details><summary>leer completo +</summary><p>Colaboro con Dani en diferentes proyectos y estoy muy contento con su trabajo. Es una persona profesional y seria. Las fechas las cumple a raja tabla. El flujo de trabajo es rápido y profesional.</p><p>No solo es copywritter, sino que conoce muy bien los negocios digitales y se nota a la hora de tomar decisiones importantes durante el proceso. Es un extra muy importante.</p><p>Los textos parecen que hayan sido escritos por el propio cliente, sabe detectar el tono de comunicación de cada marca y adaptarse a su estilo sin importar racionalidad o emoción. Siempre manteniendo la persuasión y conversión en mente...</p><p>Todo esto hace que sea muy completo dentro del mundo copy. Es muy bueno en una cosa y conoce muy bien el sector digital. Esa combinación es tremenda.</p></details><figcaption><img src="/li-monleon.png" alt=""><div><div class="q">David Monleón</div><div class="d">consultor vsl · estratega de publicidad</div></div></figcaption></figure>
-            <figure class="ucom"><blockquote>«Tienes el tono cogido de la marca, me siento genial leyendo los emails, son mis ideas, mis palabras, pero con mucha más fuerza.»</blockquote><figcaption><img src="/josemunoz.png" alt=""><div><div class="q">José Muñoz</div><div class="d">por whatsapp, al leer una secuencia</div></div></figcaption></figure>
             <figure class="ucom"><blockquote>«Esta página es la mejor que has escrito para nosotros con diferencia. Está 100% alineada con lo que somos, con cómo nos comunicamos, con lo que queremos decir.»</blockquote><figcaption><img src="/li-minano.png" alt=""><div><div class="q">Manuel Miñano</div><div class="d">proelia digital · comentario en el doc</div></div></figcaption></figure>
             <figure class="ucom"><blockquote>«Logré llenar las plazas de mi primer lanzamiento online en menos de un mes, con una facturación de más de 20.000€.»</blockquote><figcaption><img src="/li-manzano.png" alt=""><div><div class="q">Sara Manzano</div><div class="d">mentes innovadoras</div></div></figcaption></figure>
-            <figure class="ucom"><blockquote>«Pelos de punta al leer esto. Qué bien has captado mi voz y mi historia.»</blockquote><figcaption><img src="/vanessa.png" alt=""><div><div class="q">Vanessa Marrero</div><div class="d">comentario en el doc</div></div></figcaption></figure>
           </div>
         </div>
       </div>
@@ -207,98 +323,9 @@ body{margin:0;background:var(--bg)}
             </div>
             <div class="ag-caso">
               <h3>Hackaviss, ciberseguridad: más de 100 plazas vendidas</h3>
-              <p>Escribí los textos de su lanzamiento. Al día siguiente de cerrar el carrito, su fundador grabó un vídeo:</p>
-              <blockquote>«Ayer hicimos el lanzamiento, todo ha salido perfecto, más de 100 plazas vendidas.»</blockquote>
+              <p>Escribí los textos de su lanzamiento. Al día siguiente de cerrar el carrito, su fundador grabó el vídeo que tienes más arriba.</p>
               <div class="d">jose javier pastor · hackaviss</div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ EL PROBLEMA ============ -->
-  <section class="sec">
-    <div class="wrap">
-      <div class="row">
-        <div class="rail"></div>
-        <div class="cnt">
-          <h2 class="h-sec">Un lanzamiento tiene fecha de estreno. Y esa fecha no se mueve</h2>
-          <div class="ag-txt">
-            <p>El tráfico está comprado, el webinar anunciado y tu cliente contando los días.</p>
-            <p class="golpe">Lo único que todavía puede llegar tarde es el texto.</p>
-            <p>Un lanzamiento funciona como una obra con el estreno vendido. Tienes el escenario, las luces y la taquilla. Si el guion llega tarde, los actores ensayan con folios en blanco. Y si llega flojo, el estreno se hace igual: con un guion flojo.</p>
-            <p>Las salidas habituales son tres, y las tres tienen trampa.</p>
-            <p><strong>Un copy en plantilla.</strong> Cobra los doce meses y los lanzamientos llegan a picos. Cuando coinciden dos, se queda corto igual. Y antes de rendir, hay que enseñarle cómo lanzáis.</p>
-            <p><strong>Un freelance para cada pieza.</strong> Uno escribe los emails, otro la landing, otro los anuncios. Tres voces en el mismo lanzamiento, y alguien de tu equipo uniendo costuras a dos días del directo.</p>
-            <p><strong>La IA a pelo.</strong> Te saca la secuencia en una tarde. Y se lee como la de todos los lanzamientos que tu cliente ha visto este año.</p>
-            <p>O sea que, o pagas un sueldo para los meses tranquilos, o coordinas a tres personas en la semana más tensa, o lanzas con un texto que no se distingue del resto.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ QUÉ TE LLEVAS ============ -->
-  <section class="sec" style="background: var(--bg-raised);">
-    <div class="wrap">
-      <div class="row">
-        <div class="rail"></div>
-        <div class="cnt">
-          <h2 class="h-sec">Una persona para todo el lanzamiento</h2>
-          <div class="ag-txt" style="margin-bottom: 40px;">
-            <p>Te escribo todas las piezas que pida el lanzamiento, de principio a fin, con una sola voz: la de tu cliente.</p>
-          </div>
-          <div class="entrega" style="background: var(--bg);">
-            <div><span class="n">01</span><h3>Captación</h3><p>Guiones de anuncios, copys de estáticos, captions, landing de registro y los emails y WhatsApp que llevan a la gente al directo.</p></div>
-            <div><span class="n">02</span><h3>Directo</h3><p>El guion del webinar y su presentación, y los emails y WhatsApp de asistencia.</p></div>
-            <div><span class="n">03</span><h3>Venta</h3><p>La página de venta y la secuencia de carrito por email y por WhatsApp. Y el reopen o el upsell, si el lanzamiento lo lleva.</p></div>
-          </div>
-          <div class="ag-txt" style="margin-top: 40px;">
-            <p><strong>La lógica de los flujos:</strong> qué mensaje sale, cuándo y con qué condición. La escribo para quien monte las automatizaciones y la cierro con esa persona.</p>
-            <p>No cuento piezas. Si el lanzamiento pide un email más el martes, se escribe. Es barra libre de piezas dentro de ese lanzamiento.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ ANTES DE ESCRIBIR ============ -->
-  <section class="sec">
-    <div class="wrap">
-      <div class="row">
-        <div class="rail"></div>
-        <div class="cnt">
-          <h2 class="h-sec">Antes de la primera línea, miro lo que puede hundir el lanzamiento</h2>
-          <div class="ag-txt">
-            <p>La oferta, la promesa y cómo llega la audiencia al directo.</p>
-            <p>Si algo de eso cojea, te lo digo antes de escribir. Arreglarlo con el carrito abierto sale mucho más caro.</p>
-            <p class="golpe" style="font-size: clamp(24px, 2.4vw, 32px); line-height: 1.1;">Y aunque la estrategia la pongas tú, te lo digo igual. Para eso me contratas.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ CÓMO TRABAJO ============ -->
-  <section id="ia" class="sec" style="background: var(--bg-raised);">
-    <div class="wrap">
-      <div class="row">
-        <div class="rail"></div>
-        <div class="cnt">
-          <h2 class="h-sec">Escribo con IA, como tu equipo. Lo que cambia es lo que lee antes de escribir</h2>
-          <div class="ag-txt">
-            <p>Si le pides una secuencia de lanzamiento a la IA sin más, sale un texto correcto que podría ser de cualquier infoproductor. El problema no es la herramienta. Es lo que le das de comer.</p>
-            <p>Por eso trabajo con mi propio sistema operativo: los archivos que la IA lee antes de escribir una sola línea. Tiene tres capas.</p>
-          </div>
-          <div class="entrega" style="margin-top: 40px; background: var(--bg);">
-            <div><span class="n">01</span><h3>Tu forma de lanzar</h3><p>Tu estructura, tu calendario de piezas y lo que tus clientes aprueban y lo que no. Lo que te entrego encaja en vuestro proceso, no al revés.</p></div>
-            <div><span class="n">02</span><h3>La investigación del cliente final</h3><p>Su mercado, su competencia y el avatar de su comprador: lo que le duele, cómo lo cuenta con sus palabras y lo que ya ha probado. Es la capa que nadie mira, porque no sale en el primer prompt. De ahí salen la narrativa del lanzamiento y los ángulos, y cada ángulo se valida antes de convertirse en pieza.</p></div>
-            <div><span class="n">03</span><h3>Los archivos rectores</h3><p>Mi oficio puesto por escrito.</p><p style="margin-top: 10px;"><strong style="color: var(--ink);">En email:</strong> qué asunto encaja con ese cliente y con ese envío, cómo se cocinan las cuatro primeras frases y cómo se construye cada llamada a la acción.</p><p style="margin-top: 10px;"><strong style="color: var(--ink);">En anuncios:</strong> el gancho, el ángulo y la estructura de cada formato.</p><p style="margin-top: 10px;"><strong style="color: var(--ink);">En el webinar:</strong> de la promesa del principio a la oferta del final.</p></div>
-          </div>
-          <div class="ag-txt" style="margin-top: 40px;">
-            <p>Y al final, lo reviso yo. Ninguna pieza sale sin pasar por mis manos y por un filtro que caza las muletillas que delatan un texto hecho con IA.</p>
-            <p class="golpe" style="font-size: clamp(24px, 2.4vw, 32px); line-height: 1.1;">La IA pone la velocidad. Tu agencia pone la estrategia, o me la pide. Yo pongo el oficio, que es lo que la IA no trae de serie.</p>
           </div>
         </div>
       </div>
@@ -311,7 +338,7 @@ body{margin:0;background:var(--bg)}
       <div class="row">
         <div class="rail"></div>
         <div class="cnt">
-          <h2 class="h-sec">Tú decides cuánto de la estrategia pones tú</h2>
+          <h2 class="h-sec">Tú decides hasta dónde meto las manos</h2>
           <div class="ag-precios">
             <div class="ag-caja">
               <span class="k">tu agencia pone la estrategia</span>
@@ -326,10 +353,9 @@ body{margin:0;background:var(--bg)}
               <p>Me encargo también de la estrategia del lanzamiento y después la escribo.</p>
             </div>
           </div>
+          <div class="ag-cita"><figure class="ucom"><blockquote>«No solo escribe copy que vende: entiende la estrategia detrás de cada palabra.»</blockquote><figcaption><img src="/li-alcazar.png" alt=""><div><div class="q">Víctor Alcázar</div><div class="d">lanzamientos en digital riders</div></div></figcaption></figure></div>
           <div class="ag-txt" style="margin-top: 40px;">
-            <p class="golpe" style="font-size: clamp(24px, 2.4vw, 32px); line-height: 1.1;">La primera cuesta lo que un mes de un copy senior en plantilla. Sin los otros once.</p>
             <p>Las dos cubren un lanzamiento con una captación de dos semanas y una ronda de revisión por pieza. Si la captación es más larga o el formato es otro, como un PLF, lo vemos aparte.</p>
-            <p><strong>Lo que no hago: montar.</strong> Te entrego el copy en Google Docs, listo para que tu equipo lo suba. No maqueto emails ni monto WhatsApp, ManyChat ni landings. La única excepción es la presentación del webinar, que te la entrego hecha.</p>
             <p><strong>Lo que no cojo: lanzamientos que arrancan en menos de un mes, o de mes y medio si también llevo la estrategia.</strong> No da tiempo a investigar como toca, y un lanzamiento sin investigar se nota en el carrito.</p>
             <p>Trabajo en marca blanca: tus clientes son tuyos, y nadie tiene por qué saber quién escribe su copy.</p>
           </div>
@@ -346,10 +372,10 @@ body{margin:0;background:var(--bg)}
         <div class="rail"></div>
         <div class="cnt">
           <h2 class="h-sec">Para quién es</h2>
-          <div class="ag-encaja" style="background: var(--bg);">
-            <div><span class="k">encaja si</span><p>Tu agencia ya lanza infoproductos, tiene su propio equipo de tráfico y técnico, y quieres que todo el copy de un lanzamiento salga de una sola mano.</p></div>
-            <div><span class="k">también encaja si</span><p>Ya tienes copy en casa y te coinciden dos lanzamientos en las mismas semanas.</p></div>
-            <div><span class="k">no encaja si</span><p>Necesitas a alguien que además monte las piezas, o si el lanzamiento arranca antes de ese plazo: un mes para el copy, mes y medio con la estrategia.</p></div>
+          <div class="ag-encaja2">
+            <div class="si"><span class="ic" aria-hidden="true">✓</span><h3>Encaja si</h3><p>Tu agencia ya lanza infoproductos, tiene su propio equipo de tráfico y técnico, y quieres que todo el copy de un lanzamiento salga de una sola mano.</p></div>
+            <div class="si"><span class="ic" aria-hidden="true">✓</span><h3>También encaja si</h3><p>Ya tienes copy en casa y te coinciden dos lanzamientos en las mismas semanas.</p></div>
+            <div class="no"><span class="ic" aria-hidden="true">✕</span><h3>No encaja si</h3><p>Necesitas a alguien que además monte las piezas, o si el lanzamiento arranca antes de ese plazo: un mes para el copy, mes y medio con la estrategia.</p></div>
           </div>
         </div>
       </div>
@@ -365,17 +391,12 @@ body{margin:0;background:var(--bg)}
           <h2 class="h-sec">Quién escribe</h2>
           <div class="trabaja">
             <div class="ag-txt">
-              <p>Soy Daniel García de Celis, copywriter. Desde 2020 he participado en más de 70 lanzamientos, que entre todos han facturado más de 5 M€.</p>
-              <p>He trabajado con agencias de lanzamientos como Digital Riders y con agencias como Crece Sin Límite y Proelia Digital.</p>
+              <p>Soy Daniel García de Celis. Estudié Derecho y ejercí de abogado hasta 2019. Ese año cambié los expedientes por los embudos.</p>
+              <p>Del derecho me traje una costumbre que en este oficio casi nadie tiene: leer la letra pequeña del negocio antes de escribir una línea. Por eso, si la oferta o la promesa de un lanzamiento cojean, te lo digo antes de empezar. Aunque la estrategia la pongas tú.</p>
+              <p>Desde 2020 he participado en más de 70 lanzamientos, que entre todos han facturado más de 5 M€: formación en inversión inmobiliaria, en finanzas, en ciberseguridad, en marca personal. Y fuera de los lanzamientos, embudos, anuncios para negocios de servicios y el copy de un SaaS de contenido con IA.</p>
               <p>¿Quieres ver cómo pienso antes de escribirme? <a href="/#lista" style="color: var(--ink); text-decoration: underline; text-underline-offset: 3px;">Apúntate a la lista</a>: te cuento lo que veo desde dentro de los lanzamientos, con sus números.</p>
             </div>
             <div class="quien-foto"><div class="dg-foto" style="width: 100%; aspect-ratio: 4 / 3;"><img src="/daniel.jpg" alt="Daniel García de Celis"></div></div>
-          </div>
-          <p class="clients-h">agencias con las que he trabajado</p>
-          <div class="clients-flex" style="justify-content: flex-start;">
-            <div class="dg-cliente"><img class="dg-cliente__logo" src="/riders.png" alt="" loading="lazy"><div style="min-width: 0;"><div class="dg-cliente__nombre">Digital Riders</div><div class="dg-cliente__nicho">agencia de lanzamientos</div></div></div>
-            <div class="dg-cliente"><img class="dg-cliente__logo" src="/crece.png" alt="" loading="lazy"><div style="min-width: 0;"><div class="dg-cliente__nombre">Crece Sin Límite</div><div class="dg-cliente__nicho">publicidad y marketing</div></div></div>
-            <div class="dg-cliente"><img class="dg-cliente__logo" src="/logos/proelia.svg" alt="" loading="lazy" style="object-fit: contain; padding: 8px; box-sizing: border-box; background: #fff;"><div style="min-width: 0;"><div class="dg-cliente__nombre">Proelia Digital</div><div class="dg-cliente__nicho">agencia</div></div></div>
           </div>
         </div>
       </div>
