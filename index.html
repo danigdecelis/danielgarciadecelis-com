@@ -22,6 +22,7 @@
 <link rel="alternate icon" href="/assets/logo/favicon-64.png">
 <link rel="apple-touch-icon" href="/assets/logo/favicon-64.png">
 <script src="/js/analytics.js" defer></script>
+<script src="/js/videos.js" defer></script>
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Daniel García de Celis · Copywriter de lanzamientos y funnels">
 <meta name="twitter:description" content="Un copywriter estratega detrás de decenas de lanzamientos y embudos de 5, 6 y 7 cifras. Emails, páginas de venta y guiones para infoproductores.">
@@ -110,7 +111,7 @@
           </div>
           <div class="stats" style="margin-top: 40px;">
             <div class="dg-stat dg-stat--grande"><span class="dg-stat__num">+5M€</span><span class="dg-stat__txt">facturados en los lanzamientos en los que he participado desde 2020</span></div>
-            <div class="dg-stat dg-stat--grande"><span class="dg-stat__num">+70</span><span class="dg-stat__txt">lanzamientos desde 2020</span></div>
+            <div class="dg-stat dg-stat--grande"><span class="dg-stat__num">+50</span><span class="dg-stat__txt">lanzamientos desde 2020</span></div>
           </div>
         </div>
       </div>
@@ -233,7 +234,8 @@
 
 <script>
 (function () {
-  var LISTA_SUBMIT_URL = ''; // PENDIENTE: endpoint de alta (Kit, Mailchimp, Apps Script…)
+  var LISTA_SUBMIT_URL = 'https://danigdecelis.activehosted.com/proc.php'; // Wildmail, formulario 8 «Lista · formulario de la home»: lista Newsletter + etiqueta origen-home
+  var LISTA_FORM_ID = '8';
   var AVISO_LEGAL_URL = '/aviso-legal/';
   var PRIVACIDAD_URL = '/privacidad/';
   var CONTACTO_URL = 'mailto:daniel@danielgarciadecelis.com';
@@ -266,17 +268,20 @@
     if (campo) campo.style.borderColor = '';
     if (boton) boton.disabled = true;
     if (!LISTA_SUBMIT_URL) return;
-    var payload = {
-      email: email,
-      source: form.getAttribute('data-source') || 'home',
-      ts: new Date().toISOString()
-    };
-    fetch(LISTA_SUBMIT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify(payload)
-    }).catch(function () {});
+    var nombreCampo = form.querySelector('input[name="nombre"]');
+    var qs = new URLSearchParams(location.search);
+    var datos = new FormData();
+    datos.append('u', LISTA_FORM_ID); datos.append('f', LISTA_FORM_ID); datos.append('s', '');
+    datos.append('c', '0'); datos.append('m', '0'); datos.append('act', 'sub'); datos.append('v', '2');
+    datos.append('email', email);
+    if (nombreCampo && nombreCampo.value.trim()) datos.append('fullname', nombreCampo.value.trim());
+    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(function (k, i) {
+      if (qs.get(k)) datos.append('field[' + (3 + i) + ']', qs.get(k));
+    });
+    datos.append('field[9]', location.pathname + (form.getAttribute('data-source') === 'popup' ? ' (popup)' : ''));
+    var payload = { source: form.getAttribute('data-source') || 'home' };
+    fetch(LISTA_SUBMIT_URL, { method: 'POST', mode: 'no-cors', body: datos }).catch(function () {});
+    if (boton) boton.textContent = 'hecho: ya estás dentro';
     if (window.dgcTrack) window.dgcTrack('lead', { source: payload.source });
   }
 

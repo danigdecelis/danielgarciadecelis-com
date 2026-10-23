@@ -979,7 +979,7 @@
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
       <button class="qback" style="margin-top:16px;display:block;" onclick="backToQuiz()">Atrás, quiero revisar una respuesta</button>
-      <p class="privacy">Tus datos se usan solo para entregarte este diagnóstico y, si la pides, mi lectura de tu caso. Nada de secuencias infinitas ni cesión a terceros. <a href="/privacidad/">Más info</a>.</p>
+      <p class="privacy">Tus datos se usan para entregarte este diagnóstico, tu lectura si la pides y los emails de la lista. Te das de baja cuando quieras. Nada de cesión a terceros. <a href="/privacidad/">Más info</a>.</p>
     </div>
   </div>
 
@@ -1450,6 +1450,15 @@
           intentado: A.intentado||'', ref,
           emailSubject: sub, emailBody: body};
         fetch(SUBMIT_URL, {method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain'}, body:JSON.stringify(payload)}).catch(()=>{});
+        // Alta en Wildmail: formulario 9 «Regalo · Diagnóstico de lista» (lista Newsletter + etiqueta regalo-diagnostico-lista)
+        try {
+          const wm = new FormData(), qs = new URLSearchParams(location.search);
+          [['u','9'],['f','9'],['s',''],['c','0'],['m','0'],['act','sub'],['v','2'],['email',email]].forEach(p=>wm.append(p[0],p[1]));
+          if (name) wm.append('fullname', name);
+          ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach((k,i)=>{ if(qs.get(k)) wm.append('field['+(3+i)+']', qs.get(k)); });
+          wm.append('field[9]', '/lista/');
+          fetch('https://danigdecelis.activehosted.com/proc.php', {method:'POST', mode:'no-cors', body:wm}).catch(()=>{});
+        } catch(e) {}
         if (window.dgcTrack) window.dgcTrack('lead', { source: 'lista' });
       }
       showReport(result, name);
