@@ -144,6 +144,13 @@ body{margin:0;background:var(--bg)}
 .ag-par-h + .ag-par{margin-top:18px}
 .ag-caso .vid{gap:10px}
 @media (max-width:820px){.ag-par{grid-template-columns:minmax(0,1fr);margin-top:40px}.ag-creds{margin-top:48px}.ag-creds .dg-stat{align-items:center}}
+/* Ajustes 23-oct (3): versión para enseñar a Natalia */
+.ag-frase{margin:0 auto;max-width:900px;display:flex;flex-direction:column;align-items:center;gap:24px;text-align:center}
+.ag-frase blockquote{margin:0;font-family:var(--font-display);font-weight:800;font-stretch:88%;font-size:clamp(28px,3.2vw,46px);line-height:1.1;letter-spacing:-.025em;color:var(--ink)}
+.ag-frase figcaption{display:flex;align-items:center;gap:12px;text-align:left}
+.ag-frase figcaption img{width:48px;height:48px;border-radius:50%;object-fit:cover;filter:grayscale(1)}
+.ag-frase .q{font-weight:700;font-size:15px}
+.ag-frase .d{font-family:var(--font-mono);font-size:11px;letter-spacing:.03em;color:var(--ink-subtle);margin-top:2px}
 </style>
 </head>
 <body>
@@ -177,16 +184,10 @@ body{margin:0;background:var(--bg)}
       <div class="row">
         <div class="rail"></div>
         <div class="cnt">
-          <h2 class="h-sec">Que te lo cuenten ellos</h2>
-          <div class="ag-video-top">
-            <a class="vid" href="https://www.youtube.com/watch?v=Q8IGzGJKQDs" target="_blank" rel="noopener">
-              <div class="th"><img src="/yt-josemunoz.jpg" alt="Testimonio de José Muñoz" loading="lazy"><span class="play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="#0a0b0d"></path></svg></span></div>
-            </a>
-            <div style="display: flex; flex-direction: column; gap: 16px;">
-              <p class="vid-q">«Aportar más que la parte de copy […] una parte más analítica, más de visión global.»</p>
-              <div><div class="vid-nombre">José Muñoz</div><div class="vid-rol">programa in · de 75 a 1.800 personas en la comunidad</div></div>
-            </div>
-          </div>
+          <figure class="ag-frase">
+            <blockquote>«Aportar más que la parte de copy […] una parte más analítica, más de visión global.»</blockquote>
+            <figcaption><img src="/josemunoz.png" alt=""><div><div class="q">José Muñoz</div><div class="d">programa in · de 75 a 1.800 personas en la comunidad</div></div></figcaption>
+          </figure>
           <div class="ag-creds">
             <div class="stats">
             <div class="dg-stat dg-stat--grande"><span class="dg-stat__num">+70</span><span class="dg-stat__txt">lanzamientos desde 2020</span></div>
@@ -223,11 +224,15 @@ body{margin:0;background:var(--bg)}
           <div class="ag-txt" style="margin-top: 40px;">
             <p><strong>La lógica de los flujos:</strong> qué mensaje sale, cuándo y con qué condición. La escribo para quien monte las automatizaciones y la cierro con esa persona.</p>
             <p>No cuento piezas. Si el lanzamiento pide un email más el martes, se escribe. Es barra libre de piezas dentro de ese lanzamiento.</p>
+            <p>Los anuncios son la excepción: cuántos, lo cerramos al empezar. Suelo plantear 8 ángulos, con un anuncio en vídeo y una imagen estática por cada uno, y lo ajusto a lo que necesite tu lanzamiento.</p>
             <p class="ag-aparte">Aparte, con su propio precio: la gestión de esa lista prioritaria y la creación de un infoproducto nuevo.</p>
           </div>
-          <div class="ag-par">
-            <a class="vid" href="https://www.youtube.com/watch?v=wxXWydbZA6U" target="_blank" rel="noopener"><div class="th"><img src="/yt-victoralcazar.jpg" alt="Testimonio de Víctor Alcázar" loading="lazy"><span class="play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="#0a0b0d"></path></svg></span></div><p class="vid-q">«Hemos probado todo tipo de […] profesionales en cuanto al copy para hacer nuestros lanzamientos y no conseguíamos ni la experiencia ni los resultados que buscábamos.»</p><div><div class="vid-nombre">Víctor Alcázar</div><div class="vid-rol">coo de digital riders · agencia de lanzamientos</div></div></a>
-            <figure class="ucom" style="background: var(--bg-raised);"><blockquote>«Sabe entender muy bien el tono y el mensaje que queremos dar y luego es capaz de plasmarlo a la perfección.»</blockquote><figcaption><img src="/li-alcazar.png" alt=""><div><div class="q">Víctor Alcázar</div><div class="d">en el mismo vídeo</div></div></figcaption></figure>
+          <div class="ag-video-top" style="margin-top: 56px;">
+            <a class="vid" href="https://www.youtube.com/watch?v=wxXWydbZA6U" target="_blank" rel="noopener"><div class="th"><img src="/yt-victoralcazar.jpg" alt="Testimonio de Víctor Alcázar" loading="lazy"><span class="play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="#0a0b0d"></path></svg></span></div></a>
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+              <p class="vid-q">«Hemos probado todo tipo de […] profesionales en cuanto al copy para hacer nuestros lanzamientos y no conseguíamos ni la experiencia ni los resultados que buscábamos.»</p>
+              <div><div class="vid-nombre">Víctor Alcázar</div><div class="vid-rol">coo de digital riders · agencia de lanzamientos</div></div>
+            </div>
           </div>
         </div>
       </div>
@@ -282,11 +287,12 @@ body{margin:0;background:var(--bg)}
           <h2 class="h-sec">Tres lanzamientos por dentro</h2>
           <div class="ag-casos">
             <div class="ag-caso">
+              <a class="vid" href="https://www.youtube.com/watch?v=Q8IGzGJKQDs" target="_blank" rel="noopener"><div class="th"><img src="/yt-josemunoz.jpg" alt="Testimonio de José Muñoz" loading="lazy"><span class="play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="#0a0b0d"></path></svg></span></div><p class="vid-q">«Dani ha sido fundamental, él ha llevado toda la parte de copy.»</p></a>
               <h3>José Muñoz, Programa IN: de cero a más de 2 M€ en dos años</h3>
               <p>Llevo su email marketing. Uno de sus lanzamientos facturó más de 1 M€ con un carrito de trece emails, cada uno con su papel y su hora de salida.</p>
-              <p>La agencia que llevaba el proyecto lo cuenta así:</p>
+              <p>Lo levantamos entre dos: David Carbonel en la estrategia y yo en el copy. Él lo cuenta así:</p>
               <blockquote>«Hicimos un match increíblemente potente para levantar un proyecto literalmente de cero y ponerlo en órbita en 2 años llegando a los +2M de facturación.»</blockquote>
-              <div class="d">david carbonel · founder de0a100 agency</div>
+              <div class="d">david carbonel · estratega del proyecto</div>
             </div>
             <div class="ag-caso">
               <a class="vid" href="https://www.youtube.com/watch?v=wuKKOqv-3EY" target="_blank" rel="noopener"><div class="th"><img src="/yt-vanessa.jpg" alt="Testimonio de Vanessa Marrero" loading="lazy"><span class="play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="#0a0b0d"></path></svg></span></div><p class="vid-q">«Aluciné cómo en tan solo dos reuniones fue capaz de captar mi esencia.»</p></a>
@@ -329,7 +335,7 @@ body{margin:0;background:var(--bg)}
               <p>Me encargo también de la estrategia del lanzamiento y después la escribo.</p>
             </div>
           </div>
-          <div class="ag-cita"><figure class="ucom"><blockquote>«No solo escribe copy que vende: entiende la estrategia detrás de cada palabra.»</blockquote><figcaption><img src="/li-alcazar.png" alt=""><div><div class="q">Víctor Alcázar</div><div class="d">lanzamientos en digital riders</div></div></figcaption></figure></div>
+          <div class="ag-cita"><figure class="ucom"><blockquote>«Logré llenar las plazas de mi primer lanzamiento online en menos de un mes, con una facturación de más de 20.000€.»</blockquote><figcaption><img src="/li-manzano.png" alt=""><div><div class="q">Sara Manzano</div><div class="d">mentes innovadoras</div></div></figcaption></figure></div>
           <div class="ag-txt" style="margin-top: 40px;">
             <p>Las dos cubren un lanzamiento con una captación de dos semanas y una ronda de revisión por pieza. Si la captación es más larga o el formato es otro, como un PLF, lo vemos aparte.</p>
             <p><strong>Lo que no cojo: lanzamientos que arrancan en menos de un mes, o de mes y medio si también llevo la estrategia.</strong> No da tiempo a investigar como toca, y un lanzamiento sin investigar se nota en el carrito.</p>
@@ -356,7 +362,7 @@ body{margin:0;background:var(--bg)}
           <p class="ag-par-h">lo que dicen agencias con las que he trabajado</p>
           <div class="ag-par">
             <a class="vid" href="https://www.youtube.com/watch?v=MvuuZ2ZtaGo" target="_blank" rel="noopener"><div class="th"><img src="https://i.ytimg.com/vi/MvuuZ2ZtaGo/hqdefault.jpg" alt="Testimonio de Yan Vispo" loading="lazy"><span class="play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="#0a0b0d"></path></svg></span></div><p class="vid-q">«Con nadie a nivel de copy nos hemos sentido tan a gusto como con Dani.»</p><div><div class="vid-nombre">Yan Vispo</div><div class="vid-rol">fundador de rumbo eficiente</div></div></a>
-            <figure class="ucom" style="background: var(--bg-raised);"><blockquote>«Esta página es la mejor que has escrito para nosotros con diferencia. Está 100% alineada con lo que somos, con cómo nos comunicamos, con lo que queremos decir.»</blockquote><figcaption><img src="/li-minano.png" alt=""><div><div class="q">Manuel Miñano</div><div class="d">proelia digital · comentario en el doc</div></div></figcaption></figure>
+            <figure class="ucom" style="background: var(--bg-raised);"><blockquote>«Esta página es la mejor que has escrito para nosotros con diferencia. Está 100% alineada con lo que somos, con cómo nos comunicamos, con lo que queremos decir.»</blockquote><figcaption><img src="/li-minano.png" alt=""><div><div class="q">Manuel Miñano</div><div class="d">proelia digital · sobre la antigua web de proelia</div></div></figcaption></figure>
           </div>
         </div>
       </div>
@@ -374,14 +380,17 @@ body{margin:0;background:var(--bg)}
             <div class="ag-txt">
               <p>Soy Daniel García de Celis. Estudié Derecho y ejercí de abogado hasta 2019. Ese año cambié los expedientes por los embudos.</p>
               <p>Del derecho me traje una costumbre que en este oficio casi nadie tiene: leer la letra pequeña del negocio antes de escribir una línea. Por eso, si la oferta o la promesa de un lanzamiento cojean, te lo digo antes de empezar. Aunque la estrategia la pongas tú.</p>
-              <p>Desde 2020 he participado en más de 70 lanzamientos, que entre todos han facturado más de 5 M€: formación en inversión inmobiliaria, en finanzas, en ciberseguridad, en marca personal. Y fuera de los lanzamientos, embudos, anuncios para negocios de servicios y el copy de un SaaS de contenido con IA.</p>
+              <p>Desde 2020 he participado en más de 70 lanzamientos, que entre todos han facturado más de 5 M€.</p>
               <p>¿Quieres ver cómo pienso antes de escribirme? <a href="/#lista" style="color: var(--ink); text-decoration: underline; text-underline-offset: 3px;">Apúntate a la lista</a>: te cuento lo que veo desde dentro de los lanzamientos, con sus números.</p>
             </div>
             <div class="quien-foto"><div class="dg-foto" style="width: 100%; aspect-ratio: 4 / 3;"><img src="/daniel.jpg" alt="Daniel García de Celis"></div></div>
           </div>
-          <div class="ag-par">
-            <a class="vid" href="https://www.youtube.com/watch?v=3PVCFX-8qu0" target="_blank" rel="noopener"><div class="th"><img src="/yt-zeke.jpg" alt="Testimonio de Zeke Novarino" loading="lazy"><span class="play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="#0a0b0d"></path></svg></span></div><p class="vid-q">«La persona que escribía estos textos yo sentía que no me representaba, y con Dani eso no existió.»</p><div><div class="vid-nombre">Zeke Novarino</div><div class="vid-rol">marca personal · speaker internacional</div></div></a>
-            <figure class="ucom" style="background: var(--bg);"><blockquote>«Logré llenar las plazas de mi primer lanzamiento online en menos de un mes, con una facturación de más de 20.000€.»</blockquote><figcaption><img src="/li-manzano.png" alt=""><div><div class="q">Sara Manzano</div><div class="d">mentes innovadoras</div></div></figcaption></figure>
+          <div class="ag-video-top" style="margin-top: 56px;">
+            <a class="vid" href="https://www.youtube.com/watch?v=3PVCFX-8qu0" target="_blank" rel="noopener"><div class="th"><img src="/yt-zeke.jpg" alt="Testimonio de Zeke Novarino" loading="lazy"><span class="play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="#0a0b0d"></path></svg></span></div></a>
+            <div style="display: flex; flex-direction: column; gap: 16px;">
+              <p class="vid-q">«La persona que escribía estos textos yo sentía que no me representaba, y con Dani eso no existió.»</p>
+              <div><div class="vid-nombre">Zeke Novarino</div><div class="vid-rol">marca personal · speaker internacional</div></div>
+            </div>
           </div>
         </div>
       </div>
@@ -397,6 +406,7 @@ body{margin:0;background:var(--bg)}
           <h2 class="h-sec">Lo que suelen preguntar</h2>
           <div class="ag-faq">
             <details><summary>¿Te sirvo si mi agencia ya tiene copywriter?</summary><p>Sí. Tu copy lleva un lanzamiento y yo el otro, o yo cojo las piezas que no le caben.</p></details>
+            <details><summary>¿Hay un límite de piezas?</summary><p>Solo en los anuncios, y lo fijamos al empezar: suelo plantear 8 ángulos, con un anuncio en vídeo y una imagen estática por cada uno, aunque lo ajusto a lo que necesite tu lanzamiento.</p><p>Todo lo demás no lo cuento. Dentro de las dos semanas de captación, y hasta el reopen o el upsell, escribo los emails, los mensajes de WhatsApp y las landings que pida el lanzamiento. Si la captación es más larga o el lanzamiento es de otro tipo, lo vemos aparte.</p></details>
             <details><summary>¿Qué necesitas para empezar?</summary><p>El cliente, la oferta, el calendario del lanzamiento y los accesos a lo que ya exista. La investigación la hago yo.</p></details>
             <details><summary>¿Montas tú las piezas?</summary><p>No. Te las entrego en Google Docs y las monta tu equipo. Solo la presentación del webinar sale hecha.</p></details>
             <details><summary>¿Diseñas también las automatizaciones?</summary><p>Escribo su lógica: qué mensaje sale, cuándo y con qué condición. Las monta tu equipo, y lo cerramos juntos para que todo lo que escribo se pueda montar.</p></details>
