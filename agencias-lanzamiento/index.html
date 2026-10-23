@@ -49,13 +49,13 @@ body{margin:0;background:var(--bg)}
 .ag-video-top{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:32px;align-items:center;margin-bottom:0}
 .ag-video-top .vid-q{margin:0;font-family:var(--font-display);font-weight:800;font-stretch:88%;font-size:clamp(24px,2.4vw,32px);line-height:1.15;letter-spacing:-.02em;color:var(--ink)}
 .ag-casos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
-.ag-caso{display:flex;flex-direction:column;gap:16px;padding:28px;background:var(--bg);border-top:4px solid var(--accent)}
+.ag-caso{display:flex;flex-direction:column;gap:16px;padding:28px;background:var(--bg-raised);border-top:4px solid var(--accent)}
 .ag-caso h3{margin:0;font-family:var(--font-display);font-weight:800;font-stretch:88%;font-size:24px;line-height:1.15;letter-spacing:-.02em}
 .ag-caso p{margin:0;font-size:16px;line-height:1.6;color:var(--ink-muted)}
 .ag-caso blockquote{margin:0;font-size:17px;font-weight:600;font-stretch:94%;line-height:1.45;color:var(--ink)}
 .ag-caso .d{margin-top:auto;padding-top:14px;border-top:1px solid var(--line);font-family:var(--font-mono);font-size:11px;letter-spacing:.03em;color:var(--ink-subtle)}
 .ag-precios{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
-.ag-caja{display:flex;flex-direction:column;gap:16px;padding:32px;background:var(--bg-raised);border:1px solid var(--line)}
+.ag-caja{display:flex;flex-direction:column;gap:16px;padding:32px;background:var(--bg);border:1px solid var(--line)}
 .ag-caja.destacada{background:var(--bg);border:2px solid var(--ink)}
 .ag-caja h3{margin:0;font-family:var(--font-display);font-weight:900;font-stretch:82%;font-size:34px;line-height:1;letter-spacing:-.03em}
 .ag-caja .k{font-family:var(--font-mono);font-size:12px;letter-spacing:.04em;color:var(--ink-subtle)}
@@ -97,9 +97,9 @@ body{margin:0;background:var(--bg)}
 .ag-videos2 > a:nth-child(-n+2) .vid-q{font-size:19px}
 .ag-escrito-h{margin:64px 0 18px;font-family:var(--font-mono);font-size:12px;letter-spacing:.04em;color:var(--ink-subtle)}
 .ag-cita{margin:32px 0 0;max-width:620px}
-.ag-cita .ucom{background:var(--bg-raised)}
+.ag-cita .ucom{background:var(--bg)}
 .ag-encaja2{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
-.ag-encaja2 > div{display:flex;flex-direction:column;gap:14px;padding:30px 28px;background:var(--bg);border:1px solid var(--line)}
+.ag-encaja2 > div{display:flex;flex-direction:column;gap:14px;padding:30px 28px;background:var(--bg-raised);border:1px solid var(--line)}
 .ag-encaja2 > div.si{border-top:4px solid var(--accent)}
 .ag-encaja2 > div.no{background:transparent;border:1px dashed var(--line-strong)}
 .ag-encaja2 .ic{width:40px;height:40px;display:grid;place-items:center;font-family:var(--font-mono);font-size:18px;font-weight:700;background:var(--accent);color:var(--on-accent)}
@@ -131,6 +131,19 @@ body{margin:0;background:var(--bg)}
 .ag-encaja2 > div{padding:24px 20px}
 .ag-escrito-h{margin-top:48px}
 }
+/* Ajustes 23-oct (2): prueba social repartida y credenciales centradas */
+.ag-creds{margin-top:72px;display:flex;flex-direction:column;align-items:center;text-align:center}
+.ag-creds .stats{width:100%;max-width:760px}
+.ag-creds .dg-stat{align-items:center}
+.ag-creds .clients-h{margin:48px 0 14px}
+.ag-creds .clients-flex{justify-content:center;width:100%;max-width:760px}
+.ag-creds .dg-cliente{background:var(--bg);text-align:left}
+.ag-par{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:28px;align-items:start;margin-top:56px}
+.ag-par .vid-q{margin:0;font-size:18px;font-weight:600;font-stretch:94%;line-height:1.45;color:var(--ink)}
+.ag-par-h{margin:64px 0 0;font-family:var(--font-mono);font-size:12px;letter-spacing:.04em;color:var(--ink-subtle)}
+.ag-par-h + .ag-par{margin-top:18px}
+.ag-caso .vid{gap:10px}
+@media (max-width:820px){.ag-par{grid-template-columns:minmax(0,1fr);margin-top:40px}.ag-creds{margin-top:48px}.ag-creds .dg-stat{align-items:center}}
 </style>
 </head>
 <body>
@@ -148,23 +161,11 @@ body{margin:0;background:var(--bg)}
       <div class="cnt cnt-hero">
         <div class="ag-hero">
           <div class="ag-ante">para agencias de lanzamientos de infoproductos</div>
-          <h1 class="h-hero" style="max-width: 19ch;">Todo el copy de tu lanzamiento, <span class="dg-mark">de una sola mano</span>. Y lo que viene cuando cierra el carrito.</h1>
+          <h1 class="h-hero" style="max-width: 16ch;">Todo el copy de tu lanzamiento, <span class="dg-mark">de una sola mano</span>.</h1>
           <p class="ag-sub">Estrategia, copy y lógica de los flujos de tu próximo lanzamiento, de la captación al último email del carrito. Más de 70 lanzamientos desde 2020.</p>
           <p class="cred" style="margin: 0;"><span>Sí, escribo con IA, como tu equipo. Lo que cambia es lo que lee antes de escribir. <a href="#ia" style="color: var(--ink); text-decoration: underline; text-underline-offset: 3px;">Te cuento cómo</a>.</span></p>
           <a class="dg-btn dg-btn--primario dg-btn--grande js-contacto" href="#contacto">cuéntame tu próximo lanzamiento <span class="dg-arrow">→</span></a>
           <div class="ag-micro">te contesto con un vídeo corto sobre tu caso antes de proponerte ninguna llamada.</div>
-          <div class="stats" style="margin-top: 24px; max-width: 760px;">
-            <div class="dg-stat dg-stat--grande"><span class="dg-stat__num">+70</span><span class="dg-stat__txt">lanzamientos desde 2020</span></div>
-            <div class="dg-stat dg-stat--grande"><span class="dg-stat__num">+5M€</span><span class="dg-stat__txt">facturados en los lanzamientos en los que he participado desde 2020</span></div>
-          </div>
-          <div class="ag-logos">
-            <p class="clients-h">agencias con las que he trabajado</p>
-            <div class="clients-flex" style="justify-content: flex-start;">
-            <div class="dg-cliente"><img class="dg-cliente__logo" src="/riders.png" alt="" loading="lazy"><div style="min-width: 0;"><div class="dg-cliente__nombre">Digital Riders</div><div class="dg-cliente__nicho">agencia de lanzamientos</div></div></div>
-            <div class="dg-cliente"><img class="dg-cliente__logo" src="/crece.png" alt="" loading="lazy"><div style="min-width: 0;"><div class="dg-cliente__nombre">Crece Sin Límite</div><div class="dg-cliente__nicho">publicidad y marketing</div></div></div>
-            <div class="dg-cliente"><img class="dg-cliente__logo" src="/logos/proelia.svg" alt="" loading="lazy" style="object-fit: contain; padding: 8px; box-sizing: border-box; background: #fff;"><div style="min-width: 0;"><div class="dg-cliente__nombre">Proelia Digital</div><div class="dg-cliente__nicho">agencia</div></div></div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -184,6 +185,18 @@ body{margin:0;background:var(--bg)}
             <div style="display: flex; flex-direction: column; gap: 16px;">
               <p class="vid-q">«Aportar más que la parte de copy […] una parte más analítica, más de visión global.»</p>
               <div><div class="vid-nombre">José Muñoz</div><div class="vid-rol">programa in · de 75 a 1.800 personas en la comunidad</div></div>
+            </div>
+          </div>
+          <div class="ag-creds">
+            <div class="stats">
+            <div class="dg-stat dg-stat--grande"><span class="dg-stat__num">+70</span><span class="dg-stat__txt">lanzamientos desde 2020</span></div>
+            <div class="dg-stat dg-stat--grande"><span class="dg-stat__num">+5M€</span><span class="dg-stat__txt">facturados en los lanzamientos en los que he participado desde 2020</span></div>
+          </div>
+            <p class="clients-h">agencias con las que he trabajado</p>
+            <div class="clients-flex">
+            <div class="dg-cliente"><img class="dg-cliente__logo" src="/riders.png" alt="" loading="lazy"><div style="min-width: 0;"><div class="dg-cliente__nombre">Digital Riders</div><div class="dg-cliente__nicho">agencia de lanzamientos</div></div></div>
+            <div class="dg-cliente"><img class="dg-cliente__logo" src="/crece.png" alt="" loading="lazy"><div style="min-width: 0;"><div class="dg-cliente__nombre">Crece Sin Límite</div><div class="dg-cliente__nicho">publicidad y marketing</div></div></div>
+            <div class="dg-cliente"><img class="dg-cliente__logo" src="/logos/proelia.svg" alt="" loading="lazy" style="object-fit: contain; padding: 8px; box-sizing: border-box; background: #fff;"><div style="min-width: 0;"><div class="dg-cliente__nombre">Proelia Digital</div><div class="dg-cliente__nicho">agencia</div></div></div>
             </div>
           </div>
         </div>
@@ -211,6 +224,10 @@ body{margin:0;background:var(--bg)}
             <p><strong>La lógica de los flujos:</strong> qué mensaje sale, cuándo y con qué condición. La escribo para quien monte las automatizaciones y la cierro con esa persona.</p>
             <p>No cuento piezas. Si el lanzamiento pide un email más el martes, se escribe. Es barra libre de piezas dentro de ese lanzamiento.</p>
             <p class="ag-aparte">Aparte, con su propio precio: la gestión de esa lista prioritaria y la creación de un infoproducto nuevo.</p>
+          </div>
+          <div class="ag-par">
+            <a class="vid" href="https://www.youtube.com/watch?v=wxXWydbZA6U" target="_blank" rel="noopener"><div class="th"><img src="/yt-victoralcazar.jpg" alt="Testimonio de Víctor Alcázar" loading="lazy"><span class="play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="#0a0b0d"></path></svg></span></div><p class="vid-q">«Hemos probado todo tipo de […] profesionales en cuanto al copy para hacer nuestros lanzamientos y no conseguíamos ni la experiencia ni los resultados que buscábamos.»</p><div><div class="vid-nombre">Víctor Alcázar</div><div class="vid-rol">coo de digital riders · agencia de lanzamientos</div></div></a>
+            <figure class="ucom" style="background: var(--bg-raised);"><blockquote>«Sabe entender muy bien el tono y el mensaje que queremos dar y luego es capaz de plasmarlo a la perfección.»</blockquote><figcaption><img src="/li-alcazar.png" alt=""><div><div class="q">Víctor Alcázar</div><div class="d">en el mismo vídeo</div></div></figcaption></figure>
           </div>
         </div>
       </div>
@@ -250,58 +267,14 @@ body{margin:0;background:var(--bg)}
           <div class="ag-txt" style="margin-top: 40px;">
             <p class="golpe" style="font-size: clamp(24px, 2.4vw, 32px); line-height: 1.1;">La IA pone la velocidad. Tu agencia pone la estrategia, o me la pide. Yo pongo el oficio, que es lo que la IA no trae de serie.</p>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ TESTIMONIOS ============ -->
-  <section class="sec">
-    <div class="wrap">
-      <div class="row">
-        <div class="rail"></div>
-        <div class="cnt">
-          <h2 class="h-sec">Más gente que ha lanzado conmigo</h2>
-          <div class="ag-videos2">
-            <a class="vid" href="https://www.youtube.com/watch?v=wxXWydbZA6U" target="_blank" rel="noopener">
-              <div class="th"><img src="/yt-victoralcazar.jpg" alt="Testimonio de Víctor Alcázar" loading="lazy"><span class="play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="#0a0b0d"></path></svg></span></div>
-              <p class="vid-q">«Hemos probado todo tipo de […] profesionales en cuanto al copy para hacer nuestros lanzamientos y no conseguíamos ni la experiencia ni los resultados que buscábamos.»</p>
-              <div><div class="vid-nombre">Víctor Alcázar</div><div class="vid-rol">coo de digital riders · agencia de lanzamientos</div></div>
-            </a>
-            <a class="vid" href="https://www.youtube.com/watch?v=gOsJxN-l9Ac" target="_blank" rel="noopener">
-              <div class="th"><img src="/yt-pepe.jpg" alt="Testimonio de Jose Javier Pastor" loading="lazy"><span class="play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="#0a0b0d"></path></svg></span></div>
-              <p class="vid-q">«Más de 100 plazas vendidas […] Dani, que ha sido uno de los pilares fundamentales que hemos tenido.»</p>
-              <div><div class="vid-nombre">Jose Javier Pastor</div><div class="vid-rol">hackaviss · ciberseguridad</div></div>
-            </a>
-            <a class="vid" href="https://www.youtube.com/watch?v=wuKKOqv-3EY" target="_blank" rel="noopener">
-              <div class="th"><img src="/yt-vanessa.jpg" alt="Testimonio de Vanessa Marrero" loading="lazy"><span class="play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="#0a0b0d"></path></svg></span></div>
-              <p class="vid-q">«Aluciné cómo en tan solo dos reuniones fue capaz de captar mi esencia.»</p>
-              <div><div class="vid-nombre">Vanessa Marrero</div><div class="vid-rol">finanzas para negocios · lanzamiento 2026</div></div>
-            </a>
-            <a class="vid" href="https://www.youtube.com/watch?v=MvuuZ2ZtaGo" target="_blank" rel="noopener">
-              <div class="th"><img src="https://i.ytimg.com/vi/MvuuZ2ZtaGo/hqdefault.jpg" alt="Testimonio de Yan Vispo" loading="lazy"><span class="play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="#0a0b0d"></path></svg></span></div>
-              <p class="vid-q">«Con nadie a nivel de copy nos hemos sentido tan a gusto como con Dani.»</p>
-              <div><div class="vid-nombre">Yan Vispo</div><div class="vid-rol">fundador de rumbo eficiente</div></div>
-            </a>
-            <a class="vid" href="https://www.youtube.com/watch?v=3PVCFX-8qu0" target="_blank" rel="noopener">
-              <div class="th"><img src="/yt-zeke.jpg" alt="Testimonio de Zeke Novarino" loading="lazy"><span class="play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="#0a0b0d"></path></svg></span></div>
-              <p class="vid-q">«La persona que escribía estos textos yo sentía que no me representaba, y con Dani eso no existió.»</p>
-              <div><div class="vid-nombre">Zeke Novarino</div><div class="vid-rol">marca personal · speaker internacional</div></div>
-            </a>
-          </div>
-          <p class="ag-escrito-h">y por escrito</p>
-          <div class="ucoms">
-            <figure class="ucom"><blockquote>«No solo es copywriter, sino que conoce muy bien los negocios digitales y se nota a la hora de tomar decisiones importantes durante el proceso.»</blockquote><details><summary>leer completo +</summary><p>Colaboro con Dani en diferentes proyectos y estoy muy contento con su trabajo. Es una persona profesional y seria. Las fechas las cumple a raja tabla. El flujo de trabajo es rápido y profesional.</p><p>No solo es copywritter, sino que conoce muy bien los negocios digitales y se nota a la hora de tomar decisiones importantes durante el proceso. Es un extra muy importante.</p><p>Los textos parecen que hayan sido escritos por el propio cliente, sabe detectar el tono de comunicación de cada marca y adaptarse a su estilo sin importar racionalidad o emoción. Siempre manteniendo la persuasión y conversión en mente...</p><p>Todo esto hace que sea muy completo dentro del mundo copy. Es muy bueno en una cosa y conoce muy bien el sector digital. Esa combinación es tremenda.</p></details><figcaption><img src="/li-monleon.png" alt=""><div><div class="q">David Monleón</div><div class="d">consultor vsl · estratega de publicidad</div></div></figcaption></figure>
-            <figure class="ucom"><blockquote>«Esta página es la mejor que has escrito para nosotros con diferencia. Está 100% alineada con lo que somos, con cómo nos comunicamos, con lo que queremos decir.»</blockquote><figcaption><img src="/li-minano.png" alt=""><div><div class="q">Manuel Miñano</div><div class="d">proelia digital · comentario en el doc</div></div></figcaption></figure>
-            <figure class="ucom"><blockquote>«Logré llenar las plazas de mi primer lanzamiento online en menos de un mes, con una facturación de más de 20.000€.»</blockquote><figcaption><img src="/li-manzano.png" alt=""><div><div class="q">Sara Manzano</div><div class="d">mentes innovadoras</div></div></figcaption></figure>
-          </div>
+          <div class="ag-cita"><figure class="ucom" style="background: var(--bg);"><blockquote>«No solo es copywriter, sino que conoce muy bien los negocios digitales y se nota a la hora de tomar decisiones importantes durante el proceso.»</blockquote><details><summary>leer completo +</summary><p>Colaboro con Dani en diferentes proyectos y estoy muy contento con su trabajo. Es una persona profesional y seria. Las fechas las cumple a raja tabla. El flujo de trabajo es rápido y profesional.</p><p>No solo es copywritter, sino que conoce muy bien los negocios digitales y se nota a la hora de tomar decisiones importantes durante el proceso. Es un extra muy importante.</p><p>Los textos parecen que hayan sido escritos por el propio cliente, sabe detectar el tono de comunicación de cada marca y adaptarse a su estilo sin importar racionalidad o emoción. Siempre manteniendo la persuasión y conversión en mente...</p><p>Todo esto hace que sea muy completo dentro del mundo copy. Es muy bueno en una cosa y conoce muy bien el sector digital. Esa combinación es tremenda.</p></details><figcaption><img src="/li-monleon.png" alt=""><div><div class="q">David Monleón</div><div class="d">consultor vsl · estratega de publicidad</div></div></figcaption></figure></div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ============ CASOS ============ -->
-  <section class="sec" style="background: var(--bg-raised);">
+  <section class="sec">
     <div class="wrap">
       <div class="row">
         <div class="rail"></div>
@@ -316,14 +289,17 @@ body{margin:0;background:var(--bg)}
               <div class="d">david carbonel · founder de0a100 agency</div>
             </div>
             <div class="ag-caso">
+              <a class="vid" href="https://www.youtube.com/watch?v=wuKKOqv-3EY" target="_blank" rel="noopener"><div class="th"><img src="/yt-vanessa.jpg" alt="Testimonio de Vanessa Marrero" loading="lazy"><span class="play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="#0a0b0d"></path></svg></span></div><p class="vid-q">«Aluciné cómo en tan solo dos reuniones fue capaz de captar mi esencia.»</p></a>
               <h3>Vanessa Marrero, finanzas para negocios: 24 ventas de un programa de 1.636 €</h3>
               <p>Escribí la secuencia de venta y el guion del webinar de su lanzamiento de enero de 2026. Facturó más de 39.000 €, y la publicidad en frío devolvió tres veces lo invertido.</p>
               <blockquote>«Hemos superado las ventas previstas de mi programa high ticket.»</blockquote>
               <div class="d">vanessa marrero · finanzas para negocios</div>
             </div>
             <div class="ag-caso">
+              <a class="vid" href="https://www.youtube.com/watch?v=gOsJxN-l9Ac" target="_blank" rel="noopener"><div class="th"><img src="/yt-pepe.jpg" alt="Testimonio de Jose Javier Pastor" loading="lazy"><span class="play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="#0a0b0d"></path></svg></span></div><p class="vid-q">«Dani, que ha sido uno de los pilares fundamentales que hemos tenido.»</p></a>
               <h3>Hackaviss, ciberseguridad: más de 100 plazas vendidas</h3>
-              <p>Escribí los textos de su lanzamiento. Al día siguiente de cerrar el carrito, su fundador grabó el vídeo que tienes más arriba.</p>
+              <p>Escribí los textos de su lanzamiento. Al día siguiente de cerrar el carrito, su fundador grabó este vídeo:</p>
+              <blockquote>«Ayer hicimos el lanzamiento, todo ha salido perfecto, más de 100 plazas vendidas.»</blockquote>
               <div class="d">jose javier pastor · hackaviss</div>
             </div>
           </div>
@@ -333,7 +309,7 @@ body{margin:0;background:var(--bg)}
   </section>
 
   <!-- ============ PRECIOS ============ -->
-  <section id="precios" class="sec">
+  <section id="precios" class="sec" style="background: var(--bg-raised);">
     <div class="wrap">
       <div class="row">
         <div class="rail"></div>
@@ -366,7 +342,7 @@ body{margin:0;background:var(--bg)}
   </section>
 
   <!-- ============ PARA QUIÉN ============ -->
-  <section class="sec" style="background: var(--bg-raised);">
+  <section class="sec">
     <div class="wrap">
       <div class="row">
         <div class="rail"></div>
@@ -377,13 +353,18 @@ body{margin:0;background:var(--bg)}
             <div class="si"><span class="ic" aria-hidden="true">✓</span><h3>También encaja si</h3><p>Ya tienes copy en casa y te coinciden dos lanzamientos en las mismas semanas.</p></div>
             <div class="no"><span class="ic" aria-hidden="true">✕</span><h3>No encaja si</h3><p>Necesitas a alguien que además monte las piezas, o si el lanzamiento arranca antes de ese plazo: un mes para el copy, mes y medio con la estrategia.</p></div>
           </div>
+          <p class="ag-par-h">lo que dicen agencias con las que he trabajado</p>
+          <div class="ag-par">
+            <a class="vid" href="https://www.youtube.com/watch?v=MvuuZ2ZtaGo" target="_blank" rel="noopener"><div class="th"><img src="https://i.ytimg.com/vi/MvuuZ2ZtaGo/hqdefault.jpg" alt="Testimonio de Yan Vispo" loading="lazy"><span class="play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="#0a0b0d"></path></svg></span></div><p class="vid-q">«Con nadie a nivel de copy nos hemos sentido tan a gusto como con Dani.»</p><div><div class="vid-nombre">Yan Vispo</div><div class="vid-rol">fundador de rumbo eficiente</div></div></a>
+            <figure class="ucom" style="background: var(--bg-raised);"><blockquote>«Esta página es la mejor que has escrito para nosotros con diferencia. Está 100% alineada con lo que somos, con cómo nos comunicamos, con lo que queremos decir.»</blockquote><figcaption><img src="/li-minano.png" alt=""><div><div class="q">Manuel Miñano</div><div class="d">proelia digital · comentario en el doc</div></div></figcaption></figure>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ============ QUIÉN ESCRIBE ============ -->
-  <section class="sec">
+  <section class="sec" style="background: var(--bg-raised);">
     <div class="wrap">
       <div class="row">
         <div class="rail"></div>
@@ -398,13 +379,17 @@ body{margin:0;background:var(--bg)}
             </div>
             <div class="quien-foto"><div class="dg-foto" style="width: 100%; aspect-ratio: 4 / 3;"><img src="/daniel.jpg" alt="Daniel García de Celis"></div></div>
           </div>
+          <div class="ag-par">
+            <a class="vid" href="https://www.youtube.com/watch?v=3PVCFX-8qu0" target="_blank" rel="noopener"><div class="th"><img src="/yt-zeke.jpg" alt="Testimonio de Zeke Novarino" loading="lazy"><span class="play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="#0a0b0d"></path></svg></span></div><p class="vid-q">«La persona que escribía estos textos yo sentía que no me representaba, y con Dani eso no existió.»</p><div><div class="vid-nombre">Zeke Novarino</div><div class="vid-rol">marca personal · speaker internacional</div></div></a>
+            <figure class="ucom" style="background: var(--bg);"><blockquote>«Logré llenar las plazas de mi primer lanzamiento online en menos de un mes, con una facturación de más de 20.000€.»</blockquote><figcaption><img src="/li-manzano.png" alt=""><div><div class="q">Sara Manzano</div><div class="d">mentes innovadoras</div></div></figcaption></figure>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ============ PREGUNTAS ============ -->
-  <section class="sec" style="background: var(--bg-raised);">
+  <section class="sec">
     <div class="wrap">
       <div class="row">
         <div class="rail"></div>
