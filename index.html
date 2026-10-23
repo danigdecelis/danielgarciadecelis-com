@@ -234,7 +234,8 @@
 
 <script>
 (function () {
-  var LISTA_SUBMIT_URL = ''; // PENDIENTE: endpoint de alta (Kit, Mailchimp, Apps Script…)
+  var LISTA_SUBMIT_URL = 'https://danigdecelis.activehosted.com/proc.php'; // Wildmail, formulario 8 «Lista · formulario de la home»: lista Newsletter + etiqueta origen-home
+  var LISTA_FORM_ID = '8';
   var AVISO_LEGAL_URL = '/aviso-legal/';
   var PRIVACIDAD_URL = '/privacidad/';
   var CONTACTO_URL = 'mailto:daniel@danielgarciadecelis.com';
@@ -267,17 +268,20 @@
     if (campo) campo.style.borderColor = '';
     if (boton) boton.disabled = true;
     if (!LISTA_SUBMIT_URL) return;
-    var payload = {
-      email: email,
-      source: form.getAttribute('data-source') || 'home',
-      ts: new Date().toISOString()
-    };
-    fetch(LISTA_SUBMIT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'text/plain' },
-      body: JSON.stringify(payload)
-    }).catch(function () {});
+    var nombreCampo = form.querySelector('input[name="nombre"]');
+    var qs = new URLSearchParams(location.search);
+    var datos = new FormData();
+    datos.append('u', LISTA_FORM_ID); datos.append('f', LISTA_FORM_ID); datos.append('s', '');
+    datos.append('c', '0'); datos.append('m', '0'); datos.append('act', 'sub'); datos.append('v', '2');
+    datos.append('email', email);
+    if (nombreCampo && nombreCampo.value.trim()) datos.append('fullname', nombreCampo.value.trim());
+    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(function (k, i) {
+      if (qs.get(k)) datos.append('field[' + (3 + i) + ']', qs.get(k));
+    });
+    datos.append('field[9]', location.pathname + (form.getAttribute('data-source') === 'popup' ? ' (popup)' : ''));
+    var payload = { source: form.getAttribute('data-source') || 'home' };
+    fetch(LISTA_SUBMIT_URL, { method: 'POST', mode: 'no-cors', body: datos }).catch(function () {});
+    if (boton) boton.textContent = 'hecho: ya estás dentro';
     if (window.dgcTrack) window.dgcTrack('lead', { source: payload.source });
   }
 
