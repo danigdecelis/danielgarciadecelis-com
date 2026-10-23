@@ -7,7 +7,7 @@
    - Los enlaces a pay.hotmart.com salen con las UTM de la visita y con sck/src para que Hotmart atribuya la venta. */
 (function () {
   var GA4_MEASUREMENT_ID = ''; // PENDIENTE: pegar G-XXXXXXXXXX
-  var META_PIXEL_ID = '';      // PENDIENTE: pegar ID numérico del Pixel de Meta
+  var META_PIXEL_ID = '2370688430350844'; // conjunto de datos «danielgarciadecelis.com», porfolio Dani GdC (23-oct-2026)
 
   var K_DECISION = 'dgc_cookies';          // 'si' | 'no'
   var K_ULTIMO = 'dgc_utm_ultimo';         // UTM de la última visita que las traía
