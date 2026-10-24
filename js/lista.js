@@ -8,7 +8,7 @@
   var PROC_URL = 'https://danigdecelis.activehosted.com/proc.php';
 
   // data-regalo → id del formulario de Wildmail
-  var FORMULARIOS = { numeros: 5, iman: 6, 'caja-negra': 7 };
+  var FORMULARIOS = { numeros: 5, 'caja-negra': 7 };
 
   // id de cada campo oculto en Wildmail
   var CAMPO = {

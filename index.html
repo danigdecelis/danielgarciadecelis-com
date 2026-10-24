@@ -281,7 +281,7 @@
     datos.append('field[9]', location.pathname + (form.getAttribute('data-source') === 'popup' ? ' (popup)' : ''));
     var payload = { source: form.getAttribute('data-source') || 'home' };
     fetch(LISTA_SUBMIT_URL, { method: 'POST', mode: 'no-cors', body: datos }).catch(function () {});
-    if (boton) boton.textContent = 'hecho: ya estás dentro';
+    if (boton) boton.textContent = 'recibido, gracias';
     if (window.dgcTrack) window.dgcTrack('lead', { source: payload.source });
   }
 
