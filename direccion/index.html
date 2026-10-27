@@ -212,7 +212,7 @@ body{margin:0;background:var(--bg)}
             <h1 class="h-hero" style="max-width: 17ch;">Un estratega en tu mesa que además <span class="dg-mark">escribe</span> lo que se decide en ella.</h1>
             <p class="ag-sub">Leo tu negocio, propongo qué se publica, cómo y cuándo, y escribo las piezas que mueven la venta. Las decisiones son tuyas.</p>
             <p class="cred" style="margin: 0;"><span>Trabajo con IA en todo el proceso y no lo escondo. Lo que la IA no trae es el criterio para decidir qué va dentro. <a href="#ia" style="color: var(--ink); text-decoration: underline; text-underline-offset: 3px;">Te cuento cómo</a>.</span></p>
-            <a class="dg-btn dg-btn--primario dg-btn--grande" href="#solicitud">cuéntame tu negocio <span class="dg-arrow">→</span></a>
+            <a class="dg-btn dg-btn--primario dg-btn--grande js-solicitud" href="/direccion/solicitud/">cuéntame tu negocio <span class="dg-arrow">→</span></a>
             <div class="ag-micro">es un formulario corto. te contesto con un vídeo sobre tu caso antes de proponerte ninguna llamada.</div>
           </div>
           <!-- HUECO DEL VÍDEO DE CABECERA (preparado, sin vídeo todavía).
@@ -259,7 +259,7 @@ body{margin:0;background:var(--bg)}
             <p>No cómo se escribe. Ni quién lo escribe.</p>
             <p>Quién decide <strong>qué</strong> sale, por qué ese y no otro, y <strong>cuándo</strong>.</p>
             <p>Casi nadie contesta a la primera. Y la respuesta honesta, cuando llega, suele ser que no lo decide nadie: lo decide lo que había en el calendario, lo que le apeteció al equipo esa semana o una lista de temas que alguien le pidió a ChatGPT un martes.</p>
-            <p class="golpe">No hay nadie al mando de tu comunicación. Y no es un problema de talento: es un hueco en el organigrama.</p>
+            <p class="golpe">No hay nadie al mando de tu comunicación.</p>
             <p>Tienes quien escribe, quien edita, quien publica y quien lleva los anuncios. Lo que no tienes es a alguien que decida qué, cómo y cuándo, y que responda de las tres cosas a la vez. Ese hueco se nota de tres maneras:</p>
           </div>
           <div class="entrega tres-col" style="margin-top: 40px;">
@@ -582,116 +582,23 @@ body{margin:0;background:var(--bg)}
             <details><summary>¿Montas tú las piezas?</summary><p>No. Escribo y dirijo, y tu equipo monta. No implemento en herramientas ni gestiono la pauta.</p></details>
             <details><summary>¿Por qué no me dices cuántas horas le dedicas?</summary><p>Porque no vendo horas. Lo que pagas no es mi tiempo: es que el documento hable de ti y que alguien responda durante el año de lo que se publica.</p></details>
             <details><summary>¿Hay permanencia?</summary><p>No. Propongo doce meses, con un mínimo de noventa días. Si a los noventa sientes que no, lo dejamos.</p></details>
-            <details><summary>¿Cómo empezamos?</summary><p>Rellenas el formulario de aquí abajo. Lo leo yo y te contesto con un vídeo corto sobre tu caso. Si encaja, hablamos.</p></details>
+            <details><summary>¿Cómo empezamos?</summary><p>Pulsas el botón y respondes unas preguntas rápidas sobre tu negocio. Lo leo yo y te contesto con un vídeo corto sobre tu caso. Si encaja, hablamos.</p></details>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ SOLICITUD ============ -->
-  <section id="solicitud" class="sec">
+  <!-- ============ CIERRE ============ -->
+  <section id="contacto" class="sec banda-final" style="border-top: 0;">
     <div class="wrap">
       <div class="row">
-        <div class="rail"></div>
-        <div class="cnt">
-          <div class="solicitud">
-            <div class="sol-intro">
-              <h2 class="h-sec" style="margin: 0;">Cuéntame tu negocio</h2>
-              <p>Son unas preguntas rápidas. Me sirven para saber si te puedo ayudar antes de pedirte una hora de tu agenda, y para que, si no encajo, te lo diga yo antes de que lo descubras tú.</p>
-              <ol class="sol-pasos">
-                <li><span class="n">01</span><span>Leo tus respuestas yo, no un sistema.</span></li>
-                <li><span class="n">02</span><span>Te mando un vídeo corto sobre tu caso.</span></li>
-                <li><span class="n">03</span><span>Si encaja, hablamos.</span></li>
-              </ol>
-            </div>
-            <div>
-              <form class="dir-form" id="dir-form" novalidate>
-                <div class="bloque">
-                  <div class="campo" data-req><label for="f-nombre">nombre</label><input class="dg-input" id="f-nombre" name="nombre" type="text" autocomplete="name"><span class="aviso">falta tu nombre.</span></div>
-                  <div class="campo" data-req><label for="f-email">email</label><input class="dg-input" id="f-email" name="email" type="email" autocomplete="email"><span class="aviso">revisa el email.</span></div>
-                  <div class="campo"><label for="f-wa">whatsapp <span class="opcional">(opcional)</span></label><input class="dg-input" id="f-wa" name="wa" type="tel" autocomplete="tel" placeholder="+52 ..."></div>
-                  <div class="campo" data-req><label for="f-web">tu web o tu perfil principal</label><input class="dg-input" id="f-web" name="web" type="text" placeholder="es lo primero que miro"><span class="aviso">déjame un enlace para mirar tu negocio.</span></div>
-                  <div class="campo full" data-req><label for="f-que">qué vendes y a quién</label><textarea id="f-que" name="que" placeholder="en dos o tres líneas"></textarea><span class="aviso">cuéntamelo en un par de líneas.</span></div>
-                </div>
-
-                <fieldset class="preg" data-preg="vendido">
-                  <legend><span class="n">01 / tu negocio</span>¿Has vendido ya tu programa o tu formación?</legend>
-                  <label class="opc"><input type="radio" name="vendido" value="no"><span>Todavía no lo he lanzado</span></label>
-                  <label class="opc"><input type="radio" name="vendido" value="lanzamientos"><span>Sí, con lanzamientos</span></label>
-                  <label class="opc"><input type="radio" name="vendido" value="evergreen"><span>Sí, con un embudo que vende todo el año</span></label>
-                  <label class="opc"><input type="radio" name="vendido" value="ambos"><span>Sí, con las dos cosas</span></label>
-                  <span class="aviso">elige una opción.</span>
-                </fieldset>
-
-                <fieldset class="preg" data-preg="facturacion">
-                  <legend><span class="n">02 / tu negocio</span>¿Cuánto facturó tu negocio en los últimos doce meses?</legend>
-                  <label class="opc"><input type="radio" name="facturacion" value="<50k"><span>Menos de 50.000 €</span></label>
-                  <label class="opc"><input type="radio" name="facturacion" value="50-150k"><span>Entre 50.000 y 150.000 €</span></label>
-                  <label class="opc"><input type="radio" name="facturacion" value="150-500k"><span>Entre 150.000 y 500.000 €</span></label>
-                  <label class="opc"><input type="radio" name="facturacion" value=">500k"><span>Más de 500.000 €</span></label>
-                  <span class="aviso">elige una opción. si facturas en otra moneda, su equivalente.</span>
-                </fieldset>
-
-                <fieldset class="preg" data-preg="audiencia">
-                  <legend><span class="n">03 / tu audiencia</span>¿Cuántos contactos tienes en tu lista de email?</legend>
-                  <label class="opc"><input type="radio" name="audiencia" value="sin-lista"><span>No tengo lista: vendo por redes o por WhatsApp</span></label>
-                  <label class="opc"><input type="radio" name="audiencia" value="<3k"><span>Menos de 3.000</span></label>
-                  <label class="opc"><input type="radio" name="audiencia" value="3-20k"><span>Entre 3.000 y 20.000</span></label>
-                  <label class="opc"><input type="radio" name="audiencia" value=">20k"><span>Más de 20.000</span></label>
-                  <span class="aviso">elige una opción.</span>
-                </fieldset>
-
-                <fieldset class="preg" data-preg="equipo">
-                  <legend><span class="n">04 / tu equipo</span>¿Quién hace hoy el marketing de tu negocio?</legend>
-                  <label class="opc"><input type="radio" name="equipo" value="solo"><span>Casi todo yo</span></label>
-                  <label class="opc"><input type="radio" name="equipo" value="piezas"><span>Tengo piezas sueltas: un editor, alguien de anuncios, un community…</span></label>
-                  <label class="opc"><input type="radio" name="equipo" value="equipo"><span>Tengo un equipo con alguien a cargo de cada área</span></label>
-                  <span class="aviso">elige una opción.</span>
-                </fieldset>
-
-                <fieldset class="preg" data-preg="forma">
-                  <legend><span class="n">05 / cómo trabajas</span>¿Qué buscas en alguien como yo?</legend>
-                  <label class="opc"><input type="radio" name="forma" value="ejecutar"><span>Que ejecute bien lo que yo decido</span></label>
-                  <label class="opc"><input type="radio" name="forma" value="criterio"><span>Criterio y propuestas con fundamento, y la última palabra para mí</span></label>
-                  <label class="opc"><input type="radio" name="forma" value="todo"><span>Que lo decida todo y me lo quite de encima</span></label>
-                  <span class="aviso">elige una opción.</span>
-                </fieldset>
-
-                <fieldset class="preg" data-preg="lanzamiento">
-                  <legend><span class="n">06 / tu calendario</span>¿Tienes algún lanzamiento con fecha?</legend>
-                  <label class="opc"><input type="radio" name="lanzamiento" value="no"><span>No, ninguno con fecha</span></label>
-                  <label class="opc"><input type="radio" name="lanzamiento" value=">2m"><span>Sí, dentro de más de dos meses</span></label>
-                  <label class="opc"><input type="radio" name="lanzamiento" value="1-2m"><span>Sí, dentro de uno o dos meses</span></label>
-                  <label class="opc"><input type="radio" name="lanzamiento" value="<1m"><span>Sí, en menos de un mes</span></label>
-                  <span class="aviso">elige una opción.</span>
-                </fieldset>
-
-                <fieldset class="preg" data-preg="presupuesto">
-                  <legend><span class="n">07 / tu inversión</span>¿Cuánto tienes pensado invertir al mes en la dirección y la ejecución de tu comunicación?</legend>
-                  <label class="opc"><input type="radio" name="presupuesto" value="<1.5k"><span>Menos de 1.500 €</span></label>
-                  <label class="opc"><input type="radio" name="presupuesto" value="1.5-3.5k"><span>Entre 1.500 y 3.500 €</span></label>
-                  <label class="opc"><input type="radio" name="presupuesto" value="3.5-6k"><span>Entre 3.500 y 6.000 €</span></label>
-                  <label class="opc"><input type="radio" name="presupuesto" value=">6k"><span>Más de 6.000 €</span></label>
-                  <span class="aviso">elige una opción.</span>
-                </fieldset>
-
-                <div class="campo"><label for="f-anyo">qué quieres que sea distinto dentro de un año <span class="opcional">(opcional)</span></label><textarea id="f-anyo" name="anyo"></textarea></div>
-
-                <div class="trampa" aria-hidden="true"><label for="f-empresa">empresa</label><input id="f-empresa" name="empresa" type="text" tabindex="-1" autocomplete="off"></div>
-
-                <div class="envio">
-                  <button class="dg-btn dg-btn--primario dg-btn--grande" type="submit">enviar mis respuestas <span class="dg-arrow">→</span></button>
-                  <span class="dg-form__nota">solo lo leo yo. tus datos no salen de aquí. <a href="/privacidad/" style="color: inherit;">privacidad</a>.</span>
-                </div>
-              </form>
-
-              <div class="sol-ok" id="sol-ok" role="status" aria-live="polite">
-                <span class="k">recibido</span>
-                <h3 id="ok-titulo"></h3>
-                <div id="ok-texto"></div>
-              </div>
-            </div>
+        <div></div>
+        <div class="cnt" style="padding-top: 64px; padding-bottom: 64px; display: flex; flex-wrap: wrap; gap: 28px 48px; align-items: center; justify-content: space-between;">
+          <p style="margin: 0; font-family: var(--font-display); font-weight: 900; font-stretch: 82%; font-size: clamp(30px, 3.4vw, 46px); line-height: 1; letter-spacing: -.03em; max-width: 20ch; color: var(--on-accent);">Si quieres que lo hablemos, empieza contándome tu negocio.</p>
+          <div style="display: flex; flex-direction: column; gap: 14px; align-items: flex-start;">
+            <a class="dg-btn dg-btn--grande btn-invertido js-solicitud" href="/direccion/solicitud/">cuéntame tu negocio <span class="dg-arrow">→</span></a>
+            <p style="margin: 0; font-size: 15px; color: var(--on-accent);">Unas preguntas rápidas. Te contesto con un vídeo, no con un calendario de llamadas.</p>
           </div>
         </div>
       </div>
@@ -714,158 +621,10 @@ body{margin:0;background:var(--bg)}
 </div>
 
 <script>
-/* Formulario de cualificación (reto 25 de El Núcleo).
-   Las respuestas van al mismo Apps Script que /lista/ (tubo tonto): fila en la hoja de leads
-   y email a Daniel con el brief que monta esta página. Sin «tool»: el script lo guarda en su pestaña
-   por defecto. La página clasifica la solicitud (encaja · revisar · auditoría · no encaja) y le enseña
-   a la persona el siguiente paso; la clasificación también va en el asunto del email. */
+/* Los botones llevan al formulario de cualificación (/direccion/solicitud/) con los parámetros de la visita (utm, r). */
 (function () {
-  var SUBMIT_URL = 'https://script.google.com/macros/s/AKfycbydQsYJmELssd2TC4YWMafMf9zI6NxwJGRLJVCzWYWCSCHL666GvfEdXiaPTLUtgl9s/exec';
-  var form = document.getElementById('dir-form');
-  var ok = document.getElementById('sol-ok');
-  if (!form) return;
-
-  var PREGUNTAS = {
-    vendido: '¿Ha vendido ya su programa?',
-    facturacion: 'Facturación últimos 12 meses',
-    audiencia: 'Lista de email',
-    equipo: 'Quién hace el marketing',
-    forma: 'Qué busca',
-    lanzamiento: 'Lanzamiento con fecha',
-    presupuesto: 'Inversión mensual'
-  };
-
-  function valor(nombre) {
-    var r = form.querySelector('input[name="' + nombre + '"]:checked');
-    return r ? r.value : '';
-  }
-  function texto(nombre) {
-    var r = form.querySelector('input[name="' + nombre + '"]:checked');
-    return r ? r.parentNode.textContent.trim() : '';
-  }
-  function campo(id) { var el = document.getElementById(id); return el ? el.value.trim() : ''; }
-  function emailOk(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v); }
-
-  function clasificar(r) {
-    var motivos = [];
-    if (r.vendido === 'no') motivos.push('todavía no ha vendido su producto');
-    if (r.forma === 'ejecutar') motivos.push('busca a alguien que ejecute lo que él decide');
-    if (r.forma === 'todo') motivos.push('quiere que alguien lo decida todo por él');
-    if (r.presupuesto === '<1.5k') motivos.push('inversión por debajo de 1.500 €/mes');
-    if (motivos.length) return { tipo: 'no', etiqueta: 'NO ENCAJA', motivos: motivos };
-    if (r.lanzamiento === '<1m') return { tipo: 'auditoria', etiqueta: 'AUDITORÍA', motivos: ['lanzamiento en menos de un mes'] };
-    if (r.equipo === 'solo') motivos.push('hace casi todo el marketing él');
-    if (r.presupuesto === '1.5-3.5k') motivos.push('inversión entre 1.500 y 3.500 €/mes (¿encargo o consultoría?)');
-    if (r.facturacion === '<50k') motivos.push('factura menos de 50.000 € al año');
-    if (r.audiencia === '<3k') motivos.push('lista de menos de 3.000 contactos');
-    if (r.lanzamiento === '1-2m') motivos.push('lanzamiento en uno o dos meses');
-    if (motivos.length) return { tipo: 'revisar', etiqueta: 'REVISAR', motivos: motivos };
-    return { tipo: 'encaja', etiqueta: 'ENCAJA', motivos: [] };
-  }
-
-  var MENSAJES = {
-    encaja: {
-      t: 'Gracias. Esto ya lo leo yo.',
-      p: ['En un par de días laborables te mando un vídeo corto sobre tu caso, a tu email. Si después de verlo tiene sentido hablar, ahí te propongo la llamada.']
-    },
-    revisar: {
-      t: 'Gracias. Esto ya lo leo yo.',
-      p: ['Hay un par de cosas de tu caso que quiero mirar con calma antes de decirte nada. En un par de días laborables te mando un vídeo corto a tu email con lo que veo, y si tiene sentido hablar, te lo propongo ahí.']
-    },
-    auditoria: {
-      t: 'Gracias. Con un lanzamiento tan cerca, te digo la verdad.',
-      p: ['Un lanzamiento a menos de un mes no se arregla con un año de dirección: se hace con lo que ya hay, mejorándolo. Para eso está la auditoría.',
-          'En un par de días laborables te mando un vídeo corto a tu email con cómo la plantearía en tu caso.']
-    },
-    no: {
-      t: 'Gracias por contármelo con tanto detalle.',
-      p: ['Por lo que me cuentas, ahora mismo no soy lo que necesitas, y prefiero decírtelo ya antes que hacerte perder una llamada.',
-          'Si quieres seguir cerca, en <a href="/">la lista</a> cuento por email lo que voy aprendiendo en cada lanzamiento, y en <a href="/lista/">el diagnóstico de lista</a> puedes ver gratis dónde se te escapan las ventas.']
-    }
-  };
-
-  function marcar(el, falta) { if (el) el.classList.toggle('falta', !!falta); }
-
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    var primero = null;
-    form.querySelectorAll('.campo[data-req]').forEach(function (c) {
-      var input = c.querySelector('input, textarea');
-      var v = input ? input.value.trim() : '';
-      var mal = !v || (input.type === 'email' && !emailOk(v));
-      marcar(c, mal);
-      if (mal && !primero) primero = c;
-    });
-    form.querySelectorAll('.preg[data-preg]').forEach(function (p) {
-      var mal = !valor(p.getAttribute('data-preg'));
-      marcar(p, mal);
-      if (mal && !primero) primero = p;
-    });
-    if (primero) { primero.scrollIntoView({ behavior: 'smooth', block: 'center' }); return; }
-
-    var boton = form.querySelector('button[type="submit"]');
-    if (boton) boton.disabled = true;
-
-    var r = {};
-    Object.keys(PREGUNTAS).forEach(function (k) { r[k] = valor(k); });
-    var veredicto = clasificar(r);
-
-    var nombre = campo('f-nombre'), email = campo('f-email'), wa = campo('f-wa'), web = campo('f-web');
-    var que = campo('f-que'), anyo = campo('f-anyo');
-    var trampa = campo('f-empresa');
-
-    var qs = new URLSearchParams(location.search);
-    var utm = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term']
-      .filter(function (k) { return qs.get(k); }).map(function (k) { return k + '=' + qs.get(k); }).join(' · ');
-    var ref = qs.get('r') || '';
-
-    var detalle = Object.keys(PREGUNTAS).map(function (k) { return PREGUNTAS[k] + ' -> ' + texto(k); }).join('\n');
-    var linea = '====================================================';
-    var asunto = 'Solicitud /direccion/ · ' + veredicto.etiqueta + ' · ' + (nombre || 'sin nombre');
-    var cuerpo =
-      'NUEVA SOLICITUD DE DIRECCIÓN (servicio estrella)\n' + linea + '\n\n' +
-      'CLASIFICACIÓN: ' + veredicto.etiqueta + '\n' +
-      (veredicto.motivos.length ? '  Motivos: ' + veredicto.motivos.join('; ') + '\n' : '') + '\n' +
-      'CONTACTO\n' +
-      '  Nombre:    ' + nombre + '\n' +
-      '  Email:     ' + email + '\n' +
-      '  WhatsApp:  ' + (wa || '(no ha dejado)') + '\n' +
-      '  Web/perfil: ' + web + '\n\n' +
-      'QUÉ VENDE Y A QUIÉN\n' + que + '\n\n' +
-      'RESPUESTAS\n' + linea + '\n' + detalle + '\n\n' +
-      'QUÉ QUIERE QUE SEA DISTINTO EN UN AÑO\n' + (anyo || '(no ha escrito nada)') + '\n\n' +
-      'ORIGEN\n  ' + (utm || 'sin utm') + (ref ? ' · r=' + ref : '') + ' · ' + location.pathname + '\n\n' +
-      linea + '\nSiguiente paso: vídeo personalizado; llamada solo si encaja.\n';
-
-    var payload = {
-      name: nombre, email: email, wa: wa, online: web, ts: new Date().toISOString(),
-      nivel: '', nivelTitulo: veredicto.etiqueta, score: '',
-      arquetipo: 'direccion', fugaTitulo: 'Solicitud /direccion/ · ' + veredicto.etiqueta,
-      dimensiones: veredicto.motivos.join('; '), detalle: 'Qué vende: ' + que + '\n' + detalle,
-      respuestas: Object.keys(r).map(function (k) { return k + ': ' + r[k]; }).join(' | '),
-      intentado: anyo, ref: ref || 'direccion',
-      emailSubject: asunto, emailBody: cuerpo
-    };
-
-    if (!trampa) {
-      fetch(SUBMIT_URL, { method: 'POST', mode: 'no-cors', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(payload) }).catch(function () {});
-      if (window.dgcTrack) window.dgcTrack('lead', { source: 'direccion' });
-    }
-
-    var m = MENSAJES[veredicto.tipo];
-    document.getElementById('ok-titulo').textContent = m.t;
-    document.getElementById('ok-texto').innerHTML = m.p.map(function (x) { return '<p>' + x + '</p>'; }).join('');
-    form.style.display = 'none';
-    ok.classList.add('visible');
-    ok.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  });
-
-  form.addEventListener('change', function (e) {
-    var p = e.target.closest('.preg'); if (p) marcar(p, false);
-  });
-  form.addEventListener('input', function (e) {
-    var c = e.target.closest('.campo'); if (c) marcar(c, false);
-  });
+  if (!location.search) return;
+  document.querySelectorAll('a.js-solicitud').forEach(function (a) { a.href = a.getAttribute('href') + location.search; });
 })();
 </script>
 </body>
