@@ -225,7 +225,8 @@ body{margin:0;background:var(--bg)}
                   <div class="campo" data-req><label for="f-email">email</label><input class="dg-input" id="f-email" name="email" type="email" autocomplete="email"><span class="aviso">revisa el email.</span></div>
                   <div class="campo"><label for="f-wa">whatsapp <span class="opcional">(opcional)</span></label><input class="dg-input" id="f-wa" name="wa" type="tel" autocomplete="tel" placeholder="+52 ..."></div>
                   <div class="campo" data-req><label for="f-web">tu web o tu perfil principal</label><input class="dg-input" id="f-web" name="web" type="text" placeholder="es lo primero que miro"><span class="aviso">déjame un enlace para mirar tu negocio.</span></div>
-                  <div class="campo full" data-req><label for="f-que">qué vendes y a quién</label><textarea id="f-que" name="que" placeholder="en dos o tres líneas"></textarea><span class="aviso">cuéntamelo en un par de líneas.</span></div>
+                  <div class="campo full" data-req><label for="f-como">cómo me conociste</label><input class="dg-input" id="f-como" name="como" type="text" placeholder="por ejemplo: me habló de ti alguien, te vi en LinkedIn…"><span class="aviso">cuéntame cómo llegaste hasta aquí.</span></div>
+                  <div class="campo full" data-req><label for="f-que">qué vendes, a quién y a qué precio</label><textarea id="f-que" name="que" placeholder="en dos o tres líneas"></textarea><span class="aviso">cuéntamelo en un par de líneas.</span></div>
                 </div>
 
                 <fieldset class="preg" data-preg="vendido">
@@ -288,6 +289,8 @@ body{margin:0;background:var(--bg)}
                   <label class="opc"><input type="radio" name="presupuesto" value=">6k"><span>Más de 6.000 €</span></label>
                   <span class="aviso">elige una opción.</span>
                 </fieldset>
+
+                <div class="campo"><label for="f-antes">¿has trabajado antes con alguien en esto? ¿qué pasó? <span class="opcional">(opcional)</span></label><textarea id="f-antes" name="antes"></textarea></div>
 
                 <div class="campo"><label for="f-anyo">qué quieres que sea distinto dentro de un año <span class="opcional">(opcional)</span></label><textarea id="f-anyo" name="anyo"></textarea></div>
 
@@ -424,7 +427,7 @@ body{margin:0;background:var(--bg)}
     var veredicto = clasificar(r);
 
     var nombre = campo('f-nombre'), email = campo('f-email'), wa = campo('f-wa'), web = campo('f-web');
-    var que = campo('f-que'), anyo = campo('f-anyo');
+    var que = campo('f-que'), anyo = campo('f-anyo'), como = campo('f-como'), antes = campo('f-antes');
     var trampa = campo('f-empresa');
 
     var qs = new URLSearchParams(location.search);
@@ -446,8 +449,10 @@ body{margin:0;background:var(--bg)}
       '  Email:     ' + email + '\n' +
       '  WhatsApp:  ' + (wa || '(no ha dejado)') + '\n' +
       '  Web/perfil: ' + web + '\n\n' +
-      'QUÉ VENDE Y A QUIÉN\n' + que + '\n\n' +
+      'CÓMO ME CONOCIÓ\n' + como + '\n\n' +
+      'QUÉ VENDE, A QUIÉN Y A QUÉ PRECIO\n' + que + '\n\n' +
       'RESPUESTAS\n' + linea + '\n' + detalle + '\n\n' +
+      'CON QUIÉN HA TRABAJADO ANTES Y QUÉ PASÓ\n' + (antes || '(no ha escrito nada)') + '\n\n' +
       'QUÉ QUIERE QUE SEA DISTINTO EN UN AÑO\n' + (anyo || '(no ha escrito nada)') + '\n\n' +
       'ORIGEN\n  ' + (utm || 'sin utm') + (ref ? ' · r=' + ref : '') + ' · ' + location.pathname + '\n\n' +
       linea + '\nSiguiente paso: vídeo personalizado; llamada solo si encaja.\n';
@@ -456,7 +461,7 @@ body{margin:0;background:var(--bg)}
       name: nombre, email: email, wa: wa, online: web, ts: new Date().toISOString(),
       nivel: '', nivelTitulo: veredicto.etiqueta, score: '',
       arquetipo: 'direccion', fugaTitulo: 'Solicitud /direccion/ · ' + veredicto.etiqueta,
-      dimensiones: veredicto.motivos.join('; '), detalle: 'Qué vende: ' + que + '\n' + detalle,
+      dimensiones: veredicto.motivos.join('; '), detalle: 'Cómo me conoció: ' + como + '\nQué vende: ' + que + '\n' + detalle + (antes ? '\nAntes: ' + antes : ''),
       respuestas: Object.keys(r).map(function (k) { return k + ': ' + r[k]; }).join(' | '),
       intentado: anyo, ref: ref || 'direccion',
       emailSubject: asunto, emailBody: cuerpo
