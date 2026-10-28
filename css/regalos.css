@@ -98,3 +98,8 @@ form.enviado + .rg-ok,form.enviado .rg-ok{display:block}
   .rg-logo span{font-size:10px}
   .jose{grid-template-columns:minmax(0,1fr);gap:24px}
 }
+
+/* Pie mínimo de las landings de regalo: solo lo legal, sin más salidas */
+.rg-pie{display:flex;flex-wrap:wrap;gap:12px 24px;padding-top:24px;padding-bottom:32px;font-family:var(--font-mono);font-size:11px;letter-spacing:.04em}
+.rg-pie a{color:var(--ink-subtle)}
+#caja{scroll-margin-top:96px}

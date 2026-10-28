@@ -5,11 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, follow">
 <title>La Caja Negra · Daniel García de Celis</title>
-<meta name="description" content="La plantilla para medir tu lanzamiento sin engañarte con los números: escenario, diario y un panel que se calcula solo. Gratis.">
+<meta name="description" content="Mide tu lanzamiento sin que los números te mientan: escenario, diario y un panel que se calcula solo. Plantilla gratis.">
 <link rel="canonical" href="https://danielgarciadecelis.com/caja-negra/">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="es_ES">
-<meta property="og:title" content="La Caja Negra: mide tu lanzamiento sin engañarte con los números">
+<meta property="og:title" content="La Caja Negra: mide tu lanzamiento sin que los números te mientan">
 <meta property="og:description" content="Escenario, diario y un panel que se calcula solo. Plantilla gratis de Google Sheets.">
 <meta property="og:url" content="https://danielgarciadecelis.com/caja-negra/">
 <meta property="og:image" content="https://danielgarciadecelis.com/og.png">
@@ -21,34 +21,28 @@
 <link rel="stylesheet" href="/css/dgc-componentes.css">
 <link rel="stylesheet" href="/css/home.css">
 <link rel="stylesheet" href="/css/regalos.css">
+<script src="/js/videos.js" defer></script>
 </head>
 <body>
 <div class="pg">
 
   <nav class="dg-nav navp" style="position: sticky; top: 0; z-index: 10; background: var(--bg);">
-    <a class="dg-nav__marca nav-logo" href="/"><img src="/assets/logo/dgdc-horizontal-oscuro.svg" alt="Daniel García de Celis" width="200" height="30" style="height: 30px; width: auto; display: block;"></a>
+    <span class="dg-nav__marca nav-logo"><img src="/assets/logo/dgdc-horizontal-oscuro.svg" alt="Daniel García de Celis" width="200" height="30" style="height: 30px; width: auto; display: block;"></span>
   </nav>
 
   <section class="wrap">
     <div class="row">
-      <div class="rail"><span class="dg-label"><b>plantilla</b> / gratis</span></div>
+      <div class="rail rg-rail-movil"></div>
       <div class="cnt cnt-hero">
-        <div class="rg-hero">
-          <div>
+        <div class="rg-hero rg-hero--areas">
+          <div class="rg-intro">
             <p class="rg-ante">plantilla gratis · google sheets</p>
-            <h1 class="rg-h1">La hoja para medir tu lanzamiento <span class="dg-mark">sin engañarte con los números</span></h1>
-            <p class="rg-sub">La Caja Negra. Como la de un avión: lo registra todo para que sepas dónde se te cayó el lanzamiento. La diseñé después de revisar las hojas de seguimiento de 17 lanzamientos y encontrar los mismos errores una y otra vez. Rellenas una fila al día y te dice dónde se te van las ventas.</p>
-            <ul class="rg-lista">
-              <li><span><b>Un escenario antes de lanzar.</b> Cuánto puedes pagar por registro y por compra sin perder dinero.</span></li>
-              <li><span><b>Un diario de quince columnas.</b> Solo lo que se usa: una fila por día y por fuente, y una columna para apuntar qué cambiaste.</span></li>
-              <li><span><b>Un panel que se calcula solo.</b> Cada fuente se divide entre sus propios registros, nunca entre los de todas.</span></li>
-              <li><span><b>Un ROAS de pago aparte del total,</b> para que las ventas orgánicas no maquillen la publicidad.</span></li>
-              <li><span><b>Avisos cuando algo no cuadra</b> y la mediana de 17 lanzamientos al lado de cada número.</span></li>
-            </ul>
+            <h1 class="rg-h1">Mide tu lanzamiento <span class="dg-mark">sin que los números te mientan</span></h1>
+            <p class="rg-sub rg-solo-desk">La Caja Negra. Como la de un avión: lo registra todo para que sepas dónde se te cayó el lanzamiento. La diseñé después de revisar las hojas de seguimiento de 17 lanzamientos que escribí entre 2024 y 2026, y encontrar los mismos errores una y otra vez. Rellenas una fila al día y te dice dónde se te van las ventas.</p>
           </div>
-          <div class="rg-caja">
+          <div class="rg-caja" id="caja">
             <h2>Te mando tu copia al email</h2>
-            <p>Y quedas dentro de la lista: lo que aprendo escribiendo lanzamientos de verdad. Te das de baja cuando quieras.</p>
+            <p>Y recibirás mis emails, con lo que voy aprendiendo escribiendo para mis clientes y trabajando en mi propio negocio. Te das de baja cuando quieras.</p>
             <form class="dg-form js-regalo-form" data-source="landing-caja-negra" data-regalo="caja-negra" novalidate style="max-width: none;">
               <div class="rg-campos" style="display: flex; flex-direction: column; gap: 16px; position: relative;">
                 <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;"><label>Deja este campo vacío <input type="text" name="web_url" tabindex="-1" autocomplete="off"></label></div>
@@ -60,21 +54,98 @@
               <div class="rg-ok"><b>Recibido.</b> En unos minutos te llega el enlace para hacer tu copia. Si no lo ves, mira en promociones o en spam.</div>
             </form>
           </div>
+          <div class="rg-mas">
+            <p class="rg-sub rg-solo-movil">La Caja Negra. Como la de un avión: lo registra todo para que sepas dónde se te cayó el lanzamiento. La diseñé después de revisar las hojas de seguimiento de 17 lanzamientos que escribí entre 2024 y 2026, y encontrar los mismos errores una y otra vez. Rellenas una fila al día y te dice dónde se te van las ventas.</p>
+            <ul class="rg-lista">
+              <li><span><b>Sabes cuánto puedes pagar por cada registro antes de gastar un euro.</b> Un escenario que calcula tu límite por registro y por compra. Para que el agujero no lo descubras con el presupuesto ya gastado.</span></li>
+              <li><span><b>Sabes qué cambio movió el número.</b> Un diario de quince columnas, una fila por día y por fuente, con una columna para apuntar qué cambiaste. Al cerrar el lanzamiento no tienes que adivinar qué funcionó.</span></li>
+              <li><span><b>Ves dónde se te van las ventas sin hacer una sola cuenta.</b> Un panel que se calcula solo y divide cada fuente entre sus propios registros. Los porcentajes que lees son los de verdad, no una mezcla de todas las fuentes.</span></li>
+              <li><span><b>Sabes si tu publicidad se paga sola.</b> Un ROAS solo de pago, aparte del total. Las ventas de tu lista dejan de maquillar lo que hacen los anuncios.</span></li>
+              <li><span><b>Pillas el error antes de decidir con él.</b> Avisos cuando un dato no cuadra, como más compras que registros, y la mediana de 17 lanzamientos al lado de cada número. Sabes si estás lejos o cerca antes de tocar nada.</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec rg-stopper">
+    <div class="wrap">
+      <div class="row">
+        <div class="rail"></div>
+        <div class="cnt">
+          <p class="rg-stopper__txt">Cuánto puedes pagar por cada registro: <span class="dg-mark">casi todo el mundo lo descubre</span> cuando ya se lo ha gastado.</p>
+          <p class="rg-stopper__sub">El escenario te lo dice antes de lanzar. Pones tu precio, tu inversión y lo que esperas convertir, y te devuelve tu límite por registro y por compra.</p>
+          <a class="dg-btn dg-btn--primario dg-btn--grande" href="#caja">quiero mi escenario <span class="dg-arrow">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" style="background: var(--bg-raised);">
+    <div class="wrap">
+      <div class="row">
+        <div class="rail"></div>
+        <div class="cnt">
+          <div class="stats home-stats">
+            <div class="dg-stat dg-stat--grande"><span class="dg-stat__num">+5M€</span><span class="dg-stat__txt">facturados en los lanzamientos en los que he participado desde 2020</span></div>
+            <div class="dg-stat dg-stat--grande"><span class="dg-stat__num">+50</span><span class="dg-stat__txt">lanzamientos desde 2020</span></div>
+          </div>
+          <p class="rg-logos-label" style="margin-top: 56px;">clientes con los que he trabajado</p>
+          <div class="rg-logos">
+            <div class="rg-logo"><img class="av" src="/logos/josemunoz.jpg" alt="" loading="lazy"><span>José Muñoz</span></div>
+            <div class="rg-logo"><img class="av" src="/logos/hackaviss.jpg" alt="" loading="lazy"><span>Hackaviss</span></div>
+            <div class="rg-logo"><img class="lg" src="/logos/talentnetwork.svg" alt="" loading="lazy" data-color><span>Talent Network</span></div>
+            <div class="rg-logo"><img class="lg" src="/logos/crecesinlimite.svg" alt="" loading="lazy"><span>Crece Sin Límite</span></div>
+            <div class="rg-logo"><img class="lg" src="/logos/tutellus.svg" alt="" loading="lazy"><span>Tutellus</span></div>
+            <div class="rg-logo"><img class="lg" src="/logos/digitalriders.webp" alt="" loading="lazy"><span>Digital Riders</span></div>
+            <div class="rg-logo"><img class="lg" src="/logos/racks.png" alt="" loading="lazy"><span>Racks Academy</span></div>
+            <div class="rg-logo"><img class="lg" src="/logos/escueladelujo.png" alt="" loading="lazy" data-whiten><span>Escuela de Lujo</span></div>
+            <div class="rg-logo"><img class="av" src="/logos/anamoreno.jpg" alt="" loading="lazy"><span>Ana Moreno Marín</span></div>
+            <div class="rg-logo"><img class="av" src="/logos/vanessamarrero.jpg" alt="" loading="lazy"><span>Vanessa Marrero</span></div>
+            <div class="rg-logo"><img class="av" src="/logos/zekenovarino.jpg" alt="" loading="lazy"><span>Zeke Novarino</span></div>
+            <div class="rg-logo"><img class="av" src="/logos/tutobiohacker.jpg" alt="" loading="lazy"><span>Tuto Biohacker</span></div>
+          </div>
+          <div class="videos4" style="margin-top: 56px;">
+            <a class="vid" href="https://www.youtube.com/watch?v=Q8IGzGJKQDs" target="_blank" rel="noopener">
+              <div class="th"><img src="/yt-josemunoz.jpg" alt="Testimonio de José Muñoz" loading="lazy"><span class="play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="#0a0b0d"></path></svg></span></div>
+              <div><div class="vid-nombre">José Muñoz</div><div class="vid-rol">programa in · inversión inmobiliaria</div></div>
+            </a>
+            <a class="vid" href="https://www.youtube.com/watch?v=wxXWydbZA6U" target="_blank" rel="noopener">
+              <div class="th"><img src="/yt-victoralcazar.jpg" alt="Testimonio de Víctor Alcázar" loading="lazy"><span class="play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="#0a0b0d"></path></svg></span></div>
+              <div><div class="vid-nombre">Víctor Alcázar</div><div class="vid-rol">agencia riders · agencia de lanzamientos</div></div>
+            </a>
+            <a class="vid" href="https://www.youtube.com/watch?v=wuKKOqv-3EY" target="_blank" rel="noopener">
+              <div class="th"><img src="/yt-vanessa.jpg" alt="Testimonio de Vanessa Marrero" loading="lazy"><span class="play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="#0a0b0d"></path></svg></span></div>
+              <div><div class="vid-nombre">Vanessa Marrero</div><div class="vid-rol">lanzamiento 2026</div></div>
+            </a>
+            <a class="vid" href="https://www.youtube.com/watch?v=gOsJxN-l9Ac" target="_blank" rel="noopener">
+              <div class="th"><img src="/yt-pepe.jpg" alt="Testimonio de Jose Javier Pastor" loading="lazy"><span class="play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="#0a0b0d"></path></svg></span></div>
+              <div><div class="vid-nombre">Jose Javier Pastor</div><div class="vid-rol">hackaviss · ciberseguridad</div></div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec banda-final" style="border-top: 0;">
+    <div class="wrap">
+      <div class="row">
+        <div></div>
+        <div class="cnt" style="padding-top: 64px; padding-bottom: 64px; display: flex; flex-wrap: wrap; gap: 28px 48px; align-items: center; justify-content: space-between;">
+          <p style="margin: 0; font-family: var(--font-display); font-weight: 900; font-stretch: 82%; font-size: clamp(30px, 3.4vw, 46px); line-height: 1; letter-spacing: -.03em; max-width: 22ch; color: var(--on-accent);">Si no lo apuntas, no sabrás qué movió el número.</p>
+          <a class="dg-btn dg-btn--grande btn-invertido" href="#caja">quiero la caja negra <span class="dg-arrow">→</span></a>
         </div>
       </div>
     </div>
   </section>
 
   <footer class="sec foot">
-    <div class="wrap" style="padding-top: 28px; padding-bottom: 40px; display: flex; flex-wrap: wrap; gap: 16px 32px; align-items: center; justify-content: space-between;">
-      <div style="display: flex; align-items: center; gap: 10px;"><img src="/favicon.svg" alt="" style="width: 22px; height: 22px;"><span style="font-family: var(--font-mono); font-size: 11px; letter-spacing: .04em; color: var(--ink-subtle);">daniel garcía de celis</span></div>
-      <div style="display: flex; flex-wrap: wrap; gap: 16px 24px; font-family: var(--font-mono); font-size: 11px; letter-spacing: .04em;">
-        <a href="/aviso-legal/">aviso legal</a>
-        <a href="/privacidad/">política de privacidad</a>
-        <a href="/el-desglose/">el desglose</a>
-        <a href="/cookies/">cookies</a>
-        <a href="mailto:daniel@danielgarciadecelis.com">contacto</a>
-      </div>
+    <div class="wrap rg-pie">
+      <a href="/aviso-legal/">aviso legal</a>
+      <a href="/privacidad/">política de privacidad</a>
+      <a href="/cookies/">cookies</a>
     </div>
   </footer>
 
