@@ -103,3 +103,20 @@ form.enviado + .rg-ok,form.enviado .rg-ok{display:block}
 .rg-pie{display:flex;flex-wrap:wrap;gap:12px 24px;padding-top:24px;padding-bottom:32px;font-family:var(--font-mono);font-size:11px;letter-spacing:.04em}
 .rg-pie a{color:var(--ink-subtle)}
 #caja{scroll-margin-top:96px}
+
+/* Cabecera compacta: titular, subtítulo y formulario; los puntos van en su propia sección */
+.rg-hero--compacto{align-items:center}
+.rg-hero--compacto .rg-caja{position:static}
+.rg-hero--compacto .rg-sub{margin-bottom:0}
+.rg-puntos{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:20px}
+.rg-punto{grid-column:span 2}
+.rg-punto:nth-child(4),.rg-punto:nth-child(5){grid-column:span 3}
+.rg-logos-label{text-align:center}
+.rg-punto{padding:26px;background:var(--bg-raised);border-top:4px solid var(--accent)}
+.rg-punto h3{margin:0 0 12px;font-family:var(--font-display);font-weight:800;font-stretch:90%;font-size:21px;line-height:1.2;letter-spacing:-.01em;color:var(--ink)}
+.rg-punto p{margin:0;font-size:16px;line-height:1.6;color:var(--ink-muted)}
+/* Cifras siempre centradas */
+.rg-centro{justify-items:center;text-align:center}
+.rg-centro .dg-stat{align-items:center}
+@media (max-width:1100px){.rg-puntos{grid-template-columns:repeat(2,minmax(0,1fr))}.rg-punto,.rg-punto:nth-child(4){grid-column:auto}.rg-punto:nth-child(5){grid-column:span 2}}
+@media (max-width:820px){.rg-puntos{grid-template-columns:minmax(0,1fr)}.rg-punto:nth-child(5){grid-column:auto}}
