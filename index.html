@@ -43,6 +43,25 @@
 .q-txt{display:flex;flex-direction:column;gap:20px;max-width:64ch}
 .q-txt p{margin:0;font-size:18px;line-height:1.65;color:var(--ink)}
 @media (max-width:820px){.jose{grid-template-columns:minmax(0,1fr);gap:24px}.home-stats{margin-top:48px}.q-txt p{font-size:17px}}
+/* Menú de anclas: cada enlace baja a su bloque de la misma página */
+html{scroll-behavior:smooth}
+#servicios,#infoproductores,#agencias,#lista{scroll-margin-top:80px}
+.nav-dcha{display:flex;align-items:center;gap:24px}
+.nav-anclas{display:flex;gap:20px;font-family:var(--font-mono);font-size:12px;letter-spacing:.04em}
+.nav-anclas a{color:var(--ink-muted);text-decoration:none}
+.nav-anclas a:hover{color:var(--ink)}
+.nav-logo .nav-completo{display:block}
+.nav-logo .nav-simbolo{display:none}
+@media (max-width:640px){.nav-logo .nav-completo{display:none}.nav-logo .nav-simbolo{display:block}.nav-dcha{gap:14px}.nav-anclas{gap:12px;font-size:11px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+/* Servicios: dos puertas */
+.puertas2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.puertas2 > div{display:flex;flex-direction:column;gap:16px;padding:32px 30px;background:var(--bg-raised);border-top:4px solid var(--accent)}
+.puertas2 .k{font-family:var(--font-mono);font-size:12px;letter-spacing:.04em;color:var(--ink-subtle)}
+.puertas2 h3{margin:0;font-family:var(--font-display);font-weight:900;font-stretch:82%;font-size:clamp(28px,2.6vw,36px);line-height:1;letter-spacing:-.03em;color:var(--ink)}
+.puertas2 p{margin:0;font-size:17px;line-height:1.6;color:var(--ink-muted)}
+.puertas2 .enlaces{display:flex;flex-direction:column;gap:12px;align-items:flex-start;margin-top:auto;padding-top:8px}
+@media (max-width:820px){.puertas2{grid-template-columns:minmax(0,1fr)}.puertas2 > div{padding:24px 20px}}
 </style>
 </head>
 <body>
@@ -50,8 +69,11 @@
 <div class="pg">
 
   <nav class="dg-nav navp" style="position: sticky; top: 0; z-index: 10; background: var(--bg);">
-    <a class="dg-nav__marca nav-logo" href="#top"><img src="/assets/logo/dgdc-horizontal-oscuro.svg" alt="Daniel García de Celis" width="200" height="30" style="height: 30px; width: auto; display: block;"></a>
-    <a class="dg-btn dg-btn--primario" href="#lista">la lista</a>
+    <a class="dg-nav__marca nav-logo" href="#top"><img class="nav-completo" src="/assets/logo/dgdc-horizontal-oscuro.svg" alt="Daniel García de Celis" width="200" height="30" style="height: 30px; width: auto;"><img class="nav-simbolo" src="/assets/logo/dgdc-simbolo-oscuro.svg" alt="Daniel García de Celis" style="height: 26px; width: auto;"></a>
+    <div class="nav-dcha">
+      <nav class="nav-anclas" aria-label="Secciones"><a href="#infoproductores">infoproductores</a><a href="#agencias">agencias</a></nav>
+      <a class="dg-btn dg-btn--primario" href="#lista">la lista</a>
+    </div>
   </nav>
 
   <!-- ============ 01 · PERFIL ============ -->
@@ -125,6 +147,8 @@
           <div class="ucoms cuatro">
             <figure class="ucom"><blockquote>«Hicimos un match increíblemente potente para levantar un proyecto literalmente de cero y ponerlo en órbita en 2 años llegando a los +2M de facturación.»</blockquote><p class="ucom-extra">«No simplemente es un copy &quot;ejecutor&quot;, sino que es capaz de levantar la vista del papel y entender lo que debe sentir el usuario en cada paso de la estrategia.»</p><details><summary>leer completo +</summary><p>Colaboré con Daniel algo más de 2 años en un mismo proyecto de Infoproducción. Dani se encargaba de todo el área de copywriting y yo de la parte estratégica, por lo que hicimos un match increíblemente potente para levantar un proyecto literalmente de cero y ponerlo en órbita en 2 años llegando a los +2M de facturación.</p><p>Sin duda, destacaría su habilidad en la persuasión, capacidad narrativa, ingenio y contundencia en sus palabras. Y no simplemente es un copy &quot;ejecutor&quot; sino que es capaz de levantar la vista del papel y entender lo que debe sentir el usuario en cada paso de la estrategia (algo que suena fácil decirlo pero no tanto hacerlo).</p></details><figcaption><img src="/li-carbonel.png" alt=""><div><div class="q">David Carbonel</div><div class="d">founder de0a100 agency · sobre el proyecto de José Muñoz</div></div></figcaption></figure>
             <figure class="ucom"><blockquote>«Los textos parecen que hayan sido escritos por el propio cliente, sabe detectar el tono de comunicación de cada marca.»</blockquote><p class="ucom-extra">«No solo es copywriter: conoce muy bien los negocios digitales y se nota a la hora de tomar decisiones importantes durante el proceso. Es un extra muy importante.»</p><details><summary>leer completo +</summary><p>Colaboro con Dani en diferentes proyectos y estoy muy contento con su trabajo. Es una persona profesional y seria. Las fechas las cumple a raja tabla. El flujo de trabajo es rápido y profesional.</p><p>No solo es copywritter, sino que conoce muy bien los negocios digitales y se nota a la hora de tomar decisiones importantes durante el proceso. Es un extra muy importante.</p><p>Los textos parecen que hayan sido escritos por el propio cliente, sabe detectar el tono de comunicación de cada marca y adaptarse a su estilo sin importar racionalidad o emoción. Siempre manteniendo la persuasión y conversión en mente...</p><p>Todo esto hace que sea muy completo dentro del mundo copy. Es muy bueno en una cosa y conoce muy bien el sector digital. Esa combinación es tremenda.</p></details><figcaption><img src="/li-monleon.png" alt=""><div><div class="q">David Monleón</div><div class="d">consultor vsl · estratega de publicidad</div></div></figcaption></figure>
+            <figure class="ucom"><blockquote>«Logré llenar las plazas de mi primer lanzamiento online en menos de un mes, con una facturación de más de 20.000€.»</blockquote><details><summary>leer completo +</summary><p>Logré llenar las plazas de mi primer lanzamiento online en menos de un mes, con una facturación de más de 20.000€.</p></details><figcaption><img src="/li-manzano.png" alt=""><div><div class="q">Sara Manzano</div><div class="d">mentes innovadoras</div></div></figcaption></figure>
+            <figure class="ucom"><blockquote>«Hemos superado las ventas previstas de mi programa high ticket. Recomiendo el trabajo de Dani porque ha sido brillante.»</blockquote><details><summary>leer completo +</summary><p>En mi último lanzamiento trabajé con Dani, que se encargaba de todo el copy de toda la estrategia de lanzamiento. La verdad es que me ha encantado.</p><p>Alucino cómo en solo 2 reuniones fue capaz de captar mi esencia, mi forma de comunicar y los valores de mi proyecto para trasladarlos a esos copies tan efectivos que han hecho que el lanzamiento haya sido un éxito y hayamos superado las ventas previstas de mi programa high ticket.</p><p>Recomiendo el trabajo de Dani porque ha sido brillante.</p></details><figcaption><img src="/vanessa.png" alt=""><div><div class="q">Vanessa Marrero</div><div class="d">finanzas para negocios</div></div></figcaption></figure>
           </div>
         </div>
       </div>
@@ -151,14 +175,26 @@
     </div>
   </section>
 
-  <section class="sec">
+  <!-- ============ SERVICIOS · las dos puertas ============ -->
+  <section id="servicios" class="sec">
     <div class="wrap">
       <div class="row">
         <div class="rail"></div>
         <div class="cnt">
-          <div class="ucoms cuatro">
-            <figure class="ucom"><blockquote>«Logré llenar las plazas de mi primer lanzamiento online en menos de un mes, con una facturación de más de 20.000€.»</blockquote><details><summary>leer completo +</summary><p>Logré llenar las plazas de mi primer lanzamiento online en menos de un mes, con una facturación de más de 20.000€.</p></details><figcaption><img src="/li-manzano.png" alt=""><div><div class="q">Sara Manzano</div><div class="d">mentes innovadoras</div></div></figcaption></figure>
-            <figure class="ucom"><blockquote>«Hemos superado las ventas previstas de mi programa high ticket. Recomiendo el trabajo de Dani porque ha sido brillante.»</blockquote><details><summary>leer completo +</summary><p>En mi último lanzamiento trabajé con Dani, que se encargaba de todo el copy de toda la estrategia de lanzamiento. La verdad es que me ha encantado.</p><p>Alucino cómo en solo 2 reuniones fue capaz de captar mi esencia, mi forma de comunicar y los valores de mi proyecto para trasladarlos a esos copies tan efectivos que han hecho que el lanzamiento haya sido un éxito y hayamos superado las ventas previstas de mi programa high ticket.</p><p>Recomiendo el trabajo de Dani porque ha sido brillante.</p></details><figcaption><img src="/vanessa.png" alt=""><div><div class="q">Vanessa Marrero</div><div class="d">finanzas para negocios</div></div></figcaption></figure>
+          <h2 class="h-sec">Cómo trabajo contigo</h2>
+          <div class="puertas2">
+            <div id="infoproductores">
+              <span class="k">para infoproductores con negocio, audiencia y equipo</span>
+              <h3>Dirección de tu comunicación</h3>
+              <p>Leo tu negocio, te propongo qué se publica, cómo y cuándo, y escribo las piezas que mueven la venta. Las decisiones son tuyas.</p>
+              <div class="enlaces"><a class="dg-btn dg-btn--secundario" href="/direccion/">ver cómo trabajo <span class="dg-arrow">→</span></a></div>
+            </div>
+            <div id="agencias">
+              <span class="k">para agencias</span>
+              <h3>El copy de tus clientes</h3>
+              <p>Si llevas lanzamientos, todo el copy del lanzamiento de una sola mano. Si llevas anuncios y email, los guiones y los emails que necesites, en 48 horas.</p>
+              <div class="enlaces"><a class="dg-btn dg-btn--secundario" href="/agencias-lanzamiento/">agencias de lanzamientos <span class="dg-arrow">→</span></a><a class="dg-btn dg-btn--secundario" href="/agencias/">agencias de anuncios y email <span class="dg-arrow">→</span></a></div>
+            </div>
           </div>
         </div>
       </div>
