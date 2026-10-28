@@ -53,6 +53,12 @@ body{margin:0;background:var(--bg)}
 .ag-linea{display:flex;justify-content:space-between;gap:16px;padding-bottom:12px;border-bottom:1px solid var(--line);font-size:16px}
 .ag-linea:last-child{border-bottom:0;padding-bottom:0}
 .ag-linea b{font-family:var(--font-mono);font-weight:600;white-space:nowrap}
+.ag-cita{margin:4px 0;padding:20px 24px;background:var(--bg-raised);border-left:4px solid var(--accent)}
+.ag-cita blockquote{margin:0 0 14px;font-size:18px;line-height:1.55;color:var(--ink)}
+.ag-cita figcaption{display:flex;align-items:center;gap:12px}
+.ag-cita img{width:40px;height:40px;border-radius:50%;object-fit:cover}
+.ag-cita .q{font-weight:700;font-size:15px}
+.ag-cita .d{font-family:var(--font-mono);font-size:11px;letter-spacing:.04em;color:var(--ink-subtle)}
 .ag-caja-txt{margin:0;font-size:16px;line-height:1.6;color:var(--ink-muted)}
 .ag-cuota{display:flex;flex-direction:column;gap:6px;padding-bottom:18px;border-bottom:1px solid var(--line)}
 .ag-cuota:last-child{border-bottom:0;padding-bottom:0}
@@ -102,9 +108,9 @@ body{margin:0;background:var(--bg)}
             <strong>Tu propio departamento de copy, pero sin tenerlo en nómina.</strong>
             <span>Me haces un pedido y lo tienes en 48 horas laborables seguro, aunque normalmente entrego mucho antes. Sin contar piezas y sin permanencia.</span>
           </div>
-          <a class="dg-btn dg-btn--primario dg-btn--grande js-contacto" href="#contacto">agendemos una llamada <span class="dg-arrow">→</span></a>
-          <div class="ag-micro">cuadramos la llamada por whatsapp. en ella vemos qué volumen mueve tu agencia y si la barra libre te sale a cuenta.</div>
-          <p class="cred" style="margin: 8px 0 0;"><span>Sí, escribo con IA, como tú. Pero con mi propio sistema operativo y el criterio de decenas de funnels y lanzamientos de 5, 6 y 7 cifras encima: copy con el estilo de tu agencia, no copy genérico. <a href="#ia" style="color: var(--ink); text-decoration: underline; text-underline-offset: 3px;">Te cuento cómo</a>.</span></p>
+          <a class="dg-btn dg-btn--primario dg-btn--grande js-contacto" href="#contacto">quiero más info <span class="dg-arrow">→</span></a>
+          <div class="ag-micro">te llega a mi whatsapp y te respondo yo. vemos qué volumen mueve tu agencia y si la barra libre te sale a cuenta.</div>
+          <p class="cred" style="margin: 8px 0 0;"><span>Sí, escribo con IA, como tú. Pero con mi propio sistema operativo y el oficio de cientos de anuncios y emails encima: copy con el estilo de tu agencia, no copy genérico. <a href="#ia" style="color: var(--ink); text-decoration: underline; text-underline-offset: 3px;">Te cuento cómo</a>.</span></p>
         </div>
       </div>
     </div>
@@ -178,7 +184,7 @@ body{margin:0;background:var(--bg)}
             <div><span class="n">03</span><h3>Los archivos rectores</h3><p>Es mi oficio puesto por escrito: lo que tiene que cumplir cada pieza antes de salir.</p><p style="margin-top: 10px;"><strong style="color: var(--ink);">En email:</strong> qué tipo de asunto encaja con ese cliente y con el objetivo del envío, cómo se cocinan las cuatro primeras frases, cómo se construye cada llamada a la acción, el formato y la longitud.</p><p style="margin-top: 10px;"><strong style="color: var(--ink);">En anuncios, lo mismo:</strong> el gancho, el ángulo y la estructura de cada formato.</p></div>
           </div>
           <div class="ag-txt" style="margin-top: 40px;">
-            <p>Y al final, lo reviso yo. Ningún pedido sale sin pasar por mis manos, con el criterio de decenas de lanzamientos y embudos de 5, 6 y 7 cifras y con un filtro que caza las muletillas que delatan un texto hecho con IA.</p>
+            <p>Y al final, lo reviso yo. Ningún pedido sale sin pasar por mis manos, con el criterio que llevo acumulando desde 2020, después de participar en decenas de lanzamientos y embudos, y con un filtro que caza las muletillas que delatan un texto hecho con IA.</p>
             <p class="golpe" style="font-size: clamp(24px, 2.4vw, 32px); line-height: 1.1;">La IA pone la velocidad. Tu agencia pone el estilo. Yo pongo el oficio, que es lo que la IA no trae de serie.</p>
           </div>
         </div>
@@ -263,7 +269,7 @@ body{margin:0;background:var(--bg)}
             <p>Con los dos canales, por 1.500 € más sumas el email y un segundo pedido en paralelo.</p>
             <p>¿Viene un mes flojo? La pausas cuando quieras: solo te pido que me avises con una semana de antelación.</p>
           </div>
-          <div class="cta-fila"><a class="dg-btn dg-btn--primario dg-btn--grande js-contacto" href="#contacto">agendemos una llamada <span class="dg-arrow">→</span></a></div>
+          <div class="cta-fila"><a class="dg-btn dg-btn--primario dg-btn--grande js-contacto" href="#contacto">quiero más info <span class="dg-arrow">→</span></a></div>
         </div>
       </div>
     </div>
@@ -279,8 +285,10 @@ body{margin:0;background:var(--bg)}
           <div class="trabaja">
             <div class="ag-txt">
               <p>Soy Daniel García de Celis, copywriter desde 2020.</p>
-              <p>En anuncios, solo para Crece Sin Límite he escrito guiones para unos 25 de sus clientes en pocos meses. Sectores que no se parecen en nada entre sí, y cada uno con su tono.</p>
-              <p>En email, llevo desde 2020 escribiendo para negocios que viven de su lista: secuencias de venta y envíos para la base que ya tienen.</p>
+              <p>He escrito cientos de anuncios para infoproductores y negocios B2B. Nichos que no se parecen en nada entre sí, y cada uno con su propio tono.</p>
+              <p>Es lo que más destacan mis clientes: que me adapto a cualquier tono, sea cual sea.</p>
+              <figure class="ag-cita"><blockquote>«Ha sido capaz de adaptar el mensaje a mi tono y ha conseguido que realmente sea yo quien lo transmite. Al final, la gente lee algo que estás diciendo tú.»</blockquote><figcaption><img src="/josemunoz.png" alt=""><div><div class="q">José Muñoz</div><div class="d">programa in · inversión inmobiliaria</div></div></figcaption></figure>
+              <p>En email, he gestionado la lista de negocios que viven de ella, alguna de más de 100.000 personas: la estrategia de email marketing, las secuencias evergreen y las acciones de venta.</p>
               <p>Trabajo en marca blanca: tus clientes son tuyos, y nadie tiene por qué saber quién escribe su copy.</p>
             </div>
             <div class="quien-foto"><div class="dg-foto" style="width: 100%; aspect-ratio: 4 / 3;"><img src="/daniel.jpg" alt="Daniel García de Celis"></div></div>
@@ -323,7 +331,7 @@ body{margin:0;background:var(--bg)}
         <div class="cnt" style="padding-top: 64px; padding-bottom: 64px; display: flex; flex-wrap: wrap; gap: 28px 48px; align-items: center; justify-content: space-between;">
           <p style="margin: 0; font-family: var(--font-display); font-weight: 900; font-stretch: 82%; font-size: clamp(30px, 3.4vw, 46px); line-height: 1; letter-spacing: -.03em; max-width: 22ch; color: var(--on-accent);">Si tu agencia vive de sacar anuncios y emails cada semana, hablemos.</p>
           <div style="display: flex; flex-direction: column; gap: 14px; align-items: flex-start;">
-            <a class="dg-btn dg-btn--grande btn-invertido js-contacto" href="#contacto">agendemos una llamada <span class="dg-arrow">→</span></a>
+            <a class="dg-btn dg-btn--grande btn-invertido js-contacto" href="#contacto">quiero más info <span class="dg-arrow">→</span></a>
             <p class="ag-cierre-mail">o escríbeme a <a class="js-contacto-texto" href="mailto:daniel@danielgarciadecelis.com?subject=Barra%20libre%20de%20copy">daniel@danielgarciadecelis.com</a></p>
           </div>
         </div>
@@ -349,7 +357,7 @@ body{margin:0;background:var(--bg)}
 <script>
 (function () {
   // Destino de todos los botones de contacto: WhatsApp de Daniel con el mensaje ya escrito.
-  var CONTACTO_URL = 'https://wa.me/34628347382?text=' + encodeURIComponent('Hola Daniel, vengo de la página de agencias y me gustaría agendar una llamada contigo.');
+  var CONTACTO_URL = 'https://wa.me/34628347382?text=' + encodeURIComponent('Hola Daniel, vengo de la página de agencias y quiero más info sobre la barra libre de copy.');
   document.querySelectorAll('a.js-contacto').forEach(function (a) {
     a.href = CONTACTO_URL;
     a.target = '_blank'; a.rel = 'noopener';
