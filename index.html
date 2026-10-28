@@ -311,6 +311,7 @@ html{scroll-behavior:smooth}
 </div>
 
 
+<script src="/js/origen.js"></script>
 <script>
 (function () {
   var LISTA_SUBMIT_URL = 'https://danigdecelis.activehosted.com/proc.php'; // Wildmail, formulario 8 «Lista · formulario de la home»: lista Newsletter + etiqueta origen-home
@@ -356,9 +357,11 @@ html{scroll-behavior:smooth}
     datos.append('c', '0'); datos.append('m', '0'); datos.append('act', 'sub'); datos.append('v', '2');
     datos.append('email', email);
     if (nombreCampo && nombreCampo.value.trim()) datos.append('fullname', nombreCampo.value.trim());
+    var utm = window.dgcOrigen ? window.dgcOrigen.utm() : {};
     ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(function (k, i) {
-      if (qs.get(k)) datos.append('field[' + (3 + i) + ']', qs.get(k));
+      if (utm[k]) datos.append('field[' + (3 + i) + ']', utm[k]);
     });
+    if (window.dgcOrigen) datos.append('field[8]', window.dgcOrigen.primero());
     datos.append('field[9]', location.pathname + (form.getAttribute('data-source') === 'popup' ? ' (popup)' : ''));
     var payload = { source: form.getAttribute('data-source') || 'home' };
     fetch(LISTA_SUBMIT_URL, { method: 'POST', mode: 'no-cors', body: datos }).catch(function () {});

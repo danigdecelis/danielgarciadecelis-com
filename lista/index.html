@@ -816,6 +816,7 @@
       input[type=range] { display:none; }
     }
 </style>
+<script src="/js/origen.js"></script>
 </head>
 <body>
 
@@ -1465,7 +1466,9 @@
           const wm = new FormData(), qs = new URLSearchParams(location.search);
           [['u','9'],['f','9'],['s',''],['c','0'],['m','0'],['act','sub'],['v','2'],['email',email]].forEach(p=>wm.append(p[0],p[1]));
           if (name) wm.append('fullname', name);
-          ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach((k,i)=>{ if(qs.get(k)) wm.append('field['+(3+i)+']', qs.get(k)); });
+          const utm = window.dgcOrigen ? window.dgcOrigen.utm() : {};
+          ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach((k,i)=>{ if(utm[k]) wm.append('field['+(3+i)+']', utm[k]); });
+          if(window.dgcOrigen) wm.append('field[8]', window.dgcOrigen.primero());
           wm.append('field[9]', '/lista/');
           wm.append('field[10]', informe); // Wildmail: Informe diagnóstico de lista (la automatización 17 lo manda por email)
           fetch('https://danigdecelis.activehosted.com/proc.php', {method:'POST', mode:'no-cors', body:wm}).catch(()=>{});
