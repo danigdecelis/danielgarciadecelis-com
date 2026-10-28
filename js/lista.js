@@ -53,6 +53,8 @@
     }
     if (campoEmail) campoEmail.style.borderColor = '';
     if (boton) boton.disabled = true;
+    var trampa = form.querySelector('input[name="web_url"]');
+    if (trampa && trampa.value) { form.classList.add('enviado'); return; } // campo trampa: solo lo rellenan los bots
 
     var regalo = form.getAttribute('data-regalo') || '';
     var source = form.getAttribute('data-source') || '';

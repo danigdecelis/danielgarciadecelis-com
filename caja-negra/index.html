@@ -50,7 +50,8 @@
             <h2>Te mando tu copia al email</h2>
             <p>Y quedas dentro de la lista: lo que aprendo escribiendo lanzamientos de verdad. Te das de baja cuando quieras.</p>
             <form class="dg-form js-regalo-form" data-source="landing-caja-negra" data-regalo="caja-negra" novalidate style="max-width: none;">
-              <div class="rg-campos" style="display: flex; flex-direction: column; gap: 16px;">
+              <div class="rg-campos" style="display: flex; flex-direction: column; gap: 16px; position: relative;">
+                <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;"><label>Deja este campo vacío <input type="text" name="web_url" tabindex="-1" autocomplete="off"></label></div>
                 <div class="campo"><label for="h-nombre">nombre</label><input class="dg-input" id="h-nombre" type="text" name="nombre" placeholder="Tu nombre" autocomplete="given-name"></div>
                 <div class="campo"><label for="h-email">email</label><input class="dg-input" id="h-email" type="email" name="email" placeholder="tu@email.com" required autocomplete="email"></div>
                 <button class="dg-btn dg-btn--primario dg-btn--grande" type="submit" style="width: 100%; justify-content: center;">quiero la caja negra <span class="dg-arrow">→</span></button>
