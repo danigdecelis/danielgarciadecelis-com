@@ -802,6 +802,19 @@
     @media (max-width: 480px) { .nav-logo img { height: 24px; } .nav-cta { font-size: 0.7rem; } }
     .privacy a { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
     a:focus-visible, button:focus-visible, .opt:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+    .resumen-mail { border-left: 2px solid var(--gold); }
+    .resumen-mail b { color: var(--ink); }
+    .punto .ftag { margin-bottom: 10px; }
+    .punto .palanca { color: var(--ink); }
+    .pdf-fila { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: center; margin: 8px 0 20px; }
+    @media print {
+      :root { --black:#ffffff; --black-2:#ffffff; --ink:#111111; --ink-dim:#333333; --muted:#555555; --line:rgba(0,0,0,.25); --line-soft:rgba(0,0,0,.15); --gold:#8a6a00; }
+      html, body { background:#ffffff !important; color:#111111 !important; }
+      nav, footer, .no-print, .qback, .pdf-fila, #dgc-cookies { display:none !important; }
+      .rcard { background:#ffffff !important; break-inside: avoid; }
+      .dbar, .dbar i, .levelhead .dots i { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      input[type=range] { display:none; }
+    }
 </style>
 </head>
 <body>
@@ -873,7 +886,7 @@
           <span class="b-num">04.</span>
           <div class="b-body">
             <strong>Qué campaña activarías primero</strong>
-            <p>Reactivación, nutrición, segmentación, venta directa o recompra. La que pide tu caso, no la de todos. En pantalla.</p>
+            <p>Reactivación, nutrición, segmentación, venta directa o recompra. La que pide tu caso, no la de todos. En tu informe.</p>
           </div>
         </li>
       </ul>
@@ -898,12 +911,12 @@
           <p>Sobre tu lista, tu oferta y cómo le escribes hoy. El test se adapta a tu caso. Tres minutos.</p>
         </div>
         <div class="step">
-          <h3>Ves tu diagnóstico al instante.</h3>
-          <p>Estado de tu lista, fuga principal, potencial mensual y la primera campaña que activaría. En pantalla, completo.</p>
+          <h3>Ves el resumen al instante.</h3>
+          <p>Tu nivel, el radar de tu lista y tu fuga principal, en pantalla.</p>
         </div>
         <div class="step">
-          <h3>Si quieres, te doy mi lectura personal.</h3>
-          <p>Me mandas tu resultado por WhatsApp y te digo cómo montaría esa campaña en tu caso, en qué orden y con qué. En menos de 24h. Sin llamada de venta disfrazada.</p>
+          <h3>Te llega el informe completo.</h3>
+          <p>Cada fuga con su porqué, la primera campaña que activaría, lo que podría generar tu lista y lo que no tocaría todavía. Para guardarlo o descargarlo en PDF.</p>
         </div>
       </div>
     </section>
@@ -965,21 +978,16 @@
     <div class="container capture-wrap">
       <p class="eyebrow">Último paso</p>
       <h2>Tu diagnóstico está listo.</h2>
-      <p class="section-lead" style="margin-bottom:34px;">Lo ves en pantalla ahora mismo, completo. Si dejas tu WhatsApp, te paso además mi lectura personal de tu caso.</p>
-      <div class="field"><label>Nombre</label><input type="text" id="f-name" placeholder="Tu nombre"></div>
-      <div class="field"><label>Email</label><input type="text" id="f-email" placeholder="tu@email.com"><div class="err" id="e-email">Revisa el email, no parece válido.</div></div>
-      <div style="margin-top:20px;padding:22px;border:1px solid var(--gold);border-radius:0;background:rgba(255, 210, 63,0.06);">
-        <p style="font-weight:700;color:var(--ink);margin:0 0 4px;font-size:1rem;">Para mi lectura personal de tu caso</p>
-        <p style="font-size:0.88rem;color:var(--ink-dim);margin:0 0 18px;line-height:1.55;">Tu diagnóstico lo ves en pantalla igual. Esto es lo que necesito para revisar tu caso a mano y decirte qué cambiar, en vez de darte consejos genéricos.</p>
-        <div class="field"><label>Tu web y tus redes</label><textarea id="f-online" placeholder="Pega aquí tu web, Instagram, YouTube o LinkedIn. Es justo lo que miro para que la lectura sea de TU negocio y no de uno cualquiera." style="min-height:80px;"></textarea></div>
-        <div class="field" style="margin-bottom:0;"><label>WhatsApp <span style="text-transform:none;letter-spacing:0;color:var(--gold);">· por aquí te la mando</span></label><input type="text" id="f-wa" placeholder="+57 300 000 0000"></div>
-      </div>
+      <p class="section-lead" style="margin-bottom:34px;">Ahora ves el resumen en pantalla. El informe completo te llega al email: cada punto con su porqué, por dónde empezaría y qué no tocaría todavía.</p>
+      <div class="field"><label>Nombre</label><input type="text" id="f-name" placeholder="Tu nombre" autocomplete="given-name"><div class="err" id="e-name">Dime tu nombre.</div></div>
+      <div class="field"><label>Email</label><input type="email" id="f-email" placeholder="tu@email.com" autocomplete="email"><div class="err" id="e-email">Revisa el email, no parece válido.</div></div>
+      <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;"><label>Deja este campo vacío <input type="text" id="f-web" name="web_url" tabindex="-1" autocomplete="off"></label></div>
       <button class="btn-wa" style="margin-top:18px;" onclick="submitCapture()">
         Ver mi diagnóstico
         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
       <button class="qback" style="margin-top:16px;display:block;" onclick="backToQuiz()">Atrás, quiero revisar una respuesta</button>
-      <p class="privacy">Tus datos se usan para entregarte este diagnóstico, tu lectura si la pides y los emails de la lista, con contenido y ofertas. Te das de baja cuando quieras. Nada de cesión a terceros. <a href="/privacidad/">Más info</a>.</p>
+      <p class="privacy">Tus datos se usan para enviarte el informe y los emails de la lista, con contenido y ofertas. Te das de baja cuando quieras. Nada de cesión a terceros. <a href="/privacidad/">Más info</a>.</p>
     </div>
   </div>
 
@@ -1125,7 +1133,7 @@
 
     function startQuiz(){ if(path.length===0) next(); else render(); show('quiz'); }
     function backToQuiz(){ cur = path.length-1; render(); show('quiz'); }
-    function restart(){ A={}; AL={}; MID={}; path=[]; cur=-1; pendiente=false; document.getElementById('rbox').innerHTML=''; next(); show('quiz'); }
+    function restart(){ if(location.hash) history.replaceState(null,'',location.pathname); A={}; AL={}; MID={}; path=[]; cur=-1; pendiente=false; document.getElementById('rbox').innerHTML=''; next(); show('quiz'); }
 
     function next(){
       const curQ = path.length>0 ? Q[path[path.length-1]] : null;
@@ -1393,13 +1401,16 @@
     function submitCapture(){
       const name = document.getElementById('f-name').value.trim();
       const email = document.getElementById('f-email').value.trim();
+      const nOK = name.length > 0;
       const eOK = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+      document.getElementById('e-name').style.display = nOK?'none':'block';
       document.getElementById('e-email').style.display = eOK?'none':'block';
-      if(!eOK) return;
+      if(!nOK || !eOK) return;
 
-      const wa = document.getElementById('f-wa').value.trim();
-      const online = document.getElementById('f-online').value.trim();
       const result = buildResult();
+      const trampa = document.getElementById('f-web');
+      if(trampa && trampa.value){ showReport(result, name, 'resumen', email); return; } // campo trampa: solo lo rellenan los bots
+      const informe = urlInforme();
       if(SUBMIT_URL){
         const ref = new URLSearchParams(location.search).get('r')||'';
         const detalle = path.map(i=>Q[i]).filter(q=>AL[q.id]).map(q=>q.text+' -> '+AL[q.id]).join('\n');
@@ -1428,8 +1439,7 @@
           'CONTACTO\n'+
           '  Nombre:      '+(name||'')+'\n'+
           '  Email:       '+(email||'')+'\n'+
-          '  WhatsApp:    '+(wa||'(no ha dejado)')+'\n'+
-          '  Online:      '+(online||'(no ha dejado enlaces)')+'\n'+
+          '  Informe:     '+informe+'\n'+
           '  Herramienta: '+(AL.herramienta||'(no indicada)')+'\n\n'+
           'RESULTADO\n'+
           '  '+nivelStr+'\n'+
@@ -1440,9 +1450,9 @@
           (potencial?('POTENCIAL (estimacion con asunciones por defecto)\n'+potencial+'\n\n'):'')+
           'RESPUESTAS COMPLETAS\n'+linea+'\n'+detalle+'\n\n'+
           'QUE HA INTENTADO YA\n'+linea+'\n'+(A.intentado&&A.intentado.trim()?A.intentado:'(no ha escrito nada)')+'\n\n'+
-          linea+'\nMaterial listo para investigar su presencia online y, si merece la pena, montar un strategy doc.\n';
+          linea+'\nInforme completo (el mismo enlace que le llega por email): '+informe+'\n';
 
-        const payload = {tool:'lista', name, email, wa, online, ts:new Date().toISOString(),
+        const payload = {tool:'lista', name, email, wa:'', online:'', informe, ts:new Date().toISOString(),
           nivel:result.noList?0:result.level.n, nivelTitulo:result.noList?'Sin lista':result.level.t, score:result.total,
           arquetipo:result.findings[0]?.id||'', fugaTitulo,
           dimensiones: dimStr, detalle,
@@ -1457,11 +1467,12 @@
           if (name) wm.append('fullname', name);
           ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'].forEach((k,i)=>{ if(qs.get(k)) wm.append('field['+(3+i)+']', qs.get(k)); });
           wm.append('field[9]', '/lista/');
+          wm.append('field[10]', informe); // Wildmail: Informe diagnóstico de lista (la automatización 17 lo manda por email)
           fetch('https://danigdecelis.activehosted.com/proc.php', {method:'POST', mode:'no-cors', body:wm}).catch(()=>{});
         } catch(e) {}
         if (window.dgcTrack) window.dgcTrack('lead', { source: 'lista' });
       }
-      showReport(result, name);
+      showReport(result, name, 'resumen', email);
     }
 
     function waLink(r, name){
@@ -1471,8 +1482,44 @@
       return 'https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(msg);
     }
 
-    function showReport(r, name){
-      MM = mathModule();
+    /* =====================================================
+       ENLACE DEL INFORME
+       Las respuestas viajan en el propio enlace (#informe=...), una letra por pregunta:
+       la posición de la opción elegida en base 36, o "-" si no se respondió.
+       Sin datos personales en el enlace. Versión v1: si cambia el orden de preguntas
+       u opciones, se crea una v2 y se mantiene la lectura de la v1.
+    ===================================================== */
+    const QCOD = Q.filter(q=>!q.free).map(q=>q.id);
+    function codificar(){
+      return 'v1' + (currency==='€'?'e':'u') + QCOD.map(id=>{
+        const q = Q.find(x=>x.id===id);
+        const i = A[id]===undefined ? -1 : q.opts.findIndex(o=>o.v===A[id]);
+        return i<0 ? '-' : i.toString(36);
+      }).join('');
+    }
+    function decodificar(s){
+      if(!/^v1[ue][0-9a-z\-]+$/.test(s)) return false;
+      currency = s[2]==='e' ? '€' : '$';
+      const cs = s.slice(3);
+      A={}; AL={}; MID={};
+      QCOD.forEach((id,k)=>{
+        const c = cs[k];
+        if(!c || c==='-') return;
+        const q = Q.find(x=>x.id===id);
+        const o = q.opts[parseInt(c,36)];
+        if(!o) return;
+        A[id]=o.v; AL[id]=o.t; if(o.mid!==undefined) MID[id]=o.mid;
+      });
+      return Object.keys(A).length>0;
+    }
+    function urlInforme(){ return location.origin + '/lista/#informe=' + codificar(); }
+
+    /* modo 'resumen': lo que se ve al terminar el test (nivel, radar y titular) + aviso del email.
+       modo 'completo': lo que se abre desde el email (todo, con cada punto, su porqué y su palanca). */
+    function showReport(r, name, modo, email){
+      modo = modo || 'resumen';
+      const completo = modo==='completo';
+      MM = completo ? mathModule() : null;
       const fugaTitulo = typeof r.findings[0].title==='function'?r.findings[0].title():r.findings[0].title;
       let h = '';
 
@@ -1505,26 +1552,85 @@
         </div>`;
       }
 
-      h += `${(()=>{
-        const sym=currency;
-        const rows=[
-          ['Modelo', AL.modelo],
-          ['Ticket', AL.ticket?AL.ticket+' '+sym:''],
-          ['Tamaño de lista', AL.lista],
-          ['Frecuencia de envío', AL.frec],
-          ['Apertura media', AL.apertura],
-          ['¿Te genera ventas?', AL.monetiza],
-          ['Herramienta', AL.herramienta]
-        ].filter(x=>x[1]);
-        if(!rows.length) return '';
-        return `<div class="rcard"><div class="ftag">Tu punto de partida</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px 24px;">`+
-          rows.map(x=>`<div><span style="display:block;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:3px;">${x[0]}</span><b style="font-size:0.96rem;color:var(--ink);">${x[1]}</b></div>`).join('')+
-          `</div><p style="font-size:0.9rem;color:var(--muted);margin:18px 0 0;line-height:1.6;">Todo lo que sigue está calculado sobre estos datos. Los tuyos, no los de un promedio.</p></div>`;
-      })()}`;
-
-      if(MM){
+      if(!completo){
+        const teaser = r.noList
+          ? `Lo difícil no es ver que te falta lista. Es el orden para construirla, y eso va en tu informe completo.`
+          : (r.findings.length>=2
+            ? `Y no es lo único. He encontrado <b style="color:var(--ink);">${r.findings.length} puntos</b> donde tu lista deja ventas por el camino. El porqué de cada uno y el orden en que los tocaría van en tu informe completo.`
+            : `Tu lista ya tiene buena base. Por dónde apretar, y cómo, va en tu informe completo.`);
         h += `
+        <div class="rcard f-main">
+          <div class="ftag warn">El titular de tu diagnóstico</div>
+          <h3>${fugaTitulo}</h3>
+          <p style="margin-bottom:0;">${teaser}</p>
+        </div>
+
+        <div class="rcard resumen-mail">
+          <div class="ftag">Tu informe completo va de camino</div>
+          <p>Te lo he mandado a <b>${esc(email||'tu email')}</b>. Llega en unos minutos. Si no lo ves, mira en promociones o en spam.</p>
+          <p style="margin-bottom:0;">Dentro: cada punto con su porqué, la primera campaña que activaría, lo que podría generar tu lista y lo que no tocaría todavía.</p>
+        </div>
+
+        <div style="text-align:center;padding:8px 0 0;">
+          <button class="qback" onclick="restart()">Hacer el diagnóstico de nuevo</button>
+        </div>`;
+      } else {
+        h += `${(()=>{
+          const sym=currency;
+          const rows=[
+            ['Modelo', AL.modelo],
+            ['Ticket', AL.ticket?AL.ticket+' '+sym:''],
+            ['Tamaño de lista', AL.lista],
+            ['Frecuencia de envío', AL.frec],
+            ['Apertura media', AL.apertura],
+            ['¿Te genera ventas?', AL.monetiza],
+            ['Herramienta', AL.herramienta]
+          ].filter(x=>x[1]);
+          if(!rows.length) return '';
+          return `<div class="rcard"><div class="ftag">Tu punto de partida</div>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px 24px;">`+
+            rows.map(x=>`<div><span style="display:block;font-size:0.72rem;text-transform:uppercase;letter-spacing:0.08em;color:var(--muted);margin-bottom:3px;">${x[0]}</span><b style="font-size:0.96rem;color:var(--ink);">${x[1]}</b></div>`).join('')+
+            `</div><p style="font-size:0.9rem;color:var(--muted);margin:18px 0 0;line-height:1.6;">Todo lo que sigue está calculado sobre estos datos. Los tuyos, no los de un promedio.</p></div>`;
+        })()}`;
+
+        h += `
+        <div class="rcard f-main">
+          <div class="ftag warn">Lo que he encontrado</div>
+          <h3>${r.findings.length>=2 ? r.findings.length+' puntos, por orden' : 'Un punto claro'}</h3>
+          <p style="margin-bottom:0;">${r.findings.length>=2 ? `He encontrado <b style="color:var(--ink);">${r.findings.length} puntos</b>. Van en el orden en que los tocaría: el primero es el que más ventas te está costando.` : `Es el punto por el que empezaría. Abajo tienes el porqué y qué haría.`}</p>
+        </div>`;
+
+        h += r.findings.map((f,i)=>{
+          const t = typeof f.title==='function'?f.title():f.title;
+          return `
+        <div class="rcard punto">
+          <div class="ftag">${r.findings.length>1 ? 'Punto '+(i+1)+(i===0?' · el primero que tocaría':'') : 'Por qué'}</div>
+          <h3>${t}</h3>
+          <p>${f.body()}</p>
+          <p class="palanca" style="margin-bottom:0;"><b>Qué haría:</b> ${f.palanca}</p>
+        </div>`;
+        }).join('');
+
+        const primaryCampaign = r.findings[0].campaign;
+        h += `
+        <div class="rcard">
+          <div class="ftag">Tu primera palanca</div>
+          <h3 style="color:var(--gold);">${CAMPANAS[primaryCampaign]}</h3>
+          <p style="margin-bottom:0;">${CAMPDESC[primaryCampaign]||''}</p>
+        </div>`;
+
+        if(!r.noList){
+          const anti = antiPriority(r.findings);
+          h += `
+        <div class="rcard">
+          <div class="ftag">Lo que no tocaría todavía</div>
+          <h3>${anti.t.replace(/^Qué no haría ahora: /,'')}</h3>
+          <p style="margin-bottom:0;">${anti.b}</p>
+        </div>`;
+        }
+
+        if(MM){
+          h += `
         <div class="rcard">
           <div class="ftag">${MM.title}</div>
           <p class="factline">${MM.fact()}</p>
@@ -1537,10 +1643,10 @@
             </div>`).join('')}
           <div class="mathnote">Esto es aritmética, no una promesa. Cada asunción está a la vista y puedes moverla tú mismo. Una lista fría no convierte al precio completo ni de golpe. El valor no está en la cifra exacta: está en la diferencia entre lo que tu lista podría generar y lo que genera hoy.</div>
         </div>`;
-      }
+        }
 
-      if(MID.lista>0){
-        h += `
+        if(MID.lista>0){
+          h += `
         <div class="rcard">
           <div class="ftag">Lo que vale mover una palanca pequeña</div>
           <p class="factline">Tu lista de ${AL.lista?.toLowerCase()} contactos. La pregunta no es cuánta gente entra, es cuánta te compra cada mes.</p>
@@ -1556,44 +1662,14 @@
           </div>
           <div class="mathnote">Es la misma lista, comprándote un poco más. Subir ese porcentaje aunque sea unas décimas no es trabajar el doble, es escribirle mejor a quien ya te dio su email. Aritmética, no promesa, y el porcentaje lo ajustas a tu realidad.</div>
         </div>`;
+        }
+
+        h += `
+        <div class="pdf-fila">
+          <button class="btn-wa" onclick="window.print()">Descargar en PDF</button>
+          <a class="qback" href="/lista/">Hacer el diagnóstico de nuevo</a>
+        </div>`;
       }
-
-      const primaryCampaign = r.findings[0].campaign;
-      const teaser = r.noList
-        ? `Lo difícil no es ver que te falta lista. Es el plan: qué lead magnet, qué sistema de captura y en qué orden montarlo para tu audiencia concreta. Eso sale de mirar tu caso, no de un test.`
-        : (r.findings.length>=2
-          ? `Y no es lo único. He detectado <b style="color:var(--ink);">${r.findings.length} puntos</b> donde tu lista deja ventas por el camino. El orden en que los toques decide el resultado, y ese orden sale de tus números.`
-          : `Tu lista ya tiene buena base. Aun así hay un punto claro por donde apretar, y un orden para hacerlo bien.`);
-
-      h += `
-      <div class="rcard f-main">
-        <div class="ftag warn">El titular de tu diagnóstico</div>
-        <h3>${fugaTitulo}</h3>
-        <p style="margin-bottom:0;">${teaser}</p>
-      </div>
-
-      <div class="rcard">
-        <div class="ftag">Tu primera palanca</div>
-        <h3 style="color:var(--gold);">${CAMPANAS[primaryCampaign]}</h3>
-        <p>${CAMPDESC[primaryCampaign]||''}</p>
-        <p style="margin-bottom:0;">Saber la palanca es lo fácil. Sobre qué segmento montarla, con qué emails y en qué orden frente a tus otras fugas, ahí se gana o se pierde el dinero. Eso lo reviso a mano sobre tus respuestas y lo que vea en tu web y tus redes.</p>
-      </div>
-
-      <div class="rcard gold rcta">
-        <h3>El cómo te lo doy yo.</h3>
-        <p>La palanca ya la tienes en pantalla. Lo que decide si funciona es la ejecución: el orden, los emails, el segmento. Mándame tu resultado y te digo cómo lo montaría en tu caso. En menos de 24h, sin llamada de venta disfrazada.</p>
-        <div class="rcta-btns">
-          <a class="btn-wa" href="${waLink(r,name)}" target="_blank" rel="noopener">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            Quiero mi lectura completa
-          </a>
-        </div>
-        <p class="cta-note">La reviso personalmente y te escribo en breve.</p>
-      </div>
-
-      <div style="text-align:center;padding:8px 0 0;">
-        <button class="qback" onclick="restart()">Hacer el diagnóstico de nuevo</button>
-      </div>`;
 
       document.getElementById('rbox').innerHTML = h;
       show('report');
@@ -1636,6 +1712,11 @@
       });
       document.getElementById('mathout').textContent = MM.fmt(MM.calc(v)) + (MM.suffix||'');
     }
+    /* Arranque: si se abre con el enlace del informe (#informe=...), se muestra el informe completo */
+    (function(){
+      const m = location.hash.match(/^#informe=([0-9a-z\-]+)$/);
+      if(m && decodificar(m[1])) showReport(buildResult(), '', 'completo');
+    })();
   </script>
 
 </body>
