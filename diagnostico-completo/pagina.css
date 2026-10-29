@@ -1,0 +1,106 @@
+/* Página de venta de El Diagnóstico suelto (147 $). Tema venta del design system:
+   colores en /css/dgc-tokens.css; el informe de ejemplo y la caja de compra reutilizan
+   /upsell-diagnostico/upsell.css para que se vean igual que en el upsell. */
+
+/* barra superior: solo el logo */
+.dc-nav { position: sticky; top: 0; z-index: 20; background: rgba(255,255,255,.94); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+.dc-nav .wrap { padding-top: 14px; padding-bottom: 14px; }
+.dc-nav img { height: 30px; width: auto; display: block; }
+
+/* secciones: se separan por el cambio de fondo, sin filetes */
+.dc-sec { padding: 88px 0; }
+.dc-alt { background: var(--bg-raised); }
+.dc-sec .ups-h2 { max-width: 22ch; text-wrap: pretty; }
+.dc-sec .ups-eti { margin-bottom: 16px; }
+
+/* cabecera */
+.dc-cab { padding-top: 56px; padding-bottom: 80px; }
+.dc-puntos { list-style: none; margin: 28px 0 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+.dc-puntos li { display: grid; grid-template-columns: 22px minmax(0, 1fr); gap: 12px; align-items: baseline; font-size: clamp(19px, 2.1vw, 24px); font-weight: 800; font-stretch: 92%; line-height: 1.3; letter-spacing: -0.01em; }
+.dc-puntos li::before { content: ""; width: 12px; height: 12px; background: var(--ink); display: inline-block; }
+.ups-compra.dc-caja { border-top: 6px solid var(--accent); }
+.ups-btn:focus-visible, .dc-faq summary:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 2px; }
+
+/* comparación: lo gratis frente a El Diagnóstico */
+.dc-comp { width: 100%; max-width: 940px; border-collapse: collapse; margin-top: 36px; font-size: 16px; line-height: 1.5; background: var(--bg); }
+.dc-comp th, .dc-comp td { text-align: left; vertical-align: top; padding: 14px 16px; border-bottom: 1px solid var(--line); }
+.dc-comp thead th { font-family: var(--font-mono); font-size: 12px; font-weight: 600; letter-spacing: .04em; text-transform: lowercase; border-bottom: 0; }
+.dc-comp thead th.dc-col-pago { background: var(--ink); color: var(--bg); }
+.dc-comp tbody th { font-family: var(--font-mono); font-size: 12px; font-weight: 600; letter-spacing: .03em; color: var(--ink-subtle); width: 22%; text-transform: lowercase; }
+.dc-comp td { color: var(--ink-muted); width: 39%; }
+.dc-comp td.dc-col-pago { color: var(--ink); font-weight: 600; background: var(--bg-raised); }
+.dc-alt .dc-comp td.dc-col-pago { background: var(--bg-sunken); }
+
+/* frases sueltas */
+.dc-golpe { font-size: clamp(24px, 3.2vw, 34px); font-weight: 900; font-stretch: 84%; line-height: 1.15; letter-spacing: -0.02em; margin: 30px 0 0; max-width: 26ch; text-wrap: pretty; }
+
+/* cómo funciona */
+.dc-pasos { list-style: none; margin: 32px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+.dc-pasos li { background: var(--bg); border: 1px solid var(--line); padding: 26px 24px 28px; }
+.dc-pasos .n { font-size: 54px; font-weight: 900; font-stretch: 78%; line-height: .85; letter-spacing: -0.05em; display: block; margin-bottom: 14px; }
+.dc-pasos b { display: block; font-size: 20px; font-weight: 800; font-stretch: 88%; line-height: 1.2; margin-bottom: 8px; }
+.dc-pasos p { margin: 0; font-size: 16px; line-height: 1.6; color: var(--ink-muted); }
+
+/* cifras: siempre centradas */
+.dc-cifras { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; max-width: 760px; margin: 44px auto 8px; text-align: center; }
+.dc-cifras strong { display: block; font-size: clamp(56px, 8vw, 92px); font-weight: 900; font-stretch: 78%; line-height: .9; letter-spacing: -0.05em; }
+.dc-cifras span { display: block; margin-top: 10px; font-family: var(--font-mono); font-size: 13px; line-height: 1.5; color: var(--ink-muted); }
+.dc-cifras-nota { text-align: center; font-family: var(--font-mono); font-size: 12px; color: var(--ink-subtle); margin: 16px 0 48px; }
+
+/* para quién */
+.dc-quien { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; margin-top: 32px; }
+.dc-quien > div { background: var(--bg); border: 1px solid var(--line); padding: 26px 26px 10px; }
+.dc-quien h3 { font-family: var(--font-mono); font-size: 13px; font-weight: 600; letter-spacing: .04em; margin: 0 0 14px; }
+.dc-quien ul { list-style: none; margin: 0; padding: 0; }
+.dc-quien li { position: relative; padding: 0 0 16px 22px; font-size: 17px; line-height: 1.55; }
+.dc-quien li::before { content: ""; position: absolute; left: 0; top: .55em; width: 9px; height: 9px; background: var(--ink); }
+.dc-quien .dc-no li::before { background: transparent; border: 1px solid var(--ink-subtle); }
+.dc-quien .dc-no li { color: var(--ink-muted); }
+
+/* preguntas */
+.dc-faq { max-width: 860px; margin-top: 30px; border-top: 1px solid var(--line); }
+.dc-faq details { border-bottom: 1px solid var(--line); }
+.dc-faq summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: minmax(0, 1fr) 28px; gap: 16px; align-items: center; padding: 20px 0; font-size: clamp(18px, 2vw, 21px); font-weight: 700; font-stretch: 92%; line-height: 1.35; }
+.dc-faq summary::-webkit-details-marker { display: none; }
+.dc-faq summary::marker { content: ""; }
+.dc-faq .mas { font-family: var(--font-mono); font-size: 22px; text-align: center; transition: transform .16s ease; }
+.dc-faq details[open] .mas { transform: rotate(45deg); }
+.dc-faq details > div { padding: 0 0 18px; }
+.dc-faq p { margin: 0 0 12px; font-size: 17px; line-height: 1.65; color: var(--ink-muted); max-width: 64ch; }
+
+/* cierre */
+.dc-cierre p.ups-p { font-size: 20px; }
+.dc-firma { font-family: var(--font-mono); font-size: 13px; color: var(--ink-subtle); margin: 8px 0 36px; }
+
+/* barra fija inferior */
+#dc-barra { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; background: var(--bg); border-top: 1px solid var(--line-strong); transform: translateY(110%); transition: transform .16s ease; }
+#dc-barra .wrap { padding-top: 12px; padding-bottom: 12px; display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+#dc-barra .dc-barra-precio { font-size: 30px; font-weight: 900; font-stretch: 78%; letter-spacing: -0.04em; line-height: 1; }
+#dc-barra .dc-barra-txt { font-family: var(--font-mono); font-size: 12px; color: var(--ink-muted); margin-top: 4px; }
+#dc-barra .ups-btn { width: auto; padding: 15px 22px; font-size: 15px; }
+body { padding-bottom: 76px; }
+
+/* pie */
+.ups-pie { margin-top: 0; }
+
+@media (max-width: 900px) {
+  .dc-pasos { grid-template-columns: minmax(0, 1fr); }
+  .dc-quien { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 640px) {
+  .dc-sec { padding: 56px 0; }
+  .dc-cab { padding-top: 36px; padding-bottom: 56px; }
+  .dc-comp, .dc-comp tbody, .dc-comp tr, .dc-comp th, .dc-comp td { display: block; width: 100%; }
+  .dc-comp thead { display: none; }
+  .dc-comp tr { border-bottom: 1px solid var(--line); padding: 12px 0; }
+  .dc-comp tbody th, .dc-comp td { border: 0; padding: 4px 14px; }
+  .dc-comp tbody th { width: 100%; color: var(--ink); }
+  .dc-comp td::before { content: attr(data-c); display: block; font-family: var(--font-mono); font-size: 11px; font-weight: 500; letter-spacing: .03em; color: var(--ink-subtle); margin-bottom: 2px; }
+  .dc-comp td.dc-col-pago { padding-top: 10px; padding-bottom: 10px; margin-top: 6px; }
+  .dc-cifras { grid-template-columns: minmax(0, 1fr); }
+  #dc-barra .dc-barra-txt { display: none; }
+  #dc-barra .ups-btn { padding: 14px 16px; font-size: 14px; }
+}
+
+/* texto solo para lectores de pantalla */
+.sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }

@@ -2,7 +2,7 @@
    - Con los dos IDs vacíos no se muestra aviso ni se carga nada.
    - GA4 y el píxel solo se cargan si la persona acepta en el aviso; aceptar y rechazar van al mismo nivel.
    - La decisión se puede cambiar con el enlace «configurar cookies» que se añade al pie de cada página.
-   - Eventos: PageView, ViewContent (El Desglose), Lead (altas), ClicComprar (botón propio de compra; el
+   - Eventos: PageView, ViewContent (El Desglose y El Diagnóstico suelto), Lead (altas), ClicComprar (botón propio de compra; el
      InitiateCheckout y el Purchase los manda Hotmart desde su checkout), muestra_abierta.
    - Los enlaces a pay.hotmart.com salen con las UTM de la visita y con sck/src para que Hotmart atribuya la venta. */
 (function () {
@@ -88,6 +88,8 @@
       window.fbq('track', 'PageView');
       if (/^\/el-desglose\/?$/.test(window.location.pathname)) {
         window.fbq('track', 'ViewContent', { content_name: 'El Desglose', value: 47, currency: 'USD' });
+      } else if (/^\/diagnostico-completo\/?$/.test(window.location.pathname)) {
+        window.fbq('track', 'ViewContent', { content_name: 'El Diagnóstico', value: 147, currency: 'USD' });
       }
     }
   }
