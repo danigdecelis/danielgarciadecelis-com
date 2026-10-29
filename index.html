@@ -211,18 +211,15 @@ html{scroll-behavior:smooth}
         <div class="cnt">
           <div class="regalo">
             <div style="display: flex; flex-direction: column; gap: 20px;">
-              <h2 style="margin: 0; font-family: var(--font-display); font-weight: 900; font-stretch: 80%; font-size: clamp(40px, 4.6vw, 68px); line-height: .92; letter-spacing: -.035em;">Apúntate a <span class="dg-mark">la lista</span></h2>
+              <h2 style="margin: 0; font-family: var(--font-display); font-weight: 900; font-stretch: 80%; font-size: clamp(40px, 4.6vw, 68px); line-height: .92; letter-spacing: -.035em;">Tengo un <span class="dg-mark">regalo</span> para ti</h2>
+              <p style="margin: 0; font-size: 19px; line-height: 1.6; color: var(--ink); max-width: 48ch;">Un diagnóstico gratuito de tu lista: en 3 minutos sabes si está viva, fría o dormida, cuánto está dejando de vender y qué campaña activarías primero.</p>
               <p style="margin: 0; font-size: 19px; line-height: 1.6; color: var(--ink-muted); max-width: 48ch;">Recibirás mis emails, con lo que voy aprendiendo escribiendo para mis clientes y trabajando en mi propio negocio. También cómo aplico la IA a la estrategia de comunicación, y lo que voy sumando a mi trabajo cuando de verdad aporta, sin ir detrás de cada moda. Probablemente es lo más útil si te dedicas al marketing o vendes infoproductos.</p><!-- PROVISIONAL (28-oct-2026): promesa de la lista igual que /caja-negra/; se revisa al trabajar la home -->
-              <p style="margin: 0; font-family: var(--font-mono); font-size: 13px; letter-spacing: .02em; color: var(--ink-subtle);">¿Ya tienes lista? <a href="/lista/" style="color: inherit; text-decoration: underline;">Mira cuánto está dejando de vender en 3 minutos →</a></p>
             </div>
             <div class="regalo-caja">
-              <form class="dg-form js-lista-form" data-source="home" novalidate style="max-width: none; position: relative;">
-                <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;"><label>Deja este campo vacío <input type="text" name="web_url" tabindex="-1" autocomplete="off"></label></div>
-                <div class="campo"><label for="r-nombre">nombre</label><input class="dg-input" id="r-nombre" type="text" name="nombre" placeholder="Tu nombre"></div>
-                <div class="campo"><label for="r-email">email</label><input class="dg-input" id="r-email" type="email" name="email" placeholder="tu@email.com" required autocomplete="email"></div>
-                <button class="dg-btn dg-btn--primario dg-btn--grande" type="submit" style="width: 100%; justify-content: center;">quiero estar dentro <span class="dg-arrow">→</span></button>
-                <div class="dg-form__nota legal-nota">sin spam. te das de baja cuando quieras. tus datos los trata High Impact Systems LLC para enviarte la lista, con contenido y ofertas: <a href="/privacidad/">más info</a>.</div>
-              </form>
+              <div style="display: flex; flex-direction: column; gap: 14px;">
+                <a class="dg-btn dg-btn--primario dg-btn--grande" href="/lista/" style="width: 100%; box-sizing: border-box; justify-content: center;">haz clic aquí para recibirlo <span class="dg-arrow">→</span></a>
+                <div class="dg-form__nota legal-nota">gratis. 3 minutos. el informe completo te llega por email.</div>
+              </div>
             </div>
           </div>
         </div>
@@ -297,16 +294,9 @@ html{scroll-behavior:smooth}
       <div class="popup-caja">
         <button type="button" class="popup-cerrar" data-cerrar="1" aria-label="Cerrar">×</button>
         <span class="dg-label" style="margin-bottom: 22px;">antes de irte</span>
-        <h3 style="margin: 0 0 16px; font-family: var(--font-display); font-weight: 900; font-stretch: 80%; font-size: clamp(30px, 4vw, 44px); line-height: .95; letter-spacing: -.035em;">Apúntate a <span class="dg-mark">la lista</span></h3>
-        <p style="margin: 0 0 26px; font-size: 17px; line-height: 1.6; color: var(--ink-muted);">Recibirás mis emails, con lo que voy aprendiendo escribiendo para mis clientes y trabajando en mi propio negocio. También cómo aplico la IA a la estrategia de comunicación, y lo que voy sumando a mi trabajo cuando de verdad aporta, sin ir detrás de cada moda. Probablemente es lo más útil si te dedicas al marketing o vendes infoproductos.</p><!-- PROVISIONAL (28-oct-2026): promesa de la lista igual que /caja-negra/; se revisa al trabajar la home -->
-        <form class="dg-form js-lista-form" data-source="popup" novalidate style="position: relative;">
-          <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;"><label>Deja este campo vacío <input type="text" name="web_url" tabindex="-1" autocomplete="off"></label></div>
-          <div class="dg-form__fila">
-            <input class="dg-input" type="email" name="email" placeholder="tu@email.com" required autocomplete="email" aria-label="Email">
-            <button class="dg-btn dg-btn--primario" type="submit">quiero estar dentro</button>
-          </div>
-          <div class="dg-form__nota legal-nota">sin spam. te das de baja cuando quieras. tus datos los trata High Impact Systems LLC para enviarte la lista, con contenido y ofertas: <a href="/privacidad/">más info</a>.</div>
-        </form>
+        <h3 style="margin: 0 0 16px; font-family: var(--font-display); font-weight: 900; font-stretch: 80%; font-size: clamp(30px, 4vw, 44px); line-height: .95; letter-spacing: -.035em;">Tengo un <span class="dg-mark">regalo</span> para ti</h3>
+        <p style="margin: 0 0 26px; font-size: 17px; line-height: 1.6; color: var(--ink-muted);">Un diagnóstico gratuito de tu lista: en 3 minutos sabes si está viva, fría o dormida, cuánto está dejando de vender y qué campaña activarías primero.</p>
+        <a class="dg-btn dg-btn--primario" href="/lista/">haz clic aquí para recibirlo <span class="dg-arrow">→</span></a>
       </div>
     </div>
   </div>
