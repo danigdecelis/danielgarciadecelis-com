@@ -59,6 +59,10 @@ body{margin:0;background:var(--bg)}
 .ag-cita img{width:40px;height:40px;border-radius:50%;object-fit:cover}
 .ag-cita .q{font-weight:700;font-size:15px}
 .ag-cita .d{font-family:var(--font-mono);font-size:11px;letter-spacing:.04em;color:var(--ink-subtle)}
+.ag-hero-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:64px;align-items:center}
+.ag-cita--hero{padding:32px}
+.ag-cita--hero blockquote{font-family:var(--font-display);font-weight:800;font-stretch:88%;font-size:clamp(22px,2vw,28px);line-height:1.25;letter-spacing:-.01em}
+@media (max-width:1100px){.ag-hero-grid{grid-template-columns:minmax(0,1fr);gap:40px}}
 .ag-caja-txt{margin:0;font-size:16px;line-height:1.6;color:var(--ink-muted)}
 .ag-cuota{display:flex;flex-direction:column;gap:6px;padding-bottom:18px;border-bottom:1px solid var(--line)}
 .ag-cuota:last-child{border-bottom:0;padding-bottom:0}
@@ -101,6 +105,7 @@ body{margin:0;background:var(--bg)}
     <div class="row">
       <div class="rail"></div>
       <div class="cnt cnt-hero">
+        <div class="ag-hero-grid">
         <div class="ag-hero">
           <div class="ag-ante">barra libre de copy para agencias con volumen alto de emails y anuncios</div>
           <h1 class="h-hero" style="max-width: 16ch;">Todos los guiones y emails que necesitas, en <span class="dg-mark">48 horas</span></h1>
@@ -111,6 +116,8 @@ body{margin:0;background:var(--bg)}
           <a class="dg-btn dg-btn--primario dg-btn--grande js-contacto" href="#contacto">quiero más info <span class="dg-arrow">→</span></a>
           <div class="ag-micro">te llega a mi whatsapp y te respondo yo. vemos qué volumen mueve tu agencia y si la barra libre te sale a cuenta.</div>
           <p class="cred" style="margin: 8px 0 0;"><span>Sí, escribo con IA, como tú. Pero con mi propio sistema operativo y el oficio de cientos de anuncios y emails encima: copy con el estilo de tu agencia, no copy genérico. <a href="#ia" style="color: var(--ink); text-decoration: underline; text-underline-offset: 3px;">Te cuento cómo</a>.</span></p>
+        </div>
+        <figure class="ag-cita ag-cita--hero"><blockquote>«Siempre me da la tranquilidad de que cumple en plazos y entregas, algo importantísimo cuando trabajas en proyectos grandes.»</blockquote><figcaption><img src="/crece.png" alt=""><div><div class="q">Martí Gamarra</div><div class="d">socio de crece sin límite</div></div></figcaption></figure>
         </div>
       </div>
     </div>
@@ -287,7 +294,7 @@ body{margin:0;background:var(--bg)}
               <p>Soy Daniel García de Celis, copywriter desde 2020.</p>
               <p>He escrito cientos de anuncios para infoproductores y negocios B2B. Nichos que no se parecen en nada entre sí, y cada uno con su propio tono.</p>
               <p>Es lo que más destacan mis clientes: que me adapto a cualquier tono, sea cual sea.</p>
-              <figure class="ag-cita"><blockquote>«Tienes el tono cogido de la marca, me siento genial leyendo los emails: son mis ideas, mis palabras, pero con mucha más fuerza.»</blockquote><figcaption><img src="/josemunoz.png" alt=""><div><div class="q">José Muñoz</div><div class="d">programa in · inversión inmobiliaria</div></div></figcaption></figure>
+              <figure class="ag-cita"><blockquote>«Hemos coincidido en muchos proyectos con Dani como copy. La verdad es que es un apasionado de lo que hace, y eso se nota. A mí siempre me da la tranquilidad de que cumple en plazos y entregas, algo importantísimo cuando trabajas en proyectos grandes.»</blockquote><figcaption><img src="/crece.png" alt=""><div><div class="q">Martí Gamarra</div><div class="d">socio de crece sin límite</div></div></figcaption></figure>
               <p>En email, he gestionado listas de más de 100.000 personas: la estrategia de email marketing, las secuencias evergreen y las acciones de venta.</p>
               <p>Trabajo en marca blanca: tus clientes son tuyos, y nadie tiene por qué saber quién escribe su copy.</p>
             </div>
