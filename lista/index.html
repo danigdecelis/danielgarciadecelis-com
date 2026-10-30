@@ -629,6 +629,18 @@
     .curr button.sel { background: var(--gold); color: var(--black); }
 
     .capture-wrap { padding: 72px 0 100px; max-width: 480px; margin: 0 auto; }
+    /* vista previa del resultado antes de pedir el email (30-oct-2026) */
+    #cap-teaser { margin: 22px 0 26px; }
+    #cap-teaser .rcard { padding: 26px 24px; margin-bottom: 12px; }
+    #cap-teaser .levelhead { padding: 28px 22px 24px; }
+    #cap-teaser .levelhead .ln { font-size: clamp(1.8rem, 6vw, 2.4rem); margin: 6px 0 6px; }
+    #cap-teaser .levelhead .lt { margin-bottom: 4px; }
+    #cap-teaser h3 { font-size: 1.25rem; line-height: 1.25; margin: 0; }
+    .cap-locked { position: relative; }
+    .cap-locked .cap-row { display: flex; justify-content: space-between; gap: 16px; padding: 9px 0; border-top: 1px solid var(--line-soft); font-size: 0.9rem; color: var(--muted); }
+    .cap-locked .cap-row:first-of-type { border-top: 0; }
+    .cap-locked .cap-blur { filter: blur(5px); user-select: none; }
+    .cap-locked .cap-row i { font-style: normal; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); white-space: nowrap; }
     .field { margin-bottom: 16px; }
     .field label {
       display: block;
@@ -979,7 +991,8 @@
     <div class="container capture-wrap">
       <p class="eyebrow">Último paso</p>
       <h2>Tu diagnóstico está listo.</h2>
-      <p class="section-lead" style="margin-bottom:34px;">Ahora ves el resumen en pantalla. El informe completo te llega al email: cada punto con su porqué, por dónde empezaría y qué no tocaría todavía.</p>
+      <div id="cap-teaser"></div>
+      <p class="section-lead" style="margin-bottom:34px;">Dime dónde te lo mando y te enseño el resto ahora mismo. El informe completo te llega al email: cada punto con su porqué, por dónde empezaría y qué no tocaría todavía.</p>
       <div class="field"><label>Nombre</label><input type="text" id="f-name" placeholder="Tu nombre" autocomplete="given-name"><div class="err" id="e-name">Dime tu nombre.</div></div>
       <div class="field"><label>Email</label><input type="email" id="f-email" placeholder="tu@email.com" autocomplete="email"><div class="err" id="e-email">Revisa el email, no parece válido.</div></div>
       <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;"><label>Deja este campo vacío <input type="text" id="f-web" name="web_url" tabindex="-1" autocomplete="off"></label></div>
@@ -1141,7 +1154,7 @@
       let startIdx = curQ ? Q.indexOf(curQ)+1 : 0;
       let nxt = -1;
       for(let i=startIdx;i<Q.length;i++){ if(!Q[i].show || Q[i].show(A)){ nxt=i; break; } }
-      if(nxt===-1){ show('capture'); return; }
+      if(nxt===-1){ renderTeaser(); show('capture'); return; }
       path.push(nxt); cur=path.length-1;
       render();
     }
@@ -1397,6 +1410,47 @@
     }
 
     /* =====================================================
+       VISTA PREVIA ANTES DEL EMAIL (30-oct-2026)
+       Nivel y titular de la fuga a la vista; lo demás, borroso hasta dejar el email.
+    ===================================================== */
+    function renderTeaser(){
+      const box = document.getElementById('cap-teaser'); if(!box) return;
+      const r = buildResult();
+      const f0 = r.findings[0];
+      const titular = typeof f0.title==='function'?f0.title():f0.title;
+      const cabeza = r.noList
+        ? `<div class="ln">Todavía no tienes lista</div><div class="lt">y ese es el punto de partida</div>`
+        : `<div class="ln">Nivel ${r.level.n} de 5</div><div class="lt">${esc(r.level.t)}</div>
+           <div class="dots">${[1,2,3,4,5].map(i=>'<i class="'+(i<=r.level.n?'on':'')+'"></i>').join('')}</div>`;
+      const filas = r.noList
+        ? [['Por dónde empezaría a construirla','lead magnet y sistema de captura'],['Lo que tu audiencia podría darte','1.234 suscriptores/mes'],['Qué no tocaría todavía','tres cosas concretas']]
+        : [['El radar de tu lista','6 dimensiones · 00/100'],[(r.findings.length>1?r.findings.length+' puntos':'El punto')+' donde deja ventas','con su porqué, uno a uno'],['La primera campaña que activaría','campaña de ejemplo'],['Lo que podría generar cada mes','0.000 /mes']];
+      box.innerHTML = `
+        <div class="rcard gold levelhead"><p class="eyebrow" style="margin-bottom:0;">Tu resultado</p>${cabeza}</div>
+        <div class="rcard f-main"><div class="ftag warn">El titular de tu diagnóstico</div><h3>${esc(titular)}</h3></div>
+        <div class="rcard cap-locked" aria-label="Se desbloquea al dejar tu email">
+          ${filas.map(x=>`<div class="cap-row"><span>${x[0]} <b class="cap-blur" aria-hidden="true">${x[1]}</b></span><i>con tu email</i></div>`).join('')}
+        </div>`;
+    }
+
+    /* Resumen del resultado para la página de venta de El Diagnóstico (/diagnostico-completo/).
+       Se guarda en este navegador y viaja en el enlace sin datos personales (sin nombre ni email). */
+    const WM_CAMPO_VENTA = ''; // número del campo de Wildmail «Enlace venta diagnóstico», cuando exista
+    function resumenVenta(r){
+      const f0 = r.findings[0];
+      return {v:1, nl:r.noList?1:0, n:r.noList?0:r.level.n, lt:r.noList?'Sin lista todavía':r.level.t, s:r.total||0,
+        f:typeof f0.title==='function'?f0.title():f0.title, c:CAMPANAS[f0.campaign]||'', k:r.findings.length};
+    }
+    function codigoVenta(o){
+      const b = new TextEncoder().encode(JSON.stringify(o)); let s=''; b.forEach(x=>s+=String.fromCharCode(x));
+      return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');
+    }
+    function guardarResumenVenta(r, name){
+      try { const o = resumenVenta(r); o.nom = name||''; o.ts = Date.now(); localStorage.setItem('dgc_lista_resumen', JSON.stringify(o)); } catch(e) {}
+    }
+    function urlVenta(r){ return location.origin + '/diagnostico-completo/#lista=' + codigoVenta(resumenVenta(r)); }
+
+    /* =====================================================
        CAPTURA + INFORME
     ===================================================== */
     function submitCapture(){
@@ -1409,6 +1463,7 @@
       if(!nOK || !eOK) return;
 
       const result = buildResult();
+      guardarResumenVenta(result, name);
       const trampa = document.getElementById('f-web');
       if(trampa && trampa.value){ showReport(result, name, 'resumen', email); return; } // campo trampa: solo lo rellenan los bots
       const informe = urlInforme();
@@ -1471,6 +1526,7 @@
           if(window.dgcOrigen) wm.append('field[8]', window.dgcOrigen.primero());
           wm.append('field[9]', '/lista/');
           wm.append('field[10]', informe); // Wildmail: Informe diagnóstico de lista (la automatización 17 lo manda por email)
+          if (WM_CAMPO_VENTA) wm.append('field['+WM_CAMPO_VENTA+']', urlVenta(result)); // enlace a la página de venta personalizada
           fetch('https://danigdecelis.activehosted.com/proc.php', {method:'POST', mode:'no-cors', body:wm}).catch(()=>{});
         } catch(e) {}
         if (window.dgcTrack) window.dgcTrack('lead', { source: 'lista' });

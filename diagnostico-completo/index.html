@@ -26,7 +26,7 @@
 <!-- 1 · CABECERA CON LA COMPRA -->
 <div class="wrap ups-cab dc-cab">
   <div>
-    <p class="ups-eti">el diagnóstico · tu negocio entero, con tus números</p>
+    <p class="ups-eti" id="dc-eti">el diagnóstico · tu negocio entero, con tus números</p>
     <h1 class="ups-h1">Descubre en 15 minutos por dónde se te escapa el dinero <span class="mark">y cómo arreglarlo ya.</span></h1>
     <p class="ups-sub"><b>El Diagnóstico analiza tu negocio con tus números</b> y te dice qué está roto, cuánto te está costando y en qué orden arreglarlo.</p>
     <ul class="dc-puntos">
@@ -48,8 +48,21 @@
   <div class="wrap">
     <p class="ups-eti">lo que ya viste</p>
     <h2 class="ups-h2">Tu lista era <span class="mark">una pieza.</span></h2>
-    <p class="ups-p">Si vienes de diagnosticar tu lista, ya sabes cómo trabajo: no te digo nada que no salga de tus respuestas.</p>
-    <p class="ups-p">Pero tu lista es una de las cinco piezas que sostienen un negocio digital. Las otras cuatro son cómo captas, cómo conviertes, si alguien te vuelve a comprar y si mides lo que pasa.</p>
+    <p class="ups-p" id="dc-intro">Si vienes de diagnosticar tu lista, ya sabes cómo trabajo: no te digo nada que no salga de tus respuestas.</p>
+    <!-- Solo se ve si llega con el resultado de /lista/ (enlace #lista=… o este navegador). -->
+    <div class="dc-piezas" id="dc-piezas" hidden>
+      <div class="dc-pieza dc-pieza-vista">
+        <span class="dc-pieza-n">tu lista · ya la miraste</span>
+        <b id="dc-p-nivel"></b>
+        <span id="dc-p-fuga"></span>
+      </div>
+      <div class="dc-pieza"><span class="dc-pieza-n">captación</span><b>sin mirar</b><span>¿Te entra la gente que necesitas, y al precio que puedes pagar?</span></div>
+      <div class="dc-pieza"><span class="dc-pieza-n">conversión</span><b>sin mirar</b><span>¿Dónde se te cae la gente entre el registro y la compra?</span></div>
+      <div class="dc-pieza"><span class="dc-pieza-n">recurrencia</span><b>sin mirar</b><span>¿Alguien te vuelve a comprar, o cada mes empiezas de cero?</span></div>
+      <div class="dc-pieza"><span class="dc-pieza-n">medición</span><b>sin mirar</b><span>¿Sabes qué número se mueve cuando cambias algo?</span></div>
+    </div>
+    <p class="ups-p" id="dc-conclusion" hidden></p>
+    <p class="ups-p" id="dc-generico">Pero tu lista es una de las cinco piezas que sostienen un negocio digital. Las otras cuatro son cómo captas, cómo conviertes, si alguien te vuelve a comprar y si mides lo que pasa.</p>
     <p class="ups-p">Y el dinero casi nunca se escapa por la pieza que estás mirando.</p>
     <table class="dc-comp">
       <thead><tr><th scope="col"><span class="sr">qué cambia</span></th><th scope="col">diagnóstico de lista · gratis</th><th scope="col" class="dc-col-pago">el diagnóstico · 147 $</th></tr></thead>
@@ -465,6 +478,40 @@
 </script>
 
 <script>
+/* Personalización con el resultado del diagnóstico de lista (/lista/). Fuente: el enlace #lista=… (sin datos
+   personales) o lo que /lista/ guardó en este navegador. Sin resultado, la página se queda genérica. */
+(function () {
+  function leerHash() {
+    var m = location.hash.match(/lista=([A-Za-z0-9_-]+)/); if (!m) return null;
+    try {
+      var b = atob(m[1].replace(/-/g, '+').replace(/_/g, '/')), u = new Uint8Array(b.length);
+      for (var i = 0; i < b.length; i++) u[i] = b.charCodeAt(i);
+      return JSON.parse(new TextDecoder().decode(u));
+    } catch (e) { return null; }
+  }
+  function leerLocal() { try { return JSON.parse(localStorage.getItem('dgc_lista_resumen') || 'null'); } catch (e) { return null; } }
+  var d = leerHash(), local = leerLocal();
+  if (!d) d = local; else if (local && local.nom && local.f === d.f) d.nom = local.nom;
+  if (!d || d.v !== 1 || typeof d.f !== 'string' || !d.f) return;
+  var nom = (d.nom || '').split(' ')[0].slice(0, 30);
+  var $ = function (id) { return document.getElementById(id); };
+  var nivel = d.nl ? 'Todavía sin lista' : 'Nivel ' + d.n + ' de 5 · ' + d.lt;
+  $('dc-eti').textContent = (nom ? nom + ', ' : '') + (d.nl ? 'tu lista aún no existe. tu negocio, sí.' : 'tu lista sale en nivel ' + d.n + ' de 5. falta el resto.');
+  $('dc-intro').textContent = d.nl
+    ? 'Tu diagnóstico de lista te dijo que todavía no tienes lista. Pero tu negocio ya vende, o lo intenta, y la lista es solo una de las cinco piezas.'
+    : 'Tu diagnóstico de lista te dijo esto: ' + d.lt.toLowerCase() + ', y su titular, «' + d.f + '». Eso es una pieza. Te falta mirar las otras cuatro.';
+  $('dc-p-nivel').textContent = nivel;
+  $('dc-p-fuga').textContent = d.f;
+  $('dc-piezas').hidden = false;
+  var c = $('dc-conclusion');
+  c.textContent = 'O sea que sabes cómo está tu lista. Lo que no sabes es si el dinero se te escapa antes de llegar a ella, o después. La conclusión es tuya, pero hoy la sacarías a ojo.';
+  c.hidden = false;
+  $('dc-generico').hidden = true;
+  if (/lista=/.test(location.hash)) {
+    try { if (!local) localStorage.setItem('dgc_lista_resumen', JSON.stringify(d)); } catch (e) {}
+    history.replaceState(null, '', location.pathname + location.search);
+  }
+})();
 /* Compra: ClicComprar (begin_checkout en GA) con el precio suelto. Las UTM y sck/src las añade analytics.js al pulsar. */
 (function () {
   document.querySelectorAll('a.js-compra').forEach(function (a) {
