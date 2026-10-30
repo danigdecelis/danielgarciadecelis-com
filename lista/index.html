@@ -1435,7 +1435,7 @@
 
     /* Resumen del resultado para la página de venta de El Diagnóstico (/diagnostico-completo/).
        Se guarda en este navegador y viaja en el enlace sin datos personales (sin nombre ni email). */
-    const WM_CAMPO_VENTA = ''; // número del campo de Wildmail «Enlace venta diagnóstico», cuando exista
+    const WM_CAMPO_VENTA = '11'; // Wildmail: campo 11 «Enlace venta diagnóstico» (oculto, creado el 30-oct-2026)
     function resumenVenta(r){
       const f0 = r.findings[0];
       return {v:1, nl:r.noList?1:0, n:r.noList?0:r.level.n, lt:r.noList?'Sin lista todavía':r.level.t, s:r.total||0,
