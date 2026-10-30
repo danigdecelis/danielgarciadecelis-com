@@ -121,6 +121,7 @@ a { color: var(--ink); }
 .inf-tabla-txt td:last-child, .inf-tabla-ref td:last-child { text-align: left; font-family: var(--font-sans); font-size: 15px; }
 .inf-tabla-txt td { vertical-align: top; } .inf-tabla-txt td:first-child { white-space: nowrap; padding-right: 16px; }
 .inf-tabla-ref td:nth-child(2) { white-space: nowrap; }
+.inf-tabla-obj th:nth-child(n+2), .inf-tabla-obj td:nth-child(n+2) { text-align: right; white-space: nowrap; font-family: var(--font-mono); font-size: 14px; }   /* mejora 2: hoy · lo que necesitas */
 dialog.inf-dlg { width: min(820px, calc(100vw - 32px)); max-height: calc(100vh - 48px); overflow-y: auto; overscroll-behavior: contain; padding: 0; border: 1px solid var(--line-strong); background: var(--bg); color: var(--ink); }
 dialog.inf-dlg::backdrop { background: rgba(10, 11, 13, .72); }
 .inf-dlg-cab { position: sticky; top: 0; z-index: 1; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 10px 14px 10px 24px; background: var(--ink); color: var(--bg); font-family: var(--font-mono); font-size: 12px; letter-spacing: .04em; }

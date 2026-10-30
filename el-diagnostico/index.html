@@ -169,6 +169,8 @@ const Q = [
     {k:'visitas', t:'Visitas a la página de ventas', entero:true},
     {k:'ventas', t:'Ventas', entero:true},
     {k:'ingresos', t:'Ingresos del lanzamiento', money:true}]},
+  {id:'l_objetivo', parte:'Tu último lanzamiento', text:'¿Cuánto quieres facturar en tu próximo lanzamiento?', sub:'Con esta cifra el informe te dice lo que necesitas para llegar y lo que te cuesta quedarte como estás.', show:LZ, nums:[
+    {k:'objetivo', t:'Facturación que quieres en el próximo lanzamiento', money:true, positivo:true, ns:'Todavía no lo sé'}]},
   {id:'l_carrito', parte:'Tu último lanzamiento', text:'¿Cuántos días estuvo abierto el carrito?', show:LZ, opts:[
     {v:'c1', t:'De 1 a 3 días'}, {v:'c2', t:'De 4 a 7 días'}, {v:'c3', t:'De 8 a 14 días'}, {v:'c4', t:'Más de 14 días'}, {v:'siempre', t:'No cerró: la oferta sigue disponible'}, {v:'nose', t:'No lo sé'}]},
   {id:'l_cierre', parte:'Tu último lanzamiento', text:'¿Qué cerró la puerta?', sub:'Marca todo lo que pasó.', show:a=>LZ(a)&&a.l_carrito!=='siempre', multi:true, opts:[
@@ -201,6 +203,8 @@ const Q = [
     {k:'visitas', t:'Visitas a la página de ventas', entero:true},
     {k:'ventas', t:'Ventas', entero:true},
     {k:'ingresos', t:'Ingresos del embudo', money:true}]},
+  {id:'e_objetivo', parte:'Tu embudo', text:'¿Cuánto quieres que facture tu embudo cada 90 días?', sub:'En el mismo periodo que tus números: 90 días. Con esta cifra el informe te dice lo que necesitas para llegar y lo que te cuesta quedarte como estás.', show:EV, nums:[
+    {k:'objetivo', t:'Facturación que quieres en 90 días', money:true, positivo:true, ns:'Todavía no lo sé'}]},
   {id:'e_secuencia', parte:'Tu embudo', text:'¿Cuántos emails recibe alguien desde que entra hasta que termina la secuencia?', show:EV, opts:[
     {v:'s1', t:'De 1 a 3'}, {v:'s2', t:'De 4 a 7'}, {v:'s3', t:'De 8 a 14'}, {v:'s4', t:'Más de 14'}, {v:'ninguno', t:'No hay secuencia: solo la página'}, {v:'nose', t:'No lo sé'}]},
   {id:'e_urgencia', parte:'Tu embudo', text:'¿La oferta de ese embudo tiene fecha límite?', show:EV, opts:[
@@ -298,7 +302,7 @@ function pregunta() {
       const v = actual[f.k], ns = v === 'nose';
       return '<div class="field"><label class="l" for="n-' + f.k + '">' + f.t + (f.money ? ' (' + moneda + ')' : '') + (f.unit ? ' (%)' : '') + '</label>' +
         '<input type="text" inputmode="decimal" id="n-' + f.k + '" value="' + (typeof v === 'number' ? v : '') + '"' + (ns ? ' disabled' : '') + ' placeholder="' + (f.unit ? 'Por ejemplo: 25' : 'Por ejemplo: 1200') + '">' +
-        '<label class="nsck"><input type="checkbox" data-a="nose" data-k="' + f.k + '" id="ns-' + f.k + '"' + (ns ? ' checked' : '') + '> No lo sé</label></div>';
+        '<label class="nsck"><input type="checkbox" data-a="nose" data-k="' + f.k + '" id="ns-' + f.k + '"' + (ns ? ' checked' : '') + '> ' + (f.ns || 'No lo sé') + '</label></div>';
     }).join('') + '</div><div class="err" id="qerr"></div><div class="qnav">' + atras + '<button class="btn" data-a="nums">Siguiente</button></div>';
   } else if (q.multi) {
     const sel = A[q.id] || [];
@@ -340,12 +344,13 @@ function guardarNums() {
     if (document.getElementById('ns-' + f.k).checked) v = 'nose';
     else {
       v = parseNum(document.getElementById('n-' + f.k).value);
-      if (v === null) return error('Pon un número en «' + f.t + '» o marca «No lo sé».');
+      if (v === null) return error('Pon un número en «' + f.t + '» o marca «' + (f.ns || 'No lo sé') + '».');
+      if (f.positivo && !(v > 0)) return error('Pon una cifra mayor que 0 en «' + f.t + '» o marca «' + (f.ns || 'No lo sé') + '».');
       if (f.unit && v > 100) return error('«' + f.t + '» es un porcentaje: tiene que estar entre 0 y 100.');
       if (f.entero && v % 1 !== 0) return error('«' + f.t + '» va en números enteros: sin decimales.');
     }
     out[f.k] = v;
-    txt.push(f.t + ': ' + (v === 'nose' ? 'no lo sé' : (f.money ? moneda + fmt(Math.round(v)) : fmt(v)) + (f.unit ? ' %' : '')));
+    txt.push(f.t + ': ' + (v === 'nose' ? (f.ns || 'No lo sé').toLowerCase() : (f.money ? moneda + fmt(Math.round(v)) : fmt(v)) + (f.unit ? ' %' : '')));
   }
   /* Las mismas incoherencias que el motor rechaza, avisadas aquí para que las corrija antes de enviar */
   const n = k => typeof out[k] === 'number' ? out[k] : null;
