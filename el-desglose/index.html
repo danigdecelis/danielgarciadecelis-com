@@ -177,26 +177,52 @@
     dialog.muestra-dlg::backdrop { background: rgba(10, 11, 13, 0.72); }
     .muestra-dlg-cab { position: sticky; top: 0; z-index: 1; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 14px 18px 14px 26px; background: var(--noir-2); border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: 13px; letter-spacing: 0.04em; color: var(--bone-3); }
     .muestra-cerrar { width: 40px; height: 40px; border: 1px solid var(--line); background: transparent; color: var(--bone); font-size: 22px; line-height: 1; cursor: pointer; }
+    .ficha-cab { padding: 26px 26px 6px; }
+    .ficha-fase { font-family: var(--mono); font-size: 13px; letter-spacing: 0.04em; color: var(--bone-3); }
+    .ficha-tit { margin-top: 8px; font-size: clamp(30px, 4vw, 42px); font-weight: 900; font-stretch: 80%; line-height: 0.95; letter-spacing: -0.035em; color: var(--bone); }
+    .ficha-sec { padding: 22px 26px 8px; }
+    .ficha-sec h3, .ficha-pieza h3 { margin: 0 0 14px; font-size: 22px; font-weight: 800; font-stretch: 88%; line-height: 1.15; letter-spacing: -0.02em; color: var(--bone); }
+    .ficha-sec p { font-size: 17px; line-height: 1.65; color: var(--bone); margin: 0 0 14px; }
+    .ficha-sec ul { margin: 0 0 14px; padding-left: 20px; }
+    .ficha-sec li { font-size: 17px; line-height: 1.6; color: var(--bone); margin: 0 0 12px; }
+    .ficha-pieza { margin-top: 18px; padding: 22px 26px 4px; border-top: 6px solid var(--accent); }
+    .ficha-et { font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--bone-3); margin-bottom: 8px; }
+    .ficha-nota { margin: -4px 0 16px; font-size: 16px; font-style: italic; line-height: 1.6; color: var(--bone-2); }
+    .ficha-fin { padding-bottom: 26px; }
+    .muestra-mail + .ficha-sec, .ficha-sec + .ficha-sec { margin-top: 10px; border-top: 1px solid var(--line); }
     body.dlg-abierto { overflow: hidden; }
   </style>
   <div class="wrap" style="padding-top: 82px; padding-bottom: 82px;">
     <div style="font-family: var(--mono); font-size: 13px; font-weight: 500; letter-spacing: 0.04em; color: var(--bone-3); margin-bottom: 18px;">antes de pagar</div>
     <h2 class="h-sec" style="font-weight: 900; font-stretch: 82%; line-height: 0.96; letter-spacing: -0.038em; margin: 0 0 24px; color: var(--bone); max-width: 18ch;">Lee uno entero, <span class="mark">gratis</span></h2>
-    <p style="font-size: 19px; line-height: 1.7; color: var(--bone-2); margin: 0 0 36px; max-width: 58ch;">Es el email 26, de la fase del remate. Tal cual viene en el curso. Ábrelo y pulsa cada número para ver qué hace esa parte del email y por qué está ahí.</p>
+    <p style="font-size: 19px; line-height: 1.7; color: var(--bone-2); margin: 0 0 36px; max-width: 58ch;">Es la ficha 26, de la fase del remate, tal cual viene en El Desglose: de qué va, los dos emails, qué hace cada parte y por qué está ahí, lo que he aprendido usándolos y tu turno. Ábrela y pulsa cada número de los emails.</p>
     <div style="border: 1px solid var(--line); background: var(--noir-2); max-width: 760px;">
-      <div style="padding: 20px 26px; border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: 14px; line-height: 1.8; color: var(--bone-2);"><b style="color: var(--bone); font-weight: 600;">asunto:</b> Tres cosas malas del programa<br><b style="color: var(--bone); font-weight: 600;">preheader:</b> Mañana es el último día, así que toca contarlas.</div>
-      <div class="muestra-mail muestra-teaser" style="padding: 26px 26px 0;">
-        <p>Ey.</p>
-        <p>Queda un día para que se cierre esto y me apetece hacer algo poco habitual para la recta final: contarte lo que el programa hace mal.</p>
-        <p>No por deportividad. Es que prefiero que no entres a que entres y te arrepientas.</p>
-        <p>Lo primero, es que sepas que esto te va a dar más trabajo del que crees.</p>
+      <div class="ficha-cab" style="padding-bottom: 0;"><div class="ficha-fase">fase 6 · el remate</div><div class="ficha-tit">26 · Sincericidio</div></div>
+      <div class="ficha-sec muestra-teaser"><h3>De qué va</h3>
+        <p>En la recta final del carrito casi todo el mundo sube el volumen. Más beneficios, más bonus, más razones para entrar.</p>
+        <p>Este email hace lo contrario. Se pone a contar lo que su propio producto hace mal.</p>
+        <p>Y funciona por una razón bastante simple: nadie miente para quedar peor.</p>
       </div>
-      <div style="padding: 8px 26px 28px;"><button type="button" class="btn-muestra js-abrir-muestra">Leer el email entero <span aria-hidden="true">→</span></button></div>
+      <div style="padding: 8px 26px 28px;"><button type="button" class="btn-muestra js-abrir-muestra">Leer la ficha entera <span aria-hidden="true">→</span></button></div>
     </div>
-    <p style="font-family: var(--mono); font-size: 14px; color: var(--bone-2); margin: 20px 0 0;">En el curso hay 30 más como este, cada uno con lo que he aprendido usándolo y el momento exacto en que se manda.</p>
+    <p style="font-family: var(--mono); font-size: 14px; color: var(--bone-2); margin: 20px 0 0;">En El Desglose hay 30 fichas más como esta, cada una con lo que he aprendido usándola y el momento exacto en que se manda.</p>
   </div>
   <dialog class="muestra-dlg" id="muestra-dlg" aria-labelledby="muestra-dlg-titulo">
-    <div class="muestra-dlg-cab"><span id="muestra-dlg-titulo">email 26 · el remate · pulsa cada número</span><button type="button" class="muestra-cerrar js-cerrar-muestra" aria-label="Cerrar">×</button></div>
+    <div class="muestra-dlg-cab"><span id="muestra-dlg-titulo">ficha 26 · sincericidio · pulsa cada número</span><button type="button" class="muestra-cerrar js-cerrar-muestra" aria-label="Cerrar">×</button></div>
+    <div class="ficha-cab"><div class="ficha-fase">fase 6 · el remate</div><div class="ficha-tit">26 · Sincericidio</div></div>
+    <div class="ficha-sec"><h3>De qué va</h3>
+      <p>En la recta final del carrito casi todo el mundo sube el volumen. Más beneficios, más bonus, más razones para entrar.</p>
+      <p>Este email hace lo contrario. Se pone a contar lo que su propio producto hace mal.</p>
+      <p>Y funciona por una razón bastante simple: nadie miente para quedar peor. Cuando dices tres cosas que juegan en tu contra, las otras diez que dijiste los días anteriores se vuelven creíbles de golpe.</p>
+      <p>Pero a mí me interesa más otra cosa, que además es la que casi nadie ve. Los defectos que eliges contar son en realidad tus filtros de cliente. Cada uno espanta a un perfil concreto que iba a entrar y a los tres meses te iba a pedir la devolución.</p>
+      <p>O sea que no estás perdiendo ventas. Estás cambiando ventas malas por tranquilidad.</p>
+      <p>Va en el tramo final del cierre, cuando el lector ya se lo sabe todo de tu oferta y lo único que sigue en pie es la desconfianza.</p>
+      <p>Y ojo, que aquí hay trampa: los defectos tienen que ser de verdad. Si son defectos de entrevista de trabajo, del tipo «es que soy muy perfeccionista», se huele a un kilómetro y consigues justo lo contrario de lo que buscabas.</p>
+      <p><b>Esta pieza tiene dos caras y aquí van las dos.</b></p>
+      <p>En la primera te descalificas tú: hablas de lo que tu producto no hace. En la segunda lo descalificas a él: hablas de lo que él no está dispuesto a poner.</p>
+      <p>Es la misma mecánica apuntando a dos sitios distintos, y por eso van juntas. La primera filtra por expectativa, la segunda filtra por disposición. Y la segunda solo la usas si tu gente está curtida en lanzamientos, porque a alguien que nunca ha comprado formación online le siembras una desconfianza que no traía.</p>
+    </div>
+    <div class="ficha-pieza"><div class="ficha-et">pieza 1</div><h3>Los defectos del producto</h3></div>
     <div style="padding: 20px 26px; border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: 14px; line-height: 1.8; color: var(--bone-2);"><b style="color: var(--bone); font-weight: 600;">asunto:</b> Tres cosas malas del programa<br><b style="color: var(--bone); font-weight: 600;">preheader:</b> Mañana es el último día, así que toca contarlas.
       <div style="margin-top: 12px;"><details class="tripa"><summary><span class="tn">1</span>El asunto</summary><p>Anuncia el contenido tal cual, sin gancho. En la recta final del carrito, la rareza de lo que vas a hacer ya es gancho suficiente.</p></details></div></div>
     <div class="muestra-mail" style="padding: 26px 26px 12px;">
@@ -230,6 +256,54 @@
         <p class="ps">P.D. Si has leído los tres defectos y has pensado «bueno, tampoco es para tanto», entra tranquilo. Si has pensado «uf, pues entonces no», acabo de ahorrarte el dinero y de ahorrarme a mí un cliente descontento. Las dos son buenas noticias. [ENLACE]</p>
         <details class="tripa"><summary><span class="tn">11</span>La P.D. bifurcada</summary><p>Le da permiso al que entra y salida honrosa al que se va. Nadie se queda en el email sintiéndose señalado.</p></details>
     </div>
+    <div class="ficha-pieza"><div class="ficha-et">pieza 2</div><h3>Las razones para no entrar</h3><p class="ficha-nota">Esta pieza es opcional y depende de tu audiencia. Úsala si tu gente ya ha comprado formación online antes y está de vuelta de todo. Si no lo está, sáltatela.</p></div>
+    <div style="padding: 20px 26px; border-bottom: 1px solid var(--line); font-family: var(--mono); font-size: 14px; line-height: 1.8; color: var(--bone-2);"><b style="color: var(--bone); font-weight: 600;">asunto:</b> Razones para NO entrar hoy<br><b style="color: var(--bone); font-weight: 600;">preheader:</b> Cinco, y todas buenas.
+      <div style="margin-top: 12px;"><details class="tripa"><summary><span class="tn">1</span>El asunto en negativo</summary><p>Rompe el patrón del día. Es de los pocos asuntos que puedes mandar en la recta final sin que el lector sepa lo que se va a encontrar.</p></details></div></div>
+    <div class="muestra-mail" style="padding: 26px 26px 12px;">
+        <p>Llevo una semana dándote motivos para entrar.</p>
+        <p>Toca equilibrar.</p>
+        <details class="tripa"><summary><span class="tn">2</span>El reconocimiento del desequilibrio</summary><p>Admites que llevas días empujando. Le da al email una razón de existir que no es vender.</p></details>
+        <p>Aquí van cinco razones para no hacerlo. Si te reconoces en alguna, no entres. Te lo digo en serio.</p>
+        <details class="tripa"><summary><span class="tn">3</span>La instrucción explícita</summary><p>«Si te reconoces en alguna, no entres». Tiene que estar escrita, porque es la que hace que las cinco se lean como criterio y no como retórica.</p></details>
+        <p><b>Uno. Si vas a pagarlo con dinero que no tienes.</b></p>
+        <p>Nada de meterlo en la tarjeta a ver qué pasa. Esto va de ordenar tus números, y empezar sumando una deuda para entrar es exactamente lo contrario de lo que vamos a hacer dentro.</p>
+        <details class="tripa"><summary><span class="tn">4</span>La razón del dinero</summary><p>Va la primera a propósito. Es la única que descarta por responsabilidad y no por perfil, y colocarla arriba fija el tono de lo demás.</p></details>
+        <p><b>Dos. Si buscas que alguien te lleve las cuentas.</b></p>
+        <p>No es eso. Aquí no te quito el trabajo, te enseño a leerlo. Si lo que querías era delegarlo, contrata a alguien y te sale mejor.</p>
+        <details class="tripa"><summary><span class="tn">5</span>La razón de la expectativa</summary><p>Descarta al que venía buscando que le quiten el trabajo. De paso define tu producto por contraste, que es más rápido que definirlo de frente.</p></details>
+        <p><b>Tres. Si esperas que esto suba tu facturación el mes que viene.</b></p>
+        <p>No la sube. Lo que cambia no es lo que entra, es lo que sabes de lo que entra. Y con eso decides mejor y sí, con el tiempo entra más. Pero el mes que viene no.</p>
+        <details class="tripa"><summary><span class="tn">6</span>La razón del plazo</summary><p>Pone el tiempo real hasta el resultado. Aquí se van las devoluciones de los impacientes.</p></details>
+        <p><b>Cuatro. Si no tienes tres horas la primera semana.</b></p>
+        <p>Tres horas seguidas, no diez minutos entre cosas. Si al mirar tu semana no las ves por ningún lado, ahórratelo y vuelve cuando las tengas.</p>
+        <details class="tripa"><summary><span class="tn">7</span>La razón del esfuerzo</summary><p>Horas concretas, no «algo de dedicación». El número es lo que le obliga a mirarse la semana de verdad.</p></details>
+        <p><b>Cinco. Si en tu negocio las decisiones no las tomas tú.</b></p>
+        <p>Si tienes un socio que lleva esto y no va a mirar nada de lo que traigas, vas a acabar frustrado con información que no puedes usar. Entrad los dos o no entres.</p>
+        <details class="tripa"><summary><span class="tn">8</span>La razón del contexto</summary><p>Descarta por una circunstancia que no depende de su voluntad. Es la que demuestra que la lista es honesta y no un filtro de motivación disfrazado.</p></details>
+        <p>Ahora te cuento una cosa.</p>
+        <p>De estas cinco, yo cumplí la primera. Pedí prestado para pagarme mi primera formación, y me pasé los meses siguientes estudiando con una presión encima que no le deseo a nadie.</p>
+        <p>Salió bien, pero no por listo. Salió bien de suerte.</p>
+        <p>Por eso esa razón está la primera.</p>
+        <details class="tripa"><summary><span class="tn">9</span>La confesión</summary><p>Cuentas que tú cumpliste una de las cinco. Sin este bloque la lista se lee como una tabla de requisitos y el email se convierte en un examen.</p></details>
+        <p>Y si has leído las cinco y no te ha tocado ninguna, entonces sí: entra, que esto está hecho para ti.</p>
+        <details class="tripa"><summary><span class="tn">10</span>El permiso al que queda dentro</summary><p>Una sola frase. Después de cinco razones para no entrar, hace falta decirle en voz alta que puede entrar.</p></details>
+        <p>Cierra mañana a las 23:59: [ENLACE]</p>
+        <p>Un abrazo,</p>
+        <p class="ps">P.D. Y si te ha tocado una, no pasa nada. Esto vuelve a abrir. Lo que no vuelve es el dinero que metiste en algo para lo que no era el momento.</p>
+        <details class="tripa"><summary><span class="tn">11</span>La P.D. de salida honrosa</summary><p>Le da futuro al que se va. Es lo que impide que el email termine sonando a portazo.</p></details>
+    </div>
+    <div class="ficha-sec"><h3>Lo que yo he aprendido usándolos</h3>
+      <ul><li><b>Los defectos tienen que doler un poco al escribirlos.</b> Si al releerlo piensas «bueno, esto hasta me deja bien», no es un defecto, es un beneficio disfrazado. Y tu lector lo caza antes que tú.</li><li><b>Tres es el número, y cinco cuando hablas de él.</b> Con uno parece un trámite y con demasiados parece que estás desmontando tu propio producto delante del cliente. Probé con dos y se queda corto.</li><li><b>Cada punto tiene que descartar a un perfil distinto.</b> Si todos espantan a la misma persona, en realidad has escrito uno solo repetido y has perdido las demás oportunidades de filtrar.</li></ul>
+    </div>
+    <div class="ficha-sec"><h3>¡Ojo!</h3>
+      <p>El defecto tiene que ser real y comprobable dentro del producto. Si te inventas uno que no existe, el primer comprador que entre lo nota, y ahí pierdes algo bastante más caro que una venta.</p>
+      <p>Y no lo mandes a mitad del carrito. Contar los defectos cuando el lector todavía no conoce bien tu oferta no es honestidad, es sembrarle dudas gratis.</p>
+      <p>En la segunda pieza, la razón económica va siempre y va primera. Es la única de las cinco que no está para filtrar clientes, sino porque hay gente que no debería comprarte aunque quiera.</p>
+      <p><b>Errores que lo matan:</b> defectos de entrevista de trabajo · defectos sin compensación al lado · razones que en realidad son halagos disfrazados · quedarte tú fuera del cuadro, sin confesión · olvidar el permiso al que sí encaja · mandarlas antes del tramo final.</p>
+    </div>
+    <div class="ficha-sec ficha-fin"><h3>Tu turno, crack</h3>
+      <ul><li><b>El asunto</b> → anuncia lo que hay dentro sin adornarlo. Su trabajo es que el lector no se crea que va a leer otro email de venta.</li><li><b>La declaración de intenciones</b> → avisa de que vas a hacer algo que no toca hoy. Sin este permiso previo, lo que viene después descoloca en vez de convencer.</li><li><b>El motivo egoísta</b> → explica qué ganas tú contando esto. Es lo que separa la honestidad estratégica de la humildad decorativa.</li><li><b>El defecto que descarta al que busca atajo</b> → nombra el esfuerzo real que exige tu producto, sin suavizarlo. Aquí es donde se van los que te iban a dar problemas.</li><li><b>El defecto que descarta al que necesita que le empujen</b> → deja claro hasta dónde llega tu acompañamiento. Cuanto más concreto seas, menos expectativas rotas después.</li><li><b>El defecto incómodo</b> → señala algo desagradable que tu producto le va a hacer ver. No filtra a nadie, retrata al que sí es tu cliente.</li><li><b>Las compensaciones</b> → cada defecto necesita su contrapeso inmediato. Van pegadas, no agrupadas al final, o el email se convierte en una lista de motivos para no comprar.</li><li><b>La garantía</b> → después de tres defectos, es lo que reequilibra la decisión. Va sin condiciones, porque una condición aquí desmonta todo lo anterior.</li><li><b>La P.D. de doble salida</b> → una frase para el que entra y otra para el que no. Su trabajo es que nadie cierre el email sintiéndose juzgado.</li><li><b>El giro de la segunda pieza</b> → el mismo mecanismo, pero apuntando a él en vez de a tu producto. Decide antes si tu audiencia aguanta que la descalifiquen o le vas a sembrar dudas nuevas.</li><li><b>La razón económica</b> → la que descarta a quien no debería pagarlo aunque quiera. Va primera y sin matices, porque es la única que no negocias.</li><li><b>La razón de contexto</b> → una circunstancia ajena a su voluntad que hace que tu producto no le sirva. Es la que demuestra que la lista va en serio.</li><li><b>La confesión</b> → tu propia historia con una de esas razones, en pasado y sin moraleja heroica. Convierte la lista en aviso y no en examen.</li><li><b>El permiso</b> → una frase para el que no se ha reconocido en ninguna. Después de cinco noes, el sí hay que decirlo en voz alta.</li></ul>
+    </div>
   </dialog>
   <script>
   (function () {
@@ -261,59 +335,9 @@
     </div>
   </div>
 
-  <!-- ============ 2 · CLIENTES ============ -->
-  <div class="wrap" style="padding-top: 76px; padding-bottom: 76px;">
-    <h2 class="h-sec" style="font-weight: 900; font-stretch: 82%; line-height: 0.96; letter-spacing: -0.038em; margin: 0 0 36px; color: var(--bone);">He escrito para</h2>
-
-    <div class="col-3" style="display: grid; gap: 1px; background: var(--line);">
-
-      <div style="background: var(--noir); padding: 22px 20px 24px;">
-        <img src="/josemunoz.png" alt="José Muñoz" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; display: block; margin-bottom: 16px;">
-        <div style="font-size: 19px; font-weight: 700; font-stretch: 90%; letter-spacing: -0.015em; color: var(--bone); line-height: 1.2;">José Muñoz</div>
-        <div style="font-size: 14px; color: var(--bone-2); margin-top: 4px;">Inversor inmobiliario</div>
-        <div style="font-family: var(--mono); font-size: 12px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">josemunoz.pro · 1.099 publicaciones · 105 mil seguidores</div>
-      </div>
-
-      <div style="background: var(--noir); padding: 22px 20px 24px;">
-        <img src="/crece.png" alt="CRECE" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; display: block; margin-bottom: 16px;">
-        <div style="font-size: 19px; font-weight: 700; font-stretch: 90%; letter-spacing: -0.015em; color: var(--bone); line-height: 1.2;">CRECE</div>
-        <div style="font-size: 14px; color: var(--bone-2); margin-top: 4px;">Publicidad y marketing</div>
-        <div style="font-family: var(--mono); font-size: 12px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">crecesinlimite_ · 12 publicaciones · 29,5 mil seguidores</div>
-      </div>
-
-      <div style="background: var(--noir); padding: 22px 20px 24px;">
-        <img src="/riders.png" alt="Digital Riders" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; display: block; margin-bottom: 16px;">
-        <div style="font-size: 19px; font-weight: 700; font-stretch: 90%; letter-spacing: -0.015em; color: var(--bone); line-height: 1.2;">Digital Riders</div>
-        <div style="font-size: 14px; color: var(--bone-2); margin-top: 4px;">Lanzamientos y embudos</div>
-        <div style="font-family: var(--mono); font-size: 12px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">digitalriders_ · 484 publicaciones · 7.899 seguidores</div>
-      </div>
-
-      <div style="background: var(--noir); padding: 22px 20px 24px;">
-        <img src="/hackaviss.png" alt="Jose Javier Pastor" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; display: block; margin-bottom: 16px;">
-        <div style="font-size: 19px; font-weight: 700; font-stretch: 90%; letter-spacing: -0.015em; color: var(--bone); line-height: 1.2;">Jose Javier Pastor</div>
-        <div style="font-size: 14px; color: var(--bone-2); margin-top: 4px;">Ciberseguridad</div>
-        <div style="font-family: var(--mono); font-size: 12px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">hackaviss · 116 publicaciones · 166 mil seguidores</div>
-      </div>
-
-      <div style="background: var(--noir); padding: 22px 20px 24px;">
-        <img src="/zeke.png" alt="Zeke Novarino" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; display: block; margin-bottom: 16px;">
-        <div style="font-size: 19px; font-weight: 700; font-stretch: 90%; letter-spacing: -0.015em; color: var(--bone); line-height: 1.2;">Zeke Novarino</div>
-        <div style="font-size: 14px; color: var(--bone-2); margin-top: 4px;">Contenido Rentable</div>
-        <div style="font-family: var(--mono); font-size: 12px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">zeke.novarino · 504 publicaciones · 72,6 mil seguidores</div>
-      </div>
-
-      <div style="background: var(--noir); padding: 22px 20px 24px;">
-        <img src="/vanessa.png" alt="Vanessa Marrero" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; display: block; margin-bottom: 16px;">
-        <div style="font-size: 19px; font-weight: 700; font-stretch: 90%; letter-spacing: -0.015em; color: var(--bone); line-height: 1.2;">Vanessa Marrero</div>
-        <div style="font-size: 14px; color: var(--bone-2); margin-top: 4px;">Finanzas para negocios</div>
-        <div style="font-family: var(--mono); font-size: 12px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">vanessa__marrero · 1.106 publicaciones · 21,3 mil seguidores</div>
-      </div>
-    </div>
-  </div>
-
   <!-- ============ TRES LANZAMIENTOS POR DENTRO (4-nov-2026; réplica de /agencias-lanzamiento/ con foco en email) ============ -->
   <style>.casos{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.caso{display:flex;flex-direction:column;gap:16px;padding:24px;background:var(--noir-2);border-top:4px solid var(--accent)}.caso .vid{display:flex;flex-direction:column;gap:10px;text-decoration:none;color:var(--bone)}.caso .th{position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--noir-3)}.caso .th img{width:100%;height:100%;object-fit:cover;display:block}.caso .play{position:absolute;left:0;bottom:0;width:52px;height:52px;background:var(--accent);display:grid;place-items:center}.caso .vid-q{margin:0;font-size:16px;font-weight:600;font-stretch:94%;line-height:1.45;color:var(--bone)}.caso h3{margin:0;font-size:23px;font-weight:800;font-stretch:88%;line-height:1.15;letter-spacing:-.02em;color:var(--bone)}.caso p{margin:0;font-size:16px;line-height:1.6;color:var(--bone-2)}.caso blockquote{margin:0;font-size:17px;font-weight:600;font-stretch:94%;line-height:1.45;color:var(--bone)}.caso .wa{margin:auto 0 0;padding-top:4px;cursor:zoom-in}.caso .wa img{display:block;width:100%;height:auto;border-radius:10px;border:1px solid var(--line);box-shadow:0 8px 22px rgba(10,11,13,.08)}.wa-box{position:fixed;inset:0;z-index:999;display:grid;place-items:center;padding:20px;background:rgba(10,11,13,.82);cursor:zoom-out}.wa-box img{max-width:min(92vw,900px);max-height:88vh;width:auto;height:auto;border-radius:10px}.caso .d{margin-top:0;padding-top:14px;border-top:1px solid var(--line);font-family:var(--mono);font-size:11px;letter-spacing:.03em;color:var(--bone-3)}@media (max-width:1000px){.casos{grid-template-columns:minmax(0,1fr)}}@media (max-width:700px){.caso{padding:22px 20px}}</style>
-  <div class="wrap" style="padding-top: 20px; padding-bottom: 76px;">
+  <div class="wrap" style="padding-top: 76px; padding-bottom: 76px;">
     <h2 class="h-sec" style="font-weight: 900; font-stretch: 82%; line-height: 0.96; letter-spacing: -0.038em; margin: 0 0 14px; color: var(--bone);">Tres lanzamientos por dentro</h2>
     <p style="font-family: var(--mono); font-size: 13px; letter-spacing: 0.04em; color: var(--bone-3); margin: 0 0 36px;">tres de las decenas de lanzamientos de los que sale El Desglose</p>
     <div class="casos">
@@ -376,6 +400,56 @@
     <div class="col-2" style="display: grid; gap: 20px;">
       <figure style="margin: 0; display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 18px; align-items: start; padding: 28px 28px; background: var(--noir-2); border-left: 4px solid var(--accent);"><img class="foto-com" src="/li-vispo.png" alt="" style="width: 56px; height: 56px; border-radius: 50%; object-fit: cover; display: block;"><div><blockquote style="margin: 0 0 14px; font-size: clamp(18px, 1.7vw, 21px); font-weight: 600; font-stretch: 94%; line-height: 1.45; letter-spacing: -0.01em; color: var(--bone);">«Dani nos ayudó a conseguir nuestro objetivo con un copy que representa 100% quienes somos a día de hoy.»</blockquote><figcaption style="font-size: 15px; font-weight: 700; color: var(--bone);">Yan Vispo <span style="display: block; font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--bone-3); margin-top: 4px;">fundador de rumbo eficiente</span></figcaption></div></figure>
       <figure style="margin: 0; display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: 18px; align-items: start; padding: 28px 28px; background: var(--noir-2); border-left: 4px solid var(--accent);"><img class="foto-com" src="/li-minano.png" alt="" style="width: 56px; height: 56px; border-radius: 50%; object-fit: cover; display: block;"><div><blockquote style="margin: 0 0 14px; font-size: clamp(18px, 1.7vw, 21px); font-weight: 600; font-stretch: 94%; line-height: 1.45; letter-spacing: -0.01em; color: var(--bone);">«Es un gran profesional, con procesos muy estandarizados que le permiten imbuirse rápido y muy bien de las marcas para las que trabaja.»</blockquote><figcaption style="font-size: 15px; font-weight: 700; color: var(--bone);">Manuel Miñano <span style="display: block; font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--bone-3); margin-top: 4px;">empresario · consultor</span></figcaption></div></figure>
+    </div>
+  </div>
+
+  <!-- ============ 2 · CLIENTES ============ -->
+  <div class="wrap" style="padding-top: 8px; padding-bottom: 76px;">
+    <h2 class="h-sec" style="font-weight: 900; font-stretch: 82%; line-height: 0.96; letter-spacing: -0.038em; margin: 0 0 36px; color: var(--bone);">He escrito para</h2>
+
+    <div class="col-3" style="display: grid; gap: 1px; background: var(--line);">
+
+      <div style="background: var(--noir); padding: 22px 20px 24px;">
+        <img src="/josemunoz.png" alt="José Muñoz" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; display: block; margin-bottom: 16px;">
+        <div style="font-size: 19px; font-weight: 700; font-stretch: 90%; letter-spacing: -0.015em; color: var(--bone); line-height: 1.2;">José Muñoz</div>
+        <div style="font-size: 14px; color: var(--bone-2); margin-top: 4px;">Inversor inmobiliario</div>
+        <div style="font-family: var(--mono); font-size: 12px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">josemunoz.pro · 1.099 publicaciones · 105 mil seguidores</div>
+      </div>
+
+      <div style="background: var(--noir); padding: 22px 20px 24px;">
+        <img src="/crece.png" alt="CRECE" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; display: block; margin-bottom: 16px;">
+        <div style="font-size: 19px; font-weight: 700; font-stretch: 90%; letter-spacing: -0.015em; color: var(--bone); line-height: 1.2;">CRECE</div>
+        <div style="font-size: 14px; color: var(--bone-2); margin-top: 4px;">Publicidad y marketing</div>
+        <div style="font-family: var(--mono); font-size: 12px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">crecesinlimite_ · 12 publicaciones · 29,5 mil seguidores</div>
+      </div>
+
+      <div style="background: var(--noir); padding: 22px 20px 24px;">
+        <img src="/riders.png" alt="Digital Riders" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; display: block; margin-bottom: 16px;">
+        <div style="font-size: 19px; font-weight: 700; font-stretch: 90%; letter-spacing: -0.015em; color: var(--bone); line-height: 1.2;">Digital Riders</div>
+        <div style="font-size: 14px; color: var(--bone-2); margin-top: 4px;">Lanzamientos y embudos</div>
+        <div style="font-family: var(--mono); font-size: 12px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">digitalriders_ · 484 publicaciones · 7.899 seguidores</div>
+      </div>
+
+      <div style="background: var(--noir); padding: 22px 20px 24px;">
+        <img src="/hackaviss.png" alt="Jose Javier Pastor" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; display: block; margin-bottom: 16px;">
+        <div style="font-size: 19px; font-weight: 700; font-stretch: 90%; letter-spacing: -0.015em; color: var(--bone); line-height: 1.2;">Jose Javier Pastor</div>
+        <div style="font-size: 14px; color: var(--bone-2); margin-top: 4px;">Ciberseguridad</div>
+        <div style="font-family: var(--mono); font-size: 12px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">hackaviss · 116 publicaciones · 166 mil seguidores</div>
+      </div>
+
+      <div style="background: var(--noir); padding: 22px 20px 24px;">
+        <img src="/zeke.png" alt="Zeke Novarino" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; display: block; margin-bottom: 16px;">
+        <div style="font-size: 19px; font-weight: 700; font-stretch: 90%; letter-spacing: -0.015em; color: var(--bone); line-height: 1.2;">Zeke Novarino</div>
+        <div style="font-size: 14px; color: var(--bone-2); margin-top: 4px;">Contenido Rentable</div>
+        <div style="font-family: var(--mono); font-size: 12px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">zeke.novarino · 504 publicaciones · 72,6 mil seguidores</div>
+      </div>
+
+      <div style="background: var(--noir); padding: 22px 20px 24px;">
+        <img src="/vanessa.png" alt="Vanessa Marrero" style="width: 72px; height: 72px; border-radius: 50%; object-fit: cover; display: block; margin-bottom: 16px;">
+        <div style="font-size: 19px; font-weight: 700; font-stretch: 90%; letter-spacing: -0.015em; color: var(--bone); line-height: 1.2;">Vanessa Marrero</div>
+        <div style="font-size: 14px; color: var(--bone-2); margin-top: 4px;">Finanzas para negocios</div>
+        <div style="font-family: var(--mono); font-size: 12px; color: var(--bone-3); margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line);">vanessa__marrero · 1.106 publicaciones · 21,3 mil seguidores</div>
+      </div>
     </div>
   </div>
 
