@@ -13,6 +13,30 @@
 <link rel="stylesheet" href="/css/dgc-componentes.css">
 <link rel="stylesheet" href="/upsell-diagnostico/upsell.css">
 <script src="/js/analytics.js" defer></script>
+<style>
+/* Preguntas de perfil tras la compra: van al formulario de Wildmail «Post-compra · perfil del comprador (/gracias/)», campos 12, 13 y 14 y etiqueta perfil-postcompra. No mide nada. */
+.perfil{border-top:1px solid var(--line);margin-top:56px;padding-top:48px}
+.perfil-h2{font-size:clamp(24px,3.4vw,32px);font-weight:800;font-stretch:88%;line-height:1.12;letter-spacing:-.02em;margin:0 0 10px;text-wrap:pretty}
+.perfil-sub{font-size:17px;line-height:1.5;color:var(--ink-muted);margin:0 0 32px}
+.perfil form{display:flex;flex-direction:column;gap:30px}
+.preg{border:0;margin:0;padding:0;min-width:0;display:flex;flex-direction:column;gap:10px}
+.preg legend{padding:0;margin:0 0 12px;font-size:19px;font-weight:700;line-height:1.3;color:var(--ink)}
+.preg legend .n{display:block;margin-bottom:6px;font-family:var(--font-mono);font-size:11px;font-weight:500;letter-spacing:.04em;color:var(--ink-subtle)}
+.opc{display:grid;grid-template-columns:18px minmax(0,1fr);gap:12px;align-items:start;padding:14px 16px;background:var(--bg-sunken);border:1px solid var(--line-strong);border-radius:var(--radius-1);cursor:pointer;font-size:16px;line-height:1.45;color:var(--ink)}
+.opc input{accent-color:#0a0a0a;width:18px;height:18px;margin:2px 0 0}
+.opc:has(input:checked){background:var(--bg);border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.opc:has(input:focus-visible){outline:2px solid var(--focus-ring);outline-offset:2px}
+.campo{display:flex;flex-direction:column;gap:8px}
+.campo label{font-family:var(--font-mono);font-size:12px;letter-spacing:.04em;color:var(--ink-muted)}
+.campo .dg-input{flex:none;width:100%;border-right:1px solid var(--line-strong);border-radius:var(--radius-1)}
+.perfil .aviso{display:none;font-family:var(--font-mono);font-size:12px;color:var(--danger)}
+.perfil .falta .aviso{display:block}
+.campo.falta .dg-input{border-color:var(--danger)}
+.perfil .trampa{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.perfil-hecho{display:none;font-size:19px;line-height:1.5;margin:0}
+.perfil.enviado form{display:none}
+.perfil.enviado .perfil-hecho{display:block}
+</style>
 </head>
 <body>
 <!-- Página de agradecimiento: último paso del embudo de Hotmart «El Desglose + El Diagnóstico» (aceptar y rechazar terminan aquí). -->
@@ -25,8 +49,76 @@
   <p class="ups-p">Hotmart te acaba de enviar un email con el acceso a lo que has comprado. Si añadiste El Diagnóstico, te llega su acceso también.</p>
   <p class="ups-p muted">Si no lo ves en unos minutos, mira en promociones o en spam. Y si pagaste en efectivo o por transferencia, el acceso te llega en cuanto se apruebe el pago.</p>
   <p class="ups-p muted">Si tienes un problema para entrar, el soporte de Hotmart lo resuelve.</p>
+
+  <section class="perfil" id="perfil" aria-labelledby="perfil-h2">
+    <h2 class="perfil-h2" id="perfil-h2">Tres preguntas rápidas, opcionales, para que lo que te mande después te sirva.</h2>
+    <p class="perfil-sub">Contesta las que quieras. Es un minuto.</p>
+    <form novalidate>
+      <fieldset class="preg">
+        <legend><span class="n">01 / tu lanzamiento</span>¿Cuánto facturó tu último lanzamiento?</legend>
+        <label class="opc"><input type="radio" name="facturacion" value="Todavía no he lanzado"><span>Todavía no he lanzado</span></label>
+        <label class="opc"><input type="radio" name="facturacion" value="Menos de 5.000 $"><span>Menos de 5.000 $</span></label>
+        <label class="opc"><input type="radio" name="facturacion" value="Entre 5.000 y 20.000 $"><span>Entre 5.000 y 20.000 $</span></label>
+        <label class="opc"><input type="radio" name="facturacion" value="Entre 20.000 y 100.000 $"><span>Entre 20.000 y 100.000 $</span></label>
+        <label class="opc"><input type="radio" name="facturacion" value="Más de 100.000 $"><span>Más de 100.000 $</span></label>
+      </fieldset>
+      <fieldset class="preg">
+        <legend><span class="n">02 / tu lista</span>¿Cuántos contactos tienes en tu lista de email?</legend>
+        <label class="opc"><input type="radio" name="lista" value="Menos de 500"><span>Menos de 500</span></label>
+        <label class="opc"><input type="radio" name="lista" value="Entre 500 y 2.000"><span>Entre 500 y 2.000</span></label>
+        <label class="opc"><input type="radio" name="lista" value="Entre 2.000 y 10.000"><span>Entre 2.000 y 10.000</span></label>
+        <label class="opc"><input type="radio" name="lista" value="Más de 10.000"><span>Más de 10.000</span></label>
+      </fieldset>
+      <fieldset class="preg">
+        <legend><span class="n">03 / tus emails</span>¿Quién escribe hoy tus emails?</legend>
+        <label class="opc"><input type="radio" name="escribe" value="Yo"><span>Yo</span></label>
+        <label class="opc"><input type="radio" name="escribe" value="Alguien de mi equipo"><span>Alguien de mi equipo</span></label>
+        <label class="opc"><input type="radio" name="escribe" value="Un copy externo"><span>Un copy externo</span></label>
+        <label class="opc"><input type="radio" name="escribe" value="Nadie todavía"><span>Nadie todavía</span></label>
+      </fieldset>
+      <div class="campo" id="perfil-campo-email">
+        <label for="perfil-email">el email con el que has comprado</label>
+        <input class="dg-input" id="perfil-email" name="email" type="email" autocomplete="email" inputmode="email">
+        <span class="aviso">revisa el email: es el que usaste en el pago.</span>
+      </div>
+      <div class="trampa" aria-hidden="true"><label for="perfil-web">web</label><input id="perfil-web" name="web_url" type="text" tabindex="-1" autocomplete="off"></div>
+      <span class="aviso" id="perfil-aviso-vacio">contesta al menos una pregunta.</span>
+      <button class="ups-btn" type="submit">Enviar mis respuestas</button>
+    </form>
+    <p class="perfil-hecho" role="status">Hecho, gracias. Ya puedes ir a tu email a por tu acceso.</p>
+  </section>
 </div>
 
 <div class="ups-pie"><div class="wrap" style="max-width: 760px;"><span>daniel garcía de celis</span><span><a href="/aviso-legal/">aviso legal</a><a href="/privacidad/">privacidad</a><a href="/cookies/">cookies</a></span></div></div>
+<script>
+/* Preguntas de perfil → Wildmail (ActiveCampaign). El formulario solo pone la etiqueta perfil-postcompra:
+   no suscribe a ninguna lista ni dispara automatizaciones. Campos: 12 facturación, 13 tamaño de lista, 14 quién escribe. */
+(function () {
+  var FORM_ID = '10';
+  var CAMPO = { facturacion: 12, lista: 13, escribe: 14 };
+  var caja = document.getElementById('perfil');
+  var form = caja.querySelector('form');
+  var email = document.getElementById('perfil-email');
+  var q = new URLSearchParams(location.search).get('email');
+  if (q) email.value = q.trim();
+  function valor(n) { var r = form.querySelector('input[name="' + n + '"]:checked'); return r ? r.value : ''; }
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var r = { facturacion: valor('facturacion'), lista: valor('lista'), escribe: valor('escribe') };
+    var hay = r.facturacion || r.lista || r.escribe;
+    var mail = email.value.trim();
+    var ok = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(mail);
+    document.getElementById('perfil-campo-email').classList.toggle('falta', !ok);
+    document.getElementById('perfil-aviso-vacio').style.display = hay ? 'none' : 'block';
+    if (!ok || !hay) return;
+    if (form.querySelector('input[name="web_url"]').value) { caja.classList.add('enviado'); return; }
+    var d = new FormData();
+    [['u', FORM_ID], ['f', FORM_ID], ['s', ''], ['c', '0'], ['m', '0'], ['act', 'sub'], ['v', '2'], ['email', mail]].forEach(function (p) { d.append(p[0], p[1]); });
+    Object.keys(CAMPO).forEach(function (k) { if (r[k]) d.append('field[' + CAMPO[k] + ']', r[k]); });
+    fetch('https://danigdecelis.activehosted.com/proc.php', { method: 'POST', mode: 'no-cors', body: d }).catch(function () {});
+    caja.classList.add('enviado');
+  });
+})();
+</script>
 </body>
 </html>
