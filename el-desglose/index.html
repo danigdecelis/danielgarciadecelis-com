@@ -97,6 +97,16 @@
     @media (max-width: 1000px) { .hero-compra { grid-template-columns: minmax(0, 1fr); gap: 28px; } }
   </style>
   <style>.foto-com{filter:grayscale(1);transition:filter .3s ease}figure:hover .foto-com,figure:focus-within .foto-com{filter:none}</style>
+  <style>
+    /* Pop-up de salida → /numeros/ (mismo componente que el de la home) */
+    .popup-fondo{position:fixed;inset:0;background:rgba(4,4,6,.86);z-index:100;display:flex;align-items:center;justify-content:center;padding:16px}
+    .popup-caja{position:relative;background:var(--bg-raised);border:1px solid var(--line-strong);border-top:6px solid var(--accent);max-width:560px;width:100%;padding:44px 40px 40px;box-sizing:border-box;font-family:var(--font-sans);color:var(--ink)}
+    .popup-cerrar{position:absolute;top:10px;right:16px;font-family:var(--font-mono);font-size:26px;line-height:1;color:var(--ink-subtle);background:none;border:0;padding:4px;cursor:pointer}
+    .popup-cerrar:hover{color:var(--ink)}
+    .popup-caja .dg-label{display:flex}
+    .popup-caja .dg-btn{white-space:normal;height:auto;min-height:52px;text-align:center}
+    @media (max-width:520px){.popup-caja{padding:40px 22px 28px}.popup-caja .dg-btn{display:flex;width:100%}}
+  </style>
 </head>
 <body>
 
@@ -584,6 +594,19 @@
 
 </div>
 
+<!-- ============ POP-UP DE SALIDA → /numeros/ ============ -->
+<div id="popup-salida" hidden>
+  <div class="popup-fondo" data-overlay="1">
+    <div class="popup-caja" role="dialog" aria-modal="true" aria-labelledby="popup-salida-titulo">
+      <button type="button" class="popup-cerrar" data-cerrar="1" aria-label="Cerrar">×</button>
+      <span class="dg-label" style="margin-bottom: 22px;">antes de irte</span>
+      <h3 id="popup-salida-titulo" style="margin: 0 0 16px; font-family: var(--font-display); font-weight: 900; font-stretch: 80%; font-size: clamp(30px, 4vw, 44px); line-height: .95; letter-spacing: -.035em;">Lo entiendo: todavía <span class="dg-mark">no me conoces</span></h3>
+      <p style="margin: 0 0 26px; font-size: 17px; line-height: 1.6; color: var(--ink-muted);">Antes de pagarme nada, mira cómo pienso. Te regalo los números de 17 lanzamientos reales: la mediana, el peor y el mejor de cada etapa, para que veas dónde se te escapa el dinero en los tuyos.</p>
+      <a class="dg-btn dg-btn--primario js-popup-numeros" href="/numeros/">quiero ver los números <span class="dg-arrow">→</span></a>
+    </div>
+  </div>
+</div>
+
 <script>
 var HOTMART_CHECKOUT_URL = 'https://pay.hotmart.com/P107822681W'; // checkout de El Desglose (embudo con el upsell de El Diagnóstico)
 (function () {
@@ -608,6 +631,77 @@ var HOTMART_CHECKOUT_URL = 'https://pay.hotmart.com/P107822681W'; // checkout de
   new IntersectionObserver(function (e) {
     barra.style.transform = e[0].isIntersecting ? 'translateY(110%)' : 'none';
   }).observe(caja);
+})();
+</script>
+<script>
+/* Pop-up de salida: ofrece /numeros/ a quien se va sin comprar.
+   Ordenador: el ratón sale por arriba de la ventana.
+   Móvil: después de ver el precio, un scroll rápido hacia arriba, o 60 s en la página sin pulsar comprar.
+   Una vez por sesión; nunca a quien ya ha pulsado comprar; no toca el botón de atrás. */
+(function () {
+  var caja = document.getElementById('popup-salida');
+  if (!caja) return;
+  var CLAVE = 'dgc_desglose_popup';
+  var hecho = false;
+  try { hecho = sessionStorage.getItem(CLAVE) === '1'; } catch (e) {}
+  function bloquear() { hecho = true; try { sessionStorage.setItem(CLAVE, '1'); } catch (e) {} }
+
+  var enlace = caja.querySelector('.js-popup-numeros');
+  if (enlace && location.search) enlace.href = '/numeros/' + location.search;
+
+  document.addEventListener('click', function (e) {
+    if (e.target.closest && e.target.closest('a.js-hotmart')) bloquear();
+  }, true);
+
+  function abrir() {
+    if (hecho || !caja.hidden) return false;
+    if (document.getElementById('dgc-cookies')) return false; // con el aviso de cookies abierto, espera
+    bloquear();
+    caja.hidden = false;
+    document.body.style.overflow = 'hidden';
+    if (window.dgcTrack) window.dgcTrack('popup_salida_visto', { destino: 'numeros' });
+    return true;
+  }
+  function cerrar() {
+    caja.hidden = true;
+    document.body.style.overflow = '';
+  }
+  caja.addEventListener('click', function (e) {
+    if (e.target.hasAttribute('data-overlay') || e.target.closest('[data-cerrar]')) cerrar();
+    else if (e.target.closest('.js-popup-numeros') && window.dgcTrack) window.dgcTrack('popup_salida_clic', { destino: 'numeros' });
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && !caja.hidden) cerrar();
+  });
+
+  // Ordenador
+  document.addEventListener('mouseout', function (e) {
+    if (e.clientY <= 0 && !e.relatedTarget) abrir();
+  });
+
+  // Móvil (pantalla táctil sin ratón)
+  var tactil = window.matchMedia && window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+  if (!tactil) return;
+  var precio = document.querySelector('.hero-caja');
+  var vioPrecio = false;
+  function revisarPrecio() {
+    if (vioPrecio || !precio) return;
+    if (precio.getBoundingClientRect().bottom < 0) vioPrecio = true;
+  }
+  var ultY = window.scrollY, ultT = Date.now();
+  window.addEventListener('scroll', function () {
+    revisarPrecio();
+    var y = window.scrollY, t = Date.now();
+    var dy = y - ultY, dt = t - ultT;
+    if (vioPrecio && dy < 0 && dt > 0 && dt < 400) {
+      var vel = -dy / dt; // px por ms hacia arriba
+      if (vel > 1.5 && -dy > window.innerHeight * 0.25) abrir();
+    }
+    if (dt > 120) { ultY = y; ultT = t; }
+  }, { passive: true });
+  (function esperar(ms) {
+    setTimeout(function () { if (!hecho && !abrir()) esperar(5000); }, ms);
+  })(60000);
 })();
 </script>
 </body>
