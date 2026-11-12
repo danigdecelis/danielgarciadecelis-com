@@ -58,7 +58,7 @@ form.enviado + .rg-ok,form.enviado .rg-ok{display:block}
 
 /* Prueba social de las landings de regalo */
 .rg-logos-label{margin:0 0 28px;font-family:var(--font-mono);font-size:12px;letter-spacing:.04em;color:var(--ink-subtle)}
-.rg-logos{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));border-top:1px solid var(--line);border-left:1px solid var(--line)}
+.rg-logos{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));border-top:1px solid var(--line);border-left:1px solid var(--line)}
 .rg-logo{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;min-height:150px;padding:22px 12px 18px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);text-align:center}
 .rg-logo img{transition:filter .25s ease,opacity .25s ease}
 .rg-logo .av{width:64px;height:64px;border-radius:50%;object-fit:cover;filter:grayscale(1);opacity:.8}
