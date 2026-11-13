@@ -17,32 +17,12 @@
 .saludo{display:flex;align-items:center;gap:clamp(18px,4vw,40px)}
 .foto{flex:0 0 clamp(130px,36%,280px);width:clamp(130px,36%,280px);height:auto;aspect-ratio:540/676;object-fit:cover;border-radius:var(--radius-1);background:#c9ccc8}
 .saludo .ups-h1{flex:1;min-width:0;margin:0;font-size:clamp(26px,5.4vw,52px)}
-.regalo{border-top:1px solid var(--line);margin-top:64px;padding-top:56px}
-.regalo .ups-h1{font-size:clamp(30px,5vw,48px)}
-.regalo-ul{list-style:none;padding:0;margin:0 0 32px;display:flex;flex-direction:column;gap:12px}
-.regalo-ul li{position:relative;padding-left:26px;font-size:18px;line-height:1.55}
-.regalo-ul li::before{content:"";position:absolute;left:0;top:.55em;width:9px;height:9px;background:var(--accent)}
-.regalo .ups-btn{max-width:440px}
-.regalo-pie{font-size:15px;color:var(--ink-muted);margin:18px 0 0}
-dialog.ficha-dlg{width:min(760px,calc(100vw - 24px));max-height:calc(100vh - 32px);overflow-y:auto;overscroll-behavior:contain;padding:0;border:1px solid var(--line-strong,var(--line));background:var(--bg);color:var(--ink)}
-dialog.ficha-dlg::backdrop{background:rgba(10,10,10,.6)}
-.ficha-cab{position:sticky;top:0;z-index:1;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:12px 14px 12px 22px;background:var(--bg);border-bottom:1px solid var(--line);font-family:var(--font-mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-muted)}
-.ficha-cerrar{width:40px;height:40px;border:1px solid var(--line);background:transparent;color:var(--ink);font-size:22px;line-height:1;cursor:pointer}
-.ficha-cuerpo{padding:8px 22px 36px}
-.ficha-cuerpo h2{font-size:clamp(26px,4.4vw,38px);font-weight:900;font-stretch:80%;line-height:1;letter-spacing:-.03em;margin:24px 0 6px}
-.f-h2{font-size:22px;font-weight:800;letter-spacing:-.01em;margin:36px 0 12px}
-.ficha-cuerpo p,.f-ul li{font-size:17px;line-height:1.6;margin:0 0 12px}
-.f-mail{background:var(--bg-sunken);border:1px solid var(--line);padding:18px 20px 8px;margin:0 0 14px}
-.f-toque{font-family:var(--font-mono);font-size:12px!important;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-muted)}
-.f-meta{font-size:15px!important;margin-bottom:4px!important}
-.f-nota{border-left:3px solid var(--accent);padding-left:14px}
-.f-ul{padding-left:20px;margin:0 0 12px}
 </style>
 </head>
 <body>
 <!-- Página de segmentación del email 7 de la bienvenida de /numeros/ («Te apuesto algo»).
      Quien hace clic en «Sí, me has pillado tío» aterriza aquí. La segmentación la hace Wildmail con la acción del enlace,
-     no esta página. Debajo va de regalo la ficha 11 de El Desglose (texto copiado del Doc «11 · La escalera de asistencia», 13-nov-2026); abrirla manda el evento ficha_apuesta_abierta. -->
+     no esta página: aquí no hay formulario ni se mide nada aparte de la analítica general. -->
 <div class="wrap" style="max-width: 760px; padding-top: 36px;">
   <img src="/assets/logo/dgdc-horizontal-claro.svg" alt="Daniel García de Celis" width="200" height="30" style="height: 30px; width: auto; display: block;">
 </div>
@@ -51,139 +31,7 @@ dialog.ficha-dlg::backdrop{background:rgba(10,10,10,.6)}
   <video class="foto" src="/apuesta/pulgar-v3.mp4" poster="/apuesta/pulgar-v3.jpg" width="540" height="676" autoplay loop muted playsinline aria-label="Daniel con el pulgar hacia arriba"></video>
   <h1 class="ups-h1">Perfecto, lo tengo en cuenta y te contaré cosas pronto.</h1>
   </div>
-  <section class="regalo" aria-labelledby="regalo-h2">
-    <p class="ups-eti">un regalo, ya que te he pillado</p>
-    <h2 class="ups-h1" id="regalo-h2">Los 6 emails que meten a la gente en la sala. <span class="mark">Y ninguno es de relleno.</span></h2>
-    <p class="ups-p">Es la ficha 11 de El Desglose, «La escalera de asistencia»: los seis toques que van del día antes al directo, escritos enteros y con lo que hace cada uno. Te la dejo aquí entera, sin pedirte nada a cambio.</p>
-    <ul class="regalo-ul">
-      <li>Por qué con dos o tres recordatorios no basta (y se nota en la sala).</li>
-      <li>Los seis emails escritos, con asunto y preheader, para adaptarlos a tu evento.</li>
-      <li>Qué trabajo hace cada toque y por qué va justo donde va.</li>
-      <li>Por qué concentrarlos en las últimas 24 horas funciona y repartirlos por la semana no.</li>
-      <li>Los dos toques que más gente meten en la sala, y que son justo los que más pereza da mandar.</li>
-    </ul>
-    <button type="button" class="ups-btn js-abrir-ficha">Leer la ficha 11 entera →</button>
-    <p class="regalo-pie">Es una de las fichas de El Desglose. Del resto te hablo pronto.</p>
-  </section>
 </div>
-
-<dialog class="ficha-dlg" id="ficha-dlg" aria-labelledby="ficha-dlg-titulo">
-  <div class="ficha-cab"><span>ficha 11 · el desglose</span><button type="button" class="ficha-cerrar js-cerrar-ficha" aria-label="Cerrar">×</button></div>
-  <div class="ficha-cuerpo">
-    <h2 id="ficha-dlg-titulo">La escalera de asistencia</h2>
-<h3 class="f-h2">De qué va</h3>
-<p>Registrarse es gratis y olvidarse también.</p>
-<p>Entre el día que alguien se apunta a tu evento y el día del evento pasan cosas: se le llena la agenda, se le olvida, le surge algo o simplemente deja de acordarse de que aquello existía.</p>
-<p>Esta pieza es lo que impide que eso pase.</p>
-<p>No es un email, son seis toques repartidos entre el día antes y el momento del directo. Y cada uno hace un trabajo distinto: unos recuerdan, otros dan ganas y el último quita la fricción de conectarse.</p>
-<p>La tentación es mandar dos o tres y pensar que con eso basta. No basta, y se nota en la sala.</p>
-<p>Y ojo con una cosa que a mí me costó entender: <b>los toques del final no molestan a nadie salvo al que ya había decidido no venir.</b> El que sí va a conectarse los agradece, porque le llegan justo cuando estaba con otra cosa.</p>
-<p>Va entre el registro y el evento, con el grueso concentrado en las últimas veinticuatro horas.</p>
-<h3 class="f-h2">Los emails</h3>
-<div class="f-mail"><p class="f-toque">Toque 1 · Veinticuatro horas antes</p>
-<p class="f-meta"><b>Asunto: Mañana a las 19:00</b></p>
-<p class="f-meta"><b>Preheader: Y lo que vamos a mirar exactamente.</b></p>
-<p>Mañana nos vemos.</p>
-<p>Te recuerdo lo que vamos a hacer, que no es una charla sobre tendencias del sector.</p>
-<p>Vamos a coger tres agencias reales, mirar por dónde se les está yendo el margen y ver qué tocarían primero. Con sus números en pantalla.</p>
-<p>Si alguna vez has terminado un mes bueno y has pensado "he facturado más que nunca y no lo noto", eso es exactamente lo que vamos a desmontar.</p>
-<p>Mañana a las 19:00. El enlace te llega por la mañana y otra vez una hora antes: no lo busques ahora.</p>
-<p>Un abrazo,</p>
-</div>
-<div class="f-mail"><p class="f-toque">Toque 2 · La mañana del evento</p>
-<p class="f-meta"><b>Asunto: Aquí tienes el enlace</b></p>
-<p class="f-meta"><b>Preheader: Guárdalo o entra directo esta tarde.</b></p>
-<p>Buenos días.</p>
-<p>Esta tarde a las 19:00, aquí: [ENLACE]</p>
-<p>Te lo mando ahora para que lo tengas y no lo tengas que buscar luego con las prisas.</p>
-<p>Una cosa práctica: ponte donde puedas escribir. Va a haber un momento en el que te voy a pedir que hagas una cuenta con los números de tu propia agencia, y hacerla en el momento no es lo mismo que decir "esto lo miro luego".</p>
-<p>Nos vemos en unas horas.</p>
-<p>Un abrazo,</p>
-</div>
-<div class="f-mail"><p class="f-toque">Toque 3 · Tres horas antes</p>
-<p class="f-meta"><b>Asunto: En tres horas</b></p>
-<p class="f-meta"><b>Preheader: Y por qué te interesa la primera media hora.</b></p>
-<p>En tres horas empezamos.</p>
-<p>Te aviso de una cosa: empiezo puntual y la parte de los tres casos va al principio. Si llegas a y media, te la pierdes.</p>
-<p>No es por castigar al que llega tarde, es que lo interesante está ahí y luego construimos sobre eso.</p>
-<p>[ENLACE]</p>
-<p>Un abrazo,</p>
-</div>
-<div class="f-mail"><p class="f-toque">Toque 4 · Una hora antes</p>
-<p class="f-meta"><b>Asunto: En una hora</b></p>
-<p class="f-meta"><b>Preheader: Enlace aquí.</b></p>
-<p>En una hora.</p>
-<p>[ENLACE]</p>
-<p>Un abrazo,</p>
-</div>
-<div class="f-mail"><p class="f-toque">Toque 5 · En vivo</p>
-<p class="f-meta"><b>Asunto: Estamos dentro</b></p>
-<p class="f-meta"><b>Preheader: Entra aunque llegues empezado.</b></p>
-<p>Ya hemos empezado.</p>
-<p>Si te has liado, entra igual: [ENLACE]</p>
-<p>Estamos en la parte de los casos, que es la buena. Entra y te pones al día en dos minutos.</p>
-<p>Un abrazo,</p>
-</div>
-<div class="f-mail"><p class="f-toque">Toque 6 · Al terminar</p>
-<p class="f-meta"><b>Asunto: Seguimos mañana</b></p>
-<p class="f-meta"><b>Preheader: Y lo que viene ahora.</b></p>
-<p>Se me ha hecho corto.</p>
-<p>Gracias a los que estuvisteis, y sobre todo a los que sacasteis vuestros números en directo, que eso tiene mérito.</p>
-<p>Mañana te mando la grabación con fecha de caducidad, y te cuento una cosa que anuncié al final y que no todo el mundo llegó a escuchar.</p>
-<p>Un abrazo,</p>
-</div>
-<p class="f-nota"><b>Nota · El incentivo que solo existe en directo.</b> Si quieres subir la asistencia real y no solo los registros, ata algo a estar presente: un análisis en vivo de la agencia de alguien de la sala, un material que solo se entrega ahí, un sorteo. La regla para saber si sirve es esta: <b>si lo puedes mandar mañana por email, no es un incentivo.</b> Tiene que ser algo que se pierda por no estar.</p>
-<h3 class="f-h2">Las tripas de los emails</h3>
-<p><i>Ya los has leído. Ahora mira el esqueleto de la escalera: qué hace cada toque y por qué está donde está.</i></p>
-<ul class="f-ul">
-<li><b>La escalera completa</b>: seis toques con densidad creciente. El primero trabaja el deseo y los últimos quitan fricción, y esa progresión es la pieza, no cada email por separado.</li>
-<li><b>El toque de veinticuatro horas recuerda el porqué</b>: no dice que hay un evento, dice qué se va a hacer dentro. Es el único de los seis que todavía tiene que convencer.</li>
-<li><b>La frase de reconocimiento</b>: "has facturado más que nunca y no lo notas". Coloca al lector dentro del problema en una línea.</li>
-<li><b>El aviso de que el enlace llega luego</b>: le quita la tarea de guardarlo. Cada cosa que no tiene que hacer es una excusa menos para no aparecer.</li>
-<li><b>El toque de la mañana entrega el enlace</b>: su único trabajo es que lo tenga. Corto, práctico y sin argumentos.</li>
-<li><b>La instrucción de preparación</b>: que se ponga donde pueda escribir. Le obliga a decidir dónde va a estar, y quien decide eso ya casi ha ido.</li>
-<li><b>El toque de tres horas usa la jerarquía</b>: dice qué parte se pierde si llega tarde. Es lo que consigue puntualidad sin regañar a nadie.</li>
-<li><b>El toque de una hora es solo el enlace</b>: cuatro palabras. A esa altura, cualquier argumento sobra y estorba.</li>
-<li><b>El toque en vivo recoge al rezagado</b>: "entra aunque llegues empezado". Sin este toque pierdes a todo el que asume que ya es tarde.</li>
-<li><b>El detalle de qué se está viendo</b>: le dice que se pone al día en dos minutos. Quita la única objeción del que llega tarde.</li>
-<li><b>El toque de cierre agradece y siembra</b>: da las gracias con un detalle concreto y anuncia el replay con caducidad. Es la bisagra hacia la fase siguiente.</li>
-<li><b>La densidad creciente</b>: uno el día antes, cinco el día del evento. La escalera se estrecha según se acerca la hora, que es como funciona la atención.</li>
-</ul>
-<h3 class="f-h2">Lo que yo he aprendido usándolos</h3>
-<ul class="f-ul">
-<li><b>Los seis toques hacen falta y los últimos son los que más traen.</b> Cada vez que he recortado la escalera para no dar la lata, ha bajado la asistencia. El de una hora antes y el de en vivo son los dos que más gente meten en la sala, y son los dos que más pereza dan de mandar.</li>
-<li><b>Los últimos molestan solo al que no iba a venir.</b> El que se conecta agradece el aviso, porque le llega justo cuando estaba haciendo otra cosa. Las bajas que provoca esta escalera son de gente que ya había decidido no aparecer.</li>
-<li><b>La densidad importa más que el número.</b> Seis toques repartidos por igual a lo largo de la semana no funcionan. Concentrados el día del evento, sí, porque es cuando la persona decide de verdad si se conecta o no.</li>
-</ul>
-<h3 class="f-h2">¡Ojo!</h3>
-<p>No cambies el argumento en cada toque. Los seis venden lo mismo, y lo que cambia es cuánto dicen: el primero explica y el de una hora antes solo pone el enlace. Si cada uno trae un argumento nuevo, la escalera se convierte en seis emails distintos y cansa.</p>
-<p>Y si prometes que empiezas puntual, empieza puntual. El toque de tres horas antes usa eso como argumento, y quien llegó a la hora por tu culpa se acuerda si te pones a saludar veinte minutos.</p>
-<p><b>Errores que lo matan:</b> recortar la escalera para no dar la lata · repartir los toques por igual en vez de concentrarlos · meter argumentos nuevos en los toques finales · olvidar el toque de en vivo, que es el que recoge al que cree que ya es tarde · prometer puntualidad y empezar tarde.</p>
-<h3 class="f-h2">Súbela tú</h3>
-<ul class="f-ul">
-<li><b>La escalera</b> → seis toques con densidad creciente hacia la hora del evento. La pieza es la progresión, no cada email suelto.</li>
-<li><b>El toque lejano</b> → el único que todavía convence. Cuenta qué se va a hacer dentro, no que hay un evento.</li>
-<li><b>El toque de la mañana</b> → entrega el enlace y quita tareas. Cada cosa que no tiene que hacer es una excusa menos.</li>
-<li><b>La preparación</b> → pídele algo pequeño que tenga listo. Le obliga a decidir dónde va a estar a esa hora.</li>
-<li><b>El toque intermedio</b> → usa la jerarquía: qué parte se pierde si llega tarde. Consigue puntualidad sin regañar.</li>
-<li><b>El toque de una hora</b> → el enlace y poco más. Cualquier argumento a esa altura estorba.</li>
-<li><b>El toque en vivo</b> → recoge al que cree que ya es tarde y dile qué se está viendo ahora. Es el que más gente mete de los seis.</li>
-<li><b>El toque de cierre</b> → agradece con un detalle real y siembra lo que viene. Es la bisagra hacia la fase siguiente.</li>
-<li><b>El incentivo</b> → si quieres asistencia real, ata algo a estar presente. Si se puede mandar mañana por email, no es un incentivo.</li>
-</ul>
-  </div>
-</dialog>
-<script>
-(function () {
-  var dlg = document.getElementById('ficha-dlg');
-  document.querySelector('.js-abrir-ficha').addEventListener('click', function () {
-    if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', '');
-    if (window.dgcTrack) window.dgcTrack('ficha_apuesta_abierta');
-  });
-  dlg.querySelector('.js-cerrar-ficha').addEventListener('click', function () { dlg.close(); });
-  dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
-})();
-</script>
 
 <div class="ups-pie"><div class="wrap" style="max-width: 760px;"><span>daniel garcía de celis</span><span><a href="/aviso-legal/">aviso legal</a><a href="/privacidad/">privacidad</a><a href="/cookies/">cookies</a></span></div></div>
 </body>
