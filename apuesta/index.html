@@ -17,12 +17,34 @@
 .saludo{display:flex;align-items:center;gap:clamp(18px,4vw,40px)}
 .foto{flex:0 0 clamp(130px,36%,280px);width:clamp(130px,36%,280px);height:auto;aspect-ratio:540/676;object-fit:cover;border-radius:var(--radius-1);background:#c9ccc8}
 .saludo .ups-h1{flex:1;min-width:0;margin:0;font-size:clamp(26px,5.4vw,52px)}
+.regalo{border-top:1px solid var(--line);margin-top:64px;padding-top:56px}
+.regalo .ups-h1{font-size:clamp(30px,5vw,48px)}
+.regalo-ul{list-style:none;padding:0;margin:0 0 32px;display:flex;flex-direction:column;gap:12px}
+.regalo-ul li{position:relative;padding-left:26px;font-size:18px;line-height:1.55}
+.regalo-ul li::before{content:"";position:absolute;left:0;top:.55em;width:9px;height:9px;background:var(--accent)}
+.regalo .ups-btn{max-width:440px}
+.regalo-pie{font-size:15px;color:var(--ink-muted);margin:18px 0 0}
+dialog.ficha-dlg{width:min(760px,calc(100vw - 24px));max-height:calc(100vh - 32px);overflow-y:auto;overscroll-behavior:contain;padding:0;border:1px solid var(--line-strong,var(--line));background:var(--bg);color:var(--ink)}
+dialog.ficha-dlg::backdrop{background:rgba(10,10,10,.6)}
+.ficha-cab{position:sticky;top:0;z-index:1;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:12px 14px 12px 22px;background:var(--bg);border-bottom:1px solid var(--line);font-family:var(--font-mono);font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-muted)}
+.ficha-cerrar{width:40px;height:40px;border:1px solid var(--line);background:transparent;color:var(--ink);font-size:22px;line-height:1;cursor:pointer}
+.ficha-cuerpo{padding:8px 22px 36px}
+.ficha-cuerpo h2{font-size:clamp(26px,4.4vw,38px);font-weight:900;font-stretch:80%;line-height:1;letter-spacing:-.03em;margin:24px 0 6px}
+.f-h2{font-size:22px;font-weight:800;letter-spacing:-.01em;margin:36px 0 12px}
+.ficha-cuerpo p,.f-ul li{font-size:17px;line-height:1.6;margin:0 0 12px}
+.f-mail{background:var(--bg-sunken);border:1px solid var(--line);padding:18px 20px 8px;margin:0 0 14px}
+.f-toque{font-family:var(--font-mono);font-size:12px!important;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-muted)}
+.f-meta{font-size:15px!important;margin-bottom:4px!important}
+.f-nota{border-left:3px solid var(--accent);padding-left:14px}
+.f-ul{padding-left:20px;margin:0 0 12px}
+.tabla-wrap{overflow-x:auto;margin:0 0 14px}
+.f-tabla{border-collapse:collapse;width:100%;font-size:15px}
+.f-tabla th,.f-tabla td{text-align:left;vertical-align:top;padding:9px 10px;border-bottom:1px solid var(--line)}
+.f-tabla th{font-family:var(--font-mono);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-muted)}
 </style>
 </head>
 <body>
-<!-- Página de segmentación del email 7 de la bienvenida de /numeros/ («Te apuesto algo»).
-     Quien hace clic en «Sí, me has pillado tío» aterriza aquí. La segmentación la hace Wildmail con la acción del enlace,
-     no esta página: aquí no hay formulario ni se mide nada aparte de la analítica general. -->
+<!-- Página de segmentación del email 7 de la bienvenida de /numeros/ («Te apuesto algo»). La segmentación la hace Wildmail con la acción del enlace, no esta página. Debajo va de regalo un documento de criterio sobre la secuencia de asistencia (13-nov-2026; no es la ficha 11 de El Desglose). Abrirlo manda el evento criterio_asistencia_abierto. -->
 <div class="wrap" style="max-width: 760px; padding-top: 36px;">
   <img src="/assets/logo/dgdc-horizontal-claro.svg" alt="Daniel García de Celis" width="200" height="30" style="height: 30px; width: auto; display: block;">
 </div>
@@ -31,7 +53,98 @@
   <video class="foto" src="/apuesta/pulgar-v3.mp4" poster="/apuesta/pulgar-v3.jpg" width="540" height="676" autoplay loop muted playsinline aria-label="Daniel con el pulgar hacia arriba"></video>
   <h1 class="ups-h1">Perfecto, lo tengo en cuenta y te contaré cosas pronto.</h1>
   </div>
+  <section class="regalo" aria-labelledby="regalo-h2">
+    <p class="ups-eti">un regalo, ya que te he pillado</p>
+    <h2 class="ups-h1" id="regalo-h2">Cómo monto yo los emails que meten a la gente en la sala. <span class="mark">Sin uno solo de relleno.</span></h2>
+    <p class="ups-p">Es la etapa que más se desploma de todo el lanzamiento, y la única que se arregla escribiendo. Aquí tienes el criterio con el que planteo la secuencia de asistencia: cuántos emails, cuándo, cómo de largos y qué trabajo hace cada uno.</p>
+    <ul class="regalo-ul">
+      <li>Para que no dependas de la suerte el día del directo: el reparto exacto de los seis toques y por qué cinco van el mismo día.</li>
+      <li>Para que el primer email dé ganas y no solo recuerde la hora: la promesa que se puede comprobar en los primeros minutos.</li>
+      <li>Para rescatar al que cree que ya llega tarde: el segundo aviso en vivo, que casi nadie manda.</li>
+      <li>Para que estar en directo valga más que ver la grabación: tres trucos sacados de un lanzamiento de más de 10 millones de dólares que he estudiado por dentro.</li>
+    </ul>
+    <button type="button" class="ups-btn js-abrir-ficha">Leer el documento →</button>
+  </section>
 </div>
+
+<dialog class="ficha-dlg" id="ficha-dlg" aria-labelledby="ficha-dlg-titulo">
+  <div class="ficha-cab"><span>criterio · secuencia de asistencia</span><button type="button" class="ficha-cerrar js-cerrar-ficha" aria-label="Cerrar">×</button></div>
+  <div class="ficha-cuerpo">
+    <h2 id="ficha-dlg-titulo">Cómo monto yo la secuencia de asistencia</h2>
+<p>Registrarse es gratis y olvidarse también.</p>
+<p>Ya lo viste en el informe: casi 8 de cada 10 registrados entran al grupo de WhatsApp y al directo llegan menos de 2. Entre una cosa y otra no falla el interés. Falla lo que le cuentas a esa persona desde que se apunta hasta que empiezas.</p>
+<p>Esto es lo que hago yo con esos emails. No es una plantilla: es el criterio con el que decido cuántos van, cuándo y qué dice cada uno.</p>
+<h3 class="f-h2">1. La asistencia se decide el día del evento</h3>
+<p>Mando seis emails: uno el día antes y cinco el mismo día. Veinticuatro horas antes, por la mañana, tres horas antes, una hora antes, al empezar y con el directo ya en marcha.</p>
+<p>Seis emails repartidos por igual a lo largo de la semana no funcionan. Concentrados el día del evento, sí, porque es cuando la persona decide de verdad si se conecta o no.</p>
+<p><b>Los del final no molestan a nadie salvo al que ya había decidido no venir.</b> El que sí va a conectarse los agradece, porque le llegan justo cuando estaba con otra cosa. Cada vez que he recortado esta secuencia para no dar la lata, ha bajado la asistencia.</p>
+<h3 class="f-h2">2. Entre el registro y la víspera, casi silencio</h3>
+<p>La tentación es calentar durante semanas. Pero la apertura cae con cada envío, y el email más importante de todos es el que dice «estamos en directo». Si llegas a ese con la lista cansada, lo abre poca gente.</p>
+<p>Conozco de segunda mano un caso que lo retrata: tres semanas de anuncios con uno o dos mensajes al día, 2.400 registros y unas 300 personas en el primer directo. Un 12,5%.</p>
+<p>O sea que antes de la víspera mando lo justo, y cada mensaje con un trabajo claro.</p>
+<h3 class="f-h2">3. El primero es largo y los últimos caben en una pantalla</h3>
+<p>El de veinticuatro horas antes es el único que todavía tiene que convencer, así que es un email de verdad, de los que se leen despacio. El de «estamos en directo» es una línea y el enlace.</p>
+<p>A esa hora ya no se convence a nadie: se abre la puerta. Cualquier frase de más es un segundo que el lector no está entrando.</p>
+<div class="tabla-wrap"><table class="f-tabla">
+<thead><tr><th>Cuándo</th><th>Longitud</th><th>Su trabajo</th></tr></thead>
+<tbody>
+<tr><td>24 horas antes</td><td>Largo</td><td>Dar ganas. Es el único que convence.</td></tr>
+<tr><td>La mañana del evento</td><td>Medio</td><td>Repetir la promesa y avisar de que el enlace llega luego.</td></tr>
+<tr><td>3 horas antes</td><td>Corto</td><td>Una sola idea, la que más pesa, y el enlace.</td></tr>
+<tr><td>1 hora antes</td><td>Corto</td><td>La hora, el enlace y lo que solo pasa en directo.</td></tr>
+<tr><td>Al empezar</td><td>Una línea</td><td>«Entra ahora» y el enlace.</td></tr>
+<tr><td>Con el directo en marcha</td><td>Una línea</td><td>Recoger al que cree que ya llega tarde.</td></tr>
+</tbody></table></div>
+<h3 class="f-h2">4. Un solo argumento, cada vez más corto</h3>
+<p>Los seis emails venden lo mismo. Lo que cambia es cuánto dicen: el primero lo desarrolla entero y los últimos solo ponen el enlace.</p>
+<p>Si cada uno trae un argumento nuevo, dejas de tener una secuencia de asistencia y pasas a tener seis emails distintos. Y eso cansa.</p>
+<h3 class="f-h2">5. Una promesa que se pueda comprobar en los primeros minutos</h3>
+<p>El temario no mueve a nadie. Lo que mueve es una promesa concreta con hora: «en los primeros diez minutos ya pensarás que ha merecido la pena venir. Y si no cumplo, te vas».</p>
+<p>Rebaja el compromiso de una tarde entera a diez minutos, y diez minutos se los da cualquiera.</p>
+<p>Y ojo, que aquí hay trampa: lo que prometas tiene que ocurrir. Quien llegó puntual por esa frase la está comprobando, y es la misma persona que tenía que comprarte tres días después.</p>
+<h3 class="f-h2">6. Pide una respuesta, no atención</h3>
+<p>El email de la víspera no termina informando. Termina pidiendo algo pequeño: «respóndeme con esta palabra si vienes».</p>
+<p>Quien la escribe ya ha dicho por escrito que va, y eso pesa más que haberlo pensado.</p>
+<h3 class="f-h2">7. Dos avisos en vivo, no uno</h3>
+<p>El segundo es el que casi nadie manda, y es el que le dice al que se ha liado que todavía puede entrar. Sin él pierdes a todo el que asume que ya es tarde.</p>
+<p>El de una hora antes y los de en vivo son los que más gente meten en la sala. Y son los que más pereza da mandar.</p>
+<h3 class="f-h2">8. Ata algo a estar presente</h3>
+<p>La regla para saber si sirve: <b>si lo puedes mandar mañana por email, no es un incentivo, es contenido.</b> Tiene que ser algo que se pierda por no estar.</p>
+<p>Tres formas de hacerlo que vi en un lanzamiento de más de 10 millones de dólares que he estudiado por dentro:</p>
+<ul class="f-ul">
+<li><b>El sorteo con regla.</b> «Si te nombro y no estás en directo, el premio pasa al siguiente.»</li>
+<li><b>El material con contraseña.</b> El cuaderno de trabajo se entrega antes, pero la contraseña para abrirlo solo se dice en directo.</li>
+<li><b>El regalo sin nombre.</b> Se anuncia desde el registro que al final habrá algo que no va a estar en la grabación, sin decir qué es.</li>
+</ul>
+<p>El tercero cojea si el regalo decepciona. Esa promesa se paga en el siguiente lanzamiento.</p>
+<h3 class="f-h2">9. Si el evento dura dos días, la secuencia se manda entera cada día</h3>
+<p>Lo habitual es currarse la asistencia del primer día y dar por hecho que al segundo la gente vendrá sola. No viene. Y el segundo día suele ser justo donde presentas la oferta.</p>
+<p>El segundo día ya no le hablas a un registrado. Le hablas a alguien que estuvo o a alguien que faltó, y el email tiene que servirles a los dos.</p>
+<h3 class="f-h2">10. Si dices que no se graba, no lo grabes</h3>
+<p>«No habrá grabación» llena la sala una vez. Si después mandas el replay, esa mentira pequeña te cuesta la credibilidad para el resto del lanzamiento.</p>
+<p>Si vas a mandar la grabación, dilo y explica qué se pierde quien no esté en directo. Con el coste dicho, el que puede venir viene.</p>
+<h3 class="f-h2">Para tu próximo lanzamiento</h3>
+<p>Antes de escribir una línea, contesta a estas cuatro preguntas:</p>
+<ul class="f-ul">
+<li>¿Qué va a pasar en los primeros diez minutos que merezca reorganizar una tarde?</li>
+<li>¿Qué se pierde quien no esté en directo, que no se pueda mandar mañana?</li>
+<li>¿Cuántos emails mando el día del evento, y cuántos antes?</li>
+<li>¿Tengo el segundo aviso en vivo programado?</li>
+</ul>
+<p>Si las cuatro tienen respuesta, los emails casi se escriben solos.</p>
+  </div>
+</dialog>
+<script>
+(function () {
+  var dlg = document.getElementById('ficha-dlg');
+  document.querySelector('.js-abrir-ficha').addEventListener('click', function () {
+    if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', '');
+    if (window.dgcTrack) window.dgcTrack('criterio_asistencia_abierto');
+  });
+  dlg.querySelector('.js-cerrar-ficha').addEventListener('click', function () { dlg.close(); });
+  dlg.addEventListener('click', function (e) { if (e.target === dlg) dlg.close(); });
+})();
+</script>
 
 <div class="ups-pie"><div class="wrap" style="max-width: 760px;"><span>daniel garcía de celis</span><span><a href="/aviso-legal/">aviso legal</a><a href="/privacidad/">privacidad</a><a href="/cookies/">cookies</a></span></div></div>
 </body>
