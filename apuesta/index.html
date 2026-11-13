@@ -14,7 +14,9 @@
 <link rel="stylesheet" href="/upsell-diagnostico/upsell.css">
 <script src="/js/analytics.js" defer></script>
 <style>
-.foto{display:block;width:100%;max-width:300px;height:auto;aspect-ratio:540/676;object-fit:cover;border-radius:var(--radius-1);margin:0 0 36px;background:#c9ccc8}
+.saludo{display:flex;align-items:center;gap:clamp(18px,4vw,40px)}
+.foto{flex:0 0 clamp(130px,36%,280px);width:clamp(130px,36%,280px);height:auto;aspect-ratio:540/676;object-fit:cover;border-radius:var(--radius-1);background:#c9ccc8}
+.saludo .ups-h1{flex:1;min-width:0;margin:0;font-size:clamp(26px,5.4vw,52px)}
 </style>
 </head>
 <body>
@@ -25,8 +27,10 @@
   <img src="/assets/logo/dgdc-horizontal-claro.svg" alt="Daniel García de Celis" width="200" height="30" style="height: 30px; width: auto; display: block;">
 </div>
 <div class="wrap" style="max-width: 760px; padding-top: 64px;">
+  <div class="saludo">
   <video class="foto" src="/apuesta/pulgar.mp4" poster="/apuesta/pulgar.jpg" width="540" height="676" autoplay loop muted playsinline aria-label="Daniel con el pulgar hacia arriba"></video>
   <h1 class="ups-h1">Perfecto, lo tengo en cuenta y te contaré cosas pronto.</h1>
+  </div>
 </div>
 
 <div class="ups-pie"><div class="wrap" style="max-width: 760px;"><span>daniel garcía de celis</span><span><a href="/aviso-legal/">aviso legal</a><a href="/privacidad/">privacidad</a><a href="/cookies/">cookies</a></span></div></div>
