@@ -29,8 +29,10 @@
 .di-despues{font-size:14px !important;color:var(--ink-subtle) !important}
 .di-hero{max-width:none}
 .di-h1{max-width:none;text-wrap:balance;font-size:clamp(40px,5.2vw,80px)}
-.di-yt{margin:14px 0 0;font-family:var(--font-mono);font-size:13px}
-.di-yt a{color:var(--ink-muted)}
+.di-media{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:48px;align-items:center;margin-top:8px}
+.di-media .di-video{margin:0}
+.di-media .di-que{margin-top:0}
+@media (max-width:900px){.di-media{grid-template-columns:minmax(0,1fr);gap:32px}}
 .di-que{margin-top:48px}
 .di-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.04em;color:var(--ink-subtle);margin:0 0 18px;text-transform:lowercase}
 .di-plano{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:56px;align-items:center;scroll-margin-top:96px}
@@ -61,8 +63,8 @@
         <div class="di-hero">
           <p class="rg-ante">Desmontaje · AI Income Challenge 2026 de Iman Gadzhi</p>
           <h1 class="rg-h1 di-h1">Cómo aprovechar el último lanzamiento de Iman Gadzhi <span class="dg-mark">aunque tú no gastes 7 millones de dólares</span> en publicidad.</h1>
+          <div class="di-media">
           <div class="di-video"><!--VIDEO--><div class="di-pend">[aquí va el vídeo de YouTube cuando esté publicado]</div></div>
-          <p class="di-yt"><!--YOUTUBE_URL: cambiar el href por el enlace del vídeo cuando esté publicado--><a href="https://www.youtube.com/@danigdecelis" target="_blank" rel="noopener">¿Prefieres verlo en YouTube? Ábrelo aquí →</a></p>
           <div class="di-que">
             <p class="di-label">lo que vas a ver</p>
             <ul class="rg-lista">
@@ -73,6 +75,7 @@
               <li><span><b>La escalera de cuotas que tenía preparada</b> antes de abrir el carrito.</span></li>
               <li><span><b>Cómo acabó:</b> si el cierre fue de verdad o de cartón.</span></li>
             </ul>
+          </div>
           </div>
         </div>
       </div>
