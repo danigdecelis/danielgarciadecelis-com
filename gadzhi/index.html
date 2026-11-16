@@ -1,6 +1,7 @@
 <!doctype html>
 <html lang="es">
 <head>
+<script>document.documentElement.classList.add('js')</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, follow">
@@ -26,7 +27,20 @@
 .di-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .di-video .di-pend{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:13px;color:var(--ink-subtle);text-align:center;padding:16px}
 .di-despues{font-size:14px !important;color:var(--ink-subtle) !important}
-#plano{scroll-margin-top:96px}
+.di-hero{max-width:none}
+.di-h1{max-width:none;text-wrap:balance;font-size:clamp(40px,5.2vw,80px)}
+.di-yt{margin:14px 0 0;font-family:var(--font-mono);font-size:13px}
+.di-yt a{color:var(--ink-muted)}
+.di-que{margin-top:48px}
+.di-label{font-family:var(--font-mono);font-size:12px;letter-spacing:.04em;color:var(--ink-subtle);margin:0 0 18px;text-transform:lowercase}
+.di-plano{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:56px;align-items:center;scroll-margin-top:96px}
+.di-plano h2{margin:0 0 16px;font-family:var(--font-display);font-weight:900;font-stretch:82%;font-size:clamp(30px,3.4vw,46px);line-height:1;letter-spacing:-.03em}
+.di-plano__txt p:not(.di-label){margin:0;font-size:18px;line-height:1.55;color:var(--ink-muted);max-width:52ch}
+.di-plano__accion{border:1px solid var(--accent);background:var(--bg);padding:32px}
+.di-abrir{width:100%;justify-content:center}
+.js .di-plano:not(.abierto) form{display:none}
+.di-plano.abierto .di-abrir{display:none}
+@media (max-width:820px){.di-plano{grid-template-columns:minmax(0,1fr);gap:28px}.di-plano__accion{padding:22px 18px}.di-que{margin-top:36px}}
 .di-agencias .cnt{display:flex;flex-direction:column;align-items:flex-start;gap:20px}
 .di-agencias h2{margin:0;font-family:var(--font-display);font-weight:800;font-stretch:86%;font-size:clamp(26px,2.8vw,38px);line-height:1.05;letter-spacing:-.02em}
 .di-agencias p{margin:0;font-size:17px;line-height:1.55;color:var(--ink-muted);max-width:56ch}
@@ -44,16 +58,41 @@
     <div class="row">
       <div class="rail rg-rail-movil"></div>
       <div class="cnt cnt-hero">
-        <div class="rg-hero rg-hero--areas">
-          <div class="rg-intro">
-            <p class="rg-ante">Desmontaje · AI Income Challenge 2026 de Iman Gadzhi</p>
-            <h1 class="rg-h1">Lo que el último lanzamiento de Iman Gadzhi <span class="dg-mark">le enseña al tuyo</span>, aunque tú no hayas captado 1,66 millones de leads registrados.</h1>
-            <div class="di-video"><!--VIDEO--><div class="di-pend">[aquí va el vídeo de YouTube cuando esté publicado]</div></div>
+        <div class="di-hero">
+          <p class="rg-ante">Desmontaje · AI Income Challenge 2026 de Iman Gadzhi</p>
+          <h1 class="rg-h1 di-h1">Cómo aprovechar el último lanzamiento de Iman Gadzhi <span class="dg-mark">aunque tú no gastes 7 millones de dólares</span> en publicidad.</h1>
+          <div class="di-video"><!--VIDEO--><div class="di-pend">[aquí va el vídeo de YouTube cuando esté publicado]</div></div>
+          <p class="di-yt"><!--YOUTUBE_URL: cambiar el href por el enlace del vídeo cuando esté publicado--><a href="https://www.youtube.com/@danigdecelis" target="_blank" rel="noopener">¿Prefieres verlo en YouTube? Ábrelo aquí →</a></p>
+          <div class="di-que">
+            <p class="di-label">lo que vas a ver</p>
+            <ul class="rg-lista">
+              <li><span><b>Por qué tenía 1.777 anuncios de captación a la vez</b> y cómo los repartía en tres olas.</span></li>
+              <li><span><b>Los 25 emails con el carrito abierto que no vendían nada.</b> Y por qué no fue un error.</span></li>
+              <li><span><b>Las contraseñas que solo se daban en directo,</b> y cómo hacía caducar todo, los replays incluidos.</span></li>
+              <li><span><b>Cuántas ventas necesitaba para no perder dinero,</b> con los contadores públicos de Whop.</span></li>
+              <li><span><b>La escalera de cuotas que tenía preparada</b> antes de abrir el carrito.</span></li>
+              <li><span><b>Cómo acabó:</b> si el cierre fue de verdad o de cartón.</span></li>
+            </ul>
           </div>
-          <div class="rg-caja" id="plano">
-            <h2>El plano en PDF, gratis al email</h2>
-            <p>Cada pieza del lanzamiento, de los anuncios a la venta, y lo que haría yo con cada una a una escala más asequible para el común de los mortales.</p>
-            <form class="dg-form js-regalo-form" data-source="landing-gadzhi" data-regalo="desmontaje-iman" novalidate style="max-width: none;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec di-plano-sec" style="background: var(--bg-raised);">
+    <div class="wrap">
+      <div class="row">
+        <div class="rail"></div>
+        <div class="cnt">
+          <div class="di-plano" id="plano">
+            <div class="di-plano__txt">
+              <p class="di-label">el regalo</p>
+              <h2>El plano en PDF, gratis al email</h2>
+              <p>Todo el lanzamiento, pieza a pieza: lo que hizo Iman, por qué funciona y, al lado de cada pieza, lo que haría yo a una escala más asequible para el común de los mortales.</p>
+            </div>
+            <div class="di-plano__accion">
+              <button class="dg-btn dg-btn--primario dg-btn--grande di-abrir js-abrir-plano" type="button">quiero el plano <span class="dg-arrow">→</span></button>
+              <form class="dg-form js-regalo-form" data-source="landing-gadzhi" data-regalo="desmontaje-iman" novalidate style="max-width: none;">
               <div class="rg-campos" style="display: flex; flex-direction: column; gap: 16px; position: relative;">
                 <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;"><label>Deja este campo vacío <input type="text" name="web_url" tabindex="-1" autocomplete="off"></label></div>
                 <div class="campo"><label for="d-nombre">nombre</label><input class="dg-input" id="d-nombre" type="text" name="nombre" placeholder="Tu nombre" required autocomplete="given-name"></div>
@@ -64,24 +103,14 @@
               </div>
               <div class="rg-ok"><b>Recibido.</b> Te lo acabo de mandar al email. Si no está en la bandeja de entrada, mira en promociones.</div>
             </form>
-          </div>
-          <div class="rg-mas">
-            <ul class="rg-lista">
-              <li><span><b>Por qué tenía 1.777 anuncios de captación a la vez</b> y cómo los repartía en tres olas.</span></li>
-              <li><span><b>Los 25 emails con el carrito abierto que no vendían nada.</b> Y por qué no fue un error.</span></li>
-              <li><span><b>Las contraseñas que solo se daban en directo,</b> y cómo hacía caducar todo, los replays incluidos.</span></li>
-              <li><span><b>Cuántas ventas necesitaba para no perder dinero,</b> con los contadores públicos de Whop.</span></li>
-              <li><span><b>La escalera de cuotas que tenía preparada</b> antes de abrir el carrito.</span></li>
-              <li><span><b>Cómo acabó:</b> si el cierre fue de verdad o de cartón.</span></li>
-              <li><span><b>Al lado de cada pieza, la versión que puedes montar tú</b> sin su presupuesto.</span></li>
-            </ul>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="sec" style="background: var(--bg-raised);">
+  <section class="sec">
     <div class="wrap">
       <div class="row">
         <div class="rail"></div>
@@ -112,7 +141,7 @@
         <div></div>
         <div class="cnt" style="padding-top: 64px; padding-bottom: 64px; display: flex; flex-wrap: wrap; gap: 28px 48px; align-items: center; justify-content: space-between;">
           <p style="margin: 0; font-family: var(--font-display); font-weight: 900; font-stretch: 82%; font-size: clamp(30px, 3.4vw, 46px); line-height: 1; letter-spacing: -.03em; max-width: 22ch; color: var(--on-accent);">El lanzamiento entero, pieza a pieza, en un PDF.</p>
-          <a class="dg-btn dg-btn--grande btn-invertido" href="#plano">quiero el plano <span class="dg-arrow">→</span></a>
+          <a class="dg-btn dg-btn--grande btn-invertido js-abrir-plano" href="#plano">quiero el plano <span class="dg-arrow">→</span></a>
         </div>
       </div>
     </div>
@@ -141,5 +170,16 @@
 
 </div>
 <script src="/js/lista.js" defer></script>
+<script>
+document.querySelectorAll('.js-abrir-plano').forEach(function (b) {
+  b.addEventListener('click', function (e) {
+    e.preventDefault();
+    var caja = document.getElementById('plano');
+    caja.classList.add('abierto');
+    caja.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setTimeout(function () { var n = document.getElementById('d-nombre'); if (n) n.focus({ preventScroll: true }); }, 450);
+  });
+});
+</script>
 </body>
 </html>
