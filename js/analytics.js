@@ -4,7 +4,8 @@
    - La decisión se puede cambiar con el enlace «configurar cookies» que se añade al pie de cada página.
    - Eventos: PageView, ViewContent (El Desglose y El Diagnóstico suelto), Lead (altas), ClicComprar (botón propio de compra; el
      InitiateCheckout y el Purchase los manda Hotmart desde su checkout), muestra_abierta.
-   - Los enlaces a pay.hotmart.com salen con las UTM de la visita y con sck/src para que Hotmart atribuya la venta. */
+   - Los enlaces a pay.hotmart.com salen con las UTM de la visita y con sck/src para que Hotmart atribuya la venta,
+     y con el fbclid del anuncio (salvo rechazo de cookies) para que Meta atribuya la compra al anuncio. */
 (function () {
   var GA4_MEASUREMENT_ID = 'G-3YBNRK07S8'; // propiedad «danielgarciadecelis.com», cuenta «Daniel García de Celis» (23-oct-2026)
   var META_PIXEL_ID = '2370688430350844'; // conjunto de datos «danielgarciadecelis.com», porfolio Dani GdC (23-oct-2026)
@@ -34,6 +35,10 @@
         ' · ' + window.location.pathname + ' · ' + new Date().toISOString().slice(0, 10));
     }
   }
+  /* Identificador de clic de Meta (fbclid): se guarda el de la última visita que lo traía, para pasárselo al checkout */
+  var K_FBCLID = 'dgc_fbclid';
+  var fbclidActual = params.get('fbclid');
+  if (fbclidActual) guardar(K_FBCLID, fbclidActual.slice(0, 500));
   function utmVisita() {
     if (Object.keys(actuales).length) return actuales;
     try { return JSON.parse(leer(K_ULTIMO) || '{}'); } catch (e) { return {}; }
@@ -50,6 +55,10 @@
         .join('_').replace(/[^a-zA-Z0-9_\-]/g, '-').replace(/_+$/, '').slice(0, 100);
       if (!u.searchParams.get('sck')) u.searchParams.set('sck', etiqueta);
       if (!u.searchParams.get('src')) u.searchParams.set('src', window.location.pathname.replace(/\//g, '') || 'home');
+      // fbclid al checkout: así el píxel que Hotmart carga en su página de pago reconoce el clic del anuncio.
+      // No se pasa si la persona rechazó las cookies.
+      var fbclid = fbclidActual || leer(K_FBCLID);
+      if (fbclid && leer(K_DECISION) !== 'no' && !u.searchParams.get('fbclid')) u.searchParams.set('fbclid', fbclid);
       a.href = u.toString();
     } catch (e) {}
   }
