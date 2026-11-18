@@ -1302,9 +1302,9 @@
      palanca:'Campaña de recompra sobre tus clientes: una oferta del siguiente paso natural a tu producto principal, dirigida solo a quien ya compró. Convierte varias veces mejor que cualquier captación.'},
 
     {id:'contradiccion', sev:4, campaign:'reactivacion',
-     cond:a=>a.frase==='podriavendermas'&&(a.monetiza==='nunca'||a.monetiza==='sololanz'||a.ultima==='masde6'),
+     cond:a=>a.frase==='podriavendermas'&&(a.monetiza==='nunca'||a.ultima==='masde6'), // «solo cuando lanza» con la lista activa ya lo cubre la regla sololanza: aquí no hay nada que despertar
      title:'Dices que tu lista podría vender más, y tus respuestas dicen por qué',
-     body:()=>`Has marcado que tu lista vende pero podría vender más. Mirando el resto de tus respuestas, el "podría" tiene una causa concreta: ${A.monetiza==='nunca'?'me has dicho que casi nunca te genera ventas':(A.monetiza==='sololanz'?'solo te vende cuando lanzas':'tu última campaña fue hace más de 6 meses')}. No es que le falte un empujón, es que primero hay que despertarla y darle una razón para volver a comprarte.`,
+     body:()=>`Has marcado que tu lista vende pero podría vender más. Mirando el resto de tus respuestas, el "podría" tiene una causa concreta: ${A.monetiza==='nunca'?'me has dicho que casi nunca te genera ventas':'tu última campaña fue hace más de 6 meses'}. No es que le falte un empujón, es que primero hay que despertarla y darle una razón para volver a comprarte.`,
      palanca:'Empezar por reactivar y medir, no por vender más fuerte. Primero saber quién sigue ahí y devolverles valor, después la oferta. El orden inverso quema la lista que quieres rentabilizar.'},
 
     {id:'contra_responde', sev:4, campaign:'ventadirecta',
@@ -1443,7 +1443,9 @@
     function guardarResumenVenta(r, name){
       try { const o = resumenVenta(r); o.nom = name||''; o.ts = Date.now(); localStorage.setItem('dgc_lista_resumen', JSON.stringify(o)); } catch(e) {}
     }
-    function urlVenta(r){ return location.origin + '/diagnostico-completo/#lista=' + codigoVenta(resumenVenta(r)); }
+    // ?fuga=<id de la regla> va en claro para que Wildmail pueda leerlo: la automatización «router» de /lista/ mira
+    // si el campo 11 contiene «fuga=<id>» y pone la etiqueta del avatar (p. ej. fuga=sololanza -> fuga-solo-factura-cuando-lanza).
+    function urlVenta(r){ return location.origin + '/diagnostico-completo/?fuga=' + encodeURIComponent(r.findings[0].id||'') + '#lista=' + codigoVenta(resumenVenta(r)); }
 
     /* =====================================================
        CAPTURA + INFORME
