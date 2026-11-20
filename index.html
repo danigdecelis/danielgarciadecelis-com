@@ -56,6 +56,15 @@ html{scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 /* Servicios: dos puertas */
 .puertas2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.metodo{margin-top:112px}
+.metodo-lead{margin:0 0 28px;font-family:var(--font-mono);font-size:13px;color:var(--ink-subtle)}
+.metodo-pasos{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 48px;max-width:1040px}
+.metodo-pasos li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:14px;padding:20px 0;border-top:1px solid var(--line);font-size:17px;line-height:1.6;color:var(--ink-muted)}
+.metodo-pasos b{color:var(--ink);font-weight:700}
+.metodo-pasos .n{font-family:var(--font-mono);font-size:13px;font-weight:600;color:var(--ink-subtle);padding-top:3px}
+.metodo-pasos .dif .n{display:inline-flex;align-items:center;justify-content:center;width:32px;height:26px;padding:0;background:var(--accent);color:var(--on-accent)}
+.metodo-cierre{margin:36px 0 0;max-width:64ch;font-size:clamp(19px,1.8vw,22px);line-height:1.55;color:var(--ink)}
+@media (max-width:820px){.metodo{margin-top:72px}.metodo-pasos{grid-template-columns:minmax(0,1fr)}.metodo-pasos li{font-size:16px}}
 .puertas2 > div{display:flex;flex-direction:column;gap:16px;padding:32px 30px;background:var(--bg-raised);border-top:4px solid var(--accent)}
 .puertas2 .k{font-family:var(--font-mono);font-size:12px;letter-spacing:.04em;color:var(--ink-subtle)}
 .puertas2 h3{margin:0;font-family:var(--font-display);font-weight:900;font-stretch:82%;font-size:clamp(28px,2.6vw,36px);line-height:1;letter-spacing:-.03em;color:var(--ink)}
@@ -92,7 +101,7 @@ html{scroll-behavior:smooth}
             <h1 class="h-hero">No soy un copywriter al que <span class="dg-mark">la&nbsp;IA pueda sustituir</span></h1>
           </div>
           <div class="hero-txt">
-            <p class="hero-sub">Soy un copywriter estratega detrás de decenas de lanzamientos y embudos de 5, 6 y 7 cifras.</p>
+            <p class="hero-sub">La IA no me sustituye: trabaja para mí. Yo pongo el criterio de decenas de lanzamientos y embudos de 5, 6 y 7 cifras; ella, la velocidad. Por eso trabajo más rápido, con más claridad y con más profundidad.</p>
             <div><a class="dg-btn dg-btn--primario dg-btn--grande" href="/direccion/solicitud/">cuéntame tu negocio <span class="dg-arrow">→</span></a></div>
           </div>
           <div class="hero-photo">
@@ -175,6 +184,24 @@ html{scroll-behavior:smooth}
             </div>
             <div class="quien-foto"><div class="dg-foto" style="width: 100%; aspect-ratio: 4 / 3;"><img src="/daniel.jpg" alt="Daniel García de Celis" loading="lazy"></div></div>
           </div>
+          <!-- Así trabajo contigo (20-nov-2026): el método con IA, en diez pasos. Los marcados son los que me diferencian. -->
+          <div class="metodo" id="metodo">
+            <h2 class="h-sec">Así trabajo contigo</h2>
+            <p class="metodo-lead">Diez pasos. Los marcados en amarillo son los que me diferencian.</p>
+            <ol class="metodo-pasos">
+              <li><span class="n">01</span><div><b>Una llamada que no se va en lo básico.</b> Antes de vernos me cuentas tu negocio, tu oferta, tus números y lo que ya has probado, así que llego sabiendo dónde mirar.</div></li>
+              <li class="dif"><span class="n">02</span><div><b>Veo lo que tú no me puedes contar.</b> Con IA estudio tu mercado, las ofertas de tu competencia y cómo habla tu cliente cuando nadie le está vendiendo; si hay anuncios, también qué funciona hoy en tu sector. Así no decimos lo mismo que todos.</div></li>
+              <li><span class="n">03</span><div><b>Tu prueba social, convertida en arsenal.</b> Reviso tus testimonios, casos y cifras y te enseño a ordenarlos, para que ningún argumento a tu favor se quede en un cajón.</div></li>
+              <li><span class="n">04</span><div><b>Una hora para escucharte, no para preguntarte.</b> Voy con la investigación hecha y dedico la llamada a oírte hablar, que es de donde sale tu voz, y a cerrar contigo qué decimos y a quién.</div></li>
+              <li class="dif"><span class="n">05</span><div><b>Un sistema que solo sirve para tu negocio.</b> Monto tu proyecto en mi sistema de IA con tu voz, tu mercado, tu competencia y mi criterio, desmenuzado pieza a pieza: ángulos, primeras líneas, llamadas a la acción. Por eso lo que escribo suena a ti desde muy pronto.</div></li>
+              <li><span class="n">06</span><div><b>Sin sorpresas.</b> Cerramos por escrito qué te entrego, en qué fechas y en qué orden, y los dos sabemos qué esperar.</div></li>
+              <li class="dif"><span class="n">07</span><div><b>Lo que no suena a ti, no sale.</b> Antes de que lo veas, cada pieza pasa un control contra tu vocabulario, tus giros y lo que tú nunca dirías. Te llega para revisar, no para reescribir.</div></li>
+              <li><span class="n">08</span><div><b>Rápido.</b> Los encargos habituales, en menos de 48 horas laborables y muchas veces en menos de 24, en un documento listo para revisar. Tu calendario no espera por mí.</div></li>
+              <li class="dif"><span class="n">09</span><div><b>Cada corrección la haces una vez.</b> Lo que me cambias queda guardado en tu proyecto y el siguiente texto ya nace con ello, así que cada entrega pide menos retoques que la anterior.</div></li>
+              <li><span class="n">10</span><div><b>Cuanto más trabajamos, mejor sale.</b> La investigación, tu voz y tus correcciones alimentan cada encargo nuevo, y el sistema aprende cada semana. Por eso puedo llevarte un canal entero y no solo piezas sueltas.</div></li>
+            </ol>
+            <p class="metodo-cierre">Otros te dirán que se reúnen contigo, diseñan la estrategia, la ejecutan y miden. Yo también. La diferencia está en los pasos 2, 5, 7 y 9: investigo más allá de lo que me cuentas, construyo un sistema solo para tu negocio, controlo la voz antes de entregar y aprendo de cada corrección.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -186,7 +213,7 @@ html{scroll-behavior:smooth}
       <div class="row">
         <div class="rail"></div>
         <div class="cnt">
-          <h2 class="h-sec">Cómo trabajo contigo</h2>
+          <h2 class="h-sec">Qué hago por ti</h2>
           <div class="puertas2 cinco">
             <div><span class="k">dirección</span><h3>Consultoría estratégica</h3><p>Dirijo la estrategia de tu negocio: qué lanzas, cuándo y con qué mensaje. Tú y tu equipo lo ejecutáis.</p></div>
             <div><span class="k">lanzamientos</span><h3>Tu lanzamiento, de la captación al carrito</h3><p>La estrategia y todas las piezas: anuncios, landing, emails, WhatsApp, el guion del webinar y la página de venta, con una sola voz: la tuya.</p></div>
