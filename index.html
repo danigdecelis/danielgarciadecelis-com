@@ -56,6 +56,18 @@ html{scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 /* Servicios: dos puertas */
 .puertas2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+/* subtítulo de la cabecera con jerarquía (20-nov-2026) */
+.hs{display:flex;flex-direction:column;gap:10px;max-width:640px}
+.hs p{margin:0}
+.hs-1{font-family:var(--font-display);font-weight:800;font-stretch:88%;font-size:clamp(24px,2.3vw,32px);line-height:1.15;letter-spacing:-.02em;color:var(--ink);margin-bottom:10px!important}
+.hs-par{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 12px;font-size:clamp(19px,1.7vw,22px);line-height:1.35;color:var(--ink)}
+.hs-par b{font-weight:700;position:relative;padding-left:22px;white-space:nowrap}
+.hs-par b::before{content:"";position:absolute;left:0;top:.42em;width:10px;height:10px;background:var(--accent)}
+.hs-nota{font-size:13.5px;font-weight:400;color:var(--ink-subtle)}
+@media (min-width:1200px){.hs-par{flex-wrap:nowrap}.hs-nota{white-space:nowrap}}
+@media (min-width:1200px) and (max-width:1359px){.hs-nota{font-size:12px}}
+.hs-fin{margin-top:14px!important;padding-top:14px;border-top:1px solid var(--line);font-size:clamp(17px,1.5vw,19px);line-height:1.55;color:var(--ink-muted)}
+@media (max-width:1199px){.hs-nota{flex-basis:100%;padding-left:22px}}
 .metodo{margin-top:112px}
 .metodo-lead{margin:0 0 28px;font-family:var(--font-mono);font-size:13px;color:var(--ink-subtle)}
 .metodo-pasos{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 48px;max-width:1040px}
@@ -101,7 +113,12 @@ html{scroll-behavior:smooth}
             <h1 class="h-hero">No soy un copywriter al que <span class="dg-mark">la&nbsp;IA pueda sustituir</span></h1>
           </div>
           <div class="hero-txt">
-            <p class="hero-sub">La IA no me sustituye: trabaja para mí.<br>Yo pongo el criterio (el de decenas de lanzamientos y embudos de 5, 6 y&nbsp;7&nbsp;cifras).<br>Ella, la velocidad.<br>Desde que he creado mi sistema operativo de IA, trabajo más rápido, con más claridad y más profundidad.</p>
+            <div class="hs">
+              <p class="hs-1">La IA no me sustituye: trabaja para mí.</p>
+              <p class="hs-par"><b>Yo pongo el criterio</b> <span class="hs-nota">(el de decenas de lanzamientos y embudos de 5, 6 y&nbsp;7&nbsp;cifras)</span></p>
+              <p class="hs-par"><b>Ella, la velocidad</b></p>
+              <p class="hs-fin">Con mi sistema operativo de IA trabajo más rápido y con más claridad y profundidad.</p>
+            </div>
             <div><a class="dg-btn dg-btn--primario dg-btn--grande" href="/direccion/solicitud/">cuéntame tu negocio <span class="dg-arrow">→</span></a></div>
           </div>
           <div class="hero-photo">
