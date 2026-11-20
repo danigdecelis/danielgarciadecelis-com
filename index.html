@@ -45,7 +45,7 @@
 @media (max-width:820px){.jose{grid-template-columns:minmax(0,1fr);gap:24px}.home-stats{margin-top:48px}.q-txt p{font-size:17px}}
 /* Menú de anclas: cada enlace baja a su bloque de la misma página */
 html{scroll-behavior:smooth}
-#servicios,#infoproductores,#agencias,#lista{scroll-margin-top:80px}
+#servicios,#infoproductores,#agencias,#lista,#metodo{scroll-margin-top:80px}
 .nav-dcha{display:flex;align-items:center;gap:24px}
 .nav-anclas{display:flex;gap:20px;font-family:var(--font-mono);font-size:12px;letter-spacing:.04em}
 .nav-anclas a{color:var(--ink-muted);text-decoration:none}
@@ -80,6 +80,7 @@ html{scroll-behavior:smooth}
 .abogado-rasgos b{color:var(--ink);font-weight:700}
 @media (max-width:820px){.abogado{margin-top:72px;grid-template-columns:minmax(0,1fr);gap:28px}.abogado-p{font-size:17px}}
 .metodo{margin-top:112px}
+.metodo-tesis{margin:0 0 18px;max-width:58ch;font-size:clamp(19px,1.8vw,22px);line-height:1.5;color:var(--ink)}
 .metodo-lead{margin:0 0 28px;font-family:var(--font-mono);font-size:13px;color:var(--ink-subtle)}
 .metodo-pasos{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 48px;max-width:1040px}
 .metodo-pasos li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:14px;padding:20px 0;border-top:1px solid var(--line);font-size:17px;line-height:1.6;color:var(--ink-muted)}
@@ -111,7 +112,7 @@ html{scroll-behavior:smooth}
   <nav class="dg-nav navp" style="position: sticky; top: 0; z-index: 10; background: var(--bg);">
     <a class="dg-nav__marca nav-logo" href="#top"><img class="nav-completo" src="/assets/logo/dgdc-horizontal-oscuro.svg" alt="Daniel García de Celis" width="200" height="30" style="height: 30px; width: auto;"><img class="nav-simbolo" src="/assets/logo/dgdc-simbolo-oscuro.svg" alt="Daniel García de Celis" style="height: 26px; width: auto;"></a>
     <div class="nav-dcha">
-      <nav class="nav-anclas" aria-label="Secciones"><a href="#servicios">servicios</a></nav>
+      <nav class="nav-anclas" aria-label="Secciones"><a href="#metodo">cómo trabajo</a></nav>
       <a class="dg-btn dg-btn--primario" href="#lista">la lista</a>
     </div>
   </nav>
@@ -131,7 +132,7 @@ html{scroll-behavior:smooth}
               <p class="hs-1">La IA no me sustituye: trabaja para mí.</p>
               <p class="hs-par"><b>Yo pongo el criterio</b> <span class="hs-nota">(el de +50 lanzamientos y embudos de 5, 6 y&nbsp;7&nbsp;cifras)</span></p>
               <p class="hs-par"><b>Ella, la velocidad</b></p>
-              <p class="hs-fin">Con mi sistema operativo de IA trabajo más rápido y con más claridad y profundidad.</p>
+              <p class="hs-fin">Con mi sistema operativo de IA cruzo los datos de tu negocio y encuentro dónde se te escapa el dinero y de qué tienes que hablar para recuperarlo.</p>
             </div>
             <div><a class="dg-btn dg-btn--primario dg-btn--grande" href="/direccion/solicitud/">cuéntame tu negocio <span class="dg-arrow">→</span></a></div>
           </div>
@@ -236,6 +237,7 @@ html{scroll-behavior:smooth}
           <!-- Así trabajo contigo (20-nov-2026): el método con IA, en diez pasos. Los marcados son los que me diferencian. -->
           <div class="metodo" id="metodo">
             <h2 class="h-sec">Así trabajo contigo</h2>
+            <p class="metodo-tesis">Lo que antes me llevaba días de análisis, ahora lo tengo en horas: qué falla, por qué falla y qué tecla tocar para arreglarlo.</p>
             <p class="metodo-lead">Diez pasos. Los marcados en amarillo son los que me diferencian.</p>
             <ol class="metodo-pasos">
               <li><span class="n">01</span><div><b>Una llamada que no se va en lo básico.</b> Antes de vernos me cuentas tu negocio, tu oferta, tus números y lo que ya has probado, así que llego sabiendo dónde mirar.</div></li>
