@@ -4,7 +4,7 @@
 <script>document.documentElement.classList.add('js')</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, follow">
+<meta name="robots" content="index, follow">
 <title>El lanzamiento de Iman Gadzhi, desmontado · Daniel García de Celis</title>
 <meta name="description" content="El plano del lanzamiento de 7 millones de Iman Gadzhi, pieza a pieza, y lo que haría yo con cada una a una escala más asequible. Gratis.">
 <link rel="canonical" href="https://danielgarciadecelis.com/gadzhi/">
@@ -13,7 +13,9 @@
 <meta property="og:title" content="El lanzamiento de Iman Gadzhi, desmontado pieza a pieza">
 <meta property="og:description" content="Qué hizo, cuánto le costó y qué puedes aplicar en un lanzamiento con una lista de unos pocos miles de personas.">
 <meta property="og:url" content="https://danielgarciadecelis.com/gadzhi/">
-<meta property="og:image" content="https://danielgarciadecelis.com/og.png">
+<meta property="og:image" content="https://danielgarciadecelis.com/assets/yt/miniatura-desmontaje-iman.jpg">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="720">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="alternate icon" href="/favicon.png">
 <script src="/js/analytics.js" defer></script>
@@ -25,6 +27,12 @@
 <style>
 .di-video{position:relative;aspect-ratio:16/9;margin:28px 0 0;background:var(--bg-raised);border:1px solid var(--line);overflow:hidden}
 .di-video iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.di-play{position:absolute;inset:0;display:block;cursor:pointer}
+.di-play img{width:100%;height:100%;object-fit:cover;display:block}
+.di-play-ico{position:absolute;left:50%;top:50%;width:76px;height:76px;margin:-38px 0 0 -38px;border-radius:var(--radius-full);background:var(--accent);box-shadow:0 6px 24px rgba(0,0,0,.35);transition:transform .15s}
+.di-play-ico::after{content:"";position:absolute;left:31px;top:24px;border-style:solid;border-width:14px 0 14px 22px;border-color:transparent transparent transparent var(--on-accent)}
+.di-play:hover .di-play-ico,.di-play:focus-visible .di-play-ico{transform:scale(1.08)}
+.di-play:focus-visible{outline:2px solid var(--focus-ring);outline-offset:-2px}
 .di-video .di-pend{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:var(--font-mono);font-size:13px;color:var(--ink-subtle);text-align:center;padding:16px}
 .di-despues{font-size:14px !important;color:var(--ink-subtle) !important}
 .di-hero{max-width:none}
@@ -64,7 +72,7 @@
           <p class="rg-ante">Desmontaje · AI Income Challenge 2026 de Iman Gadzhi</p>
           <h1 class="rg-h1 di-h1">Cómo aprovechar el último lanzamiento de Iman Gadzhi <span class="dg-mark">aunque tú no gastes 7 millones de dólares</span> en publicidad.</h1>
           <div class="di-media">
-          <div class="di-video"><!--VIDEO--><iframe src="https://www.youtube.com/embed/s0FLuyyFrxM?rel=0" title="Iman Gadzhi gastó 7 M$ en anuncios para un reto gratis: su lanzamiento, desmontado" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen loading="lazy"></iframe></div>
+          <div class="di-video"><!--VIDEO--><a class="di-play" href="https://www.youtube.com/watch?v=s0FLuyyFrxM" data-yt="s0FLuyyFrxM" data-titulo="Iman Gadzhi gastó 7 M$ en anuncios para un reto gratis: su lanzamiento, desmontado" aria-label="Reproducir el vídeo: el lanzamiento de Iman Gadzhi, desmontado"><img src="/assets/yt/miniatura-desmontaje-iman.jpg" alt="" width="1280" height="720" fetchpriority="high"><span class="di-play-ico" aria-hidden="true"></span></a></div>
           <div class="di-que">
             <p class="di-label">lo que vas a ver</p>
             <ul class="rg-lista">
@@ -174,6 +182,18 @@
 </div>
 <script src="/js/lista.js" defer></script>
 <script>
+document.querySelectorAll('.di-play').forEach(function (a) {
+  a.addEventListener('click', function (e) {
+    e.preventDefault();
+    var f = document.createElement('iframe');
+    f.src = 'https://www.youtube.com/embed/' + a.dataset.yt + '?rel=0&autoplay=1';
+    f.title = a.dataset.titulo;
+    f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    f.referrerPolicy = 'strict-origin-when-cross-origin';
+    f.allowFullscreen = true;
+    a.replaceWith(f);
+  });
+});
 document.querySelectorAll('.js-abrir-plano').forEach(function (b) {
   b.addEventListener('click', function (e) {
     e.preventDefault();
